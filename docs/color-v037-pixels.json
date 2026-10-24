@@ -1,0 +1,91 @@
+{
+  "source": "fastrider-edge840-v037-default.png",
+  "comparison": "fastrider-edge840-v036-default.png",
+  "regions": {
+    "HR_Z4": {
+      "box": [
+        2,
+        76,
+        120,
+        82
+      ],
+      "before": {
+        "rgb": [
+          139,
+          89,
+          0
+        ],
+        "hue_degrees": 38.4,
+        "saturation_percent": 100.0
+      },
+      "after": {
+        "rgb": [
+          213,
+          89,
+          0
+        ],
+        "hue_degrees": 25.1,
+        "saturation_percent": 100.0
+      }
+    },
+    "cadence_low": {
+      "box": [
+        2,
+        112,
+        60,
+        150
+      ],
+      "before": {
+        "rgb": [
+          156,
+          24,
+          24
+        ],
+        "hue_degrees": 0.0,
+        "saturation_percent": 84.6
+      },
+      "after": {
+        "rgb": [
+          213,
+          0,
+          32
+        ],
+        "hue_degrees": 351.0,
+        "saturation_percent": 100.0
+      }
+    },
+    "grade_gt5": {
+      "box": [
+        2,
+        180,
+        60,
+        214
+      ],
+      "before": {
+        "rgb": [
+          180,
+          80,
+          8
+        ],
+        "hue_degrees": 25.1,
+        "saturation_percent": 95.6
+      },
+      "after": {
+        "rgb": [
+          213,
+          89,
+          0
+        ],
+        "hue_degrees": 25.1,
+        "saturation_percent": 100.0
+      }
+    }
+  },
+  "unchanged_pixel_regions": [
+    "marker_top",
+    "marker_inverse",
+    "marker_bottom",
+    "radar_blank",
+    "top_margin"
+  ]
+}

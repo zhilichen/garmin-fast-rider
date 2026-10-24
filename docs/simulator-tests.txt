@@ -77,7 +77,7 @@ Executing test bitmapFontMetricsTest...
 PASS
 ------------------------------------------------------------------------------
 Executing test nativeRenderStatesTest...
-FastRider demo memory: 82184 / 8384568 bytes
+FastRider demo memory: 82136 / 8384568 bytes
 Tap [123,238] -> 3s, All, 20m
 Tap [123,238] -> 3s, All, All
 Tap [123,238] -> 3s, All, 5m
@@ -96,7 +96,7 @@ Tap [123,238] -> 10s, LAP, All
 Tap [123,238] -> 10s, LAP, 5m
 Tap [200,160] -> 10s, All, 5m
 Tap [200,50] -> 3s, All, 5m
-DEBUG (14:38): Native render memory used=81768 free=8302800
+DEBUG (14:42): Native render memory used=81720 free=8302848
 PASS
 ------------------------------------------------------------------------------
 Executing test navigationAvailabilityTest...

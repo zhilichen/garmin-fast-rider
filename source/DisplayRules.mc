@@ -33,36 +33,38 @@ module DisplayRules {
     const INK = 0x15212B;
     const LABEL = 0x354550;
     const RULE = 0x83909B;
-    const BLUE = 0x005AA8;
+    // Fully saturated chromatic anchors; neutral gray stays achromatic.
+    // Share anchors across text, bars and plots so zones never change hue.
+    const GRAY = 0x555555;
+    const BLUE = 0x004CFF;
+    const GREEN = 0x008A20;
+    const ORANGE = 0xD05A00;
+    const RED = 0xD00020;
+    const PURPLE = 0x8000D8;
     const BANNER_FILL = 0xFFFFFF;
-    const DEEP_RED = 0x991B1B;
-    const DEEP_PURPLE = 0x581C87;
-    const ORANGE = 0xB45309;
+    const DEEP_RED = RED;
+    const DEEP_PURPLE = PURPLE;
 
     function pixel(value) { return Math.round(value).toNumber(); }
     function zoneColor(zone) {
-        var colors = [LABEL, 0x55616A, BLUE, 0x006B3C, 0x8F5B00, 0xB62612];
+        var colors = [LABEL, GRAY, BLUE, GREEN, ORANGE, RED];
         return colors[RideMath.clamp(zone, 0, 5)];
     }
     function powerColor(zone) {
         if (zone == 2) { return BLUE; }
         if (zone == 4) { return ORANGE; }
-        if (zone == 5) { return 0x6B2FA0; }
-        if (zone >= 6) { return 0xB62612; }
-        return 0x55616A;
+        if (zone == 5) { return PURPLE; }
+        if (zone >= 6) { return RED; }
+        return GRAY;
     }
     function plotColor(zone) {
-        if (zone == 2) { return 0x0075C9; }
-        if (zone == 4) { return 0xE26A18; }
-        if (zone == 5) { return 0x7B3FC6; }
-        if (zone >= 6) { return 0xDC322F; }
-        return 0x7D8794;
+        return powerColor(zone);
     }
     function fadeWhite(c) {
-        // 80% opaque over the fixed white page; also works on non-alpha Dc.
-        var r = (((c >> 16)&255)*0.8+51).toNumber();
-        var g = (((c >> 8)&255)*0.8+51).toNumber();
-        var b = ((c&255)*0.8+51).toNumber();
+        // 90% opaque; white underlays preserve FTP/Z2/lap guide visibility.
+        var r = ((((c >> 16)&255)*9+255)/10).toNumber();
+        var g = ((((c >> 8)&255)*9+255)/10).toNumber();
+        var b = (((c&255)*9+255)/10).toNumber();
         return (r << 16)|(g << 8)|b;
     }
     function gradeColor(value) {

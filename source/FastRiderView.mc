@@ -274,7 +274,7 @@ class FastRiderView extends WatchUi.DataField {
         drawZoneBadge(dc, 244, pz, pf, pc);
         // Keep inline unit icons clear of the Zone lane below the radar.
         var hx = 2+textWidth(dc, "bpm", 3)+4; var iy = DisplayRules.UNIT_BASELINE-14;
-        color(dc, 0xC62D32);
+        color(dc, DisplayRules.RED);
         dc.fillPolygon([[hx+8,iy+2],[hx+6,iy],[hx+3,iy],[hx,iy+3],[hx,iy+6],[hx+2,iy+9],[hx+8,iy+14],[hx+14,iy+9],[hx+16,iy+6],[hx+16,iy+3],[hx+13,iy],[hx+10,iy]]);
         var bx = 126+textWidth(dc, powerUnit, 3)+4;
         color(dc, DisplayRules.BLUE);
