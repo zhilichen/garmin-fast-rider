@@ -1,3 +1,14 @@
+# FastRider v0.3.10：以loud beep为主的组合铃声
+
+- 三种原生预设组成五段：`LOUD_BEEP → ALERT_HI → LOUD_BEEP → ALERT_LO → LOUD_BEEP`，响亮主击三次，高/低提示各一次。首击在双击时立即触发，后续由字段每秒compute推进，目标约4–5秒完成请求。原生预设的实际波形、音量、持续时间和连续请求处理仍由Edge固件决定，没有实测声压或现场铃感。
+- [官方Timer模块](https://developer.garmin.com/connect-iq/api-docs/Toybox/Timer.html)不支持DataField上下文；[Attention](https://developer.garmin.com/connect-iq/api-docs/Toybox/Attention.html#playTone-instance_function)的自定义数组只接受ToneProfile。因此使用非阻塞状态机，未使用Timer、sleep、忙等待或快速连续调用。compute每次最多发一段，最小请求间隔800ms；过分迟到、超过5秒或时钟回退时取消，避免补响突发。切页、活动重置及应用停止取消后续请求。
+- 左侧重触发冷却改为5.5秒，其余点击立即响应。活动未开始/暂停也可响铃。UI、配色和默认3s/All/5m不变。
+- live / hardware / demo / test构建成功，无告警；Garmin VM **29/29**，[输出](simulator-tests.txt)。新增真实1Hz推进、重复tick、超时不补响、时钟回退及切页/重置/停止取消的模型测试。原有全套数据/布局/交互回归通过。
+- [原生点击日志](bell-simulator-v0310.txt)记录五段实际请求：0/945/1946/2945/3945ms，顺序正确；连续双击未重启，右侧功率点击在第二段之前即处理。没有API异常。模拟器原生demo字段堆61,664 /127,424 bytes。以上是调用时序验收，不等于音色、完整声学时长或响度测量。SDK测试后的空白transport通过重启本任务模拟器恢复后完成验收。
+- hardware包**168,364 bytes**已更新至USB连接的Edge840 `GARMIN/APPS/SUMMIT.PRG`并回读逐字节一致，保留原App ID、签名、设置和活动数据；替换前已回读验证并备份旧pending包。断开USB后双击左侧心率/实时区试听。
+
+以下保留旧版验收记录。
+
 # FastRider v0.3.9：加厚小Z与更清楚的剩余里程
 
 - 小Z从14 px字体增至16 px（原字形高11→12 px，宽8→9 px），字形内增加0.25 px加厚笔画，以4倍采样保留抗锯齿；原生截图可见字高10→11 px，约+10%。区号44 px及baseline66保持不变，组合总宽31 px；四位主功率回退时使用10 px小Z+26 px区号，总宽20 px。Z位于主数字下方，不会与主数字争用同一行。

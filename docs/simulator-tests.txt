@@ -11,6 +11,12 @@ PASS
 Executing test bellCooldownExpiryTest...
 PASS
 ------------------------------------------------------------------------------
+Executing test bellPatternCadenceTest...
+PASS
+------------------------------------------------------------------------------
+Executing test bellPatternCancellationTest...
+PASS
+------------------------------------------------------------------------------
 Executing test powerHistoryTest...
 PASS
 ------------------------------------------------------------------------------
@@ -77,7 +83,7 @@ Executing test bitmapFontMetricsTest...
 PASS
 ------------------------------------------------------------------------------
 Executing test nativeRenderStatesTest...
-FastRider demo memory: 81824 / 8384568 bytes
+FastRider demo memory: 83816 / 8384568 bytes
 Tap [123,238] -> 3s, All, 20m
 Tap [123,238] -> 3s, All, All
 Tap [123,238] -> 3s, All, 5m
@@ -96,7 +102,7 @@ Tap [123,238] -> 10s, LAP, All
 Tap [123,238] -> 10s, LAP, 5m
 Tap [200,160] -> 10s, All, 5m
 Tap [200,50] -> 3s, All, 5m
-DEBUG (14:48): Native render memory used=81440 free=8303128
+DEBUG (14:54): Native render memory used=83432 free=8301136
 PASS
 ------------------------------------------------------------------------------
 Executing test navigationAvailabilityTest...
@@ -112,6 +118,8 @@ bellDoubleTapTest                   PASS
 bellBoundaryAndResetTest            PASS
 bellInputRoutingTest                PASS
 bellCooldownExpiryTest              PASS
+bellPatternCadenceTest              PASS
+bellPatternCancellationTest         PASS
 powerHistoryTest                    PASS
 powerWindowTest                     PASS
 measuredHistoryTest                 PASS
@@ -135,6 +143,6 @@ bitmapFontMetricsTest               PASS
 nativeRenderStatesTest              PASS
 navigationAvailabilityTest          PASS
 rideAverageAvailabilityTest         PASS
-Ran 27 tests
+Ran 29 tests
 
-PASSED (passed=27, failed=0, errors=0)
+PASSED (passed=29, failed=0, errors=0)

@@ -78,8 +78,9 @@ class FastRiderView extends WatchUi.DataField {
         powerLimits = [ftp*0.55, ftp*0.75, ftp*0.90, ftp*1.05, ftp*1.20, ftp*1.50];
     }
     function compute(info) {
-        if (BuildMode.DEMO) { computeDemo(); return; }
+        if (BuildMode.DEMO) { BellAudio.tick(); computeDemo(); return; }
         if (timerMillis != null && info.timerTime != null && info.timerTime < timerMillis) { onTimerReset(); }
+        BellAudio.tick();
         var running = info.timerState == Activity.TIMER_STATE_ON;
         power = info.currentPower;
         hr = info.currentHeartRate; if (hr != null && hr <= 0) { hr = null; }
@@ -140,6 +141,7 @@ class FastRiderView extends WatchUi.DataField {
         trend.update(millis, power, true);
     }
     function onTimerReset() {
+        BellAudio.stop();
         hardwareLog("timer reset -> defaults=3s/All/5m");
         trend.reset(); rolling.reset(); lap.reset(); ride.reset(); ui.reset();
         gradeEstimator.reset(); grade = null; lapNumber = null;
@@ -223,6 +225,7 @@ class FastRiderView extends WatchUi.DataField {
         if (textWidth(dc, s, 1) > maxWidth) { s = intText(value); }
         return textWidth(dc, s, 1) > maxWidth ? "--" : s;
     }
+    function onHide() { BellAudio.stop(); }
     function onUpdate(dc) {
         width = dc.getWidth(); height = dc.getHeight();
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE); dc.clear();
