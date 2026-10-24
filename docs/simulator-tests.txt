@@ -8,6 +8,9 @@ PASS
 Executing test gearTest...
 PASS
 ------------------------------------------------------------------------------
+Executing test lapStatsTest...
+PASS
+------------------------------------------------------------------------------
 Executing test gradeTest...
 PASS
 ------------------------------------------------------------------------------
@@ -20,8 +23,9 @@ Test:                               Status:
 zonesTest                           PASS
 timeTest                            PASS
 gearTest                            PASS
+lapStatsTest                        PASS
 gradeTest                           PASS
 courseTest                          PASS
-Ran 5 tests
+Ran 6 tests
 
-PASSED (passed=5, failed=0, errors=0)
+PASSED (passed=6, failed=0, errors=0)

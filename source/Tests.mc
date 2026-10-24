@@ -24,18 +24,63 @@ function timeTest(logger) {
     Test.assertEqual(RideMath.duration(0), "0:00:00");
     Test.assertEqual(RideMath.duration(3661000), "1:01:01");
     Test.assertEqual(RideMath.duration(36000000), "10:00:00");
+    Test.assertEqual(RideMath.lapDuration(null), "--:--");
+    Test.assertEqual(RideMath.lapDuration(0), "00:00");
+    Test.assertEqual(RideMath.lapDuration(312000), "05:12");
+    Test.assertEqual(RideMath.lapDuration(3661000), "1:01:01");
     return true;
 }
 
 (:test)
 function gearTest(logger) {
-    Test.assertEqual(RideMath.gears(2, 7), "2 / 7");
-    Test.assertEqual(RideMath.gears(null, null), "-- / --");
-    Test.assertEqual(RideMath.gears(0, 7), "-- / 7");
+    Test.assertEqual(RideMath.gears(2, 7), "2/7");
+    Test.assertEqual(RideMath.gears(null, null), "--/--");
+    Test.assertEqual(RideMath.gears(0, 7), "--/7");
     Test.assertEqual(RideMath.gradeText(null), "--");
     Test.assertEqual(RideMath.gradeText(4.2), "+4.2");
     Test.assertEqual(RideMath.gradeText(-6.5), "-6.5");
     Test.assertEqual(RideMath.gradeText(-0.001), "+0.0");
+    return true;
+}
+
+(:test)
+function lapStatsTest(logger) {
+    var s = new LapStats();
+    s.started(100000);
+    s.update(101000, 200, true);
+    Test.assert(!s.synced && s.timeMs == null && s.averagePower == null);
+    // The next native boundary is the first reliable start after a mid-ride load.
+    s.begin(102000, 200);
+    s.update(103000, 200, true);
+    Test.assertEqual(s.timeMs, 1000);
+    assertNear(s.averagePower, 200.0);
+    s.update(104000, 0, true);
+    s.update(105000, 0, true);
+    assertNear(s.averagePower, 100.0);
+    // Pause/stop and resume/start must preserve this native lap.
+    s.update(105000, 800, false);
+    s.started(105000);
+    s.update(105000, 200, true);
+    s.update(106000, 200, true);
+    Test.assertEqual(s.timeMs, 4000);
+    assertNear(s.averagePower, 125.0);
+    // Missing power and long gaps are not silently filled with zero or stale power.
+    s.update(107000, null, true);
+    s.update(108000, 400, true);
+    s.update(120000, 400, true);
+    assertNear(s.averagePower, 125.0);
+    // Every manual/auto boundary clears only the lap accumulator.
+    s.begin(120000, 0);
+    s.update(121000, 0, true);
+    Test.assertEqual(s.timeMs, 1000);
+    assertNear(s.averagePower, 0.0);
+    s.update(0, 150, true);
+    Test.assert(s.synced && s.timeMs == 0 && s.averagePower == null);
+    s.update(1000, 150, true);
+    assertNear(s.averagePower, 150.0);
+    s.breakSample();
+    s.update(0, 200, true);
+    Test.assert(s.synced && s.timeMs == 0 && s.averagePower == null);
     return true;
 }
 

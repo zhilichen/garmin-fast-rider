@@ -27,7 +27,14 @@ module RideMath {
     function gears(front, rear) {
         var f = front != null && front > 0 ? front.format("%d") : "--";
         var r = rear != null && rear > 0 ? rear.format("%d") : "--";
-        return f + " / " + r;
+        return f + "/" + r;
+    }
+
+    function lapDuration(ms) {
+        if (ms == null) { return "--:--"; }
+        if (ms >= 3600000) { return duration(ms); }
+        var seconds = (ms/1000).toNumber();
+        return (seconds/60).toNumber().format("%02d")+":"+(seconds%60).format("%02d");
     }
 
     function gradeText(value) {

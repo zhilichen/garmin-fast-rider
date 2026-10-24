@@ -1,10 +1,10 @@
 # Summit · Garmin Edge 840 全屏数据页
 
-Monkey C / Connect IQ 数据字段。浅色大字界面，上方为带 Zone 编号与颜色的**心率、功率**；中央为**踏频**和旁边较小的**前/后档位**。底部横幅集中显示**全程海拔、当前位置、当前估算坡度、路线进度/总距离、已耗时**。
+Monkey C / Connect IQ 数据字段。浅色大字界面，上方为带 Zone 编号与颜色的**心率、功率**；中央左侧为**踏频与较小的前/后档位**，右侧为**当前 Lap 时间与均功率估计**。底部横幅集中显示**全程海拔、当前位置、当前估算坡度、路线进度/总距离、已耗时**。
 
-![新版 246 × 322 矢量设计预览，非模拟器截图](docs/design/summit-v2-preview.png)
+![含当前 Lap 区的 246 × 322 设计预览，非模拟器截图](docs/design/summit-lap-preview.png)
 
-首版已在 Edge 840 模拟器（API 6.0.0）跑通动态演示；本次新版完成 demo/live 构建及 5 项 Garmin VM、3 项 Python 测试。上图是可审阅的原生尺寸设计稿；Mac 当前锁屏，新版模拟器截图验收待解锁后完成，详见 [验证记录](docs/validation.md)。[矢量源文件](docs/design/summit-v2.svg)。
+首版已在 Edge 840 模拟器（API 6.0.0）跑通动态演示；本次新版完成 demo/live 构建及 6 项 Garmin VM、3 项 Python 测试。上图是可审阅的原生尺寸设计稿；Mac 当前锁屏，新版截图及原生 Lap 按键/自动圈联调待解锁后完成，详见 [验证记录](docs/validation.md)。[矢量源文件](docs/design/summit-lap.svg)。
 
 原生像素设计规范：[最小图元、字高、间距与对比度](docs/edge840-design-rules.md)；[246 × 322 矢量图元校准卡](docs/design/edge840-atoms.svg)。界面绘图常量集中在 `source/DisplayRules.mc`。
 
@@ -42,18 +42,28 @@ python3 scripts/import_course.py /absolute/path/to/your-course.gpx
 
 导入文件必须是连续、带海拔的 GPX track / route。生成的 `source/CourseData.mc` 包含最多 160 个等距离采样点，控制 Edge 内存占用。当前内置 `courses/demo.gpx` 是**合成演示路线**，约 44 km、累计上升约 1052 m；不是实际道路导航文件。换成自己的 GPX 后重新编译并安装。
 
-真实数据版本以 `Activity.Info.currentLocation` 投影到导入路线，显示路线进度；GPS 缺失显示 `GPS --`，距路线超过 150 m 显示 `OFF COURSE` 并隐藏标记。自交路段会结合上一次路线位置选择，但重叠道路、来回路线和较差 GPS 仍可能产生歧义；160 点采样也可能切掉急弯。这是原型级路线匹配，尚需实骑验证。示例路线在真实版中同样标为 `SAMPLE`，应先导入自己的路线。
+真实数据版本以 `Activity.Info.currentLocation` 投影到导入路线，显示路线进度；GPS 缺失时距离分子显示 `GPS --`，距路线超过 150 m 显示 `OFF` 并隐藏标记。自交路段会结合上一次路线位置选择，但重叠道路、来回路线和较差 GPS 仍可能产生歧义；160 点采样也可能切掉急弯。这是原型级路线匹配，尚需实骑验证。示例路线在真实版中同样标为 `SAMPLE`，应先导入自己的路线。
 
-设置 `courseStart` 为活动里程表中路线起点对应的米数（默认 `-1`，关闭）后，在没有可用 GPS 匹配时可使用里程估算；界面标为 `ODO EST.`。绕路时里程估算会偏离路线位置。底部的距离分子是匹配到的**路线进度**，分母是导入 GPX 的全长；位置未知时显示 `-- / 总距离`。已耗时使用 `Activity.Info.elapsedTime`（含暂停时间）。
+设置 `courseStart` 为活动里程表中路线起点对应的米数（默认 `-1`，关闭）后，在没有可用 GPS 匹配时可使用里程估算；界面在距离前加 `~`。绕路时里程估算会偏离路线位置。底部的距离分子是匹配到的**路线进度**，分母是导入 GPX 的全长；位置未知时分子改为 GPS 缺失或偏航状态。已耗时使用 `Activity.Info.elapsedTime`（含暂停时间）。
 
 ## 踏频、档位与坡度
 
 - 踏频直接读取 `Activity.Info.currentCadence`，单位 rpm；零踏频有效，缺失信号显示 `--`。
-- 旁边的 `GEAR F/R` 直接读取 `frontDerailleurIndex / rearDerailleurIndex`，表示设备报告的前/后档位位置，如 `2 / 7`。需要设备已配对并能报告档位的电子变速系统；缺失位置显示 `--`，不从速度/踏频猜档位。
+- 踏频标签旁边的小字为前/后档位，直接读取 `frontDerailleurIndex / rearDerailleurIndex`，如 `2/7`。需要设备已配对并能报告档位的电子变速系统；缺失位置显示 `--`，不从速度/踏频猜档位。
 - `~GRADE %` 为测得海拔与活动里程差计算的平滑坡度估计：每前进 5 m 采样，使用至少 20 m 基线并平滑更新。初始数据不足、海拔缺失、停车后 15 秒没有新距离样本、重置或异常海拔跳变时显示 `--`。本实现会滞后于短促的坡度变化，尚需实骑校准。
 - 演示构建的坡度来自导入路线的海拔剖面，演示踏频和档位为合成数据，界面明确标记 DEMO。真实构建的坡度使用当前测得海拔。
 
 指标来源参见 [Garmin Activity.Info 官方 API](https://developer.garmin.com/connect-iq/api-docs/Toybox/Activity/Info.html)。
+
+## 当前 Lap：同步 Garmin 原生分圈
+
+- 右侧 LAP 区显示当前圈计时与 `~AVG W`。接入原生 `onTimerLap2`（手动圈、设备自动圈等触发）并保留 `onTimerLap` 兼容回调；新版回调返回 true，避免 SDK 再调用旧回调而重复清零。不创建或修改 Garmin 的圈记录。
+- 圈时间按原生事件收到时的 `Activity.Info.timerTime` 为起点计算，因此排除暂停；底部 TIME 使用 `elapsedTime`，含暂停。两个时间分别代表当前圈和整次活动。
+- 原生公开回调只提供分圈触发信息，**不提供 Garmin 自己的当前圈均功率**。`~AVG W` 用有效功率样本按骑行计时做时间加权梯形积分；包含有效的 0 W，缺失、暂停或大于 2.5 秒的采样间隙不补值。采样、丢包、回调延迟及 Garmin 的零功率平均设置可能导致与原生均功率不一致。
+- 第一次在活动开始时加载，可从 timerTime=0 统计；若在骑行中途才加载，显示 `LAP SYNC`，圈时间留空、均功率为 `--`，等下一次原生 Lap 后开始完整统计。`onTimerStart` 在中途加载也会触发，因此不能把这个事件直接当作新圈。暂停/停止后继续不清圈；活动重置才清空。
+- 演示构建使用合成 Lap 时间与均功率，明确标记 DEMO。原生事件联调应运行 `./scripts/run.sh live`，实际按 Lap 键并测试设备自动圈；本次锁屏未完成这部分验证。
+
+来源：[DataField 原生 Lap 与计时回调](https://developer.garmin.com/connect-iq/api-docs/Toybox/WatchUi/DataField.html)。
 
 ## Zone 颜色
 

@@ -11,7 +11,11 @@ class SummitView extends WatchUi.DataField {
     var power = null;
     var hr = null;
     var cadence = null;
-    var gear = "-- / --";
+    var gear = "--/--";
+    var lap;
+    var lapMillis = null;
+    var lapPower = null;
+    var lapSynced = false;
     var grade = null;
     var gradeEstimator;
     var meters = 0.0;
@@ -29,6 +33,7 @@ class SummitView extends WatchUi.DataField {
         DataField.initialize();
         tracker = new CourseTracker();
         gradeEstimator = new GradeEstimator();
+        lap = new LapStats();
         start = System.getTimer();
         loadSettings();
     }
@@ -64,6 +69,9 @@ class SummitView extends WatchUi.DataField {
             gear = RideMath.gears(2, 5+((t.toNumber()/15).toNumber()%7));
             meters = CourseData.LENGTH * (0.37 + 0.25*p);
             millis = 4980000 + (t*1000).toNumber();
+            lapMillis = (312000+(t*1000).toNumber())%360000;
+            lapPower = (243+8*Math.sin(t/25.0)).toNumber();
+            lapSynced = true;
             tracker.distance = meters;
             tracker.state = "DEMO";
             grade = RideMath.courseGrade(meters);
@@ -77,6 +85,8 @@ class SummitView extends WatchUi.DataField {
         gear = RideMath.gears(info.frontDerailleurIndex, info.rearDerailleurIndex);
         meters = info.elapsedDistance != null ? info.elapsedDistance : 0.0;
         millis = info.elapsedTime;
+        lap.update(info.timerTime, power, info.timerState == Activity.TIMER_STATE_ON);
+        lapMillis = lap.timeMs; lapPower = lap.averagePower; lapSynced = lap.synced;
         grade = gradeEstimator.update(info.elapsedDistance, info.altitude, System.getTimer());
         tracker.update(info.currentLocation);
         if (tracker.distance == null && offset >= 0) {
@@ -89,9 +99,28 @@ class SummitView extends WatchUi.DataField {
         tracker = new CourseTracker();
         gradeEstimator.reset();
         grade = null;
+        lap.reset(); lapMillis = null; lapPower = null; lapSynced = false;
         meters = 0.0;
         millis = 0;
         start = System.getTimer();
+    }
+
+    function onTimerStart() { lap.started(Activity.getActivityInfo().timerTime); }
+    function onTimerPause() { lap.breakSample(); }
+    function onTimerResume() { lap.breakSample(); }
+    function onTimerStop() { lap.breakSample(); }
+
+    function onTimerLap() {
+        var info = Activity.getActivityInfo();
+        lap.begin(info.timerTime, info.currentPower);
+        lapMillis = lap.timeMs; lapPower = lap.averagePower; lapSynced = lap.synced;
+        WatchUi.requestUpdate();
+    }
+
+    function onTimerLap2(trigger) {
+        onTimerLap();
+        // Prevent the SDK's fallback onTimerLap from resetting the same lap twice.
+        return true;
     }
 
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
@@ -137,23 +166,36 @@ class SummitView extends WatchUi.DataField {
         }
         color(dc, DisplayRules.RULE); dc.fillRectangle(122, 8, DisplayRules.STROKE, 104);
         metric(dc, 8, "HEART RATE", hr == null ? "--" : hr.format("%d"), "bpm", RideMath.zone(hr, hrLimits));
-        metric(dc, 130, "POWER", power == null ? "--" : power.format("%d"), "W", RideMath.zone(power, powerLimits));
-        text(dc, 8, 124, Graphics.FONT_MEDIUM, "CADENCE", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 62, 144, Graphics.FONT_NUMBER_MEDIUM, cadence == null ? "--" : cadence.format("%d"), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
-        text(dc, 104, 160, Graphics.FONT_SMALL, "rpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 150, 124, Graphics.FONT_SMALL, "GEAR F/R", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 150, 146, Graphics.FONT_MEDIUM, gear, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
-        // Explicit sample status without spending an entire row on branding.
+        metric(dc, 130, "PWR", power == null ? "--" : power.format("%d"), "W", RideMath.zone(power, powerLimits));
         var badge = BuildMode.DEMO ? "DEMO" : (CourseData.IS_SAMPLE ? "SAMPLE" : "");
-        var badgeFont = Graphics.FONT_SMALL;
-        if (!BuildMode.DEMO && (tracker.distance == null || tracker.state.equals("ODO EST."))) {
-            badge = tracker.state; badgeFont = Graphics.FONT_MEDIUM;
-        }
-        text(dc, 238, 164, badgeFont, badge, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        text(dc, 238, 10, Graphics.FONT_SMALL, badge, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        text(dc, 8, 124, Graphics.FONT_MEDIUM, "CADENCE", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 116, 126, Graphics.FONT_SMALL, gear, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        text(dc, 46, 144, Graphics.FONT_NUMBER_MEDIUM, cadence == null ? "--" : cadence.format("%d"), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, 86, 160, Graphics.FONT_SMALL, "rpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        color(dc, DisplayRules.RULE); dc.fillRectangle(122, 124, DisplayRules.STROKE, 54);
+        drawLap(dc);
         color(dc, DisplayRules.BANNER_FILL); dc.fillRectangle(0, DisplayRules.BANNER_TOP, width, height-DisplayRules.BANNER_TOP);
         color(dc, DisplayRules.RULE); dc.fillRectangle(8, DisplayRules.BANNER_TOP, 230, DisplayRules.STROKE);
         drawBannerStats(dc);
         drawProfile(dc);
+    }
+
+    function drawLap(dc) {
+        if (lapSynced) {
+            text(dc, 130, 124, Graphics.FONT_SMALL, "LAP", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+            text(dc, 238, 124, Graphics.FONT_MEDIUM, RideMath.lapDuration(lapMillis), DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
+        } else {
+            text(dc, 130, 124, Graphics.FONT_MEDIUM, "LAP SYNC", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        }
+        var average = lapPower == null ? "--" : Math.round(lapPower).toNumber().format("%d");
+        var maxNumber = 108-dc.getTextWidthInPixels("~AVG W", Graphics.FONT_SMALL)-4;
+        if (dc.getTextWidthInPixels(average, Graphics.FONT_NUMBER_MILD) <= maxNumber) {
+            text(dc, 130, 146, Graphics.FONT_NUMBER_MILD, average, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
+            text(dc, 238, 158, Graphics.FONT_SMALL, "~AVG W", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        } else {
+            text(dc, 130, 152, Graphics.FONT_MEDIUM, "~AVG "+average+" W", DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
+        }
     }
 
     function drawBannerStats(dc) {
@@ -165,10 +207,15 @@ class SummitView extends WatchUi.DataField {
         var total = (CourseData.LENGTH/1000.0).format("%.1f");
         var current = d == null ? "--" : (d/1000.0).format("%.1f");
         var dist = current + " / " + total + " km";
+        if (d == null) {
+            dist = (tracker.state.equals("OFF COURSE") ? "OFF" : "GPS --") + " / " + total + " km";
+        } else if (tracker.state.equals("ODO EST.")) { dist = "~"+dist; }
         if (dc.getTextWidthInPixels(dist, Graphics.FONT_MEDIUM) > 144) {
             total = (CourseData.LENGTH/1000.0).format("%.0f");
             current = d == null ? "--" : (d/1000.0).format("%.0f");
             dist = current + " / " + total + " km";
+            if (d == null) { dist = (tracker.state.equals("OFF COURSE") ? "OFF" : "GPS --")+" / "+total+" km"; }
+            else if (tracker.state.equals("ODO EST.")) { dist = "~"+dist; }
         }
         text(dc, 238, 192, Graphics.FONT_MEDIUM, dist, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
         var time = millis == null ? "--" : RideMath.duration(millis);
