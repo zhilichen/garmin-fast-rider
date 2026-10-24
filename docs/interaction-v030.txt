@@ -1,0 +1,7 @@
+Tap [200,50] -> 10s, All, 5m
+Tap [200,160] -> 10s, LAP, 5m
+Tap [123,260] -> 10s, LAP, 20m
+Tap [200,50] -> 3s, LAP, 20m
+Tap [200,160] -> 3s, All, 20m
+Tap [123,260] -> 3s, All, All
+Tap [123,260] -> 3s, All, 5m
