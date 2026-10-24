@@ -9,13 +9,15 @@ from PIL import Image, ImageDraw, ImageFont
 import argparse
 
 FONT_SPECS = [
-    ('Primary49', 'Garmin_Roboto_Bold.ttf', 49, '0123456789-'),
-    ('Live33', 'RobotoCondensed-Regular.ttf', 33, '0123456789.-'),
-    ('Average44', 'RobotoCondensed-Bold.ttf', 44, '0123456789-'),
-    ('Average32', 'RobotoCondensed-Bold.ttf', 32, '0123456789-'),
+    ('Primary58', 'RobotoCondensed-Bold.ttf', 58, '0123456789-'),
+    ('Live38', 'RobotoCondensed-Regular.ttf', 38, '0123456789.-'),
+    ('Average50', 'RobotoCondensed-Bold.ttf', 50, '0123456789-'),
+    ('Average36', 'RobotoCondensed-Bold.ttf', 36, '0123456789-'),
     ('Meta18', 'DejaVuSans_Cd_SemiBold_WGL4.ttf', 18, '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz %().:-<>'),
-    ('Chart20', 'DejaVuSans_Cd_SemiBold_WGL4.ttf', 20, '0123456789().:-'),
-    ('Stats26', 'DejaVuSans_Cd_SemiBold_WGL4.ttf', 26, '0123456789mi .:-'),
+    ('Chart26', 'RobotoCondensed-Bold.ttf', 26, '0123456789().:-'),
+    ('Stats32', 'RobotoCondensed-Bold.ttf', 32, '0123456789.:-'),
+    ('Stats30', 'RobotoCondensed-Bold.ttf', 30, '0123456789.:-'),
+    ('Footer24', 'RobotoCondensed-Bold.ttf', 24, '0123456789().:-'),
 ]
 
 def generate(font_dir, out):

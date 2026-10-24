@@ -9,13 +9,15 @@ module DisplayRules {
     const CELL_WIDTH = 108;
     const STROKE = 2;
     const COLUMN_DIVIDER = 122;
+    const RADAR_LEFT = 218;
+    const RADAR_BOTTOM = 34;
     const ZONE_BAR = 6;
     const ZONE_MARKER_WIDTH = 3;
     const ZONE_MARKER_HEIGHT = 10;
     const PLOT_LEFT = 16;
     const PLOT_RIGHT = 228;
     const BANNER_TOP = 220;
-    const PLOT_TOP = 243;
+    const PLOT_TOP = 247;
     const PLOT_BOTTOM = 293;
     const INK = 0x15212B;
     const LABEL = 0x354550;

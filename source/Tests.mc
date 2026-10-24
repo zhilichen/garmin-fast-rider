@@ -432,13 +432,23 @@ function bitmapFontMetricsTest(logger) {
     var bitmap = reference.get();
     var dc = bitmap.getDc();
     var v = new FastRiderView(); v.loadFonts();
-    Test.assertEqual(dc.getTextWidthInPixels("303", v.fonts[0]), 84);
-    Test.assert(dc.getTextWidthInPixels("22.4", v.fonts[1]) <= 58);
-    Test.assert(dc.getTextWidthInPixels("All", v.fonts[3])+4+dc.getTextWidthInPixels("1:23:08", v.fonts[5]) <= 104);
-    Test.assert(dc.getTextWidthInPixels("245", v.fonts[2])+6+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 104);
-    Test.assert(dc.getTextWidthInPixels("1234", v.fonts[6])+6+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 104);
-    Test.assert(dc.getTextWidthInPixels("0.42 mi", v.fonts[5]) <= 104);
-    Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[0]), 49);
+    // Ordinary 3-digit and fallback 4-digit power stay left of the radar overlay.
+    Test.assertEqual(dc.getTextWidthInPixels("303", v.fonts[0]), 87);
+    Test.assert(130+dc.getTextWidthInPixels("999", v.fonts[v.primaryFont(dc, "999")]) <= DisplayRules.RADAR_LEFT);
+    Test.assert(130+dc.getTextWidthInPixels("1234", v.fonts[v.primaryFont(dc, "1234")]) <= DisplayRules.RADAR_LEFT);
+    Test.assert(dc.getTextWidthInPixels("120", v.fonts[1]) <= 60);
+    Test.assertEqual(v.liveInteger(dc, 120, 60), "120");
+    Test.assertEqual(v.compactValue(dc, 22.4, 58), "22");
+    Test.assertEqual(v.compactValue(dc, 6.4, 54), "6.4");
+    Test.assertEqual(v.compactValue(dc, -16.4, 54), "-16");
+    Test.assertEqual(v.compactValue(dc, 100.7, 58), "101");
+    Test.assert(dc.getTextWidthInPixels("1:23:08", v.fonts[5]) <= 108);
+    Test.assert(dc.getTextWidthInPixels("12:23:08", v.fonts[7]) <= 108);
+    Test.assert(dc.getTextWidthInPixels("245", v.fonts[2])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 110);
+    Test.assert(dc.getTextWidthInPixels("1234", v.fonts[6])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 110);
+    Test.assert(dc.getTextWidthInPixels("0.42", v.fonts[5])+3+dc.getTextWidthInPixels("mi", v.fonts[3]) <= 108);
+    Test.assert(dc.getTextWidthInPixels("12:23:08", v.fonts[8])+8+2 <= 125-dc.getTextWidthInPixels("< 20m >", v.fonts[3])/2);
+    Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[0]), 58);
     return true;
 }
 

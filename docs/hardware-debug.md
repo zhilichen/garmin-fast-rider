@@ -60,3 +60,7 @@ Garmin SDK 的本地 `doc/docs/Core_Topics/Debugging.html` 明确说明：单步
 应用显示名、源码类名、构建产物和 VS Code 任务统一为 FastRider。App ID 和签名密钥保持原值；已有设备通过同一应用更新保留身份。当前 USB 调试沿用 `SUMMIT.PRG` 和对应 `SUMMIT.TXT` 文件名以保留现有日志；这只是兼容文件名，码表显示 FastRider。新本地构建产物为 `bin/FastRider-{live,demo,hardware,test}.prg`。
 
 FastRider v0.2.3 硬件包已替换待加载的 v0.2.2 包，150,012 bytes，回读逐字节相同；旧包已保存在本地备份。拔掉 USB 后加载改名版本。
+
+## v0.3.0 真机反馈修复
+
+放大数值并预留右上雷达位置的153,004 bytes硬件包已上传且回读完全一致；使用同一App ID、密钥和日志文件。真机加载与雷达实际覆盖待拔掉USB后观察。Mac锁定，暂未做模拟器目视检查。

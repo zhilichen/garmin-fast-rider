@@ -1,309 +1,310 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" role="img" aria-labelledby="title desc">
-  <title id="title">FastRider · independent tap cycles · design draft 46</title>
-  <desc id="desc">Design only. Tap live power block to cycle 3s and 10s averages. Tap the right-middle statistics block to cycle current LAP and whole Ride, titled All. Tap chart header or plot to cycle 5m, 20m, All. Modes are independent, with no data reset; history All covers the entire Ride regardless of statistics scope. Remaining course values and all sensor values are illustrative. Current implementation defaults to 3s / All statistics / 5m. Each native lap boundary selects the newest lap. Statistics average power uses bold type. Black 3 by 10 px ticks show position within the original numbered heart-rate or power zone.</desc>
+  <title id="title">FastRider · large numerals and radar clearance · v0.3.0</title>
+  <desc id="desc">Design only. Tap live power block to cycle 3s and 10s averages. Tap the right-middle statistics block to cycle current LAP and whole Ride, titled All. Tap chart header or plot to cycle 5m, 20m, All. Modes are independent, with no data reset; history All covers the entire Ride regardless of statistics scope. Remaining course values and all sensor values are illustrative. Current implementation defaults to 3s / All statistics / 5m. Each native lap boundary selects the newest lap. Statistics average power uses bold type. Black 3 by 10 px ticks show position within the original numbered heart-rate or power zone. Current layout: left-aligned 58px primary numerals, right-side icons, reserved x218–245/y0–33 for native radar. Other numeric values enlarged; 18px labels retained.</desc>
   <rect width="246" height="322" fill="white" />
   <rect x="122" y="17" width="2" height="65" fill="#83909B" shape-rendering="crispEdges" />
-  <text x="116" y="52" font-family="'Garmin Robo Units', Arial, sans-serif" font-size="49" font-weight="bold" text-anchor="end" fill="#8F5B00">158</text>
-  <text x="8" y="76" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550">bpm</text>
-  <text x="116" y="76" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="end" fill="#8F5B00">Z4</text>
+  <text x="8" y="60" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#8F5B00">158</text>
+  <text x="8" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550">bpm</text>
+  <text x="116" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="end" fill="#8F5B00">Z4</text>
   <rect x="8" y="88" width="108" height="6" fill="#8F5B00" shape-rendering="crispEdges" />
   <rect x="41" y="86" width="3" height="10" fill="#000000" shape-rendering="crispEdges" id="heart-zone-position" />
-  <text x="238" y="52" font-family="'Garmin Robo Units', Arial, sans-serif" font-size="49" font-weight="bold" text-anchor="end" fill="#6B2FA0" data-power-group="z6-z7" id="live-power-value">292</text>
-  <text x="130" y="76" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="live-power-average-window-label" id="live-power-unit">W 10s</text>
-  <text x="238" y="76" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="end" fill="#6B2FA0" data-power-group="z6-z7" id="live-power-zone">Z5</text>
+  <text x="130" y="60" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#6B2FA0" data-power-group="z6-z7" id="live-power-value">292</text>
+  <text x="130" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="live-power-average-window-label" id="live-power-unit">W 10s</text>
+  <text x="238" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="end" fill="#6B2FA0" data-power-group="z6-z7" id="live-power-zone">Z5</text>
   <rect x="130" y="88" width="108" height="6" fill="#6B2FA0" shape-rendering="crispEdges" data-power-group="z6-z7" id="live-power-bar" />
   <rect x="213" y="86" width="3" height="10" fill="#000000" shape-rendering="crispEdges" id="power-zone-position" />
-  <text x="33" y="149" font-family="'Roboto Condensed', Arial, sans-serif" font-size="33" font-weight="400" text-anchor="middle" fill="#991B1B" data-metric="current-cadence" data-color-rule="lt70-deep-red;gt100-deep-purple;otherwise-neutral">64</text>
+  <text x="33" y="153" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="400" text-anchor="middle" fill="#991B1B" data-metric="current-cadence" data-color-rule="lt70-deep-red;gt100-deep-purple;otherwise-neutral">64</text>
   <rect x="122" y="102" width="2" height="111" fill="#83909B" shape-rendering="crispEdges" />
-  <text x="134" y="117" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" id="stats-title">All</text>
-  <text x="238" y="123" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="26" font-weight="normal" text-anchor="end" fill="#15212B" id="stats-time">1:23:08</text>
-  <text x="134" y="169" font-family="'Roboto Condensed', Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="start" fill="#15212B" data-metric="current-lap-average-power" id="stats-power">212</text>
+  <text x="130" y="113" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" id="stats-title">All</text>
+  <text x="238" y="140" font-family="'Roboto Condensed', Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="end" fill="#15212B" id="stats-time">1:23:08</text>
+  <text x="130" y="182" font-family="'Roboto Condensed', Arial, sans-serif" font-size="50" font-weight="bold" text-anchor="start" fill="#15212B" data-metric="current-lap-average-power" id="stats-power">212</text>
   <rect x="8" y="220" width="230" height="2" fill="#83909B" shape-rendering="crispEdges" />
-  <text x="8" y="238" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="20" text-anchor="start" fill="#354550" data-metric="activity-elapsed-time" font-weight="normal">1:23:08</text>
-  <polygon points="18,20 15,17 11,17 8,20 8,25 10,28 18,35 26,28 28,25 28,20 25,17 21,17" fill="#C62D32" shape-rendering="crispEdges" />
-  <polygon points="142,17 132,29 138,29 134,37 150,24 142,24 146,17" fill="#005AA8" shape-rendering="crispEdges" />
-  <text x="92" y="149" font-family="'Roboto Condensed', Arial, sans-serif" font-size="33" font-weight="400" text-anchor="middle" fill="#15212B" data-metric="rear-gear-index">5</text>
+  <text x="8" y="242" font-family="'Roboto Condensed', Arial, sans-serif" font-size="26" text-anchor="start" fill="#354550" data-metric="activity-elapsed-time" font-weight="bold">1:23:08</text>
+  <polygon points="108,14 105,11 101,11 98,14 98,19 100,22 108,29 116,22 118,19 118,14 115,11 111,11" fill="#C62D32" shape-rendering="crispEdges" />
+  <polygon points="230,37 220,49 226,49 222,57 238,44 230,44 234,37" fill="#005AA8" shape-rendering="crispEdges" />
+  <text x="92" y="153" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="400" text-anchor="middle" fill="#15212B" data-metric="rear-gear-index">5</text>
   <text x="92" y="174" font-size="18" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" text-anchor="middle" fill="#354550" font-weight="normal">mph</text>
-  <text x="92" y="207" font-size="33" font-family="'Roboto Condensed', Arial, sans-serif" text-anchor="middle" fill="#15212B" font-weight="400" data-metric="current-speed-mph">22.4</text>
-  <text x="134" y="202" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="26" text-anchor="start" fill="#15212B" font-weight="normal" data-metric="current-lap-distance" id="stats-distance">10.4 mi</text>
-  <text x="226" y="238" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="20" text-anchor="end" fill="#354550" data-metric="local-clock" font-weight="normal">9:41</text>
-  <text x="33" y="207" font-family="'Roboto Condensed', Arial, sans-serif" font-size="33" text-anchor="middle" fill="#B45309" data-metric="current-estimated-grade" font-weight="400" data-color-rule="gt15-deep-purple;gt10-deep-red;gt5-orange;otherwise-neutral">6.4</text>
-  <text x="123" y="238" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" data-metric="history-window" font-weight="normal" id="chart-range">&lt; All &gt;</text>
-  <text x="238" y="238" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="end" fill="#354550" data-metric="clock-half-day" data-am-label="A" data-pm-label="B" font-weight="normal">A</text>
-  <text x="220" y="149" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">AVG</text>
-  <text x="220" y="169" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">W</text>
-  <text x="33" y="117" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">rpm</text>
-  <text x="92" y="117" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">gear</text>
+  <text x="92" y="212" font-size="38" font-family="'Roboto Condensed', Arial, sans-serif" text-anchor="middle" fill="#15212B" font-weight="400" data-metric="current-speed-mph">22</text>
+  <text x="130" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="32" text-anchor="start" fill="#15212B" font-weight="bold" data-metric="current-lap-distance" id="stats-distance">10.4</text>
+  <text x="226" y="242" font-family="'Roboto Condensed', Arial, sans-serif" font-size="26" text-anchor="end" fill="#354550" data-metric="local-clock" font-weight="bold">9:41</text>
+  <text x="33" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" text-anchor="middle" fill="#B45309" data-metric="current-estimated-grade" font-weight="400" data-color-rule="gt15-deep-purple;gt10-deep-red;gt5-orange;otherwise-neutral">6.4</text>
+  <text x="125" y="242" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" data-metric="history-window" font-weight="normal" id="chart-range">&lt; All &gt;</text>
+  <text x="238" y="242" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="end" fill="#354550" data-metric="clock-half-day" data-am-label="A" data-pm-label="B" font-weight="normal">A</text>
+  <text x="223" y="162" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">AVG</text>
+  <text x="223" y="182" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">W</text>
+  <text x="33" y="114" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">rpm</text>
+  <text x="92" y="114" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">gear</text>
   <text x="33" y="174" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">%</text>
-  <text x="6" y="316" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="20" font-weight="normal" text-anchor="start" fill="#354550" data-metric="distance-total-and-remaining" data-part="total">10.4</text>
-  <text x="43" y="316" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="20" font-weight="normal" text-anchor="start" fill="#005AA8" data-metric="distance-total-and-remaining" data-part="remaining">(12.4)</text>
-  <text x="92" y="316" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="distance-total-and-remaining" data-part="unit">mi</text>
-  <text x="131" y="316" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="20" font-weight="normal" text-anchor="start" fill="#354550" data-metric="ascent-total-and-remaining" data-part="total">2238</text>
-  <text x="173" y="316" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="20" font-weight="normal" text-anchor="start" fill="#005AA8" data-metric="ascent-total-and-remaining" data-part="remaining">(1200)</text>
-  <text x="227" y="316" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="ascent-total-and-remaining" data-part="unit">ft</text>
-  <rect x="16" y="286" width="2" height="8" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="169.38" />
-  <rect x="18" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="175.69" />
-  <rect x="20" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="176.01" />
-  <rect x="22" y="286" width="2" height="8" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="170.15" />
+  <text x="6" y="318" font-family="'Roboto Condensed', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#354550" data-metric="distance-total-and-remaining" data-part="total">10</text>
+  <text x="32" y="318" font-family="'Roboto Condensed', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#005AA8" data-metric="distance-total-and-remaining" data-part="remaining">(12)</text>
+  <text x="75" y="318" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="distance-total-and-remaining" data-part="unit">mi</text>
+  <text x="110" y="318" font-family="'Roboto Condensed', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#354550" data-metric="ascent-total-and-remaining" data-part="total">2238</text>
+  <text x="160" y="318" font-family="'Roboto Condensed', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#005AA8" data-metric="ascent-total-and-remaining" data-part="remaining">(1200)</text>
+  <text x="227" y="318" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="ascent-total-and-remaining" data-part="unit">ft</text>
+  <rect x="16" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="169.38" />
+  <rect x="18" y="286" width="2" height="8" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="175.69" />
+  <rect x="20" y="286" width="2" height="8" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="176.01" />
+  <rect x="22" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="170.15" />
   <rect x="25" y="288" width="2" height="6" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="161.41" />
   <rect x="27" y="289" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="154.68" />
   <rect x="29" y="290" width="2" height="4" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="153.73" />
   <rect x="31" y="288" width="2" height="6" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="159.1" />
   <rect x="33" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="167.78" />
-  <rect x="35" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="174.9" />
-  <rect x="37" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="176.47" />
-  <rect x="40" y="286" width="2" height="8" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="171.61" />
-  <rect x="42" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="246.47" />
-  <rect x="44" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="242.41" />
-  <rect x="46" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="234.37" />
-  <rect x="48" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="235.5" />
-  <rect x="50" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="244.44" />
-  <rect x="52" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="250.44" />
-  <rect x="55" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="246.31" />
-  <rect x="57" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="237.0" />
-  <rect x="59" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.7" />
-  <rect x="61" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="240.37" />
-  <rect x="63" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.0" />
-  <rect x="65" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.22" />
-  <rect x="67" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="240.77" />
-  <rect x="70" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.79" />
-  <rect x="72" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="236.68" />
-  <rect x="74" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="245.96" />
-  <rect x="76" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="250.48" />
-  <rect x="78" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="244.82" />
-  <rect x="80" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="235.77" />
-  <rect x="82" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="234.21" />
-  <rect x="85" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="242.01" />
-  <rect x="87" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.8" />
-  <rect x="89" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="248.22" />
-  <rect x="91" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="239.17" />
+  <rect x="35" y="286" width="2" height="8" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="174.9" />
+  <rect x="37" y="286" width="2" height="8" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="176.47" />
+  <rect x="40" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="171.61" />
+  <rect x="42" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="246.47" />
+  <rect x="44" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="242.41" />
+  <rect x="46" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="234.37" />
+  <rect x="48" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="235.5" />
+  <rect x="50" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="244.44" />
+  <rect x="52" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="250.44" />
+  <rect x="55" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="246.31" />
+  <rect x="57" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="237.0" />
+  <rect x="59" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.7" />
+  <rect x="61" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="240.37" />
+  <rect x="63" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.0" />
+  <rect x="65" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.22" />
+  <rect x="67" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="240.77" />
+  <rect x="70" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.79" />
+  <rect x="72" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="236.68" />
+  <rect x="74" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="245.96" />
+  <rect x="76" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="250.48" />
+  <rect x="78" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="244.82" />
+  <rect x="80" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="235.77" />
+  <rect x="82" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="234.21" />
+  <rect x="85" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="242.01" />
+  <rect x="87" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.8" />
+  <rect x="89" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="248.22" />
+  <rect x="91" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="239.17" />
   <rect x="93" y="288" width="2" height="6" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="162.24" />
   <rect x="95" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-watts="136.89" />
   <rect x="97" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-watts="134.61" />
   <rect x="100" y="290" width="2" height="4" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="153.91" />
   <rect x="102" y="289" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="154.71" />
   <rect x="104" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-watts="135.35" />
-  <rect x="106" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="226.43" />
-  <rect x="108" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="243.64" />
-  <rect x="110" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="250.31" />
-  <rect x="112" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="246.99" />
-  <rect x="115" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="237.68" />
-  <rect x="117" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.56" />
-  <rect x="119" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="239.58" />
-  <rect x="121" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="248.51" />
-  <rect x="123" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.62" />
-  <rect x="125" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="241.58" />
-  <rect x="127" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="234.04" />
-  <rect x="129" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="236.07" />
-  <rect x="132" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="245.22" />
-  <rect x="134" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="250.5" />
-  <rect x="136" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="245.57" />
-  <rect x="138" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="236.35" />
-  <rect x="140" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.92" />
-  <rect x="142" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="241.19" />
-  <rect x="144" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.44" />
-  <rect x="147" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="248.75" />
-  <rect x="149" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="239.95" />
-  <rect x="151" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.61" />
-  <rect x="153" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="237.35" />
-  <rect x="155" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="246.67" />
+  <rect x="106" y="276" width="2" height="18" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="226.43" />
+  <rect x="108" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="243.64" />
+  <rect x="110" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="250.31" />
+  <rect x="112" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="246.99" />
+  <rect x="115" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="237.68" />
+  <rect x="117" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.56" />
+  <rect x="119" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="239.58" />
+  <rect x="121" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="248.51" />
+  <rect x="123" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.62" />
+  <rect x="125" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="241.58" />
+  <rect x="127" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="234.04" />
+  <rect x="129" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="236.07" />
+  <rect x="132" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="245.22" />
+  <rect x="134" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="250.5" />
+  <rect x="136" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="245.57" />
+  <rect x="138" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="236.35" />
+  <rect x="140" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.92" />
+  <rect x="142" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="241.19" />
+  <rect x="144" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.44" />
+  <rect x="147" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="248.75" />
+  <rect x="149" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="239.95" />
+  <rect x="151" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.61" />
+  <rect x="153" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="237.35" />
+  <rect x="155" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="246.67" />
   <rect x="157" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="166.24" />
   <rect x="159" y="289" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="158.1" />
   <rect x="162" y="292" width="2" height="2" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="141.51" />
   <rect x="164" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-watts="132.17" />
   <rect x="166" y="290" width="2" height="4" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="149.47" />
   <rect x="168" y="289" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="157.49" />
-  <rect x="170" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="230.69" />
-  <rect x="172" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="238.4" />
-  <rect x="174" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.5" />
-  <rect x="177" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="238.81" />
-  <rect x="179" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="247.95" />
-  <rect x="181" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.95" />
-  <rect x="183" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="242.39" />
-  <rect x="185" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="234.37" />
-  <rect x="187" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="235.51" />
-  <rect x="189" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="244.45" />
-  <rect x="192" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="250.44" />
-  <rect x="194" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="246.29" />
-  <rect x="196" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="236.99" />
-  <rect x="198" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.7" />
-  <rect x="200" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="240.39" />
-  <rect x="202" y="270" width="2" height="24" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.01" />
-  <rect x="204" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.21" />
-  <rect x="207" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="240.75" />
-  <rect x="209" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="174.4" />
+  <rect x="170" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="230.69" />
+  <rect x="172" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="238.4" />
+  <rect x="174" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.5" />
+  <rect x="177" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="238.81" />
+  <rect x="179" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="247.95" />
+  <rect x="181" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.95" />
+  <rect x="183" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="242.39" />
+  <rect x="185" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="234.37" />
+  <rect x="187" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="235.51" />
+  <rect x="189" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="244.45" />
+  <rect x="192" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="250.44" />
+  <rect x="194" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="246.29" />
+  <rect x="196" y="274" width="2" height="20" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="236.99" />
+  <rect x="198" y="275" width="2" height="19" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="233.7" />
+  <rect x="200" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="240.39" />
+  <rect x="202" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.01" />
+  <rect x="204" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="249.21" />
+  <rect x="207" y="273" width="2" height="21" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="240.75" />
+  <rect x="209" y="286" width="2" height="8" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="174.4" />
   <rect x="211" y="290" width="2" height="4" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="150.58" />
   <rect x="213" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-watts="132.57" />
   <rect x="215" y="292" width="2" height="2" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="140.37" />
-  <rect x="217" y="265" width="2" height="29" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-watts="271.78" />
+  <rect x="217" y="267" width="2" height="27" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-watts="271.78" />
   <rect x="219" y="291" width="2" height="3" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="149.12" />
-  <rect x="222" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="251.78" />
-  <rect x="224" y="280" width="2" height="14" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-watts="200.01" />
-  <rect x="226" y="283" width="2" height="11" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="184.87" />
-  <rect x="228" y="266" width="2" height="28" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-watts="263.39" />
-  <polyline points="16,286 18,285" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="18,285 20,285" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="20,285 22,286" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="22,286 25,288" fill="none" stroke="#0075C9" stroke-width="2" />
+  <rect x="222" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-watts="251.78" />
+  <rect x="224" y="281" width="2" height="13" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-watts="200.01" />
+  <rect x="226" y="284" width="2" height="10" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-watts="184.87" />
+  <rect x="228" y="268" width="2" height="26" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-watts="263.39" />
+  <polyline points="16,287 18,286" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="18,286 20,286" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="20,286 22,287" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="22,287 25,288" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="25,288 27,289" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="27,289 29,290" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="29,290 31,288" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="31,288 33,287" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="33,287 35,285" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="35,285 37,285" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="37,285 40,286" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="40,286 42,270" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="42,270 44,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="44,271 46,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="46,273 48,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="48,272 50,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="50,270 52,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="52,269 55,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="55,270 57,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="57,272 59,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="59,273 61,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="61,271 63,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="63,270 65,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="65,269 67,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="67,271 70,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="70,273 72,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="72,272 74,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="74,270 76,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="76,269 78,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="78,270 80,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="80,272 82,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="82,273 85,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="85,271 87,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="87,269 89,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="89,270 91,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="91,272 93,288" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="33,287 35,286" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="35,286 37,286" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="37,286 40,287" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="40,287 42,272" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="42,272 44,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="44,273 46,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="46,275 48,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="48,274 50,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="50,272 52,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="52,271 55,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="55,272 57,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="57,274 59,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="59,275 61,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="61,273 63,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="63,272 65,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="65,271 67,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="67,273 70,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="70,275 72,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="72,274 74,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="74,272 76,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="76,271 78,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="78,272 80,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="80,274 82,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="82,275 85,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="85,273 87,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="87,271 89,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="89,272 91,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="91,274 93,288" fill="none" stroke="#E26A18" stroke-width="2" />
   <polyline points="93,288 95,292" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="95,292 97,292" fill="none" stroke="#7D8794" stroke-width="2" />
   <polyline points="97,292 100,290" fill="none" stroke="#7D8794" stroke-width="2" />
   <polyline points="100,290 102,289" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="102,289 104,292" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="104,292 106,274" fill="none" stroke="#7D8794" stroke-width="2" />
-  <polyline points="106,274 108,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="108,271 110,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="110,269 112,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="112,270 115,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="115,272 117,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="117,273 119,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="119,272 121,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="121,270 123,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="123,269 125,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="125,271 127,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="127,273 129,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="129,272 132,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="132,270 134,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="134,269 136,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="136,270 138,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="138,272 140,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="140,273 142,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="142,271 144,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="144,269 147,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="147,270 149,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="149,271 151,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="151,273 153,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="153,272 155,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="155,270 157,287" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="104,292 106,276" fill="none" stroke="#7D8794" stroke-width="2" />
+  <polyline points="106,276 108,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="108,273 110,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="110,271 112,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="112,272 115,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="115,274 117,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="117,275 119,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="119,274 121,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="121,272 123,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="123,271 125,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="125,273 127,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="127,275 129,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="129,274 132,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="132,272 134,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="134,271 136,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="136,272 138,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="138,274 140,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="140,275 142,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="142,273 144,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="144,271 147,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="147,272 149,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="149,273 151,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="151,275 153,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="153,274 155,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="155,272 157,287" fill="none" stroke="#E26A18" stroke-width="2" />
   <polyline points="157,287 159,289" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="159,289 162,292" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="162,292 164,292" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="164,292 166,290" fill="none" stroke="#7D8794" stroke-width="2" />
   <polyline points="166,290 168,289" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="168,289 170,273" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="170,273 172,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="172,272 174,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="174,273 177,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="177,272 179,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="179,270 181,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="181,269 183,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="183,271 185,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="185,273 187,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="187,272 189,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="189,270 192,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="192,269 194,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="194,270 196,272" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="196,272 198,273" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="198,273 200,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="200,271 202,270" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="202,270 204,269" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="204,269 207,271" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="207,271 209,285" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="209,285 211,290" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="168,289 170,275" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="170,275 172,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="172,274 174,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="174,275 177,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="177,274 179,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="179,272 181,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="181,271 183,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="183,273 185,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="185,275 187,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="187,274 189,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="189,272 192,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="192,271 194,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="194,272 196,274" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="196,274 198,275" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="198,275 200,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="200,273 202,272" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="202,272 204,271" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="204,271 207,273" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="207,273 209,286" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="209,286 211,290" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="211,290 213,292" fill="none" stroke="#0075C9" stroke-width="2" />
   <polyline points="213,292 215,292" fill="none" stroke="#7D8794" stroke-width="2" />
-  <polyline points="215,292 217,265" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="217,265 219,291" fill="none" stroke="#7B3FC6" stroke-width="2" />
-  <polyline points="219,291 222,269" fill="none" stroke="#0075C9" stroke-width="2" />
-  <polyline points="222,269 224,280" fill="none" stroke="#E26A18" stroke-width="2" />
-  <polyline points="224,280 226,283" fill="none" stroke="#7D8794" stroke-width="2" />
-  <polyline points="226,283 228,266" fill="none" stroke="#0075C9" stroke-width="2" />
-  <rect x="15" y="268" width="6" height="4" fill="white" />
-  <rect x="16" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="23" y="268" width="6" height="4" fill="white" />
-  <rect x="24" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="31" y="268" width="6" height="4" fill="white" />
-  <rect x="32" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="39" y="268" width="6" height="4" fill="white" />
-  <rect x="40" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="47" y="268" width="6" height="4" fill="white" />
-  <rect x="48" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="55" y="268" width="6" height="4" fill="white" />
-  <rect x="56" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="63" y="268" width="6" height="4" fill="white" />
-  <rect x="64" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="71" y="268" width="6" height="4" fill="white" />
-  <rect x="72" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="79" y="268" width="6" height="4" fill="white" />
-  <rect x="80" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="87" y="268" width="6" height="4" fill="white" />
-  <rect x="88" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="95" y="268" width="6" height="4" fill="white" />
-  <rect x="96" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="103" y="268" width="6" height="4" fill="white" />
-  <rect x="104" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="111" y="268" width="6" height="4" fill="white" />
-  <rect x="112" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="119" y="268" width="6" height="4" fill="white" />
-  <rect x="120" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="127" y="268" width="6" height="4" fill="white" />
-  <rect x="128" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="135" y="268" width="6" height="4" fill="white" />
-  <rect x="136" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="143" y="268" width="6" height="4" fill="white" />
-  <rect x="144" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="151" y="268" width="6" height="4" fill="white" />
-  <rect x="152" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="159" y="268" width="6" height="4" fill="white" />
-  <rect x="160" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="167" y="268" width="6" height="4" fill="white" />
-  <rect x="168" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="175" y="268" width="6" height="4" fill="white" />
-  <rect x="176" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="183" y="268" width="6" height="4" fill="white" />
-  <rect x="184" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="191" y="268" width="6" height="4" fill="white" />
-  <rect x="192" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="199" y="268" width="6" height="4" fill="white" />
-  <rect x="200" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="207" y="268" width="6" height="4" fill="white" />
-  <rect x="208" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="215" y="268" width="6" height="4" fill="white" />
-  <rect x="216" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="223" y="268" width="6" height="4" fill="white" />
-  <rect x="224" y="269" width="4" height="2" fill="#59636E" />
-  <rect x="16" y="281" width="213" height="4" fill="white" />
-  <rect x="16" y="282" width="213" height="2" fill="#005AA8" />
-  <rect x="14" y="243" width="4" height="51" fill="white" />
-  <rect x="15" y="243" width="2" height="51" fill="#15212B" />
-  <rect x="13" y="243" width="6" height="4" fill="#15212B" />
-  <rect x="218" y="243" width="4" height="51" fill="white" />
-  <rect x="219" y="243" width="2" height="51" fill="#15212B" />
-  <rect x="217" y="243" width="6" height="4" fill="#15212B" />
-  <rect x="223" y="243" width="4" height="51" fill="white" />
-  <rect x="224" y="243" width="2" height="51" fill="#15212B" />
-  <rect x="222" y="243" width="6" height="4" fill="#15212B" />
-  <rect x="227" y="243" width="3" height="51" fill="#005AA8" />
+  <polyline points="215,292 217,267" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="217,267 219,291" fill="none" stroke="#7B3FC6" stroke-width="2" />
+  <polyline points="219,291 222,271" fill="none" stroke="#0075C9" stroke-width="2" />
+  <polyline points="222,271 224,281" fill="none" stroke="#E26A18" stroke-width="2" />
+  <polyline points="224,281 226,284" fill="none" stroke="#7D8794" stroke-width="2" />
+  <polyline points="226,284 228,268" fill="none" stroke="#0075C9" stroke-width="2" />
+  <rect x="15" y="270" width="6" height="4" fill="white" />
+  <rect x="16" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="23" y="270" width="6" height="4" fill="white" />
+  <rect x="24" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="31" y="270" width="6" height="4" fill="white" />
+  <rect x="32" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="39" y="270" width="6" height="4" fill="white" />
+  <rect x="40" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="47" y="270" width="6" height="4" fill="white" />
+  <rect x="48" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="55" y="270" width="6" height="4" fill="white" />
+  <rect x="56" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="63" y="270" width="6" height="4" fill="white" />
+  <rect x="64" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="71" y="270" width="6" height="4" fill="white" />
+  <rect x="72" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="79" y="270" width="6" height="4" fill="white" />
+  <rect x="80" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="87" y="270" width="6" height="4" fill="white" />
+  <rect x="88" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="95" y="270" width="6" height="4" fill="white" />
+  <rect x="96" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="103" y="270" width="6" height="4" fill="white" />
+  <rect x="104" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="111" y="270" width="6" height="4" fill="white" />
+  <rect x="112" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="119" y="270" width="6" height="4" fill="white" />
+  <rect x="120" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="127" y="270" width="6" height="4" fill="white" />
+  <rect x="128" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="135" y="270" width="6" height="4" fill="white" />
+  <rect x="136" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="143" y="270" width="6" height="4" fill="white" />
+  <rect x="144" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="151" y="270" width="6" height="4" fill="white" />
+  <rect x="152" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="159" y="270" width="6" height="4" fill="white" />
+  <rect x="160" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="167" y="270" width="6" height="4" fill="white" />
+  <rect x="168" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="175" y="270" width="6" height="4" fill="white" />
+  <rect x="176" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="183" y="270" width="6" height="4" fill="white" />
+  <rect x="184" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="191" y="270" width="6" height="4" fill="white" />
+  <rect x="192" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="199" y="270" width="6" height="4" fill="white" />
+  <rect x="200" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="207" y="270" width="6" height="4" fill="white" />
+  <rect x="208" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="215" y="270" width="6" height="4" fill="white" />
+  <rect x="216" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="223" y="270" width="6" height="4" fill="white" />
+  <rect x="224" y="271" width="4" height="2" fill="#59636E" />
+  <rect x="16" y="282" width="213" height="4" fill="white" />
+  <rect x="16" y="283" width="213" height="2" fill="#005AA8" />
+  <rect x="14" y="247" width="4" height="47" fill="white" />
+  <rect x="15" y="247" width="2" height="47" fill="#15212B" />
+  <rect x="13" y="247" width="6" height="4" fill="#15212B" />
+  <rect x="218" y="247" width="4" height="47" fill="white" />
+  <rect x="219" y="247" width="2" height="47" fill="#15212B" />
+  <rect x="217" y="247" width="6" height="4" fill="#15212B" />
+  <rect x="223" y="247" width="4" height="47" fill="white" />
+  <rect x="224" y="247" width="2" height="47" fill="#15212B" />
+  <rect x="222" y="247" width="6" height="4" fill="#15212B" />
+  <rect x="227" y="247" width="3" height="47" fill="#005AA8" />
+  <text x="190" y="212" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" fill="#354550">mi</text>
 </svg>
