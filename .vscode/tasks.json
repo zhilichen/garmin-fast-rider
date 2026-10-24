@@ -1,0 +1,9 @@
+{
+  "version":"2.0.0",
+  "tasks":[
+    {"label":"Summit: build live","type":"shell","command":"./scripts/build.sh live","group":{"kind":"build","isDefault":true},"problemMatcher":[]},
+    {"label":"Summit: run demo","type":"shell","command":"./scripts/run.sh demo","problemMatcher":[]},
+    {"label":"Summit: run live","type":"shell","command":"./scripts/run.sh live","problemMatcher":[]},
+    {"label":"Summit: tests","type":"shell","command":"./scripts/run.sh test","group":"test","problemMatcher":[]}
+  ]
+}

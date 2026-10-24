@@ -1,0 +1,6 @@
+{
+  "monkeyC.developerKeyPath": "/absolute/path/to/garmin-fast-rider/.local/developer_key.der",
+  "monkeyC.javaPath": "/absolute/path/to/jdk-17",
+  "monkeyC.jungleFiles": ["monkey.jungle"],
+  "monkeyC.compilerWarnings": true
+}

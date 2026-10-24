@@ -1,0 +1,5 @@
+<properties>
+  <property id="ftp" type="number">250</property>
+  <property id="maxHr" type="number">190</property>
+  <property id="courseStart" type="number">-1</property>
+</properties>

@@ -1,0 +1,10 @@
+bin/
+.local/
+*.der
+*.pem
+*.iq
+*.prg
+*.prg.debug.xml
+__pycache__/
+.DS_Store
+.vscode/settings.json

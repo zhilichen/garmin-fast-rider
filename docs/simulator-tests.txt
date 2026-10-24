@@ -1,0 +1,19 @@
+------------------------------------------------------------------------------
+Executing test zonesTest...
+PASS
+------------------------------------------------------------------------------
+Executing test timeTest...
+PASS
+------------------------------------------------------------------------------
+Executing test courseTest...
+PASS
+
+==============================================================================
+RESULTS
+Test:                               Status:
+zonesTest                           PASS
+timeTest                            PASS
+courseTest                          PASS
+Ran 3 tests
+
+PASSED (passed=3, failed=0, errors=0)
