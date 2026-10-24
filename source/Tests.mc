@@ -28,6 +28,37 @@ function timeTest(logger) {
 }
 
 (:test)
+function gearTest(logger) {
+    Test.assertEqual(RideMath.gears(2, 7), "2 / 7");
+    Test.assertEqual(RideMath.gears(null, null), "-- / --");
+    Test.assertEqual(RideMath.gears(0, 7), "-- / 7");
+    Test.assertEqual(RideMath.gradeText(null), "--");
+    Test.assertEqual(RideMath.gradeText(4.2), "+4.2");
+    Test.assertEqual(RideMath.gradeText(-6.5), "-6.5");
+    Test.assertEqual(RideMath.gradeText(-0.001), "+0.0");
+    return true;
+}
+
+(:test)
+function gradeTest(logger) {
+    var e = new GradeEstimator();
+    Test.assert(e.update(0.0, 100.0, 0) == null);
+    for (var i = 1; i < 4; i += 1) { Test.assert(e.update(i*5.0, 100+i*0.25, i*1000) == null); }
+    assertNear(e.update(20.0, 101.0, 4000), 5.0);
+    assertNear(e.update(25.0, 101.25, 5000), 5.0);
+    // A stopped bike expires its estimate, rather than keeping a stale grade.
+    Test.assert(e.update(25.0, 101.25, 21001) == null);
+    assertNear(e.update(45.0, 100.25, 25001), -5.0);
+    Test.assert(e.update(null, 100.0, 26000) == null);
+    Test.assert(e.update(0.0, 100.0, 27000) == null);
+    assertNear(e.update(20.0, 100.0, 29000), 0.0);
+    // Activity reset and bad altitude jumps must discard history.
+    Test.assert(e.update(1.0, 100.0, 30000) == null);
+    Test.assert(e.update(21.0, 200.0, 31000) == null);
+    return true;
+}
+
+(:test)
 function courseTest(logger) {
     assertNear(RideMath.elevation(0), CourseData.ELEVATIONS[0]);
     assertNear(RideMath.elevation(CourseData.LENGTH), CourseData.ELEVATIONS[CourseData.ELEVATIONS.size()-1]);

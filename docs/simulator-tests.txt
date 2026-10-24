@@ -5,6 +5,12 @@ PASS
 Executing test timeTest...
 PASS
 ------------------------------------------------------------------------------
+Executing test gearTest...
+PASS
+------------------------------------------------------------------------------
+Executing test gradeTest...
+PASS
+------------------------------------------------------------------------------
 Executing test courseTest...
 PASS
 
@@ -13,7 +19,9 @@ RESULTS
 Test:                               Status:
 zonesTest                           PASS
 timeTest                            PASS
+gearTest                            PASS
+gradeTest                           PASS
 courseTest                          PASS
-Ran 3 tests
+Ran 5 tests
 
-PASSED (passed=3, failed=0, errors=0)
+PASSED (passed=5, failed=0, errors=0)

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" role="img" aria-labelledby="title desc">
+  <title id="title">Edge 840 native-pixel primitive calibration card</title>
+  <desc id="desc">246 by 322 pixel design card. One-pixel coordinate quantum, two-pixel spacing grid, two-pixel minimum semantic strokes, four-pixel negative space, sixteen-pixel icons and a position marker with white isolation halo.</desc>
+  <rect width="246" height="322" fill="white"/>
+  <g font-family="DejaVu Sans,Arial,sans-serif" fill="#15212b">
+    <text x="8" y="22" font-size="16" font-weight="bold">EDGE 840 · 246 × 322</text>
+    <text x="8" y="44" font-size="12">1 px coordinates / 2 px layout grid</text>
+    <text x="8" y="70" font-size="14" font-weight="bold">STROKES</text>
+    <g shape-rendering="crispEdges" fill="#15212b">
+      <rect x="8" y="82" width="60" height="2"/>
+      <rect x="88" y="82" width="60" height="3"/>
+      <rect x="168" y="82" width="60" height="4"/>
+    </g>
+    <text x="8" y="106" font-size="12">2 px contour</text>
+    <text x="88" y="106" font-size="12">3 px cursor</text>
+    <text x="168" y="106" font-size="12">4 px bar</text>
+    <text x="8" y="134" font-size="14" font-weight="bold">16 px / 24 px ICONS</text>
+    <g fill="none" stroke="#15212b" stroke-width="2" stroke-linejoin="miter" shape-rendering="crispEdges">
+      <path d="M10 162 L16 148 L24 162 Z"/>
+      <path d="M44 170 L54 148 L66 170 Z"/>
+      <path d="M89 149 H111 V171 H89 Z M97 157 H103 V163 H97 Z"/>
+    </g>
+    <text x="126" y="156" font-size="12">2 px strokes</text>
+    <text x="126" y="174" font-size="12">4 px clear gaps</text>
+    <text x="8" y="204" font-size="14" font-weight="bold">POSITION / ISOLATION</text>
+    <path d="M16 252 L50 232 L82 248 L124 220 L160 234 L194 226 L230 250 V264 H16 Z" fill="#d8dfe4"/>
+    <path d="M16 252 L50 232 L82 248 L124 220 L160 234 L194 226 L230 250" fill="none" stroke="#53616b" stroke-width="2" shape-rendering="crispEdges"/>
+    <rect x="81" y="218" width="3" height="47" fill="#005aa8"/>
+    <g shape-rendering="crispEdges">
+      <circle cx="82" cy="248" r="8" fill="white"/>
+      <circle cx="82" cy="248" r="6" fill="#005aa8"/>
+      <circle cx="82" cy="248" r="2" fill="white"/>
+    </g>
+    <text x="8" y="286" font-size="12">r6 marker · r8 halo · 3 px cursor</text>
+    <text x="8" y="310" font-size="12">Inspect at 1× or integer nearest zoom.</text>
+  </g>
+</svg>

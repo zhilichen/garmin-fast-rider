@@ -24,6 +24,26 @@ module RideMath {
         return hour.format("%d") + ":" + minute.format("%02d") + ":" + (sec % 60).format("%02d");
     }
 
+    function gears(front, rear) {
+        var f = front != null && front > 0 ? front.format("%d") : "--";
+        var r = rear != null && rear > 0 ? rear.format("%d") : "--";
+        return f + " / " + r;
+    }
+
+    function gradeText(value) {
+        if (value == null) { return "--"; }
+        // Avoid displaying a negative zero after rounding to one decimal.
+        if (value > -0.05 && value < 0.05) { value = 0.0; }
+        return (value >= 0 ? "+" : "") + value.format("%.1f");
+    }
+
+    function courseGrade(distance) {
+        distance = clamp(distance, 0, CourseData.LENGTH);
+        var a = clamp(distance-15, 0, CourseData.LENGTH);
+        var b = clamp(distance+15, 0, CourseData.LENGTH);
+        return (elevation(b)-elevation(a))*100.0/(b-a);
+    }
+
     function elevation(distance) {
         var ds = CourseData.DISTANCES;
         var es = CourseData.ELEVATIONS;
@@ -37,6 +57,40 @@ module RideMath {
         }
         var fraction = clamp((distance - ds[lo-1]) / (ds[lo] - ds[lo-1]).toFloat(), 0, 1);
         return es[lo-1] + fraction * (es[lo] - es[lo-1]);
+    }
+}
+
+// Live grade from measured altitude and traveled distance, not the imported GPX.
+// Sample every 5 m; use a >=20 m baseline and smooth successive estimates.
+class GradeEstimator {
+    var samples as Lang.Array<Lang.Array<Lang.Numeric>> = [];
+    var value = null;
+    var lastClock = null;
+    function initialize() { reset(); }
+    function reset() { samples = []; value = null; lastClock = null; }
+
+    function update(distance, altitude, clock) {
+        if (distance == null || altitude == null) { reset(); return null; }
+        if (lastClock != null && clock < lastClock) { reset(); }
+        lastClock = clock;
+        if (samples.size() > 0) {
+            var last = samples[samples.size()-1];
+            if (distance < last[0] || clock-last[2] > 15000) {
+                reset(); lastClock = clock;
+            } else if (distance-last[0] < 5) {
+                return value;
+            }
+        }
+        samples.add([distance, altitude, clock]);
+        while (samples.size() > 2 && distance-samples[1][0] >= 20) { samples.remove(samples[0]); }
+        var first = samples[0];
+        var baseline = distance-first[0];
+        if (baseline < 20) { return value; }
+        var raw = 100.0*(altitude-first[1])/baseline;
+        // Reject discontinuous altitude fixes instead of showing a clamped slope.
+        if (raw < -60 || raw > 60) { reset(); return null; }
+        value = value == null ? raw : 0.5*value+0.5*raw;
+        return value;
     }
 }
 

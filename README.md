@@ -1,10 +1,12 @@
 # Summit · Garmin Edge 840 全屏数据页
 
-Monkey C / Connect IQ 数据字段。浅色大字界面，上方为功率、心率、骑行距离、活动计时；下方为**整条路线海拔剖面**、已骑路段和当前位置。
+Monkey C / Connect IQ 数据字段。浅色大字界面，上方为带 Zone 编号与颜色的**心率、功率**；中央为**踏频**和旁边较小的**前/后档位**。底部横幅集中显示**全程海拔、当前位置、当前估算坡度、路线进度/总距离、已耗时**。
 
-![Edge 840 模拟器实际运行截图](docs/summit-edge840-demo.png)
+![新版 246 × 322 矢量设计预览，非模拟器截图](docs/design/summit-v2-preview.png)
 
-已在 Edge 840 模拟器（API 6.0.0）跑通动态演示，功率/心率数值与颜色、路线标记会更新。Garmin VM 的 3 项单元测试及 GPX 导入的 3 项 Python 测试通过，详见 [验证记录](docs/validation.md)。
+首版已在 Edge 840 模拟器（API 6.0.0）跑通动态演示；本次新版完成 demo/live 构建及 5 项 Garmin VM、3 项 Python 测试。上图是可审阅的原生尺寸设计稿；Mac 当前锁屏，新版模拟器截图验收待解锁后完成，详见 [验证记录](docs/validation.md)。[矢量源文件](docs/design/summit-v2.svg)。
+
+原生像素设计规范：[最小图元、字高、间距与对比度](docs/edge840-design-rules.md)；[246 × 322 矢量图元校准卡](docs/design/edge840-atoms.svg)。界面绘图常量集中在 `source/DisplayRules.mc`。
 
 ## 本机开发环境
 
@@ -42,7 +44,16 @@ python3 scripts/import_course.py /absolute/path/to/your-course.gpx
 
 真实数据版本以 `Activity.Info.currentLocation` 投影到导入路线，显示路线进度；GPS 缺失显示 `GPS --`，距路线超过 150 m 显示 `OFF COURSE` 并隐藏标记。自交路段会结合上一次路线位置选择，但重叠道路、来回路线和较差 GPS 仍可能产生歧义；160 点采样也可能切掉急弯。这是原型级路线匹配，尚需实骑验证。示例路线在真实版中同样标为 `SAMPLE`，应先导入自己的路线。
 
-设置 `courseStart` 为活动里程表中路线起点对应的米数（默认 `-1`，关闭）后，在没有可用 GPS 匹配时可使用里程估算；界面标为 `ODO EST.`。绕路时里程估算会偏离路线位置。顶部 DISTANCE 始终是活动总里程，计时使用 `timerTime`（不含暂停时间）。
+设置 `courseStart` 为活动里程表中路线起点对应的米数（默认 `-1`，关闭）后，在没有可用 GPS 匹配时可使用里程估算；界面标为 `ODO EST.`。绕路时里程估算会偏离路线位置。底部的距离分子是匹配到的**路线进度**，分母是导入 GPX 的全长；位置未知时显示 `-- / 总距离`。已耗时使用 `Activity.Info.elapsedTime`（含暂停时间）。
+
+## 踏频、档位与坡度
+
+- 踏频直接读取 `Activity.Info.currentCadence`，单位 rpm；零踏频有效，缺失信号显示 `--`。
+- 旁边的 `GEAR F/R` 直接读取 `frontDerailleurIndex / rearDerailleurIndex`，表示设备报告的前/后档位位置，如 `2 / 7`。需要设备已配对并能报告档位的电子变速系统；缺失位置显示 `--`，不从速度/踏频猜档位。
+- `~GRADE %` 为测得海拔与活动里程差计算的平滑坡度估计：每前进 5 m 采样，使用至少 20 m 基线并平滑更新。初始数据不足、海拔缺失、停车后 15 秒没有新距离样本、重置或异常海拔跳变时显示 `--`。本实现会滞后于短促的坡度变化，尚需实骑校准。
+- 演示构建的坡度来自导入路线的海拔剖面，演示踏频和档位为合成数据，界面明确标记 DEMO。真实构建的坡度使用当前测得海拔。
+
+指标来源参见 [Garmin Activity.Info 官方 API](https://developer.garmin.com/connect-iq/api-docs/Toybox/Activity/Info.html)。
 
 ## Zone 颜色
 

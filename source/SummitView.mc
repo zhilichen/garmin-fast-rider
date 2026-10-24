@@ -1,18 +1,19 @@
 import Toybox.Activity;
 import Toybox.Application;
 import Toybox.Graphics;
+import Toybox.Lang;
 import Toybox.Math;
 import Toybox.System;
 import Toybox.UserProfile;
 import Toybox.WatchUi;
 
 class SummitView extends WatchUi.DataField {
-    const INK = 0x172B3A;
-    const MUTED = 0x607080;
-    const RULE = 0xDDE3E8;
-    const BLUE = 0x0077CC;
     var power = null;
     var hr = null;
+    var cadence = null;
+    var gear = "-- / --";
+    var grade = null;
+    var gradeEstimator;
     var meters = 0.0;
     var millis = 0;
     var powerLimits;
@@ -22,10 +23,12 @@ class SummitView extends WatchUi.DataField {
     var start;
     var width;
     var height;
+    var profileY as Lang.Array<Lang.Number> or Null = null;
 
     function initialize() {
         DataField.initialize();
         tracker = new CourseTracker();
+        gradeEstimator = new GradeEstimator();
         start = System.getTimer();
         loadSettings();
     }
@@ -57,17 +60,24 @@ class SummitView extends WatchUi.DataField {
             var p = (t.toNumber() % 180) / 180.0;
             power = (220 + 135*Math.sin(t/12.0)).toNumber();
             hr = (147 + 28*Math.sin(t/19.0)).toNumber();
+            cadence = (90 + 7*Math.sin(t/11.0)).toNumber();
+            gear = RideMath.gears(2, 5+((t.toNumber()/15).toNumber()%7));
             meters = CourseData.LENGTH * (0.37 + 0.25*p);
             millis = 4980000 + (t*1000).toNumber();
             tracker.distance = meters;
             tracker.state = "DEMO";
+            grade = RideMath.courseGrade(meters);
             return;
         }
         power = info.currentPower;
         hr = info.currentHeartRate;
         if (hr != null && hr <= 0) { hr = null; }
+        cadence = info.currentCadence;
+        if (cadence != null && cadence < 0) { cadence = null; }
+        gear = RideMath.gears(info.frontDerailleurIndex, info.rearDerailleurIndex);
         meters = info.elapsedDistance != null ? info.elapsedDistance : 0.0;
-        millis = info.timerTime != null ? info.timerTime : 0;
+        millis = info.elapsedTime;
+        grade = gradeEstimator.update(info.elapsedDistance, info.altitude, System.getTimer());
         tracker.update(info.currentLocation);
         if (tracker.distance == null && offset >= 0) {
             tracker.distance = RideMath.clamp(meters-offset, 0, CourseData.LENGTH);
@@ -77,96 +87,126 @@ class SummitView extends WatchUi.DataField {
 
     function onTimerReset() {
         tracker = new CourseTracker();
+        gradeEstimator.reset();
+        grade = null;
         meters = 0.0;
         millis = 0;
         start = System.getTimer();
     }
 
-    function x(v) { return (v * width / 246.0).toNumber(); }
-    function y(v) { return (v * height / 322.0).toNumber(); }
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
     function text(dc, xx, yy, font, value, c, align) {
         color(dc, c);
-        dc.drawText(x(xx), y(yy), font, value, align);
-    }
-
-    function zoneColor(z) {
-        var colors = [MUTED, 0x71808A, 0x0077CC, 0x008844, 0xCC8800, 0xDD3300, 0xAA22AA, 0xCC2277];
-        return colors[z < 7 ? z : 7];
+        dc.drawText(xx, yy, font, value, align);
     }
 
     function fitFont(dc, value, maxWidth, big) {
-        var fonts = big ? [Graphics.FONT_NUMBER_HOT, Graphics.FONT_NUMBER_MEDIUM, Graphics.FONT_NUMBER_MILD, Graphics.FONT_SMALL] : [Graphics.FONT_NUMBER_MILD, Graphics.FONT_GLANCE_NUMBER, Graphics.FONT_SMALL, Graphics.FONT_XTINY];
+        // Never shrink a ride metric into a caption font to make it fit.
+        var fonts = big ? [Graphics.FONT_NUMBER_HOT, Graphics.FONT_NUMBER_MEDIUM] : [Graphics.FONT_NUMBER_MILD];
         for (var i = 0; i < fonts.size(); i += 1) {
             if (dc.getTextWidthInPixels(value, fonts[i]) <= maxWidth) { return fonts[i]; }
         }
-        return Graphics.FONT_XTINY;
+        return null;
+    }
+
+    function number(dc, left, top, value, c, big) {
+        var font = fitFont(dc, value, DisplayRules.CELL_WIDTH, big);
+        if (font == null) { value = "--"; font = big ? Graphics.FONT_NUMBER_MEDIUM : Graphics.FONT_NUMBER_MILD; }
+        text(dc, left+54, top, font, value, c, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     function metric(dc, left, label, value, unit, z) {
-        var c = zoneColor(z);
-        text(dc, left+10, 29, Graphics.FONT_XTINY, label, MUTED, Graphics.TEXT_JUSTIFY_LEFT);
-        var font = fitFont(dc, value, x(106), true);
-        text(dc, left+61, 51, font, value, c, Graphics.TEXT_JUSTIFY_CENTER);
-        text(dc, left+10, 114, Graphics.FONT_XTINY, unit, MUTED, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, left+111, 114, Graphics.FONT_XTINY, z == 0 ? "--" : "Z"+z, c, Graphics.TEXT_JUSTIFY_RIGHT);
+        var c = DisplayRules.zoneColor(z);
+        text(dc, left, 8, Graphics.FONT_MEDIUM, label, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        number(dc, left, 32, value, c, true);
+        text(dc, left, 92, Graphics.FONT_SMALL, unit, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, left+108, 90, Graphics.FONT_MEDIUM, z == 0 ? "--" : "Z"+z, c, Graphics.TEXT_JUSTIFY_RIGHT);
         color(dc, c);
-        dc.fillRectangle(x(left+10), y(139), x(103), 3);
+        dc.fillRectangle(left, 116, DisplayRules.CELL_WIDTH, DisplayRules.ZONE_BAR);
     }
 
     function onUpdate(dc) {
         width = dc.getWidth(); height = dc.getHeight();
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE); dc.clear();
-        if (width < 220 || height < 240) {
-            text(dc, 123, 95, Graphics.FONT_SMALL, "SUMMIT", INK, Graphics.TEXT_JUSTIFY_CENTER);
-            text(dc, 123, 155, Graphics.FONT_XTINY, "Select 1-field layout", MUTED, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.setPenWidth(DisplayRules.STROKE);
+        if (dc has :setAntiAlias) { dc.setAntiAlias(false); }
+        if (width != DisplayRules.WIDTH || height != DisplayRules.HEIGHT) {
+            text(dc, width/2, height/2-20, Graphics.FONT_SMALL, "SUMMIT", DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
+            text(dc, width/2, height/2+4, Graphics.FONT_SMALL, "1 field", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
             return;
         }
-        text(dc, 10, 3, Graphics.FONT_XTINY, "SUMMIT", INK, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 236, 3, Graphics.FONT_XTINY, BuildMode.DEMO ? "DEMO" : "RIDE", BLUE, Graphics.TEXT_JUSTIFY_RIGHT);
-        color(dc, RULE); dc.drawLine(0, y(25), width, y(25));
-        dc.drawLine(x(123), y(33), x(123), y(134));
-        metric(dc, 0, "POWER", power == null ? "--" : power.format("%d"), "W", RideMath.zone(power, powerLimits));
-        metric(dc, 123, "HEART RATE", hr == null ? "--" : hr.format("%d"), "bpm", RideMath.zone(hr, hrLimits));
-        text(dc, 10, 151, Graphics.FONT_XTINY, "DISTANCE  km", MUTED, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 133, 151, Graphics.FONT_XTINY, "RIDE TIME", MUTED, Graphics.TEXT_JUSTIFY_LEFT);
-        var dist = (meters/1000.0).format("%.1f");
-        text(dc, 10, 171, fitFont(dc, dist, x(103), false), dist, INK, Graphics.TEXT_JUSTIFY_LEFT);
-        var time = RideMath.duration(millis);
-        text(dc, 133, 179, fitFont(dc, time, x(103), false), time, INK, Graphics.TEXT_JUSTIFY_LEFT);
-        color(dc, RULE); dc.drawLine(0, y(216), width, y(216));
+        color(dc, DisplayRules.RULE); dc.fillRectangle(122, 8, DisplayRules.STROKE, 104);
+        metric(dc, 8, "HEART RATE", hr == null ? "--" : hr.format("%d"), "bpm", RideMath.zone(hr, hrLimits));
+        metric(dc, 130, "POWER", power == null ? "--" : power.format("%d"), "W", RideMath.zone(power, powerLimits));
+        text(dc, 8, 124, Graphics.FONT_MEDIUM, "CADENCE", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 62, 144, Graphics.FONT_NUMBER_MEDIUM, cadence == null ? "--" : cadence.format("%d"), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, 104, 160, Graphics.FONT_SMALL, "rpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 150, 124, Graphics.FONT_SMALL, "GEAR F/R", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 150, 146, Graphics.FONT_MEDIUM, gear, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
+        // Explicit sample status without spending an entire row on branding.
+        var badge = BuildMode.DEMO ? "DEMO" : (CourseData.IS_SAMPLE ? "SAMPLE" : "");
+        var badgeFont = Graphics.FONT_SMALL;
+        if (!BuildMode.DEMO && (tracker.distance == null || tracker.state.equals("ODO EST."))) {
+            badge = tracker.state; badgeFont = Graphics.FONT_MEDIUM;
+        }
+        text(dc, 238, 164, badgeFont, badge, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        color(dc, DisplayRules.BANNER_FILL); dc.fillRectangle(0, DisplayRules.BANNER_TOP, width, height-DisplayRules.BANNER_TOP);
+        color(dc, DisplayRules.RULE); dc.fillRectangle(8, DisplayRules.BANNER_TOP, 230, DisplayRules.STROKE);
+        drawBannerStats(dc);
         drawProfile(dc);
+    }
+
+    function drawBannerStats(dc) {
+        text(dc, 8, 192, Graphics.FONT_MEDIUM, "~GRADE %", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        var slope = RideMath.gradeText(grade);
+        var font = fitFont(dc, slope, 84, false);
+        text(dc, 8, 214, font == null ? Graphics.FONT_MEDIUM : font, slope, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
+        var d = tracker.distance;
+        var total = (CourseData.LENGTH/1000.0).format("%.1f");
+        var current = d == null ? "--" : (d/1000.0).format("%.1f");
+        var dist = current + " / " + total + " km";
+        if (dc.getTextWidthInPixels(dist, Graphics.FONT_MEDIUM) > 144) {
+            total = (CourseData.LENGTH/1000.0).format("%.0f");
+            current = d == null ? "--" : (d/1000.0).format("%.0f");
+            dist = current + " / " + total + " km";
+        }
+        text(dc, 238, 192, Graphics.FONT_MEDIUM, dist, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
+        var time = millis == null ? "--" : RideMath.duration(millis);
+        text(dc, 98, 218, Graphics.FONT_SMALL, "TIME", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 238, 216, Graphics.FONT_MEDIUM, time, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
     }
 
     function drawProfile(dc) {
         var d = tracker.distance;
-        text(dc, 10, 222, Graphics.FONT_XTINY, CourseData.IS_SAMPLE ? "SAMPLE" : "COURSE", INK, Graphics.TEXT_JUSTIFY_LEFT);
-        var summary = d == null ? tracker.state : (100*d/CourseData.LENGTH).format("%.0f") + "%  " + ((CourseData.LENGTH-d)/1000.0).format("%.1f") + " km left";
-        if (d != null && tracker.state.equals("ODO EST.")) { summary = "EST " + (100*d/CourseData.LENGTH).format("%.0f") + "%"; }
-        text(dc, 236, 222, Graphics.FONT_XTINY, summary, d == null ? MUTED : BLUE, Graphics.TEXT_JUSTIFY_RIGHT);
-        var left = x(10); var right = x(236);
-        var top = y(249); var bottom = y(297);
+        var left = DisplayRules.PLOT_LEFT; var right = DisplayRules.PLOT_RIGHT;
+        var top = DisplayRules.PLOT_TOP; var bottom = DisplayRules.PLOT_BOTTOM;
         var range = CourseData.HIGH-CourseData.LOW;
         if (range < 40) { range = 40; }
-        var marker = d == null ? -1 : left + (right-left)*d/CourseData.LENGTH;
-        var prevY = bottom;
+        var marker = d == null ? -1 : DisplayRules.pixel(left + (right-left)*d/CourseData.LENGTH);
+        if (profileY == null) {
+            profileY = [];
+            for (var col = 0; col <= right-left; col += 1) {
+                var at = col*CourseData.LENGTH/(right-left).toFloat();
+                profileY.add(DisplayRules.pixel(bottom-8-(RideMath.elevation(at)-CourseData.LOW)*(bottom-top-16)/range));
+            }
+        }
+        // Fill first, outline second: later columns must not erase a 2 px stroke.
         for (var px = left; px <= right; px += 1) {
-            var at = (px-left)*CourseData.LENGTH/(right-left).toFloat();
-            var py = bottom - 3 - (RideMath.elevation(at)-CourseData.LOW)*(bottom-top-6)/range;
-            color(dc, px <= marker ? 0x99CCEE : 0xDDE3E8);
-            dc.drawLine(px, py.toNumber(), px, bottom);
-            color(dc, px <= marker ? BLUE : 0x84939D);
-            if (px > left) { dc.drawLine(px-1, prevY.toNumber(), px, py.toNumber()); }
-            prevY = py;
+            var py = profileY[px-left];
+            color(dc, px <= marker ? DisplayRules.DONE_FILL : DisplayRules.FUTURE_FILL);
+            dc.fillRectangle(px, py, 1, bottom-py+1);
+        }
+        dc.setPenWidth(DisplayRules.STROKE);
+        for (var px = left+1; px <= right; px += 1) {
+            color(dc, px <= marker ? DisplayRules.BLUE : DisplayRules.FUTURE);
+            dc.drawLine(px-1, profileY[px-left-1], px, profileY[px-left]);
         }
         if (d != null) {
-            var markerY = bottom - 3 - (RideMath.elevation(d)-CourseData.LOW)*(bottom-top-6)/range;
-            color(dc, BLUE); dc.drawLine(marker.toNumber(), top-1, marker.toNumber(), bottom+2);
-            dc.fillCircle(marker.toNumber(), markerY.toNumber(), 5);
-            color(dc, Graphics.COLOR_WHITE); dc.fillCircle(marker.toNumber(), markerY.toNumber(), 2);
+            var markerY = profileY[marker-left];
+            color(dc, DisplayRules.BLUE); dc.fillRectangle(marker-1, top, DisplayRules.MARKER_STROKE, bottom-top+1);
+            color(dc, Graphics.COLOR_WHITE); dc.fillCircle(marker, markerY, DisplayRules.MARKER_HALO);
+            color(dc, DisplayRules.BLUE); dc.fillCircle(marker, markerY, DisplayRules.MARKER_RADIUS);
+            color(dc, Graphics.COLOR_WHITE); dc.fillCircle(marker, markerY, 2);
         }
-        text(dc, 10, 301, Graphics.FONT_XTINY, "0", MUTED, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 123, 301, Graphics.FONT_XTINY, CourseData.ASCENT.format("%d") + " m up", MUTED, Graphics.TEXT_JUSTIFY_CENTER);
-        text(dc, 236, 301, Graphics.FONT_XTINY, (CourseData.LENGTH/1000.0).format("%.1f") + " km", MUTED, Graphics.TEXT_JUSTIFY_RIGHT);
     }
 }

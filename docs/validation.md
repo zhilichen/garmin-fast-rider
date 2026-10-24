@@ -2,10 +2,11 @@
 
 验证日期：2026-10-24。工具链为 macOS、Corretto Java 17、Connect IQ SDK 9.3.0、Edge 840 官方设备包；模拟器报告设备 API 6.0.0。
 
-- demo 和 live 均针对 `edge840` 构建。
-- 动态 demo 已在模拟器单字段全屏（246 × 322）运行：功率、心率、Zone 标签与颜色更新；距离、骑行计时更新；全程海拔曲线显示已完成路段、当前位置、剩余距离与累计爬升。
-- 实际运行截图：[summit-edge840-demo.png](summit-edge840-demo.png)。模拟器运行时显示约 27 KB 内存使用，低于设备数据字段上限。
-- Garmin VM 单元测试：`zonesTest`、`timeTest`、`courseTest`，3/3 通过。[原始输出](simulator-tests.txt)。覆盖区间边界、零功率/缺失传感器、时间格式、剖面插值、GPS 路线匹配和偏航。
+- 新版 demo 和 live 均针对 `edge840` 构建。
+- 新版布局为上方心率/功率（Zone 编号与颜色）、中央踏频/较小的前后档位、底部路线横幅（全程海拔、位置、估算坡度、路线进度/总距离、已耗时）。
+- [原生尺寸矢量稿](design/summit-v2.svg)及[设计预览 PNG](design/summit-v2-preview.png)为设计资产，**不是模拟器截图**。本次新画面的截图验收因 Mac 锁屏尚未完成。
+- [首版模拟器截图](summit-edge840-demo.png)为历史参考；其约 27 KB 内存读数不代表新版测量结果。
+- Garmin VM 单元测试：`zonesTest`、`timeTest`、`gearTest`、`gradeTest`、`courseTest`，5/5 通过。[原始输出](simulator-tests.txt)。覆盖区间边界、零功率/缺失传感器、时间格式、档位缺失、坡度升降/预热/停止过期/重置/海拔跳变、剖面插值、GPS 路线匹配和偏航。
 - Python GPX 导入测试：3/3 通过，覆盖采样上限与端点、缺失海拔、多个不连续段/路线、重复坐标。
 
 复现命令（在项目根目录）：
