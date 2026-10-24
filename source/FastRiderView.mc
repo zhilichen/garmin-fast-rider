@@ -213,7 +213,12 @@ class FastRiderView extends WatchUi.DataField {
     function textWidth(dc, value, index) { return dc.getTextWidthInPixels(value, fonts[index]); }
     function intText(value) { return value == null ? "--" : Math.round(value).toNumber().format("%d"); }
     function primaryFont(dc, value) { return textWidth(dc, value, 0) <= DisplayRules.RADAR_LEFT-DisplayRules.RIGHT_START ? 0 : 6; }
-    function digitIndex(ch) { return ch.equals(".") ? 10 : (ch.equals("-") ? 11 : ch.toNumber()); }
+    function digitIndex(ch) {
+        if (ch.equals(".")) { return 10; } if (ch.equals("-")) { return 11; }
+        if (ch.equals("(")) { return 12; } if (ch.equals(")")) { return 13; }
+        if (ch.equals("m")) { return 14; } if (ch.equals("i")) { return 15; }
+        return ch.toNumber();
+    }
     function numberBounds(dc, value, index, tracking) as Lang.Array {
         var pen = 0; var left = 10000; var right = -10000;
         for (var i = 0; i < value.length(); i += 1) {
@@ -248,15 +253,37 @@ class FastRiderView extends WatchUi.DataField {
         var bounds = numberBounds(dc, value, 0, tracking);
         return bounds[1]+textWidth(dc, "7", 8)+1 <= DisplayRules.LEFT_WIDTH ? 0 : 6;
     }
-    function liveInteger(dc, value, available) {
-        var s = intText(value);
-        return numberWidth(dc, s, 1, 2) <= available ? s : "--";
+    function packedWidth(value, index) {
+        var w = 0;
+        for (var i = 0; i < value.length(); i += 1) {
+            var d = digitIndex(value.substring(i,i+1));
+            w += FontInk.NUMERIC_RIGHT[index][d]-FontInk.NUMERIC_LEFT[index][d];
+        }
+        return w+value.length()-1;
     }
-    function compactValue(dc, value, maxWidth) {
-        if (value == null) { return "--"; }
-        var s = value.format("%.1f");
-        if (numberWidth(dc, s, 1, 2) > maxWidth) { s = intText(value); }
-        return numberWidth(dc, s, 1, 2) > maxWidth ? "--" : s;
+    function drawPacked(dc, x, baseline, index, value, c) {
+        var top = baseline-FontInk.TOP[index]; var h = FontInk.TOP[index]+FontInk.BOTTOM[index];
+        var cursor = x;
+        for (var i = 0; i < value.length(); i += 1) {
+            var ch = value.substring(i,i+1); var d = digitIndex(ch);
+            var left = FontInk.NUMERIC_LEFT[index][d];
+            var w = FontInk.NUMERIC_RIGHT[index][d]-left;
+            dc.setClip(cursor, top, w, h); dc.setColor(c, Graphics.COLOR_WHITE);
+            dc.drawText(cursor-left, baseline-fontSizes[index], fonts[index], ch, Graphics.TEXT_JUSTIFY_LEFT);
+            dc.clearClip(); cursor += w+1;
+        }
+    }
+    function liveFont(value, available) {
+        var faces = [1,5,7,4];
+        for (var i = 0; i < faces.size(); i += 1) {
+            if (packedWidth(value, faces[i]) <= available) { return faces[i]; }
+        }
+        return 4;
+    }
+    function drawLive(dc, center, baseline, value, available, c) {
+        var face = liveFont(value, available);
+        var x = center-DisplayRules.pixel(packedWidth(value, face)/2.0);
+        drawPacked(dc, x, baseline, face, value, c);
     }
     function onUpdate(dc) {
         width = dc.getWidth(); height = dc.getHeight();
@@ -270,15 +297,14 @@ class FastRiderView extends WatchUi.DataField {
         }
         drawPrimary(dc);
         color(dc, DisplayRules.RULE); dc.fillRectangle(DisplayRules.COLUMN_DIVIDER, DisplayRules.MIDDLE_TOP, DisplayRules.STROKE, 123);
-        text(dc, DisplayRules.LIVE_LEFT_CENTER, 106, 3, "rpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
-        text(dc, DisplayRules.LIVE_RIGHT_CENTER, 106, 3, "gear", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
-        drawDigits(dc, DisplayRules.LIVE_LEFT_CENTER, 149, 1, liveInteger(dc, cadence, DisplayRules.LIVE_VALUE_WIDTH), DisplayRules.cadenceColor(cadence), 2, true);
-        drawDigits(dc, DisplayRules.LIVE_RIGHT_CENTER, 149, 1, liveInteger(dc, rearGear, DisplayRules.LIVE_VALUE_WIDTH), DisplayRules.INK, 2, true);
+        text(dc, DisplayRules.LIVE_LEFT_CENTER, 106, 3, "gear", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, DisplayRules.LIVE_RIGHT_CENTER, 106, 3, "rpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
+        drawLive(dc, DisplayRules.LIVE_LEFT_CENTER, 149, intText(rearGear), DisplayRules.LIVE_LEFT_WIDTH, DisplayRules.INK);
+        drawLive(dc, DisplayRules.LIVE_RIGHT_CENTER, 149, intText(cadence), DisplayRules.LIVE_RIGHT_WIDTH, DisplayRules.cadenceColor(cadence));
         text(dc, DisplayRules.LIVE_LEFT_CENTER, 170, 3, "%", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
         text(dc, DisplayRules.LIVE_RIGHT_CENTER, 170, 3, "mph", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
-        var g = grade != null && grade > -0.05 && grade < 0.05 ? 0.0 : grade;
-        drawDigits(dc, DisplayRules.LIVE_LEFT_CENTER, 212, 1, compactValue(dc, g, DisplayRules.LIVE_VALUE_WIDTH), DisplayRules.gradeColor(grade), 2, true);
-        drawDigits(dc, DisplayRules.LIVE_RIGHT_CENTER, 212, 1, compactValue(dc, speed == null ? null : speed*2.236936292, DisplayRules.LIVE_VALUE_WIDTH), DisplayRules.INK, 2, true);
+        drawLive(dc, DisplayRules.LIVE_LEFT_CENTER, 212, intText(grade), DisplayRules.LIVE_LEFT_WIDTH, DisplayRules.gradeColor(grade));
+        drawLive(dc, DisplayRules.LIVE_RIGHT_CENTER, 212, RideMath.speedMphText(speed), DisplayRules.LIVE_RIGHT_WIDTH, DisplayRules.INK);
         drawStats(dc); drawChartHeader(dc); drawPowerTrend(dc);
         if ((BuildMode.DEMO || BuildMode.DIAGNOSTICS) && !demoDiagnostics) {
             var stats = System.getSystemStats();
@@ -356,29 +382,30 @@ class FastRiderView extends WatchUi.DataField {
         var center = ax+aw+3+uw/2;
         text(dc, center, 160, 3, "AVG", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
         text(dc, center, 180, 3, "W", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
-        var rowWidth = textWidth(dc, parts[0], parts[2])+3+textWidth(dc, "mi", 12)+(parts[1] == null ? 0 : 3+textWidth(dc, parts[1], parts[3]));
+        var rowWidth = distanceRowWidth(parts);
         var x = DisplayRules.RIGHT_START+DisplayRules.pixel((DisplayRules.RIGHT_WIDTH-rowWidth)/2.0);
-        text(dc, x, 212, parts[2], parts[0], DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
-        x += textWidth(dc, parts[0], parts[2])+3;
-        text(dc, x, 212, 12, "mi", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        x += textWidth(dc, "mi", 12)+3;
-        if (parts[1] != null) { text(dc, x, 212, parts[3], parts[1], DisplayRules.BLUE, Graphics.TEXT_JUSTIFY_LEFT); }
+        drawPacked(dc, x, 212, parts[2], parts[0], DisplayRules.INK);
+        x += packedWidth(parts[0], parts[2])+1;
+        drawPacked(dc, x, 212, 12, "mi", DisplayRules.LABEL);
+        x += packedWidth("mi", 12)+1;
+        if (parts[1] != null) { drawPacked(dc, x, 212, parts[3], parts[1], DisplayRules.BLUE); }
+    }
+    function distanceRowWidth(parts as Lang.Array) {
+        return packedWidth(parts[0], parts[2])+1+packedWidth("mi", 12)+(parts[1] == null ? 0 : 1+packedWidth(parts[1], parts[3]));
     }
     function distanceParts(dc, distance, remaining, all) as Lang.Array {
         var shown = distance == null ? "--" : (distance/1609.344).format(all ? "%.1f" : "%.2f");
         var rest = all ? RideMath.remainingMilesText(remaining, 1) : null;
         var pairs = [[5,13],[7,14],[4,15]];
-        // Keep full precision first, then round the suffix only when very long.
+        // Fit complete decimal strings before considering extreme-value rounding.
         for (var pass = 0; pass < 3; pass += 1) {
             for (var i = 0; i < pairs.size(); i += 1) {
-                var pair = pairs[i];
-                var w = textWidth(dc, shown, pair[0])+textWidth(dc, "mi", 12)+(rest == null ? 0 : textWidth(dc, rest, pair[1]));
-                if (w <= DisplayRules.STATS_VALUE_WIDTH) { return [shown,rest,pair[0],pair[1]]; }
+                var pair = pairs[i]; var parts = [shown,rest,pair[0],pair[1]];
+                if (distanceRowWidth(parts) <= DisplayRules.RIGHT_WIDTH) { return parts; }
             }
             if (pass == 0 && rest != null) { rest = RideMath.remainingMilesText(remaining, 0); }
             else if (distance != null) { shown = (distance/1609.344).format("%.0f"); }
         }
-        // Unrepresentable, non-riding-scale values must not overlap the neighbor.
         return [shown,null,4,15];
     }
     function drawChartHeader(dc) {

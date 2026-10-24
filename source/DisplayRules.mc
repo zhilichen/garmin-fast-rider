@@ -7,17 +7,18 @@ module DisplayRules {
     const HEIGHT = 322;
     const MARGIN = 2;
     const STROKE = 2;
-    const COLUMN_DIVIDER = 107;
-    const RIGHT_START = 111;
+    const COLUMN_DIVIDER = 112;
+    const RIGHT_START = 116;
     const RIGHT_EDGE = 244;
     const LEFT_EDGE = 2;
-    const LEFT_RIGHT = 105;
-    const LEFT_WIDTH = 103;
-    const RIGHT_WIDTH = 133;
+    const LEFT_RIGHT = 110;
+    const LEFT_WIDTH = 108;
+    const RIGHT_WIDTH = 128;
     const RIGHT_TAP_LEFT = COLUMN_DIVIDER+STROKE;
-    const LIVE_LEFT_CENTER = 27;
-    const LIVE_RIGHT_CENTER = 79;
-    const LIVE_VALUE_WIDTH = 51;
+    const LIVE_LEFT_CENTER = 26;
+    const LIVE_RIGHT_CENTER = 81;
+    const LIVE_LEFT_WIDTH = 48;
+    const LIVE_RIGHT_WIDTH = 58;
     // Keep the existing font-selection thresholds: moving columns changes
     // spacing, not the type sizes selected for the same displayed values.
     const STATS_VALUE_WIDTH = 118;

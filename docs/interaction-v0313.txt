@@ -1,0 +1,15 @@
+Native simulator Edge 840 / SDK 9.3.0, synthetic long-distance fixture.
+Touch coordinates in native 246x322 pixels; CUA window positions [370,314], [370,534], [386,690].
+FastRider demo memory: 69584 / 127424 bytes
+Tap [115,50] -> 10s, All, 5m
+Tap [115,160] -> 10s, LAP, 5m
+Tap [123,238] -> 10s, LAP, 20m
+Visual next-frame check: W10s, LAP3, 20m, no remaining-distance suffix in LAP.
+Tap [115,50] -> 3s, LAP, 20m
+Tap [115,160] -> 3s, All, 20m
+Tap [123,238] -> 3s, All, All
+Visual next-frame check: W3s, All, All range, full 300.5mi(-200.5) returned.
+Tap [123,238] -> 3s, All, 5m
+Then loaded ordinary demo from unmodified source; visually confirmed default3s/All/5m,
+gear/rpm above grade/mph, integer6 and speed22.4, full normal remaining row.
+Native captures saved by File > Save Screen Capture, not generated previews.

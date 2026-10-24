@@ -78,16 +78,17 @@ def generate(font_dir, out):
             else:
                 draw.text((x-box[0],y-box[1]+shift),c,font=face,anchor='ls',fill=(255,255,255))
             advance = round(face.getlength(c))
-            # Optical tracking for the compact mixed-size distance row: retain
-            # full glyph width/height and weight, trim only inter-glyph spacing.
-            if name.startswith('Remaining') or (name == 'Units18' and c == 'm'):
-                advance = max(1, advance-1)
-            lines.append(f'char id={ord(c)} x={x} y={y} width={w} height={h} xoffset={box[0]} yoffset={size+box[1]} xadvance={advance} page=0 chnl=15')
-        if name in ('Primary58', 'Live38'):
-            numeric[name] = {}
-            for c,x,y,w,h,box in glyphs:
-                bounds = atlas.crop((x,y,x+w,y+h)).convert('L').getbbox()
-                numeric[name][c] = (box[0]+bounds[0], box[0]+bounds[2]) if bounds else (0,0)
+            # Keep full glyphs in CIQ. Optical spacing is applied at draw time,
+            # rather than reducing advance widths and clipping imported glyphs.
+            if name.startswith('Remaining') or name == 'Units18':
+                advance = max(advance, w)
+            offset = 0 if name.startswith('Remaining') else box[0]
+            lines.append(f'char id={ord(c)} x={x} y={y} width={w} height={h} xoffset={offset} yoffset={size+box[1]} xadvance={advance} page=0 chnl=15')
+        numeric[name] = {}
+        for c,x,y,w,h,box in glyphs:
+            bounds = atlas.crop((x,y,x+w,y+h)).convert('L').getbbox()
+            offset = 0 if name.startswith('Remaining') else box[0]
+            numeric[name][c] = (offset+bounds[0], offset+bounds[2]) if bounds else (0,0)
         atlas.save(out/f'{name}.png')
         (out/f'{name}.fnt').write_text('\n'.join(lines)+'\n')
         ink[name] = (size, max(-g[-1][1] for g in glyphs), max(g[-1][3] for g in glyphs))
@@ -106,7 +107,7 @@ def generate(font_dir, out):
     # glyphs. CIQ crops glyphs whose BMFont xadvance is tightened, so keep font
     # resources intact and clip each original glyph only to its actual ink.
     for field, column in [('NUMERIC_LEFT', 0), ('NUMERIC_RIGHT', 1)]:
-        rows = [[numeric[name].get(c, (0,0))[column] for c in '0123456789.-'] for name in ('Primary58', 'Live38')]
+        rows = [[numeric[name].get(c, (0,0))[column] for c in '0123456789.-()mi'] for name in order]
         metrics += f'    const {field} = '+str(rows)+';\n'
     metrics += '}\n'
     (Path(__file__).resolve().parents[1]/'source/FontInk.mc').write_text(metrics)

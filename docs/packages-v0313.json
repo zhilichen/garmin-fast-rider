@@ -1,0 +1,22 @@
+{
+  "version": "0.3.13",
+  "installed": false,
+  "reason": "User requested simulator and package only this round.",
+  "packages": [
+    {
+      "file": "bin/FastRider-live.prg",
+      "bytes": 174508,
+      "sha256": "27a72c630c89f221fbf62ce5f50778f64be05fb35bbba8c58e55ee1d69c3b6e7"
+    },
+    {
+      "file": "bin/FastRider-hardware.prg",
+      "bytes": 174508,
+      "sha256": "0ae6ccf3532636592b26db1a9146ffa477b99cfa766e4f1e505b65d1d9cb8181"
+    },
+    {
+      "file": "bin/FastRider-v0.3.13.prg",
+      "bytes": 174508,
+      "sha256": "27a72c630c89f221fbf62ce5f50778f64be05fb35bbba8c58e55ee1d69c3b6e7"
+    }
+  ]
+}

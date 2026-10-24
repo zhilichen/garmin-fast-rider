@@ -4,5 +4,5 @@ page id=0 file="Units18.png"
 chars count=4
 char id=102 x=1 y=1 width=7 height=15 xoffset=0 yoffset=3 xadvance=7 page=0 chnl=15
 char id=105 x=9 y=1 width=4 height=13 xoffset=0 yoffset=5 xadvance=4 page=0 chnl=15
-char id=109 x=14 y=1 width=14 height=10 xoffset=0 yoffset=8 xadvance=13 page=0 chnl=15
+char id=109 x=14 y=1 width=14 height=10 xoffset=0 yoffset=8 xadvance=14 page=0 chnl=15
 char id=116 x=29 y=1 width=6 height=13 xoffset=0 yoffset=5 xadvance=6 page=0 chnl=15

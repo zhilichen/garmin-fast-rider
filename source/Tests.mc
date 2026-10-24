@@ -276,7 +276,7 @@ function courseTest(logger) {
 function interactionCyclesTest(logger) {
     var ui = new InteractionState();
     Test.assertEqual(ui.powerSeconds, 3); Test.assert(ui.allStats); Test.assertEqual(ui.range, 0);
-    Test.assert(!ui.tap(108, 52)); Test.assert(!ui.tap(150, 90));
+    Test.assert(!ui.tap(113, 52)); Test.assert(!ui.tap(150, 90));
     Test.assert(!ui.tap(20, 320)); Test.assert(!ui.tap(246, 30)); Test.assert(!ui.tap(-1, 30));
     for (var p = 0; p < 2; p += 1) {
         for (var s = 0; s < 2; s += 1) {
@@ -290,12 +290,12 @@ function interactionCyclesTest(logger) {
         Test.assert(ui.tap(200, 50));
     }
     Test.assertEqual(ui.rangeLabel(), "5m");
-    ui.tap(109, 89); Test.assertEqual(ui.powerSeconds, 10);
-    Test.assert(!ui.tap(109, 90));
-    Test.assert(!ui.tap(108, 160));
-    Test.assert(ui.tap(109, 91)); Test.assert(!ui.allStats);
-    Test.assert(ui.tap(109, 91)); Test.assert(ui.allStats);
-    Test.assert(ui.tap(109, 160)); Test.assert(!ui.allStats);
+    ui.tap(114, 89); Test.assertEqual(ui.powerSeconds, 10);
+    Test.assert(!ui.tap(114, 90));
+    Test.assert(!ui.tap(113, 160));
+    Test.assert(ui.tap(114, 91)); Test.assert(!ui.allStats);
+    Test.assert(ui.tap(114, 91)); Test.assert(ui.allStats);
+    Test.assert(ui.tap(114, 160)); Test.assert(!ui.allStats);
     Test.assert(ui.tap(244, 160)); Test.assert(ui.allStats);
     Test.assert(ui.tap(4, 319)); Test.assertEqual(ui.range, 1);
     ui.reset(); Test.assertEqual(ui.powerSeconds, 3); Test.assert(ui.allStats);
@@ -445,12 +445,10 @@ function bitmapFontMetricsTest(logger) {
     Test.assertEqual(dc.getTextWidthInPixels("303", v.fonts[0]), 87);
     Test.assert(DisplayRules.RIGHT_START+dc.getTextWidthInPixels("999", v.fonts[v.primaryFont(dc, "999")]) <= DisplayRules.RADAR_LEFT);
     Test.assert(DisplayRules.RIGHT_START+dc.getTextWidthInPixels("1234", v.fonts[v.primaryFont(dc, "1234")]) <= DisplayRules.RADAR_LEFT);
-    Test.assert(v.numberWidth(dc, "120", 1, 2) <= DisplayRules.LIVE_VALUE_WIDTH);
-    Test.assertEqual(v.liveInteger(dc, 120, DisplayRules.LIVE_VALUE_WIDTH), "120");
-    Test.assertEqual(v.compactValue(dc, 22.4, 58), "22");
-    Test.assertEqual(v.compactValue(dc, 6.4, 54), "6.4");
-    Test.assertEqual(v.compactValue(dc, -16.4, 54), "-16");
-    Test.assertEqual(v.compactValue(dc, 100.7, 58), "101");
+    Test.assert(v.packedWidth("120", 1) <= DisplayRules.LIVE_RIGHT_WIDTH);
+    Test.assertEqual(v.liveFont("120", DisplayRules.LIVE_RIGHT_WIDTH), 1);
+    Test.assertEqual(v.liveFont("22.4", DisplayRules.LIVE_RIGHT_WIDTH), 1);
+    Test.assertEqual(v.liveFont("100.5", DisplayRules.LIVE_RIGHT_WIDTH), 7);
     Test.assert(dc.getTextWidthInPixels("1:23:08", v.fonts[5]) <= 118);
     Test.assert(dc.getTextWidthInPixels("12:23:08", v.fonts[7]) <= 118);
     Test.assert(dc.getTextWidthInPixels("245", v.fonts[2])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 118);
@@ -470,8 +468,8 @@ function bitmapFontMetricsTest(logger) {
     Test.assertEqual(v.fontSizes[1], 38);
     Test.assert(v.numberBounds(dc, "199", 0, 3)[1]+1+v.textWidth(dc, "7", 8) <= DisplayRules.LEFT_WIDTH);
     Test.assertEqual(v.zoneBadgeWidth(dc, 4, 0), DisplayRules.ZONE_BADGE_WIDTH);
-    Test.assertEqual(DisplayRules.COLUMN_DIVIDER, 122-15);
-    Test.assertEqual(DisplayRules.RIGHT_WIDTH, 118+15);
+    Test.assertEqual(DisplayRules.COLUMN_DIVIDER, 107+5);
+    Test.assertEqual(DisplayRules.RIGHT_WIDTH, 128);
     Test.assert(DisplayRules.ZONE_BASELINE-FontInk.TOP[9] > DisplayRules.PRIMARY_BASELINE+FontInk.BOTTOM[0]);
     Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[0] >= 1);
     Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[0] <= 2);
@@ -514,7 +512,36 @@ function bitmapFontMetricsTest(logger) {
     Test.assert(v.distanceParts(dc, 0.42*1609.344, 9.9*1609.344, false)[1] == null);
     var longRow = v.distanceParts(dc, 320000.0, 500000.0, true);
     Test.assert(longRow[1] != null);
-    Test.assert(v.textWidth(dc, longRow[0], longRow[2])+v.textWidth(dc, "mi", 12)+v.textWidth(dc, longRow[1], longRow[3])+6 <= DisplayRules.RIGHT_WIDTH);
+    Test.assert(v.distanceRowWidth(longRow) <= DisplayRules.RIGHT_WIDTH);
+    return true;
+}
+
+(:test)
+function liveDisplayPrecisionTest(logger) {
+    var v = new FastRiderView();
+    Test.assertEqual(v.intText(6.4), "6"); Test.assertEqual(v.intText(6.6), "7");
+    Test.assertEqual(v.intText(-16.4), "-16"); Test.assertEqual(v.intText(-0.4), "0");
+    Test.assertEqual(v.intText(null), "--");
+    Test.assertEqual(RideMath.speedMphText(10.0138), "22.4");
+    Test.assertEqual(RideMath.speedMphText(0), "0.0");
+    Test.assertEqual(RideMath.speedMphText(null), "--");
+    Test.assertEqual(RideMath.speedMphText(-1), "--");
+    return true;
+}
+
+(:test)
+function fullDistancePrecisionTest(logger) {
+    var v = new FastRiderView();
+    var reference = Toybox.Graphics.createBufferedBitmap({:width=>16,:height=>16});
+    var dc = reference.get().getDc(); v.loadFonts();
+    var p = v.distanceParts(dc, 300.5*1609.344, 200.5*1609.344, true);
+    Test.assertEqual(p[0], "300.5"); Test.assertEqual(p[1], "(-200.5)");
+    Test.assertEqual(p[2], 4); Test.assertEqual(p[3], 15);
+    Test.assertEqual(v.distanceRowWidth(p), 127);
+    Test.assert(v.distanceRowWidth(p) <= DisplayRules.RIGHT_WIDTH);
+    var worst = v.distanceParts(dc, 888.8*1609.344, 999.9*1609.344, true);
+    Test.assertEqual(worst[0], "888.8"); Test.assertEqual(worst[1], "(-999.9)");
+    Test.assert(v.distanceRowWidth(worst) <= DisplayRules.RIGHT_WIDTH);
     return true;
 }
 
@@ -541,6 +568,8 @@ function nativeRenderStatesTest(logger) {
     v.remainingAscent = 5000; v.ridePower = 1234;
     v.hr = null; v.cadence = 101; v.grade = -16.4; v.speed = 45.0;
     v.onUpdate(dc);
+    v.meters = 300.5*1609.344; v.remainingDistance = 200.5*1609.344;
+    v.cadence = 120; v.rearGear = 11; v.grade = 6.4; v.speed = 10.0138; v.onUpdate(dc);
     v.remainingDistance = null; v.remainingAscent = null; v.onUpdate(dc);
     v.timerMillis = 360001000; v.millis = 360001000; v.onUpdate(dc);
     var stats = Toybox.System.getSystemStats();

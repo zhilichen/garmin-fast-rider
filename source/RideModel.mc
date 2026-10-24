@@ -49,6 +49,9 @@ module RideMath {
         var zero = value.equals("0.0") || value.equals("0");
         return "("+(zero ? "" : "-")+value+")";
     }
+    function speedMphText(metersPerSecond) {
+        return metersPerSecond == null || metersPerSecond < 0 ? "--" : (metersPerSecond*2.236936292).format("%.1f");
+    }
     function clock12(hour, minute) {
         var h = hour%12; if (h == 0) { h = 12; }
         return h.format("%d")+":"+minute.format("%02d")+(hour < 12 ? " AM" : " PM");

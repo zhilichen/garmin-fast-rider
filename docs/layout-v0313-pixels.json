@@ -1,0 +1,134 @@
+{
+  "version": "0.3.13",
+  "source": "native File > Save Screen Capture, synthetic fixture",
+  "size": [
+    246,
+    322
+  ],
+  "long_row": {
+    "text": "300.5mi(-200.5)",
+    "width": 127,
+    "available": 128,
+    "main_font": 26,
+    "remaining_font": 21,
+    "unit_font": 18,
+    "glyph_gap": 1,
+    "max_row_0_to_999_9_miles": 127
+  },
+  "checks": {
+    "upper_divider": {
+      "box_exclusive": [
+        112,
+        2,
+        114,
+        68
+      ],
+      "rgb": [
+        131,
+        145,
+        156
+      ],
+      "passed": true
+    },
+    "middle_divider": {
+      "box_exclusive": [
+        112,
+        91,
+        114,
+        214
+      ],
+      "rgb": [
+        131,
+        145,
+        156
+      ],
+      "passed": true
+    },
+    "radar_reserve": {
+      "box_exclusive": [
+        218,
+        0,
+        246,
+        34
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "passed": true
+    },
+    "top_2px": {
+      "box_exclusive": [
+        0,
+        0,
+        246,
+        2
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "passed": true
+    },
+    "marker_black_above": {
+      "box_exclusive": [
+        35,
+        68,
+        39,
+        76
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "passed": true
+    },
+    "marker_white_inverse": {
+      "box_exclusive": [
+        35,
+        76,
+        39,
+        82
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "passed": true
+    },
+    "marker_black_below": {
+      "box_exclusive": [
+        35,
+        82,
+        39,
+        90
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "passed": true
+    },
+    "row_right_margin": {
+      "box_exclusive": [
+        244,
+        190,
+        246,
+        214
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "passed": true
+    }
+  },
+  "font_atlas_changed": false,
+  "note": "Full glyph pixels retained; Remaining/Units BMFont metadata updated to prevent importer clipping. SVG is a layout reference."
+}

@@ -24,8 +24,8 @@ function bellDoubleTapTest(logger) {
 (:test)
 function bellBoundaryAndResetTest(logger) {
     var bell = new BellGesture();
-    Test.assert(bell.contains(0, 0)); Test.assert(bell.contains(106, 213));
-    Test.assert(!bell.contains(-1, 30)); Test.assert(!bell.contains(107, 30));
+    Test.assert(bell.contains(0, 0)); Test.assert(bell.contains(111, 213));
+    Test.assert(!bell.contains(-1, 30)); Test.assert(!bell.contains(112, 30));
     Test.assert(!bell.contains(20, 214)); Test.assert(!bell.contains(4, 316));
     bell.tap(20, 40, 100);
     Test.assert(!bell.tap(200, 40, 200)); // Another panel breaks the pair.
@@ -64,10 +64,10 @@ function bellInputRoutingTest(logger) {
     Test.assertEqual(field.ui.powerSeconds, 10); // Other panels remain immediate.
     Test.assert(input.handleTapAt(126, 160, 350)); Test.assert(!field.ui.allStats);
     Test.assert(input.handleTapAt(4, 316, 400)); Test.assertEqual(field.ui.range, 1);
-    // The reclaimed 15px strip is now the right panel, not the bell region.
-    Test.assert(input.handleTapAt(110, 50, 450));
+    // The right-panel edge after the 5px readjustment is now the right panel, not the bell region.
+    Test.assert(input.handleTapAt(115, 50, 450));
     Test.assertEqual(field.ui.powerSeconds, 3); Test.assertEqual(input.rings, 1);
-    Test.assert(input.handleTapAt(110, 160, 500)); Test.assert(field.ui.allStats);
+    Test.assert(input.handleTapAt(115, 160, 500)); Test.assert(field.ui.allStats);
     field.width = 120;
     Test.assert(!input.handleTapAt(20, 40, 2000));
     Test.assert(!input.handleTapAt(20, 40, 2100));
