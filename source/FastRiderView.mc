@@ -326,20 +326,18 @@ class FastRiderView extends WatchUi.DataField {
         var hc = DisplayRules.zoneColor(hz); var pc = DisplayRules.powerColor(pz);
         var h = intText(hr); var p = intText(watts);
         var hf = heartFont(dc, h); var pf = primaryFont(dc, p);
-        if (hf == 0) { drawDigits(dc, 2, DisplayRules.PRIMARY_BASELINE, 0, h, hc, h.length() > 2 ? 3 : 0, false); }
-        else { text(dc, 2, DisplayRules.PRIMARY_BASELINE, hf, h, hc, Graphics.TEXT_JUSTIFY_LEFT); }
-        text(dc, DisplayRules.RIGHT_START, DisplayRules.PRIMARY_BASELINE, pf, p, pc, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 2, DisplayRules.UNIT_BASELINE, 3, "bpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        var powerUnit = "W "+ui.powerSeconds+"s";
-        text(dc, DisplayRules.RIGHT_START, DisplayRules.UNIT_BASELINE, 3, powerUnit, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        // Align visible numeral ink with the icon at each panel's left edge.
+        var tracking = hf == 0 && h.length() > 2 ? 3 : 0;
+        var hx = DisplayRules.LEFT_EDGE; var bx = DisplayRules.RIGHT_START;
+        drawDigits(dc, hx-numberBounds(dc, h, hf, tracking)[0], DisplayRules.PRIMARY_BASELINE, hf, h, hc, tracking, false);
+        drawDigits(dc, bx-numberBounds(dc, p, pf, 0)[0], DisplayRules.PRIMARY_BASELINE, pf, p, pc, 0, false);
         drawZoneBadge(dc, DisplayRules.LEFT_RIGHT, hz, hf, hc);
         drawZoneBadge(dc, 244, pz, pf, pc);
-        // Keep inline unit icons clear of the Zone lane below the radar.
-        var hx = 2+textWidth(dc, "bpm", 3)+4; var iy = DisplayRules.UNIT_BASELINE-14;
+        var iy = DisplayRules.UNIT_BASELINE-14;
         color(dc, DisplayRules.RED);
         dc.fillPolygon([[hx+8,iy+2],[hx+6,iy],[hx+3,iy],[hx,iy+3],[hx,iy+6],[hx+2,iy+9],[hx+8,iy+14],[hx+14,iy+9],[hx+16,iy+6],[hx+16,iy+3],[hx+13,iy],[hx+10,iy]]);
-        var bx = DisplayRules.RIGHT_START+textWidth(dc, powerUnit, 3)+4;
         drawBolt(dc, bx, iy);
+        text(dc, bx+14+4, DisplayRules.UNIT_BASELINE, 3, ui.powerSeconds+"s", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
         color(dc, hc); dc.fillRectangle(2, DisplayRules.ZONE_BAR_TOP, DisplayRules.LEFT_WIDTH, DisplayRules.ZONE_BAR);
         color(dc, pc); dc.fillRectangle(DisplayRules.RIGHT_START, DisplayRules.ZONE_BAR_TOP, DisplayRules.RIGHT_WIDTH, DisplayRules.ZONE_BAR);
         drawZoneMarker(dc, 2, DisplayRules.LEFT_WIDTH, RideMath.zoneFraction(hr, hrLimits, hrMinimum, hrMaximum));

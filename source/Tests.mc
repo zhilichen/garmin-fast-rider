@@ -498,7 +498,7 @@ function bitmapFontMetricsTest(logger) {
     Test.assert(v.rangeWidth(dc, "All") <= rangeWidth);
     Test.assert(2+v.textWidth(dc, "99999", 11)+3+v.textWidth(dc, "ft", 12)+4 <= 123-rangeWidth/2);
     Test.assert(123+rangeWidth/2+4 <= 244-dc.getTextWidthInPixels("12:59 PM", v.fonts[3]));
-    Test.assert(DisplayRules.RIGHT_START+dc.getTextWidthInPixels("W 10s", v.fonts[3])+4+14 < 244-v.zoneBadgeWidth(dc, 7, 0));
+    Test.assert(DisplayRules.RIGHT_START+14+4+dc.getTextWidthInPixels("10s", v.fonts[3]) < 244-v.zoneBadgeWidth(dc, 7, 0));
     Test.assertEqual(RideMath.remainingMilesText(9.9*1609.344, 1), "(-9.9)");
     Test.assertEqual(RideMath.remainingMilesText(0, 1), "(0.0)");
     Test.assert(RideMath.remainingMilesText(null, 1) == null);

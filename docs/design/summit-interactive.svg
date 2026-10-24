@@ -1,16 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" role="img" aria-labelledby="title desc">
-  <title id="title">FastRider · asymmetric live cells and full distance precision · v0.3.13</title>
-  <desc id="desc">246x322 Edge840. Dividers x112. Left column gear/grade, right wider column rpm/mph. Grade integer, speed one decimal. Synthetic long-distance example; native screenshots are authoritative for font rendering.</desc>
+  <title id="title">FastRider · asymmetric live cells and full distance precision · v0.3.14</title>
+  <desc id="desc">246x322 Edge840. Dividers x112. Left column gear/grade, right wider column rpm/mph. Grade integer, speed one decimal. Heart only and bolt + seconds align with the visible primary numeral left edges. Synthetic long-distance example; native screenshots are authoritative for font rendering.</desc>
   <rect width="246" height="322" fill="white" />
   <rect x="112" y="2" width="2" height="66" fill="#83909B" />
-  <text x="2" y="43" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#D05A00" letter-spacing="-3">158</text>
-  <text x="2" y="62" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550">bpm</text>
+  <text x="-2" y="43" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#D05A00" letter-spacing="-3">158</text>
   <text x="110" y="66" font-family="'Roboto Condensed', Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="end" fill="#D05A00"><tspan x="88" font-size="16" stroke="#D05A00" stroke-width="0.25">Z</tspan><tspan x="110" font-size="44">4</tspan></text>
   <rect x="2" y="76" width="108" height="6" fill="#D05A00" />
   <rect x="35" y="68" width="4" height="22" fill="#000000" id="heart-zone-position" />
   <rect x="35" y="76" width="4" height="6" fill="white" id="heart-zone-position-inverse" />
-  <text x="116" y="43" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#D00020" data-power-group="z6-z7" id="live-power-value">303</text>
-  <text x="116" y="62" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="live-power-average-window-label" id="live-power-unit">W 3s</text>
+  <text x="114" y="43" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#D00020" data-power-group="z6-z7" id="live-power-value">303</text>
+  <text x="134" y="62" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="live-power-average-window-label" id="live-power-unit">3s</text>
   <text x="244" y="66" font-family="'Roboto Condensed', Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="end" fill="#D00020" data-power-group="z6-z7" id="live-power-zone"><tspan x="222" font-size="16" stroke="#D00020" stroke-width="0.25">Z</tspan><tspan x="244" font-size="44">6</tspan></text>
   <rect x="116" y="76" width="128" height="6" fill="#D00020" data-power-group="z6-z7" id="live-power-bar" />
   <rect x="121" y="68" width="4" height="22" fill="#000000" id="power-zone-position" />
@@ -21,8 +20,8 @@
   <text x="244" y="132" font-family="'Roboto Condensed', Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="end" fill="#15212B" id="stats-time">1:23:08</text>
   <text x="123" y="180" font-family="'Roboto Condensed', Arial, sans-serif" font-size="54" font-weight="bold" text-anchor="start" fill="#15212B" data-metric="current-lap-average-power" id="stats-power">212</text>
   <rect x="2" y="220" width="242" height="2" fill="#83909B" />
-  <polygon points="46,50 44,48 41,48 38,51 38,54 40,57 46,62 52,57 54,54 54,51 51,48 48,48" fill="#D00020" />
-  <polygon points="164,48 155,56 160,56 157,62 169,53 163,53 167,48" fill="#004CFF" />
+  <polygon points="10,50 8,48 5,48 2,51 2,54 4,57 10,62 16,57 18,54 18,51 15,48 12,48" fill="#D00020" />
+  <polygon points="125,48 116,56 121,56 118,62 130,53 124,53 128,48" fill="#004CFF" />
   <g data-metric="current-cadence"><text x="55" y="149" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="bold" fill="#8000D8">1</text><text x="69" y="149" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="bold" fill="#8000D8">2</text><text x="85" y="149" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="bold" fill="#8000D8">0</text></g>
   <text x="81" y="170" font-size="18" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" text-anchor="middle" fill="#354550" font-weight="normal">mph</text>
   <g data-metric="current-speed-mph"><text x="51" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="bold" fill="#15212B">2</text><text x="68" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="bold" fill="#15212B">2</text><text x="84" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="bold" fill="#15212B">.</text><text x="92" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="bold" fill="#15212B">4</text></g>

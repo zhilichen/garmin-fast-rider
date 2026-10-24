@@ -1,0 +1,21 @@
+{
+  "version": "0.3.14",
+  "installed": false,
+  "packages": [
+    {
+      "file": "bin/FastRider-live.prg",
+      "bytes": 174396,
+      "sha256": "7b9b07330d59f6753839c36c409bfe83c57e2d3d75a8774b5fd5610936fc82d7"
+    },
+    {
+      "file": "bin/FastRider-hardware.prg",
+      "bytes": 174396,
+      "sha256": "2ccdf706436534507da5c0b9f2a63436efa1a5c2a39fce570b5a94290c63c1c7"
+    },
+    {
+      "file": "bin/FastRider-v0.3.14.prg",
+      "bytes": 174396,
+      "sha256": "7b9b07330d59f6753839c36c409bfe83c57e2d3d75a8774b5fd5610936fc82d7"
+    }
+  ]
+}

@@ -89,7 +89,7 @@ Executing test fullDistancePrecisionTest...
 PASS
 ------------------------------------------------------------------------------
 Executing test nativeRenderStatesTest...
-FastRider demo memory: 93120 / 8384568 bytes
+FastRider demo memory: 93048 / 8384568 bytes
 Tap [123,238] -> 3s, All, 20m
 Tap [123,238] -> 3s, All, All
 Tap [123,238] -> 3s, All, 5m
@@ -108,7 +108,7 @@ Tap [123,238] -> 10s, LAP, All
 Tap [123,238] -> 10s, LAP, 5m
 Tap [200,160] -> 10s, All, 5m
 Tap [200,50] -> 3s, All, 5m
-DEBUG (15:29): Native render memory used=92752 free=8291816
+DEBUG (15:38): Native render memory used=92680 free=8291888
 PASS
 ------------------------------------------------------------------------------
 Executing test navigationAvailabilityTest...
