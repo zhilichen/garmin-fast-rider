@@ -1,0 +1,189 @@
+{
+  "before": "fastrider-edge840-v0314-default.png",
+  "after": "fastrider-edge840-v0315-default.png",
+  "checks": [
+    {
+      "name": "heart",
+      "box_exclusive": [
+        0,
+        0,
+        110,
+        48
+      ],
+      "only_changed_rows": [
+        44
+      ],
+      "passed": true
+    },
+    {
+      "name": "zone",
+      "box_exclusive": [
+        78,
+        48,
+        110,
+        68
+      ],
+      "only_changed_rows": [
+        66
+      ],
+      "passed": true
+    },
+    {
+      "name": "gear",
+      "box_exclusive": [
+        2,
+        115,
+        50,
+        152
+      ],
+      "only_changed_rows": [
+        149
+      ],
+      "passed": true
+    },
+    {
+      "name": "cadence",
+      "box_exclusive": [
+        52,
+        115,
+        110,
+        152
+      ],
+      "only_changed_rows": [
+        149
+      ],
+      "passed": true
+    },
+    {
+      "name": "grade",
+      "box_exclusive": [
+        2,
+        175,
+        50,
+        215
+      ],
+      "only_changed_rows": [
+        212
+      ],
+      "passed": true
+    },
+    {
+      "name": "mph",
+      "box_exclusive": [
+        52,
+        175,
+        110,
+        215
+      ],
+      "only_changed_rows": [
+        212
+      ],
+      "passed": true
+    },
+    {
+      "name": "top2px",
+      "box_exclusive": [
+        0,
+        0,
+        246,
+        2
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "passed": true
+    },
+    {
+      "name": "radar",
+      "box_exclusive": [
+        218,
+        0,
+        246,
+        34
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "passed": true
+    },
+    {
+      "name": "divider_upper",
+      "box_exclusive": [
+        112,
+        2,
+        114,
+        68
+      ],
+      "rgb": [
+        131,
+        145,
+        156
+      ],
+      "passed": true
+    },
+    {
+      "name": "divider_middle",
+      "box_exclusive": [
+        112,
+        91,
+        114,
+        214
+      ],
+      "rgb": [
+        131,
+        145,
+        156
+      ],
+      "passed": true
+    },
+    {
+      "name": "marker_top",
+      "box_exclusive": [
+        35,
+        68,
+        39,
+        76
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "passed": true
+    },
+    {
+      "name": "marker_inverse",
+      "box_exclusive": [
+        35,
+        76,
+        39,
+        82
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "passed": true
+    },
+    {
+      "name": "marker_bottom",
+      "box_exclusive": [
+        35,
+        82,
+        39,
+        90
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "passed": true
+    }
+  ]
+}

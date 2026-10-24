@@ -2,7 +2,7 @@
 
 Connect IQ / Monkey C 数据字段，按 Edge 840 原生 **246 × 322** 实现已确认的交互设计。只针对 Edge 840 构建；使用单字段全屏布局。
 
-![v0.3.14 Edge 840 原生模拟器截图（抗锯齿），demo 合成数据](docs/fastrider-edge840-v0314-default.png)
+![v0.3.15 Edge 840 原生模拟器截图（抗锯齿），demo 合成数据](docs/fastrider-edge840-v0315-default.png)
 
 ## 显示与点击
 
@@ -65,10 +65,13 @@ python3 -m unittest discover -s tests -v
 
 ## 字体与历史内存
 
-为保持小屏可读性，使用与矢量稿对应的16组精简位图字体，主信息为58/54/44/38/36/32 px，其他字库用于小Z、常规单位、剩余距离与窄列回退。已提交生成后的字形资源，日常构建无需 Pillow。 图形使用`Dc.setAntiAlias(true)`；自定义字库以黑底灰度PNG保存覆盖率，并以`antialias="true"`导入，文字按白色页面背景混合，并使用自动生成的真实字形边界裁剪，避免白底逻辑行框遮挡相邻文字。直线、色条和竖向标记继续落在整数像素上。参见[Garmin字体资源说明](https://developer.garmin.com/connect-iq/articles/core-topics/Resources.html#fonts)和[图形抗锯齿说明](https://developer.garmin.com/connect-iq/articles/core-topics/Graphics.html#anti-aliasing)。重新生成需 Pillow 和 SDK 自带字体：
+为保持小屏可读性，使用与矢量稿对应的16组精简位图字体，主信息为58/54/44/38/36/32 px，其他字库用于小Z、常规单位、剩余距离与窄列回退。已提交生成后的字形资源，日常构建无需 Pillow。 图形使用`Dc.setAntiAlias(true)`；自定义字库以黑底灰度PNG保存覆盖率，并以`antialias="true"`导入，文字按白色页面背景混合，并使用自动生成的真实字形边界裁剪，避免白底逻辑行框遮挡相邻文字。Edge 840的原生字库渲染比源图集边界向下多1 px；三种文字绘制路径统一在底部补1 px裁剪余量，保留圆弧与底边。16组字体、44组原生绘制对照与无紧裁剪参考逐像素一致。直线、色条和竖向标记继续落在整数像素上。参见[Garmin字体资源说明](https://developer.garmin.com/connect-iq/articles/core-topics/Resources.html#fonts)和[图形抗锯齿说明](https://developer.garmin.com/connect-iq/articles/core-topics/Graphics.html#anti-aliasing)。重新生成需 Pillow 和 SDK 自带字体：
 
 ```bash
 python3 scripts/generate-fonts.py
+# 原生字形对照：构建后用 monkeydo 运行，再用 Save Screen Capture 导出
+./scripts/build-font-probe.sh
+python3 scripts/check-font-probe.py docs/font-probe-v0315-after.png
 ```
 
 上下两条竖分隔统一位于x112，较v0.3.11向右回调5 px；左侧可用108 px、右侧128 px，功率起点x116；点击右区从x114开始，车铃只占x<112。外边距2 px，心率/功率主数字可见顶边距离屏幕2 px。Zone由16 px加厚小Z和44 px区号组成（可见字高约12/32 px），合计宽度31 px；baseline66保留雷达空间。单位行baseline62：心率仅红心，不显示bpm；实时功率为蓝色闪电+3s/10s，不显示W。红心和闪电分别位于x2/x116，与上方数值的可见字形左边缘对齐；图标与秒数间距4 px。四位功率回退36 px时，Zone改用10 px加厚小Z和26 px区号，合计宽度20 px。位置标记4×22 px：上/下各8 px黑色、中段穿过6 px色条处为白色。

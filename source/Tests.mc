@@ -470,18 +470,18 @@ function bitmapFontMetricsTest(logger) {
     Test.assertEqual(v.zoneBadgeWidth(dc, 4, 0), DisplayRules.ZONE_BADGE_WIDTH);
     Test.assertEqual(DisplayRules.COLUMN_DIVIDER, 107+5);
     Test.assertEqual(DisplayRules.RIGHT_WIDTH, 128);
-    Test.assert(DisplayRules.ZONE_BASELINE-FontInk.TOP[9] > DisplayRules.PRIMARY_BASELINE+FontInk.BOTTOM[0]);
+    Test.assert(DisplayRules.ZONE_BASELINE-FontInk.TOP[9] > DisplayRules.PRIMARY_BASELINE+FontInk.BOTTOM[0]+FontInk.NATIVE_BOTTOM_PAD);
     Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[0] >= 1);
     Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[0] <= 2);
     Test.assert(DisplayRules.ZONE_BASELINE-FontInk.TOP[8] >= DisplayRules.RADAR_BOTTOM);
-    Test.assert(DisplayRules.ZONE_BASELINE+FontInk.BOTTOM[8] < DisplayRules.ZONE_BAR_TOP-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2);
+    Test.assert(DisplayRules.ZONE_BASELINE+FontInk.BOTTOM[8]+FontInk.NATIVE_BOTTOM_PAD < DisplayRules.ZONE_BAR_TOP-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2);
     // AA backdrop clips use ink bounds: adjacent rows must remain disjoint.
     var timeFonts = [5, 7, 4];
     for (var i = 0; i < timeFonts.size(); i += 1) {
-        Test.assert(132+FontInk.BOTTOM[timeFonts[i]] < 180-FontInk.TOP[2]);
+        Test.assert(132+FontInk.BOTTOM[timeFonts[i]]+FontInk.NATIVE_BOTTOM_PAD < 180-FontInk.TOP[2]);
     }
-    Test.assert(170+FontInk.BOTTOM[3] < 212-FontInk.TOP[1]);
-    Test.assert(DisplayRules.UNIT_BASELINE+FontInk.BOTTOM[3] < DisplayRules.ZONE_BAR_TOP-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2);
+    Test.assert(170+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD < 212-FontInk.TOP[1]);
+    Test.assert(DisplayRules.UNIT_BASELINE+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD < DisplayRules.ZONE_BAR_TOP-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2);
     Test.assert(DisplayRules.ZONE_BAR_TOP+(DisplayRules.ZONE_MARKER_HEIGHT+DisplayRules.ZONE_BAR)/2 <= DisplayRules.MIDDLE_TOP);
     v.trend.endTime = 600000;
     Test.assertEqual(v.chartX(600000), DisplayRules.PLOT_RIGHT);

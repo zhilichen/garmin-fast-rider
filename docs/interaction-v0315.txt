@@ -1,0 +1,10 @@
+Edge 840 native simulator, SDK 9.3.0, synthetic demo metrics.
+FastRider demo memory: 69528 / 127424 bytes
+Default next-frame visual check: 3s, All, 5m; full numeral lower edges and clear row gaps.
+Tap [115,50] -> 10s, All, 5m
+Tap [115,160] -> 10s, LAP, 5m
+Next-frame check: 10s/LAP3, full timer/average/distance lower edges, no overlaps.
+File > Save Screen Capture exported default and LAP screenshots, each246x322.
+Tap [115,50] -> 3s, LAP, 5m
+Tap [115,160] -> 3s, All, 5m
+Defaults restored. No device installation this round.

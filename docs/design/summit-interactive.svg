@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" role="img" aria-labelledby="title desc">
-  <title id="title">FastRider · asymmetric live cells and full distance precision · v0.3.14</title>
+  <title id="title">FastRider · asymmetric live cells and full distance precision · v0.3.15</title>
   <desc id="desc">246x322 Edge840. Dividers x112. Left column gear/grade, right wider column rpm/mph. Grade integer, speed one decimal. Heart only and bolt + seconds align with the visible primary numeral left edges. Synthetic long-distance example; native screenshots are authoritative for font rendering.</desc>
   <rect width="246" height="322" fill="white" />
   <rect x="112" y="2" width="2" height="66" fill="#83909B" />

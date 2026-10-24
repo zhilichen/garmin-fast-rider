@@ -1,3 +1,13 @@
+# FastRider v0.3.15：修复数字底部裁断
+
+- 根因由原生字形对照确认：Edge840的BMFont绘制相对源图集边界向下有1 px偏移，而text/drawDigits/drawPacked的裁剪下界没有包含最后一行。小尺寸字形更容易呈现平底截断。统一加入`FontInk.NATIVE_BOTTOM_PAD=1`，生成器同步输出该量；字体PNG、字号、基线及水平排布保持原配置。
+- 新增隔离字体探针：[构建脚本](../scripts/build-font-probe.sh)复制源码到`.local`，仅替换探针页面。16组字体分别以T=text、D=digits、P=packed和R=完整绘制参考显示（小Z仅T/R），共44组比较。[修复前原生截图](font-probe-v0315-before.png)及[报告](font-probe-v0315-before.json)：41组不同、缺255个前景像素，均集中在各字形底部一行。[修复后原生截图](font-probe-v0315-after.png)及[报告](font-probe-v0315-after.json)：**44/44逐像素一致，缺失0像素**。[检查脚本](../scripts/check-font-probe.py)可直接验证Save Screen Capture输出，不是只断言padding常量。
+- live / hardware / demo / test构建通过，无告警；Garmin VM **31/31**，[原始输出](simulator-tests.txt)。把行间/Zone/marker边界检查纳入新增的1 px底部余量，既有12种模式与缺失、长值及四位数原生绘制通过。测试VM native render usedMemory=92,704 bytes；真实demo字段69,528 /127,424 bytes。
+- [完整All页](fastrider-edge840-v0315-default.png)、[LAP/10s页](fastrider-edge840-v0315-lap.png)均为原生246×322截图、合成指标。[整页像素记录](layout-v0315-pixels.json)与v0.3.14的相同数据比较，心率只在y44增加底边、Zone在y66、gear/rpm在y149、grade/mph在y212；这些区域其余行逐像素保持一致。顶部2 px、雷达空白、上下分隔与黑白marker均通过检查，未因扩大裁剪擦除相邻信息。[触控日志](interaction-v0315.txt)验证All/LAP与3s/10s切换，最终恢复3s/All/5m。
+- SDK测试启动时端口未就绪，重启本任务模拟器后完成测试及验收；未更改程序绕开测试。本轮未写入真机；`bin/FastRider-v0.3.15.prg`为真实live包，174,396 bytes，沿用原App ID与签名。[包信息及SHA256](packages-v0315.json)。
+
+以下保留旧版验收记录。
+
 # FastRider v0.3.14：简化心率/功率图标行并左对齐
 
 - 移除顶部心率bpm与实时功率W，心率仅保留16×14 px红心；实时功率改为14×14 px蓝色闪电、4 px间距、18 px的3s/10s。图标均在原单位行，底端baseline62。统计区AVG/W保留。

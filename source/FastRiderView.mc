@@ -201,10 +201,11 @@ class FastRiderView extends WatchUi.DataField {
     }
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
     function text(dc, x, baseline, index, value, c, align) {
-        // Use the known white page background for font coverage blending.
+        // Native BMFont rasterization adds one row below the source ink bounds.
+        // Keep it inside the white AA backdrop clip so rounded bottoms survive.
         dc.setColor(c, Graphics.COLOR_WHITE);
         var top = RideMath.clamp(baseline-FontInk.TOP[index], 0, height);
-        var bottom = RideMath.clamp(baseline+FontInk.BOTTOM[index], 0, height);
+        var bottom = RideMath.clamp(baseline+FontInk.BOTTOM[index]+FontInk.NATIVE_BOTTOM_PAD, 0, height);
         if (bottom <= top) { return; }
         dc.setClip(0, top, width, bottom-top);
         dc.drawText(x, baseline-fontSizes[index], fonts[index], value, align);
@@ -235,7 +236,7 @@ class FastRiderView extends WatchUi.DataField {
     function drawDigits(dc, x, baseline, index, value, c, tracking, centered) {
         var bounds = numberBounds(dc, value, index, tracking);
         var origin = centered ? x-DisplayRules.pixel((bounds[0]+bounds[1])/2.0) : x;
-        var top = baseline-FontInk.TOP[index]; var h = FontInk.TOP[index]+FontInk.BOTTOM[index];
+        var top = baseline-FontInk.TOP[index]; var h = FontInk.TOP[index]+FontInk.BOTTOM[index]+FontInk.NATIVE_BOTTOM_PAD;
         var pen = 0;
         for (var i = 0; i < value.length(); i += 1) {
             var ch = value.substring(i,i+1); var d = digitIndex(ch);
@@ -262,7 +263,7 @@ class FastRiderView extends WatchUi.DataField {
         return w+value.length()-1;
     }
     function drawPacked(dc, x, baseline, index, value, c) {
-        var top = baseline-FontInk.TOP[index]; var h = FontInk.TOP[index]+FontInk.BOTTOM[index];
+        var top = baseline-FontInk.TOP[index]; var h = FontInk.TOP[index]+FontInk.BOTTOM[index]+FontInk.NATIVE_BOTTOM_PAD;
         var cursor = x;
         for (var i = 0; i < value.length(); i += 1) {
             var ch = value.substring(i,i+1); var d = digitIndex(ch);
