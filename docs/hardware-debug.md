@@ -8,7 +8,7 @@
 ./scripts/build.sh hardware
 ```
 
-`bin/Summit-hardware.prg` 使用真实 Activity.Info，**不使用 demo 合成指标**，额外记录本地诊断信息。普通 live 构建关闭这些诊断输出。
+`bin/FastRider-hardware.prg` 使用真实 Activity.Info，**不使用 demo 合成指标**，额外记录本地诊断信息。普通 live 构建关闭这些诊断输出。
 
 - 启动及首次绘制的内存占用。
 - 点击区域与切换后的 3s/10s、All/Lap、图范围。
@@ -30,7 +30,7 @@ Edge 840 使用 MTP，正常也可能不作为 Finder 磁盘出现。首先确�
 2. 若 `GARMIN/APPS/SUMMIT.PRG` 已存在，先备份到项目 `.local/device-debug/`。
 3. 将硬件调试构建复制为 `GARMIN/APPS/SUMMIT.PRG`，回读核对 SHA-256。仅操作本应用文件，不删除活动、路线或其他应用。
 4. 为 `System.println` 创建 `GARMIN/APPS/LOGS/SUMMIT.TXT`（大小写与 PRG 对应）。已存在的日志先回读备份，不截断。
-5. 安全断开 USB，在骑行配置里选择单字段 Connect IQ → Summit。
+5. 安全断开 USB，在骑行配置里选择单字段 Connect IQ → FastRider。
 6. 核对初始 `3s / All / 5m`；开始活动仍显示 All；首次 Lap 后显示 LAP 2。检查三处点击、暂停恢复及新活动重置。
 7. 若出现 IQ!、闪退或无点击响应，重新 USB 连接，回读 `SUMMIT.TXT`、`SUMMIT.BAK`、`CIQ_LOG.YAML`（较旧固件可能是 CIQ_LOG.TXT）。发生整个设备重启时还可读取 `GARMIN/ERR_LOG.TXT`。所有真实设备日志保存在 `.local/`，不提交仓库。
 
@@ -38,7 +38,7 @@ Garmin SDK 的本地 `doc/docs/Core_Topics/Debugging.html` 明确说明：单步
 
 ## 恢复正常版本
 
-调试后将 `bin/Summit-live.prg` 复制到相同 `GARMIN/APPS/SUMMIT.PRG` 位置，使用同一签名密钥和 App ID。保留日志备份；不清除用户应用设置。
+调试后将 `bin/FastRider-live.prg` 复制到相同 `GARMIN/APPS/SUMMIT.PRG` 位置，使用同一签名密钥和 App ID。保留日志备份；不清除用户应用设置。
 
 ## 2026-10-24 部署记录
 
@@ -54,3 +54,9 @@ Garmin SDK 的本地 `doc/docs/Core_Topics/Debugging.html` 明确说明：单步
 - 已回读旧版设备日志，确认正常加载、三处原生触控切换；设备堆 37,888 / 127,592 bytes。原始日志不入库。
 - 新增 Zone 位置竖线的 hardware 包已上传并回读比对完全一致，149,980 bytes，SHA-256 `48bb02d90c3a686d46079acc34d7b4af177d318a56fedf02f5745bf87177a91e`。
 - 保留原日志和设置，不改活动/路线；新版运行待断开 USB。后续日志继续写入原 SUMMIT.TXT。
+
+## v0.2.3 改名
+
+应用显示名、源码类名、构建产物和 VS Code 任务统一为 FastRider。App ID 和签名密钥保持原值；已有设备通过同一应用更新保留身份。当前 USB 调试沿用 `SUMMIT.PRG` 和对应 `SUMMIT.TXT` 文件名以保留现有日志；这只是兼容文件名，码表显示 FastRider。新本地构建产物为 `bin/FastRider-{live,demo,hardware,test}.prg`。
+
+FastRider v0.2.3 硬件包已替换待加载的 v0.2.2 包，150,012 bytes，回读逐字节相同；旧包已保存在本地备份。拔掉 USB 后加载改名版本。

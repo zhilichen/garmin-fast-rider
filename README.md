@@ -1,4 +1,4 @@
-# Summit · Garmin Edge 840 全屏数据页
+# FastRider · Garmin Edge 840 全屏数据页
 
 Connect IQ / Monkey C 数据字段，按 Edge 840 原生 **246 × 322** 实现已确认的交互设计。只针对 Edge 840 构建；使用单字段全屏布局。
 
@@ -38,7 +38,7 @@ Garmin 从活动开始计时就进入第1圈，不需要另按 Lap。首次按 L
 已配置 Java 17、Connect IQ SDK 9.3.0、Edge 840 官方设备包和 VS Code Garmin 扩展。只需安装 Edge 设备包，不需要下载全部设备。
 
 ```bash
-./scripts/build.sh live     # bin/Summit-live.prg：真实 Activity.Info
+./scripts/build.sh live     # bin/FastRider-live.prg：真实 Activity.Info
 ./scripts/run.sh demo       # 合成指标与历史，便于看布局和点击
 ./scripts/run.sh live       # 真实数据版本；模拟器 Activity Data → Start
 ./scripts/run.sh test       # Garmin VM 测试
@@ -64,8 +64,8 @@ python3 scripts/generate-fonts.py
 ## 安装到 Edge 840
 
 1. `./scripts/build.sh live`。
-2. USB 连接，将 `bin/Summit-live.prg` 复制到设备 `GARMIN/APPS/`。
-3. 在骑行活动中添加 Connect IQ → Summit，设为单字段全屏。
+2. USB 连接，将 `bin/FastRider-live.prg` 复制到设备 `GARMIN/APPS/`。
+3. 在骑行活动中添加 Connect IQ → FastRider，设为单字段全屏。
 4. 开始活动计时。live 不包含演示数据，不需要导入 GPX。
 
 [验证记录](docs/validation.md) · [原生像素规则](docs/edge840-design-rules.md) · [批准的矢量稿](docs/design/summit-interactive.svg) · [All 模式截图](docs/summit-edge840-v02-all.png)

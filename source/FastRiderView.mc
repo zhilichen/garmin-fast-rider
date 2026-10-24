@@ -7,7 +7,7 @@ import Toybox.System;
 import Toybox.UserProfile;
 import Toybox.WatchUi;
 
-class SummitView extends WatchUi.DataField {
+class FastRiderView extends WatchUi.DataField {
     var power = null;
     var hr = null;
     var cadence = null;
@@ -55,7 +55,7 @@ class SummitView extends WatchUi.DataField {
         hardwareLog("boot: live Activity.Info, defaults=3s/All/5m");
     }
     function hardwareLog(message) {
-        if (BuildMode.DIAGNOSTICS) { System.println("SUMMIT "+message); }
+        if (BuildMode.DIAGNOSTICS) { System.println("FastRider "+message); }
     }
     function loadSettings() {
         var ftp = RideMath.clamp(Application.Properties.getValue("ftp"), 50, 600);
@@ -213,7 +213,7 @@ class SummitView extends WatchUi.DataField {
         dc.setPenWidth(2); if (dc has :setAntiAlias) { dc.setAntiAlias(false); }
         loadFonts();
         if (width != 246 || height != 322) {
-            text(dc, width/2, height/2, 3, "SUMMIT", DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
+            text(dc, width/2, height/2, 3, "FastRider", DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
             text(dc, width/2, height/2+24, 3, "1 field", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER); return;
         }
         drawPrimary(dc);
@@ -230,7 +230,7 @@ class SummitView extends WatchUi.DataField {
         drawStats(dc); drawChartHeader(dc); drawPowerTrend(dc); drawFooter(dc);
         if ((BuildMode.DEMO || BuildMode.DIAGNOSTICS) && !demoDiagnostics) {
             var stats = System.getSystemStats();
-            System.println((BuildMode.DEMO ? "Summit demo memory: " : "SUMMIT device memory: ")+stats.usedMemory+" / "+stats.totalMemory+" bytes");
+            System.println((BuildMode.DEMO ? "FastRider demo memory: " : "FastRider device memory: ")+stats.usedMemory+" / "+stats.totalMemory+" bytes");
             demoDiagnostics = true;
         }
         if (flashRegion != 0 && System.getTimer() < flashUntil) {

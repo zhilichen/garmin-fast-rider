@@ -1,5 +1,5 @@
 import Toybox.WatchUi;
-class SummitInputDelegate extends WatchUi.InputDelegate {
+class FastRiderInputDelegate extends WatchUi.InputDelegate {
     var field;
     function initialize(view) { InputDelegate.initialize(); field = view; }
     function onTap(event) {

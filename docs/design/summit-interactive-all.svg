@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" role="img" aria-labelledby="title desc">
-  <title id="title">Summit · independent tap cycles · design draft 46</title>
+  <title id="title">FastRider · independent tap cycles · design draft 46</title>
   <desc id="desc">Design only. Tap live power block to cycle 3s and 10s averages. Tap the right-middle statistics block to cycle current LAP and whole Ride, titled All. Tap chart header or plot to cycle 5m, 20m, All. Modes are independent, with no data reset; history All covers the entire Ride regardless of statistics scope. Remaining course values and all sensor values are illustrative. Current implementation defaults to 3s / All statistics / 5m. Each native lap boundary selects the newest lap. Statistics average power uses bold type. Black 3 by 10 px ticks show position within the original numbered heart-rate or power zone.</desc>
   <rect width="246" height="322" fill="white" />
   <rect x="122" y="17" width="2" height="65" fill="#83909B" shape-rendering="crispEdges" />

@@ -1,4 +1,4 @@
 {
   "version":"0.2.0",
-  "configurations":[{"type":"monkeyc","request":"launch","name":"Run Summit (live)","device":"edge840"}]
+  "configurations":[{"type":"monkeyc","request":"launch","name":"Run FastRider (live)","device":"edge840"}]
 }

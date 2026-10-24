@@ -293,10 +293,10 @@ function interactionCyclesTest(logger) {
     return true;
 }
 
-class TapStub {
+class TapStub extends Toybox.WatchUi.ClickEvent {
     var xy;
     var type = 0;
-    function initialize(x, y) { xy = [x, y]; }
+    function initialize(x, y) { ClickEvent.initialize(x, y, Toybox.WatchUi.CLICK_TYPE_TAP); xy = [x, y]; }
     function getCoordinates() { return xy; }
     function getType() { return type; }
 }
@@ -307,7 +307,7 @@ class TapTarget {
 }
 (:test)
 function inputDelegateTest(logger) {
-    var target = new TapTarget(); var input = new SummitInputDelegate(target);
+    var target = new TapTarget(); var input = new FastRiderInputDelegate(target);
     Test.assert(input.onTap(new TapStub(200, 50)));
     Test.assertEqual(target.ui.powerSeconds, 10);
     Test.assert(input.onTap(new TapStub(200, 160))); Test.assert(!target.ui.allStats);
@@ -401,7 +401,7 @@ function lapDistanceTest(logger) {
 
 (:test)
 function viewInteractionPreservesDataTest(logger) {
-    var v = new SummitView();
+    var v = new FastRiderView();
     v.computeDemo();
     var time = v.lap.timeMs; var distance = v.lap.distance;
     var laps = v.trend.boundaries.size(); var points = v.trend.points.size();
@@ -431,7 +431,7 @@ function bitmapFontMetricsTest(logger) {
     var reference = Toybox.Graphics.createBufferedBitmap({:width=>16, :height=>16});
     var bitmap = reference.get();
     var dc = bitmap.getDc();
-    var v = new SummitView(); v.loadFonts();
+    var v = new FastRiderView(); v.loadFonts();
     Test.assertEqual(dc.getTextWidthInPixels("303", v.fonts[0]), 84);
     Test.assert(dc.getTextWidthInPixels("22.4", v.fonts[1]) <= 58);
     Test.assert(dc.getTextWidthInPixels("All", v.fonts[3])+4+dc.getTextWidthInPixels("1:23:08", v.fonts[5]) <= 104);
@@ -446,7 +446,7 @@ function bitmapFontMetricsTest(logger) {
 function nativeRenderStatesTest(logger) {
     var reference = Toybox.Graphics.createBufferedBitmap({:width=>246, :height=>322});
     var surface = reference.get(); var dc = surface.getDc();
-    var v = new SummitView(); v.computeDemo();
+    var v = new FastRiderView(); v.computeDemo();
     for (var p = 0; p < 2; p += 1) {
         for (var s = 0; s < 2; s += 1) {
             for (var r = 0; r < 3; r += 1) {

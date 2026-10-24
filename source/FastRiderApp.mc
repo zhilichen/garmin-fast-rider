@@ -1,12 +1,12 @@
 import Toybox.Application;
 import Toybox.WatchUi;
 
-class SummitApp extends Application.AppBase {
+class FastRiderApp extends Application.AppBase {
     var field;
     function initialize() { AppBase.initialize(); }
     function getInitialView() {
-        field = new SummitView();
-        return [field, new SummitInputDelegate(field)];
+        field = new FastRiderView();
+        return [field, new FastRiderInputDelegate(field)];
     }
     function onSettingsChanged() {
         if (field != null) { field.loadSettings(); }

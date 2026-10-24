@@ -20,11 +20,11 @@ if [ "$mode" = test ]; then
   # SDK 9.3 may return 1 even after the VM prints PASSED. Use the VM summary.
   mkdir -p .local
   set +e
-  monkeydo "bin/Summit-test.prg" edge840 -t 2>&1 | tee .local/simulator-tests.txt
+  monkeydo "bin/FastRider-test.prg" edge840 -t 2>&1 | tee .local/simulator-tests.txt
   set -e
   if ! grep -Eq '^PASSED \(passed=[0-9]+, failed=0, errors=0\)$' .local/simulator-tests.txt; then
     exit 1
   fi
 else
-  monkeydo "bin/Summit-$mode.prg" edge840
+  monkeydo "bin/FastRider-$mode.prg" edge840
 fi
