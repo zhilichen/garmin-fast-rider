@@ -1,0 +1,10 @@
+Edge 840 native simulator, SDK 9.3.0, unmodified demo source.
+FastRider demo memory: 69520 / 127424 bytes
+Default: 3s, All, 5m. Heart only; bolt followed by 3s.
+Tap [115,50] -> 10s, All, 5m
+Next-frame visual check: bolt followed by 10s; no bpm or realtime W.
+File > Save Screen Capture: fastrider-edge840-v0314-default.png and fastrider-edge840-v0314-10s.png.
+Tap [115,50] -> 3s, All, 5m
+Next-frame visual check: default restored.
+Pixel checks: heart/numeral x2; bolt/numeral x116; both dividers x112/113;
+top2px and radar reserve blank; original marker remains black/white/black.

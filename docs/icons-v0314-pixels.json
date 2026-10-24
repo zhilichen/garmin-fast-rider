@@ -1,0 +1,92 @@
+{
+  "source": "Native simulator File > Save Screen Capture, synthetic demo metrics",
+  "version": "0.3.14",
+  "records": [
+    {
+      "capture": "fastrider-edge840-v0314-default.png",
+      "mode": "3s",
+      "size": [
+        246,
+        322
+      ],
+      "heart_numeric_bounds": [
+        2,
+        2,
+        107,
+        44
+      ],
+      "heart_icon_bounds": [
+        2,
+        48,
+        18,
+        62
+      ],
+      "power_numeric_bounds": [
+        116,
+        2,
+        197,
+        44
+      ],
+      "bolt_bounds": [
+        116,
+        48,
+        130,
+        62
+      ],
+      "seconds_bounds": [
+        134,
+        50,
+        150,
+        63
+      ],
+      "old_bpm_area_blank": true,
+      "radar_reserve_blank": true,
+      "top_2px_blank": true,
+      "bolt_identical_to_chart_icon": true,
+      "dividers_x112_113": true
+    },
+    {
+      "capture": "fastrider-edge840-v0314-10s.png",
+      "mode": "10s",
+      "size": [
+        246,
+        322
+      ],
+      "heart_numeric_bounds": [
+        2,
+        2,
+        107,
+        44
+      ],
+      "heart_icon_bounds": [
+        2,
+        48,
+        18,
+        62
+      ],
+      "power_numeric_bounds": [
+        116,
+        2,
+        197,
+        44
+      ],
+      "bolt_bounds": [
+        116,
+        48,
+        130,
+        62
+      ],
+      "seconds_bounds": [
+        135,
+        50,
+        159,
+        63
+      ],
+      "old_bpm_area_blank": true,
+      "radar_reserve_blank": true,
+      "top_2px_blank": true,
+      "bolt_identical_to_chart_icon": true,
+      "dividers_x112_113": true
+    }
+  ]
+}

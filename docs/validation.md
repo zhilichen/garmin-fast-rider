@@ -3,7 +3,7 @@
 - 移除顶部心率bpm与实时功率W，心率仅保留16×14 px红心；实时功率改为14×14 px蓝色闪电、4 px间距、18 px的3s/10s。图标均在原单位行，底端baseline62。统计区AVG/W保留。
 - 红心锚点x2、闪电x116。主数字绘制时扣除实际字形左侧留白，使其可见左缘分别落在同一锚点；包含58 px主字体和36 px四位数回退。主数字字号、字间距和粗细保持原配置。
 - live / hardware / demo / test构建通过，无告警。Garmin VM **31/31**，[原始输出](simulator-tests.txt)；既有12种模式及缺失/四位数的原生绘制通过，更新了10s行与Zone的真实字宽边界检查。测试VM native render usedMemory=92,680 bytes；独立demo字段69,520 /127,424 bytes，加载后未报错。
-- [矢量参考](design/summit-interactive.svg)与像素规则已同步。Mac锁定、自动解锁失败，**本版最终GUI目视与截图尚未完成**；已请求解锁，未用旧截图冒充本版效果。下一步为原生3s/10s画面及图标/数字左边缘像素核对。
+- Mac解锁后完成原生模拟器目视、点击与截图验收。[3s截图](fastrider-edge840-v0314-default.png)、[10s截图](fastrider-edge840-v0314-10s.png)由File→Save Screen Capture输出246×322合成指标。[像素记录](icons-v0314-pixels.json)确认数字/红心左缘均x2，数字/闪电左缘均x116，bpm区域已空，闪电形状与图头同图标逐像素一致，顶部2 px与雷达预留保持空白，上下分隔x112/113。[实际点击](interaction-v0314.txt)验证3s→10s→3s，最终恢复3s/All/5m。[矢量参考](design/summit-interactive.svg)与像素规则已同步。
 - 本轮只准备安装包，未写入真机。`bin/FastRider-v0.3.14.prg`与真实live包相同，174,396 bytes，保留原App ID/签名。[包大小与SHA256](packages-v0314.json)。
 
 以下保留旧版验收记录。

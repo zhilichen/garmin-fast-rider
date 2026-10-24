@@ -2,7 +2,7 @@
 
 Connect IQ / Monkey C 数据字段，按 Edge 840 原生 **246 × 322** 实现已确认的交互设计。只针对 Edge 840 构建；使用单字段全屏布局。
 
-当前[v0.3.14矢量布局参考](docs/design/summit-interactive.svg)。本版最终模拟器目视验收待Mac解锁后补做；测试VM原生绘制已通过。
+![v0.3.14 Edge 840 原生模拟器截图（抗锯齿），demo 合成数据](docs/fastrider-edge840-v0314-default.png)
 
 ## 显示与点击
 
