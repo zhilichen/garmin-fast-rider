@@ -1,0 +1,164 @@
+{
+  "source": "fastrider-edge840-v0311-default.png",
+  "comparison": "fastrider-edge840-v039-default.png",
+  "column_before": 122,
+  "column_after": 107,
+  "regions": {
+    "upper_divider": {
+      "box": [
+        107,
+        2,
+        109,
+        68
+      ],
+      "rgb": [
+        131,
+        145,
+        156
+      ]
+    },
+    "middle_divider": {
+      "box": [
+        107,
+        91,
+        109,
+        214
+      ],
+      "rgb": [
+        131,
+        145,
+        156
+      ]
+    },
+    "radar_blank": {
+      "box": [
+        218,
+        0,
+        246,
+        34
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ]
+    },
+    "top_margin": {
+      "box": [
+        0,
+        0,
+        246,
+        2
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ]
+    },
+    "marker_black_top": {
+      "box": [
+        33,
+        68,
+        37,
+        76
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ]
+    },
+    "marker_white_mid": {
+      "box": [
+        33,
+        76,
+        37,
+        82
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ]
+    },
+    "marker_black_bottom": {
+      "box": [
+        33,
+        82,
+        37,
+        90
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "pixel_matches": {
+    "HR_digit_8": {
+      "before_box": [
+        63,
+        1,
+        87,
+        44
+      ],
+      "after_box": [
+        57,
+        1,
+        81,
+        44
+      ],
+      "identical": true
+    },
+    "cadence_digit_6": {
+      "before_box": [
+        14,
+        121,
+        30,
+        149
+      ],
+      "after_box": [
+        10,
+        121,
+        26,
+        149
+      ],
+      "identical": true
+    },
+    "cadence_digit_4": {
+      "before_box": [
+        32,
+        121,
+        49,
+        149
+      ],
+      "after_box": [
+        26,
+        121,
+        43,
+        149
+      ],
+      "identical": true
+    },
+    "average_212": {
+      "before_box": [
+        126,
+        141,
+        207,
+        182
+      ],
+      "after_box": [
+        120,
+        141,
+        201,
+        182
+      ],
+      "identical": true
+    },
+    "window_bolt_equals_power_bolt": true,
+    "window_20m_bolt_equals_power_bolt": true
+  },
+  "all_font_resources_unchanged": true
+}

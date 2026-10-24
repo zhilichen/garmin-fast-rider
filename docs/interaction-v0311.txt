@@ -1,0 +1,12 @@
+Connect IQ SDK 9.3.0 / edge840 API 6.0.0 / FastRider v0.3.11 demo.
+Native coordinates [110,*] lie inside the newly reclaimed right-side strip.
+FastRider demo memory: 63704 / 127424 bytes
+Tap [110,50] -> 10s, All, 5m
+Tap [110,160] -> 10s, LAP, 5m
+Tap [123,238] -> 10s, LAP, 20m
+Tap [123,238] -> 10s, LAP, All
+Tap [110,50] -> 3s, LAP, All
+Tap [110,160] -> 3s, All, All
+Tap [123,238] -> 3s, All, 5m
+Observed after redraw: blue vector bolt inside brackets for 5m, 20m and All;
+no bell was triggered by touches in the reclaimed right-side region.
