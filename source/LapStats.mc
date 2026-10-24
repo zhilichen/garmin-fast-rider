@@ -10,13 +10,26 @@ class LapStats {
     var averagePower = null;
     var wattMillis = 0.0;
     var validMillis = 0;
+    var startDistance = null;
+    var distance = null;
 
     function initialize() { reset(); }
     function reset() {
         synced = false; startTimer = null; timeMs = null;
         observedTimer = null;
+        startDistance = null; distance = null;
         wattMillis = 0.0; validMillis = 0; averagePower = null;
         breakSample();
+    }
+    function beginAt(timer, power, meters) {
+        begin(timer, power);
+        // At a confirmed activity origin elapsed distance is zero even if the
+        // first Activity.Info hasn't populated it yet. Never guess mid-ride.
+        var origin = meters != null ? meters : (timer == 0 ? 0.0 : null);
+        if (synced && origin != null) { startDistance = origin; distance = 0.0; }
+    }
+    function updateDistance(meters) {
+        distance = synced && meters != null && startDistance != null && meters >= startDistance ? meters-startDistance : null;
     }
 
     function breakSample() { lastTimer = null; lastPower = null; }

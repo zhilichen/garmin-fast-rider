@@ -11,265 +11,315 @@ class SummitView extends WatchUi.DataField {
     var power = null;
     var hr = null;
     var cadence = null;
-    var gear = "--/--";
-    var lap;
-    var lapMillis = null;
-    var lapPower = null;
-    var lapSynced = false;
+    var rearGear = null;
+    var speed = null;
+    var meters = null;
+    var millis = null;
+    var timerMillis = null;
+    var ascent = null;
+    var remainingDistance = null;
+    var remainingAscent = null;
+    var ridePower = null;
+    var lapNumber = null;
+    var lap as LapStats;
+    var ride as LapStats;
     var grade = null;
     var gradeEstimator;
-    var meters = 0.0;
-    var millis = 0;
+    var rolling as PowerAverage;
+    var ui as InteractionState;
     var powerLimits;
     var hrLimits;
-    var trend as PowerHistory = new PowerHistory();
+    var trend as PowerHistory;
     var ftpWatts = 250;
-    var ascent = null;
     var demoSeeded = false;
+    var demoDiagnostics = false;
     var start;
-    var width;
-    var height;
+    var width = 246;
+    var height = 322;
+    var fonts as Lang.Array<Graphics.FontType> or Null = null;
+    var fontSizes as Lang.Array<Lang.Number> = [49, 33, 44, 18, 20, 26];
+    var flashRegion = 0;
+    var flashUntil = 0;
 
     function initialize() {
         DataField.initialize();
         gradeEstimator = new GradeEstimator();
-        lap = new LapStats();
+        lap = new LapStats(); ride = new LapStats();
+        rolling = new PowerAverage(); ui = new InteractionState();
+        trend = new PowerHistory();
         start = System.getTimer();
         loadSettings();
     }
-
     function loadSettings() {
         var ftp = RideMath.clamp(Application.Properties.getValue("ftp"), 50, 600);
         var maxHr = RideMath.clamp(Application.Properties.getValue("maxHr"), 100, 240);
-        powerLimits = [ftp*0.55, ftp*0.75, ftp*0.90, ftp*1.05, ftp*1.20, ftp*1.50];
         hrLimits = [maxHr*0.60, maxHr*0.70, maxHr*0.80, maxHr*0.90];
         if (!BuildMode.DEMO) {
             var zones = UserProfile.getHeartRateZones(UserProfile.HR_ZONE_SPORT_BIKING);
-            if (zones != null && zones.size() == 6 && zones[1] > 0) {
-                hrLimits = [zones[1], zones[2], zones[3], zones[4]];
-            }
-            // Newer Edge firmware exposes FTP; guard for older devices/firmware.
+            if (zones != null && zones.size() == 6 && zones[1] > 0) { hrLimits = [zones[1], zones[2], zones[3], zones[4]]; }
             if (UserProfile has :getFunctionalThresholdPower) {
                 var deviceFtp = UserProfile.getFunctionalThresholdPower(Activity.SPORT_CYCLING);
-                if (deviceFtp != null && deviceFtp > 0) {
-                    ftp = deviceFtp;
-                    powerLimits = [deviceFtp*0.55, deviceFtp*0.75, deviceFtp*0.90, deviceFtp*1.05, deviceFtp*1.20, deviceFtp*1.50];
-                }
+                if (deviceFtp != null && deviceFtp > 0) { ftp = deviceFtp; }
             }
         }
         ftpWatts = ftp;
+        powerLimits = [ftp*0.55, ftp*0.75, ftp*0.90, ftp*1.05, ftp*1.20, ftp*1.50];
     }
-
     function compute(info) {
-        if (BuildMode.DEMO) {
-            var t = (System.getTimer() - start) / 1000.0;
-            power = RideMath.demoPower(300+t).toNumber();
-            hr = (147 + 28*Math.sin(t/19.0)).toNumber();
-            cadence = (90 + 7*Math.sin(t/11.0)).toNumber();
-            gear = RideMath.gears(2, 5+((t.toNumber()/15).toNumber()%7));
-            meters = 16600.0+t*8.0;
-            millis = 4980000 + (t*1000).toNumber();
-            var chartTime = 300000+(t*1000).toNumber();
-            var lapTime = (chartTime/120000).toNumber()*120000;
-            lapMillis = chartTime-lapTime;
-            lapPower = (243+8*Math.sin(t/25.0)).toNumber();
-            lapSynced = true;
-            if (!demoSeeded) {
-                for (var i = 0; i <= 300; i += 1) {
-                    if (i%120 == 0) { trend.beginLap(i*1000); }
-                    trend.update(i*1000, RideMath.demoPower(i), true);
-                }
-                demoSeeded = true;
-            }
-            trend.beginLap(lapTime);
-            trend.update(chartTime, power, true);
-            ascent = 682+(t/10).toNumber();
-            grade = 5*(RideMath.demoAltitude(meters+10)-RideMath.demoAltitude(meters-10));
-            return;
-        }
+        if (BuildMode.DEMO) { computeDemo(); return; }
+        if (timerMillis != null && info.timerTime != null && info.timerTime < timerMillis) { onTimerReset(); }
+        var running = info.timerState == Activity.TIMER_STATE_ON;
         power = info.currentPower;
-        hr = info.currentHeartRate;
-        if (hr != null && hr <= 0) { hr = null; }
-        cadence = info.currentCadence;
-        if (cadence != null && cadence < 0) { cadence = null; }
-        gear = RideMath.gears(info.frontDerailleurIndex, info.rearDerailleurIndex);
-        meters = info.elapsedDistance;
-        millis = info.elapsedTime;
-        lap.update(info.timerTime, power, info.timerState == Activity.TIMER_STATE_ON);
-        lapMillis = lap.timeMs; lapPower = lap.averagePower; lapSynced = lap.synced;
-        grade = gradeEstimator.update(info.elapsedDistance, info.altitude, System.getTimer());
+        hr = info.currentHeartRate; if (hr != null && hr <= 0) { hr = null; }
+        cadence = info.currentCadence; if (cadence != null && cadence < 0) { cadence = null; }
+        rearGear = info.rearDerailleurIndex;
+        if (rearGear != null && rearGear <= 0) { rearGear = null; }
+        speed = info.currentSpeed;
+        if (speed != null && speed < 0) { speed = null; }
+        meters = info.elapsedDistance; millis = info.elapsedTime; timerMillis = info.timerTime;
+        if (timerMillis != null && timerMillis == 0 && !lap.synced) {
+            lap.beginAt(0, power, meters); ride.beginAt(0, power, meters); lapNumber = 1;
+        }
+        lap.update(timerMillis, power, running); lap.updateDistance(meters);
+        ride.update(timerMillis, power, running);
+        // Prefer Garmin's complete-ride statistic, including after a mid-ride load.
+        ridePower = info.averagePower != null && info.averagePower >= 0 ? info.averagePower : ride.averagePower;
+        rolling.update(timerMillis, power, running);
+        grade = gradeEstimator.update(meters, info.altitude, System.getTimer());
         ascent = info.totalAscent;
-        trend.update(info.elapsedTime, power, info.timerState == Activity.TIMER_STATE_ON);
+        // This is navigation-to-destination distance, not an inferred course ID.
+        remainingDistance = RideMath.navigationDistance(info.distanceToDestination, info.nameOfDestination);
+        // Public Activity.Info has no remaining-course-ascent value. Never infer it
+        // from destination elevation or the GPX prototype.
+        remainingAscent = null;
+        trend.update(millis, power, running);
     }
-
+    function demoMeters(seconds) { return 16737.1776+(seconds-4988)*9.94; }
+    function seedDemo() {
+        trend.beginLap(0);
+        for (var t = 0; t < 4688; t += 30) { trend.whole.add(t*1000, RideMath.demoPower(t), 1); }
+        for (var t = 3788; t < 4688; t += 12) { trend.medium.add(t*1000, RideMath.demoPower(t), 1); }
+        for (var t = 4688; t <= 4988; t += 1) {
+            var watts = RideMath.demoPower(t);
+            if (t == 4800 || t == 4920) { trend.beginLap(t*1000); }
+            if (t == 4920) { lap.beginAt(t*1000, watts, demoMeters(t)); }
+            trend.update(t*1000, watts, true);
+            if (t >= 4920) { lap.update(t*1000, watts, true); }
+            if (t >= 4978) { rolling.update(t*1000, watts, true); }
+        }
+        lapNumber = 3; demoSeeded = true;
+    }
+    function computeDemo() {
+        if (!demoSeeded) { seedDemo(); }
+        var t = (System.getTimer()-start)/1000.0;
+        millis = 4988000+(t*1000).toNumber(); timerMillis = millis;
+        power = RideMath.demoPower(millis/1000.0);
+        hr = 158; cadence = 64; rearGear = 5; speed = 10.0138;
+        meters = demoMeters(millis/1000.0); ascent = 682.0+t/10.0; grade = 6.4;
+        remainingDistance = 19955.8656; remainingAscent = 365.76;
+        ridePower = 212;
+        rolling.update(timerMillis, power, true);
+        lap.update(timerMillis, power, true); lap.updateDistance(meters);
+        trend.update(millis, power, true);
+    }
     function onTimerReset() {
-        trend.reset(); demoSeeded = false; ascent = null;
-        gradeEstimator.reset();
-        grade = null;
-        lap.reset(); lapMillis = null; lapPower = null; lapSynced = false;
-        meters = 0.0;
-        millis = 0;
-        start = System.getTimer();
+        trend.reset(); rolling.reset(); lap.reset(); ride.reset(); ui.reset();
+        gradeEstimator.reset(); grade = null; lapNumber = null;
+        demoSeeded = false; demoDiagnostics = false; ascent = null; remainingDistance = null; remainingAscent = null;
+        meters = null; millis = null; timerMillis = null; ridePower = null;
+        power = null; hr = null; cadence = null; speed = null; rearGear = null;
+        flashRegion = 0; start = System.getTimer();
     }
-
     function onTimerStart() {
+        if (BuildMode.DEMO) { return; }
         var info = Activity.getActivityInfo();
-        lap.started(info.timerTime);
-        if (!BuildMode.DEMO) { trend.started(info.elapsedTime); }
+        if (info.timerTime != null && info.timerTime == 0) {
+            lap.beginAt(0, info.currentPower, info.elapsedDistance);
+            ride.beginAt(0, info.currentPower, info.elapsedDistance); lapNumber = 1;
+        } else { lap.started(info.timerTime); ride.started(info.timerTime); }
+        trend.started(info.elapsedTime); rolling.reset();
     }
-    function onTimerPause() { lap.breakSample(); trend.breakSample(); }
-    function onTimerResume() { lap.breakSample(); trend.breakSample(); }
-    function onTimerStop() { lap.breakSample(); trend.breakSample(); }
-
+    function breakSamples() { lap.breakSample(); ride.breakSample(); trend.breakSample(); rolling.reset(); }
+    function onTimerPause() { breakSamples(); }
+    function onTimerResume() { breakSamples(); }
+    function onTimerStop() { breakSamples(); }
     function onTimerLap() {
-        var info = Activity.getActivityInfo();
-        lap.begin(info.timerTime, info.currentPower);
-        if (!BuildMode.DEMO) { trend.beginLap(info.elapsedTime); }
-        lapMillis = lap.timeMs; lapPower = lap.averagePower; lapSynced = lap.synced;
+        if (BuildMode.DEMO) {
+            if (!demoSeeded) { computeDemo(); }
+            lap.beginAt(timerMillis, power, meters); trend.beginLap(millis);
+        } else {
+            var info = Activity.getActivityInfo();
+            lap.beginAt(info.timerTime, info.currentPower, info.elapsedDistance);
+            trend.beginLap(info.elapsedTime);
+        }
+        if (lapNumber != null) { lapNumber += 1; }
         WatchUi.requestUpdate();
     }
-
-    function onTimerLap2(trigger) {
-        onTimerLap();
-        // Prevent the SDK's fallback onTimerLap from resetting the same lap twice.
+    function onTimerLap2(trigger) { onTimerLap(); return true; }
+    function handleTap(x, y) {
+        if (width != 246 || height != 322 || !ui.tap(x, y)) { return false; }
+        flashRegion = y < 98 ? 1 : (y < 214 ? 2 : 3);
+        flashUntil = System.getTimer()+180;
+        if (BuildMode.DEMO) {
+            System.println("Tap ["+x+","+y+"] -> "+ui.powerSeconds+"s, "+(ui.allStats ? "All" : "LAP")+", "+ui.rangeLabel());
+        }
+        WatchUi.requestUpdate();
         return true;
     }
-
+    function loadFonts() {
+        if (fonts != null) { return; }
+        fonts = [WatchUi.loadResource(Rez.Fonts.Primary49), WatchUi.loadResource(Rez.Fonts.Live33),
+                 WatchUi.loadResource(Rez.Fonts.Average44), WatchUi.loadResource(Rez.Fonts.Meta18),
+                 WatchUi.loadResource(Rez.Fonts.Chart20), WatchUi.loadResource(Rez.Fonts.Stats26)];
+    }
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
-    function text(dc, xx, yy, font, value, c, align) {
-        color(dc, c);
-        dc.drawText(xx, yy, font, value, align);
+    function text(dc, x, baseline, index, value, c, align) {
+        color(dc, c); dc.drawText(x, baseline-fontSizes[index], fonts[index], value, align);
     }
-
-    function fitFont(dc, value, maxWidth, big) {
-        // Never shrink a ride metric into a caption font to make it fit.
-        var fonts = big ? [Graphics.FONT_NUMBER_HOT, Graphics.FONT_NUMBER_MEDIUM] : [Graphics.FONT_NUMBER_MILD];
-        for (var i = 0; i < fonts.size(); i += 1) {
-            if (dc.getTextWidthInPixels(value, fonts[i]) <= maxWidth) { return fonts[i]; }
-        }
-        return null;
+    function textWidth(dc, value, index) { return dc.getTextWidthInPixels(value, fonts[index]); }
+    function intText(value) { return value == null ? "--" : Math.round(value).toNumber().format("%d"); }
+    function compactValue(dc, value, maxWidth) {
+        if (value == null) { return "--"; }
+        var s = value.format("%.1f");
+        if (textWidth(dc, s, 1) > maxWidth) { s = intText(value); }
+        return textWidth(dc, s, 1) > maxWidth ? "--" : s;
     }
-
-    function number(dc, left, top, value, c, big) {
-        var font = fitFont(dc, value, DisplayRules.CELL_WIDTH, big);
-        if (font == null) { value = "--"; font = big ? Graphics.FONT_NUMBER_MEDIUM : Graphics.FONT_NUMBER_MILD; }
-        text(dc, left+54, top, font, value, c, Graphics.TEXT_JUSTIFY_CENTER);
-    }
-
-    function metric(dc, left, label, value, unit, z) {
-        var c = DisplayRules.zoneColor(z);
-        text(dc, left, 8, Graphics.FONT_MEDIUM, label, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        number(dc, left, 32, value, c, true);
-        text(dc, left, 92, Graphics.FONT_SMALL, unit, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, left+108, 90, Graphics.FONT_MEDIUM, z == 0 ? "--" : "Z"+z, c, Graphics.TEXT_JUSTIFY_RIGHT);
-        color(dc, c);
-        dc.fillRectangle(left, 116, DisplayRules.CELL_WIDTH, DisplayRules.ZONE_BAR);
-    }
-
     function onUpdate(dc) {
         width = dc.getWidth(); height = dc.getHeight();
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE); dc.clear();
-        dc.setPenWidth(DisplayRules.STROKE);
-        if (dc has :setAntiAlias) { dc.setAntiAlias(false); }
-        if (width != DisplayRules.WIDTH || height != DisplayRules.HEIGHT) {
-            text(dc, width/2, height/2-20, Graphics.FONT_SMALL, "SUMMIT", DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
-            text(dc, width/2, height/2+4, Graphics.FONT_SMALL, "1 field", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
-            return;
+        dc.setPenWidth(2); if (dc has :setAntiAlias) { dc.setAntiAlias(false); }
+        loadFonts();
+        if (width != 246 || height != 322) {
+            text(dc, width/2, height/2, 3, "SUMMIT", DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
+            text(dc, width/2, height/2+24, 3, "1 field", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER); return;
         }
-        color(dc, DisplayRules.RULE); dc.fillRectangle(122, 8, DisplayRules.STROKE, 104);
-        metric(dc, 8, "HEART RATE", hr == null ? "--" : hr.format("%d"), "bpm", RideMath.zone(hr, hrLimits));
-        metric(dc, 130, "PWR", power == null ? "--" : power.format("%d"), "W", RideMath.zone(power, powerLimits));
-        var clock = System.getClockTime();
-        var clockText = clock.hour.format("%02d")+":"+clock.min.format("%02d");
-        text(dc, 238, 10, Graphics.FONT_SMALL, clockText, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
-        text(dc, 8, 124, Graphics.FONT_MEDIUM, "CADENCE", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 116, 126, Graphics.FONT_SMALL, gear, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
-        text(dc, 46, 144, Graphics.FONT_NUMBER_MEDIUM, cadence == null ? "--" : cadence.format("%d"), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
-        text(dc, 86, 160, Graphics.FONT_SMALL, "rpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        color(dc, DisplayRules.RULE); dc.fillRectangle(122, 124, DisplayRules.STROKE, 54);
-        drawLap(dc);
-        color(dc, DisplayRules.BANNER_FILL); dc.fillRectangle(0, DisplayRules.BANNER_TOP, width, height-DisplayRules.BANNER_TOP);
-        color(dc, DisplayRules.RULE); dc.fillRectangle(8, DisplayRules.BANNER_TOP, 230, DisplayRules.STROKE);
-        drawBannerStats(dc);
-        drawPowerTrend(dc);
-    }
-
-    function drawLap(dc) {
-        if (lapSynced) {
-            text(dc, 130, 124, Graphics.FONT_SMALL, "LAP", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-            text(dc, 238, 124, Graphics.FONT_MEDIUM, RideMath.lapDuration(lapMillis), DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
-        } else {
-            text(dc, 130, 124, Graphics.FONT_MEDIUM, "LAP SYNC", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        drawPrimary(dc);
+        color(dc, DisplayRules.RULE); dc.fillRectangle(126, 102, 2, 111);
+        text(dc, 33, 117, 3, "rpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, 92, 117, 3, "gear", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, 33, 149, 1, intText(cadence), DisplayRules.cadenceColor(cadence), Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, 92, 149, 1, intText(rearGear), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, 33, 174, 3, "%", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, 92, 174, 3, "mph", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
+        var g = grade != null && grade > -0.05 && grade < 0.05 ? 0.0 : grade;
+        text(dc, 33, 207, 1, compactValue(dc, g, 50), DisplayRules.gradeColor(grade), Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, 92, 207, 1, compactValue(dc, speed == null ? null : speed*2.236936292, 58), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
+        drawStats(dc); drawChartHeader(dc); drawPowerTrend(dc); drawFooter(dc);
+        if (BuildMode.DEMO && !demoDiagnostics) {
+            var stats = System.getSystemStats();
+            System.println("Summit demo memory: "+stats.usedMemory+" / "+stats.totalMemory+" bytes");
+            demoDiagnostics = true;
         }
-        var average = lapPower == null ? "--" : Math.round(lapPower).toNumber().format("%d");
-        var maxNumber = 108-dc.getTextWidthInPixels("~AVG W", Graphics.FONT_SMALL)-4;
-        if (dc.getTextWidthInPixels(average, Graphics.FONT_NUMBER_MILD) <= maxNumber) {
-            text(dc, 130, 146, Graphics.FONT_NUMBER_MILD, average, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
-            text(dc, 238, 158, Graphics.FONT_SMALL, "~AVG W", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
-        } else {
-            text(dc, 130, 152, Graphics.FONT_MEDIUM, "~AVG "+average+" W", DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
+        if (flashRegion != 0 && System.getTimer() < flashUntil) {
+            color(dc, DisplayRules.BLUE);
+            if (flashRegion == 1) { dc.drawRectangle(124, 0, 121, 98); }
+            else if (flashRegion == 2) { dc.drawRectangle(128, 102, 117, 112); }
+            else { dc.drawRectangle(0, 220, 245, 78); }
         }
     }
-
-    function drawBannerStats(dc) {
-        text(dc, 8, 192, Graphics.FONT_MEDIUM, "~GRADE %", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        var slope = RideMath.gradeText(grade);
-        var font = fitFont(dc, slope, 84, false);
-        text(dc, 8, 214, font == null ? Graphics.FONT_MEDIUM : font, slope, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
-        var dist = meters == null ? "-- km" : (meters/1000.0).format("%.1f")+" km";
-        if (dc.getTextWidthInPixels(dist, Graphics.FONT_MEDIUM) > 144) {
-            dist = (meters/1000.0).format("%.0f")+" km";
-        }
-        text(dc, 238, 192, Graphics.FONT_MEDIUM, dist, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
-        var time = millis == null ? "--" : RideMath.duration(millis);
-        text(dc, 98, 218, Graphics.FONT_SMALL, "TIME", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 238, 216, Graphics.FONT_MEDIUM, time, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
+    function drawPrimary(dc) {
+        color(dc, DisplayRules.RULE); dc.fillRectangle(122, 17, 2, 65);
+        color(dc, 0xC62D32);
+        dc.fillPolygon([[18,20],[15,17],[11,17],[8,20],[8,25],[10,28],[18,35],[26,28],[28,25],[28,20],[25,17],[21,17]]);
+        color(dc, DisplayRules.BLUE); dc.fillPolygon([[142,17],[132,29],[138,29],[134,37],[150,24],[142,24],[146,17]]);
+        var watts = rolling.average(ui.powerSeconds);
+        var hz = RideMath.zone(hr, hrLimits); var pz = RideMath.zone(watts, powerLimits);
+        var hc = DisplayRules.zoneColor(hz); var pc = DisplayRules.powerColor(pz);
+        var h = intText(hr); var p = intText(watts);
+        text(dc, 116, 52, textWidth(dc, h, 0) <= 84 ? 0 : 1, h, hc, Graphics.TEXT_JUSTIFY_RIGHT);
+        text(dc, 238, 52, textWidth(dc, p, 0) <= 84 ? 0 : 1, p, pc, Graphics.TEXT_JUSTIFY_RIGHT);
+        text(dc, 8, 76, 3, "bpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 130, 76, 3, "W "+ui.powerSeconds+"s", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 116, 76, 3, hz == 0 ? "--" : "Z"+hz, hc, Graphics.TEXT_JUSTIFY_RIGHT);
+        text(dc, 238, 76, 3, pz == 0 ? "--" : "Z"+pz, pc, Graphics.TEXT_JUSTIFY_RIGHT);
+        color(dc, hc); dc.fillRectangle(8, 88, 108, 6);
+        color(dc, pc); dc.fillRectangle(130, 88, 108, 6);
     }
-
-    function powerY(watts, ceiling) {
-        return DisplayRules.pixel(DisplayRules.PLOT_BOTTOM-watts*(DisplayRules.PLOT_BOTTOM-DisplayRules.PLOT_TOP)/ceiling);
+    function drawStats(dc) {
+        var title = ui.allStats ? "All" : "LAP "+(lapNumber == null ? "?" : lapNumber.format("%d"));
+        var time = RideMath.lapDuration(ui.allStats ? timerMillis : lap.timeMs);
+        var average = intText(ui.allStats ? ridePower : lap.averagePower);
+        var distance = ui.allStats ? meters : lap.distance;
+        var dist = distance == null ? "-- mi" : (distance/1609.344).format(ui.allStats ? "%.1f" : "%.2f")+" mi";
+        text(dc, 134, 117, 3, title, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        var available = 104-textWidth(dc, title, 3)-4;
+        var tf = textWidth(dc, time, 5) <= available ? 5 : (textWidth(dc, time, 4) <= available ? 4 : 3);
+        text(dc, 238, 123, tf, time, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
+        var af = textWidth(dc, average, 2) <= 67 ? 2 : 1;
+        text(dc, 134, 169, af, average, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
+        var center = 134+textWidth(dc, average, af)+6+15;
+        text(dc, center, 149, 3, "AVG", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, center, 169, 3, "W", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
+        if (textWidth(dc, dist, 5) > 104 && distance != null) { dist = (distance/1609.344).format("%.1f")+" mi"; }
+        text(dc, 134, 202, textWidth(dc, dist, 5) <= 104 ? 5 : 4, dist, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
     }
-
-    function chartX(t) {
-        return DisplayRules.pixel(DisplayRules.PLOT_RIGHT+(t-trend.endTime)*(DisplayRules.PLOT_RIGHT-DisplayRules.PLOT_LEFT)/300000.0);
+    function drawChartHeader(dc) {
+        color(dc, DisplayRules.RULE); dc.fillRectangle(8, 220, 230, 2);
+        text(dc, 8, 238, 4, millis == null ? "--:--" : RideMath.duration(millis), DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 123, 238, 3, "< "+ui.rangeLabel()+" >", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
+        var clock = System.getClockTime(); var hour = clock.hour%12; if (hour == 0) { hour = 12; }
+        var time = hour.format("%d")+":"+clock.min.format("%02d");
+        var half = clock.hour < 12 ? "A" : "B";
+        text(dc, 238-textWidth(dc, half, 3)-2, 238, 4, time, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        text(dc, 238, 238, 3, half, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
     }
-
+    function powerY(watts) {
+        var lo = ftpWatts*0.55; var hi = ftpWatts*1.5;
+        return DisplayRules.pixel(RideMath.clamp(293-(watts-lo)*50/(hi-lo), 243, 292));
+    }
+    function chartX(t) { return DisplayRules.pixel(228+(t-trend.endTime)*212/trend.windowMillis(ui.range).toFloat()); }
     function drawPowerTrend(dc) {
-        var left = DisplayRules.PLOT_LEFT; var right = DisplayRules.PLOT_RIGHT;
-        var top = DisplayRules.PLOT_TOP; var bottom = DisplayRules.PLOT_BOTTOM;
-        text(dc, 8, 244, Graphics.FONT_SMALL, "PWR 5m", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 123, 244, Graphics.FONT_SMALL, "FTP "+ftpWatts.toNumber().format("%d"), DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
-        var climb = ascent == null ? "UP --" : "UP "+ascent.toNumber().format("%d")+"m";
-        text(dc, 238, 244, Graphics.FONT_SMALL, climb, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
-        var ceiling = trend.ceiling(ftpWatts);
+        if (trend.endTime == null) { return; }
+        var points = trend.viewPoints(ui.range);
         var previousX = -1; var previousY = 0; var previousSegment = -1;
-        dc.setPenWidth(DisplayRules.STROKE);
-        for (var i = 0; i < trend.points.size(); i += 1) {
-            var p = trend.points[i];
-            var px = chartX((p[0]+p[1])/2.0);
-            if (px < left || px > right) { previousX = -1; continue; }
-            var watts = p[2]/p[3].toFloat(); var py = powerY(watts, ceiling);
-            color(dc, DisplayRules.zoneColor(RideMath.zone(watts, powerLimits)));
-            dc.fillRectangle(px-1, py, 2, bottom-py+1);
-            if (previousX >= left && previousSegment == p[4]) {
-                dc.drawLine(previousX, previousY, px, py);
-            }
+        dc.setPenWidth(2);
+        for (var i = 0; i < points.size(); i += 1) {
+            var p = points[i]; var px = chartX((p[0]+p[1])/2.0);
+            if (px < 16 || px > 228) { previousX = -1; continue; }
+            var watts = p[2]/p[3].toFloat(); var py = powerY(watts);
+            var c = DisplayRules.plotColor(RideMath.zone(watts, powerLimits));
+            color(dc, DisplayRules.fadeWhite(c)); dc.fillRectangle(px-1, py, 2, 294-py);
+            color(dc, c);
+            if (previousX >= 16 && previousSegment == p[4] && p[4] >= 0) { dc.drawLine(previousX, previousY, px, py); }
+            else { dc.fillRectangle(px-1, py, 2, 2); }
             previousX = px; previousY = py; previousSegment = p[4];
         }
-        // Dashed reference is FTP; solid capped lines are native lap end/start.
-        var ftpY = powerY(ftpWatts, ceiling);
-        color(dc, DisplayRules.RULE);
-        for (var x = left; x < right; x += 8) { dc.fillRectangle(x, ftpY, 4, 2); }
-        text(dc, 8, 306, Graphics.FONT_SMALL, "-5m", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 123, 306, Graphics.FONT_SMALL, trend.startLabel(), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
-        text(dc, 238, 306, Graphics.FONT_SMALL, "NOW", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        var fy = powerY(ftpWatts);
+        for (var x = 16; x < 228; x += 8) {
+            color(dc, Graphics.COLOR_WHITE); dc.fillRectangle(x-1, fy-1, 6, 4);
+            color(dc, 0x59636E); dc.fillRectangle(x, fy, 4, 2);
+        }
+        var zy = powerY(ftpWatts*0.75);
+        color(dc, Graphics.COLOR_WHITE); dc.fillRectangle(16, zy-1, 213, 4);
+        color(dc, DisplayRules.BLUE); dc.fillRectangle(16, zy, 213, 2);
         for (var i = 0; i < trend.boundaries.size(); i += 1) {
             var px = chartX(trend.boundaries[i]);
-            if (px < left || px > right) { continue; }
-            color(dc, DisplayRules.BANNER_FILL); dc.fillRectangle(px-2, top, 4, bottom-top+1);
-            color(dc, DisplayRules.INK); dc.fillRectangle(px-1, top, 2, bottom-top+1);
-            dc.fillRectangle(px-3, top, 6, 4);
+            if (px < 16 || px > 228) { continue; }
+            color(dc, Graphics.COLOR_WHITE); dc.fillRectangle(px-2, 243, 4, 51);
+            color(dc, DisplayRules.INK); dc.fillRectangle(px-1, 243, 2, 51); dc.fillRectangle(px-3, 243, 6, 4);
         }
-        color(dc, DisplayRules.BLUE); dc.fillRectangle(right-1, top, 3, bottom-top+1);
+        color(dc, DisplayRules.BLUE); dc.fillRectangle(227, 243, 3, 51);
+    }
+    function footerWidth(dc, total, remaining, unit) {
+        return textWidth(dc, total, 4)+2+textWidth(dc, unit, 3)+(remaining == null ? 0 : 2+textWidth(dc, remaining, 4));
+    }
+    function footerGroup(dc, x, total, remaining, unit) {
+        text(dc, x, 316, 4, total, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT); x += textWidth(dc, total, 4)+2;
+        if (remaining != null) {
+            text(dc, x, 316, 4, remaining, DisplayRules.BLUE, Graphics.TEXT_JUSTIFY_LEFT); x += textWidth(dc, remaining, 4)+2;
+        }
+        text(dc, x, 316, 3, unit, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+    }
+    function drawFooter(dc) {
+        var dist = meters == null ? "--" : (meters/1609.344).format("%.1f");
+        var up = ascent == null ? "--" : intText(ascent*3.280839895);
+        var rest = remainingDistance == null ? null : "("+(remainingDistance/1609.344).format("%.1f")+")";
+        var restUp = remainingAscent == null ? null : "("+intText(remainingAscent*3.280839895)+")";
+        var lw = footerWidth(dc, dist, rest, "mi"); var rw = footerWidth(dc, up, restUp, "ft");
+        if (lw+rw > 228 && meters != null) { dist = (meters/1609.344).format("%.0f"); }
+        if (footerWidth(dc, dist, rest, "mi")+rw > 228 && remainingDistance != null) { rest = "("+(remainingDistance/1609.344).format("%.0f")+")"; }
+        if (footerWidth(dc, dist, rest, "mi")+rw > 228) { rest = null; restUp = null; rw = footerWidth(dc, up, null, "ft"); }
+        footerGroup(dc, 6, dist, rest, "mi");
+        footerGroup(dc, 240-rw, up, restUp, "ft");
     }
 }

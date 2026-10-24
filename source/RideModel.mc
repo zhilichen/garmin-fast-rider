@@ -8,6 +8,11 @@ module RideMath {
     // Math.min/max are API 6.0.3; Edge 840's simulator exposes 6.0.0.
     function clamp(value, lo, hi) { return value < lo ? lo : (value > hi ? hi : value); }
 
+    function navigationDistance(distance, destination) {
+        // A default zero without a named navigation target is not a remaining route.
+        return destination != null && destination.length() > 0 && distance != null && distance >= 0 ? distance : null;
+    }
+
     // Thresholds are upper bounds, inclusive; missing sensor != zero watts.
     function zone(value, limits as Lang.Array<Lang.Number or Lang.Float>) {
         if (value == null) { return 0; }

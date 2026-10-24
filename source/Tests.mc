@@ -47,12 +47,12 @@ function powerWindowTest(logger) {
     }
     Test.assert(h.points.size() <= 102);
     Test.assert(h.points[0][1] >= 400000);
-    Test.assertEqual(h.boundaries.size(), 1);
-    Test.assertEqual(h.boundaries[0], 500000);
+    Test.assertEqual(h.boundaries.size(), 3);
+    Test.assertEqual(h.boundaries[2], 500000);
     Test.assertEqual(h.startLabel(), "LAP START -3:20");
     h.update(801000, null, false);
     Test.assertEqual(h.startLabel(), "LAP START <-5m");
-    Test.assertEqual(h.boundaries.size(), 0);
+    Test.assertEqual(h.boundaries.size(), 3);
     // Many breaks and laps remain bounded even within the five-minute window.
     h.reset();
     for (var i = 0; i < 250; i += 1) {
@@ -237,5 +237,209 @@ function courseTest(logger) {
     tracker.update(new Position.Location({:latitude=>0.0, :longitude=>0.0, :format=>:degrees}));
     Test.assert(tracker.distance == null);
     Test.assertEqual(tracker.state, "OFF COURSE");
+    return true;
+}
+
+(:test)
+function interactionCyclesTest(logger) {
+    var ui = new InteractionState();
+    Test.assertEqual(ui.powerSeconds, 3); Test.assert(!ui.allStats); Test.assertEqual(ui.range, 0);
+    Test.assert(!ui.tap(123, 52)); Test.assert(!ui.tap(150, 100));
+    Test.assert(!ui.tap(20, 316)); Test.assert(!ui.tap(246, 30)); Test.assert(!ui.tap(-1, 30));
+    for (var p = 0; p < 2; p += 1) {
+        for (var s = 0; s < 2; s += 1) {
+            for (var r = 0; r < 3; r += 1) {
+                Test.assertEqual(ui.powerSeconds, p == 0 ? 3 : 10);
+                Test.assertEqual(ui.allStats, s != 0); Test.assertEqual(ui.range, r);
+                Test.assert(ui.tap(123, 238));
+            }
+            Test.assert(ui.tap(200, 160));
+        }
+        Test.assert(ui.tap(200, 50));
+    }
+    Test.assertEqual(ui.rangeLabel(), "5m");
+    ui.tap(124, 97); Test.assertEqual(ui.powerSeconds, 10);
+    Test.assert(!ui.tap(124, 98));
+    ui.reset(); Test.assertEqual(ui.powerSeconds, 3);
+    return true;
+}
+
+class TapStub {
+    var xy;
+    var type = 0;
+    function initialize(x, y) { xy = [x, y]; }
+    function getCoordinates() { return xy; }
+    function getType() { return type; }
+}
+class TapTarget {
+    var ui;
+    function initialize() { ui = new InteractionState(); }
+    function handleTap(x, y) { return ui.tap(x, y); }
+}
+(:test)
+function inputDelegateTest(logger) {
+    var target = new TapTarget(); var input = new SummitInputDelegate(target);
+    Test.assert(input.onTap(new TapStub(200, 50)));
+    Test.assertEqual(target.ui.powerSeconds, 10);
+    Test.assert(input.onTap(new TapStub(200, 160))); Test.assert(target.ui.allStats);
+    Test.assert(input.onTap(new TapStub(100, 260))); Test.assertEqual(target.ui.range, 1);
+    Test.assert(!input.onTap(new TapStub(20, 316)));
+    var hold = new TapStub(200, 50); hold.type = 1;
+    Test.assert(!input.onTap(hold)); Test.assertEqual(target.ui.powerSeconds, 10);
+    return true;
+}
+
+(:test)
+function rollingPowerTest(logger) {
+    var a = new PowerAverage(); Test.assert(a.average(3) == null);
+    for (var i = 1; i <= 10; i += 1) { a.update(i*1000, i*10, true); }
+    assertNear(a.average(3), 90.0); assertNear(a.average(10), 55.0);
+    a.update(10000, 999, true); assertNear(a.average(3), 90.0);
+    a.update(11000, 0, true); assertNear(a.average(3), 190.0/3.0);
+    a.update(12000, null, true); Test.assert(a.average(3) == null);
+    a.update(13000, 0, true); assertNear(a.average(10), 0.0);
+    a.update(14000, 100, false); Test.assert(a.average(3) == null);
+    a.update(15000, 150, true); a.update(20000, 250, true); assertNear(a.average(10), 250.0);
+    a.update(0, 20, true); assertNear(a.average(3), 20.0);
+    return true;
+}
+
+(:test)
+function multiRangeHistoryTest(logger) {
+    var h = new PowerHistory(); h.started(0);
+    for (var i = 0; i <= 3600; i += 1) {
+        if (i == 600 || i == 1800) { h.beginLap(i*1000); }
+        h.update(i*1000, 200, true);
+    }
+    Test.assert(h.viewPoints(0)[0][1] >= 3300000);
+    Test.assert(h.viewPoints(1)[0][1] >= 2400000);
+    Test.assertEqual(h.viewPoints(2)[0][0], 0);
+    Test.assertEqual(h.boundaries.size(), 3);
+    Test.assertEqual(h.windowMillis(0), 300000); Test.assertEqual(h.windowMillis(1), 1200000);
+    Test.assertEqual(h.windowMillis(2), 3600000);
+    Test.assert(h.points.size() <= 160 && h.medium.points.size() <= 160 && h.whole.points.size() <= 160);
+    h.update(0, 0, true);
+    Test.assertEqual(h.whole.points.size(), 1); Test.assertEqual(h.medium.points.size(), 1);
+    return true;
+}
+
+(:test)
+function allRideCompactionTest(logger) {
+    var s = new PowerSeries(30000, null, true);
+    // 24 hours, with a zero-watt interval and a break. No discarded beginning.
+    for (var i = 0; i <= 5760; i += 1) { s.add(i*15000, i < 100 ? 0 : 240, i < 2000 ? 1 : 2); }
+    Test.assert(s.points.size() <= 160); Test.assert(s.bucketMs > 30000);
+    Test.assertEqual(s.points[0][0], 0); Test.assertEqual(s.points[s.points.size()-1][1], 86400000);
+    var count = 0; var sum = 0.0;
+    for (var i = 0; i < s.points.size(); i += 1) { count += s.points[i][3]; sum += s.points[i][2]; }
+    Test.assertEqual(count, 5761); assertNear(sum, 5661*240.0);
+    s.reset(); s.add(0, 100, 1); s.add(1000, 300, 2);
+    Test.assertEqual(s.points[0][4], -1); assertNear(s.points[0][2]/s.points[0][3], 200.0);
+    return true;
+}
+
+(:test)
+function dataColorsTest(logger) {
+    Test.assertEqual(DisplayRules.gradeColor(5.0), DisplayRules.INK);
+    Test.assertEqual(DisplayRules.gradeColor(5.1), DisplayRules.ORANGE);
+    Test.assertEqual(DisplayRules.gradeColor(10.0), DisplayRules.ORANGE);
+    Test.assertEqual(DisplayRules.gradeColor(10.1), DisplayRules.DEEP_RED);
+    Test.assertEqual(DisplayRules.gradeColor(15.0), DisplayRules.DEEP_RED);
+    Test.assertEqual(DisplayRules.gradeColor(15.1), DisplayRules.DEEP_PURPLE);
+    Test.assertEqual(DisplayRules.gradeColor(-10.0), DisplayRules.INK);
+    Test.assertEqual(DisplayRules.cadenceColor(69), DisplayRules.DEEP_RED);
+    Test.assertEqual(DisplayRules.cadenceColor(70), DisplayRules.INK);
+    Test.assertEqual(DisplayRules.cadenceColor(100), DisplayRules.INK);
+    Test.assertEqual(DisplayRules.cadenceColor(101), DisplayRules.DEEP_PURPLE);
+    Test.assertEqual(DisplayRules.powerColor(1), DisplayRules.powerColor(3));
+    Test.assert(DisplayRules.powerColor(2) != DisplayRules.powerColor(4));
+    Test.assertEqual(DisplayRules.powerColor(6), DisplayRules.powerColor(7));
+    return true;
+}
+
+(:test)
+function lapDistanceTest(logger) {
+    var s = new LapStats(); s.beginAt(50000, 100, 1000.0);
+    s.updateDistance(1675.0); assertNear(s.distance, 675.0);
+    s.update(51000, 100, true); assertNear(s.averagePower, 100.0);
+    s.beginAt(51000, 100, 1675.0); assertNear(s.distance, 0.0);
+    s.updateDistance(null); Test.assert(s.distance == null);
+    s.updateDistance(1700.0); assertNear(s.distance, 25.0);
+    s.reset(); s.started(60000); s.updateDistance(1800.0); Test.assert(s.distance == null);
+    s.beginAt(0, null, null); s.updateDistance(15.0); assertNear(s.distance, 15.0);
+    return true;
+}
+
+(:test)
+function viewInteractionPreservesDataTest(logger) {
+    var v = new SummitView();
+    v.computeDemo();
+    var time = v.lap.timeMs; var distance = v.lap.distance;
+    var laps = v.trend.boundaries.size(); var points = v.trend.points.size();
+    Test.assert(v.handleTap(200, 40)); Test.assert(v.handleTap(200, 160)); Test.assert(v.handleTap(123, 238));
+    Test.assertEqual(v.ui.powerSeconds, 10); Test.assert(v.ui.allStats); Test.assertEqual(v.ui.range, 1);
+    Test.assertEqual(v.lap.timeMs, time); Test.assertEqual(v.lap.distance, distance);
+    Test.assertEqual(v.trend.boundaries.size(), laps); Test.assertEqual(v.trend.points.size(), points);
+    v.onTimerLap();
+    Test.assertEqual(v.lapNumber, 4); Test.assertEqual(v.lap.timeMs, 0);
+    Test.assert(v.ui.allStats); Test.assertEqual(v.ui.powerSeconds, 10); Test.assertEqual(v.ui.range, 1);
+    v.onTimerReset();
+    Test.assertEqual(v.ui.powerSeconds, 3); Test.assert(!v.ui.allStats); Test.assertEqual(v.ui.range, 0);
+    Test.assertEqual(v.trend.whole.points.size(), 0); Test.assert(v.lap.timeMs == null);
+    return true;
+}
+
+(:test)
+function bitmapFontMetricsTest(logger) {
+    // A tiny Dc is sufficient to verify font metrics without a full-screen buffer.
+    var reference = Toybox.Graphics.createBufferedBitmap({:width=>16, :height=>16});
+    var bitmap = reference.get();
+    var dc = bitmap.getDc();
+    var v = new SummitView(); v.loadFonts();
+    Test.assertEqual(dc.getTextWidthInPixels("303", v.fonts[0]), 84);
+    Test.assert(dc.getTextWidthInPixels("22.4", v.fonts[1]) <= 58);
+    Test.assert(dc.getTextWidthInPixels("All", v.fonts[3])+4+dc.getTextWidthInPixels("1:23:08", v.fonts[5]) <= 104);
+    Test.assert(dc.getTextWidthInPixels("245", v.fonts[2])+6+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 104);
+    Test.assert(dc.getTextWidthInPixels("0.42 mi", v.fonts[5]) <= 104);
+    Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[0]), 49);
+    return true;
+}
+
+(:test)
+function nativeRenderStatesTest(logger) {
+    var reference = Toybox.Graphics.createBufferedBitmap({:width=>246, :height=>322});
+    var surface = reference.get(); var dc = surface.getDc();
+    var v = new SummitView(); v.computeDemo();
+    for (var p = 0; p < 2; p += 1) {
+        for (var s = 0; s < 2; s += 1) {
+            for (var r = 0; r < 3; r += 1) {
+                v.onUpdate(dc); v.handleTap(123, 238);
+            }
+            v.handleTap(200, 160);
+        }
+        v.handleTap(200, 50);
+    }
+    // Exercise narrow cells, extended ride/lap time, missing signals and fallbacks.
+    v.ui.allStats = true; v.timerMillis = 43201000; v.millis = 43201000;
+    v.meters = 320000.0; v.ascent = 6000; v.remainingDistance = 500000.0;
+    v.remainingAscent = 5000; v.ridePower = 1234;
+    v.hr = null; v.cadence = 101; v.grade = -16.4; v.speed = 45.0;
+    v.onUpdate(dc);
+    v.remainingDistance = null; v.remainingAscent = null; v.onUpdate(dc);
+    var stats = Toybox.System.getSystemStats();
+    logger.debug("Native render memory used="+stats.usedMemory+" free="+stats.freeMemory);
+    // Unit-test mode has a larger heap; compare used bytes to the real field limit.
+    Test.assert(stats.usedMemory < 131072-12000);
+    return true;
+}
+
+(:test)
+function navigationAvailabilityTest(logger) {
+    Test.assert(RideMath.navigationDistance(0, null) == null);
+    Test.assert(RideMath.navigationDistance(1000, "") == null);
+    Test.assert(RideMath.navigationDistance(null, "Finish") == null);
+    Test.assert(RideMath.navigationDistance(-1, "Finish") == null);
+    Test.assertEqual(RideMath.navigationDistance(0, "Finish"), 0);
+    Test.assertEqual(RideMath.navigationDistance(1000, "Finish"), 1000);
     return true;
 }

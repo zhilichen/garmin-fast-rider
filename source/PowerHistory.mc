@@ -1,6 +1,6 @@
 import Toybox.Lang;
 
-// Five minutes of elapsed activity time, including blank pause/sensor gaps.
+// Multi-resolution elapsed activity history, including pause/sensor gaps.
 class PowerHistory {
     const WINDOW_MS = 300000;
     const BUCKET_MS = 3000;
@@ -14,10 +14,17 @@ class PowerHistory {
     var lastSample = null;
     var segment = 0;
     var needsBreak = true;
+    var medium as PowerSeries;
+    var whole as PowerSeries;
 
-    function initialize() { reset(); }
+    function initialize() {
+        medium = new PowerSeries(12000, 1200000, false);
+        whole = new PowerSeries(30000, null, true);
+        reset();
+    }
     function reset() {
         points = []; boundaries = []; endTime = null; lapStart = null;
+        medium.reset(); whole.reset();
         segment = 0; breakSample();
     }
     function breakSample() { needsBreak = true; lastSample = null; }
@@ -37,11 +44,13 @@ class PowerHistory {
         if (t == null || t < 0) { breakSample(); return; }
         if (endTime != null && t < endTime) { reset(); }
         endTime = t; prune();
+        medium.prune(t);
         if (t == 0 && lapStart == null) { beginLap(0); }
         if (!running || watts == null || watts < 0) { breakSample(); return; }
         if (lastSample != null && t == lastSample) { return; }
         if (lastSample != null && t-lastSample > 2500) { breakSample(); }
         if (needsBreak) { segment += 1; needsBreak = false; }
+        medium.add(t, watts, segment); whole.add(t, watts, segment);
         var bucket = (t/BUCKET_MS).toNumber();
         var last = points.size() > 0 ? points[points.size()-1] : null;
         if (last != null && last[4] == segment && (last[0]/BUCKET_MS).toNumber() == bucket) {
@@ -54,8 +63,14 @@ class PowerHistory {
         if (endTime == null) { return; }
         var first = endTime-WINDOW_MS;
         while (points.size() > 0 && points[0][1] < first) { points.remove(points[0]); }
-        while (boundaries.size() > 0 && boundaries[0] < first) { boundaries.remove(boundaries[0]); }
+        // Keep lap markers for All; the view clips to the selected window.
         while (boundaries.size() > MAX_LAPS) { boundaries.remove(boundaries[0]); }
+    }
+    function viewPoints(range) as Lang.Array<Lang.Array<Lang.Numeric>> { return range == 0 ? points : (range == 1 ? medium.points : whole.points); }
+    function windowMillis(range) {
+        if (range == 0) { return WINDOW_MS; }
+        if (range == 1) { return 1200000; }
+        return endTime != null && endTime > 0 ? endTime : 1000;
     }
     function ceiling(ftp) {
         var top = ftp*1.5;

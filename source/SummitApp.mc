@@ -6,7 +6,7 @@ class SummitApp extends Application.AppBase {
     function initialize() { AppBase.initialize(); }
     function getInitialView() {
         field = new SummitView();
-        return [field];
+        return [field, new SummitInputDelegate(field)];
     }
     function onSettingsChanged() {
         if (field != null) { field.loadSettings(); }
