@@ -217,7 +217,7 @@ class FastRiderView extends WatchUi.DataField {
             text(dc, width/2, height/2+24, 3, "1 field", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER); return;
         }
         drawPrimary(dc);
-        color(dc, DisplayRules.RULE); dc.fillRectangle(126, 102, 2, 111);
+        color(dc, DisplayRules.RULE); dc.fillRectangle(DisplayRules.COLUMN_DIVIDER, 102, DisplayRules.STROKE, 111);
         text(dc, 33, 117, 3, "rpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
         text(dc, 92, 117, 3, "gear", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
         text(dc, 33, 149, 1, intText(cadence), DisplayRules.cadenceColor(cadence), Graphics.TEXT_JUSTIFY_CENTER);
@@ -241,7 +241,7 @@ class FastRiderView extends WatchUi.DataField {
         }
     }
     function drawPrimary(dc) {
-        color(dc, DisplayRules.RULE); dc.fillRectangle(122, 17, 2, 65);
+        color(dc, DisplayRules.RULE); dc.fillRectangle(DisplayRules.COLUMN_DIVIDER, 17, DisplayRules.STROKE, 65);
         color(dc, 0xC62D32);
         dc.fillPolygon([[18,20],[15,17],[11,17],[8,20],[8,25],[10,28],[18,35],[26,28],[28,25],[28,20],[25,17],[21,17]]);
         color(dc, DisplayRules.BLUE); dc.fillPolygon([[142,17],[132,29],[138,29],[134,37],[150,24],[142,24],[146,17]]);

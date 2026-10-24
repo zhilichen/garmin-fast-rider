@@ -1,3 +1,9 @@
+# FastRider v0.2.4 分隔线对齐
+
+中间竖向分隔线原先比上方右偏 4 px（x=126 与 x=122）。现在两段统一使用 `DisplayRules.COLUMN_DIVIDER=122`，宽度均为 2 px；矢量稿同步修正。字号、内容位置与触控范围保持原值。
+
+live / hardware / demo 构建通过，无编译告警；模拟器目视确认上下对齐，[246×322 原生截图](fastrider-edge840-v024-aligned.png)。这次仅调整绘制坐标，没有新增或重复模型测试。真机更新包已上传并回读校验一致，待断开 USB 后加载。
+
 # FastRider v0.2.3 改名验证
 
 应用显示名、入口类及相关源码类、构建文件、VS Code 任务和当前矢量稿标题已改为 FastRider。保留 App ID 与签名密钥。live / hardware 构建通过，改名后的 Garmin VM 回归 **23/23**，无编译告警；输入事件测试夹具继承并初始化原生 ClickEvent，避免重命名改变编译顺序后暴露的类型不匹配。

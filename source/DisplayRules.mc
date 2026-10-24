@@ -8,6 +8,7 @@ module DisplayRules {
     const MARGIN = 8;
     const CELL_WIDTH = 108;
     const STROKE = 2;
+    const COLUMN_DIVIDER = 122;
     const ZONE_BAR = 6;
     const ZONE_MARKER_WIDTH = 3;
     const ZONE_MARKER_HEIGHT = 10;
