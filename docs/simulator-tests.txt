@@ -51,38 +51,43 @@ Executing test lapDistanceTest...
 PASS
 ------------------------------------------------------------------------------
 Executing test viewInteractionPreservesDataTest...
-Tap [200,40] -> 10s, LAP, 5m
-Tap [200,160] -> 10s, All, 5m
-Tap [123,238] -> 10s, All, 20m
+Tap [200,40] -> 10s, All, 5m
+Tap [200,160] -> 10s, LAP, 5m
+Tap [123,238] -> 10s, LAP, 20m
+Tap [200,160] -> 10s, All, 20m
+Tap [200,160] -> 10s, All, 20m
 PASS
 ------------------------------------------------------------------------------
 Executing test bitmapFontMetricsTest...
 PASS
 ------------------------------------------------------------------------------
 Executing test nativeRenderStatesTest...
-Summit demo memory: 68192 / 8384568 bytes
-Tap [123,238] -> 3s, LAP, 20m
-Tap [123,238] -> 3s, LAP, All
-Tap [123,238] -> 3s, LAP, 5m
-Tap [200,160] -> 3s, All, 5m
+Summit demo memory: 69368 / 8384568 bytes
 Tap [123,238] -> 3s, All, 20m
 Tap [123,238] -> 3s, All, All
 Tap [123,238] -> 3s, All, 5m
 Tap [200,160] -> 3s, LAP, 5m
-Tap [200,50] -> 10s, LAP, 5m
-Tap [123,238] -> 10s, LAP, 20m
-Tap [123,238] -> 10s, LAP, All
-Tap [123,238] -> 10s, LAP, 5m
-Tap [200,160] -> 10s, All, 5m
+Tap [123,238] -> 3s, LAP, 20m
+Tap [123,238] -> 3s, LAP, All
+Tap [123,238] -> 3s, LAP, 5m
+Tap [200,160] -> 3s, All, 5m
+Tap [200,50] -> 10s, All, 5m
 Tap [123,238] -> 10s, All, 20m
 Tap [123,238] -> 10s, All, All
 Tap [123,238] -> 10s, All, 5m
 Tap [200,160] -> 10s, LAP, 5m
-Tap [200,50] -> 3s, LAP, 5m
-DEBUG (11:54): Native render memory used=68192 free=8316376
+Tap [123,238] -> 10s, LAP, 20m
+Tap [123,238] -> 10s, LAP, All
+Tap [123,238] -> 10s, LAP, 5m
+Tap [200,160] -> 10s, All, 5m
+Tap [200,50] -> 3s, All, 5m
+DEBUG (12:02): Native render memory used=69384 free=8315184
 PASS
 ------------------------------------------------------------------------------
 Executing test navigationAvailabilityTest...
+PASS
+------------------------------------------------------------------------------
+Executing test rideAverageAvailabilityTest...
 PASS
 
 ==============================================================================
@@ -109,6 +114,7 @@ viewInteractionPreservesDataTest    PASS
 bitmapFontMetricsTest               PASS
 nativeRenderStatesTest              PASS
 navigationAvailabilityTest          PASS
-Ran 21 tests
+rideAverageAvailabilityTest         PASS
+Ran 22 tests
 
-PASSED (passed=21, failed=0, errors=0)
+PASSED (passed=22, failed=0, errors=0)

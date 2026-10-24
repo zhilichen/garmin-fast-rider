@@ -37,7 +37,7 @@ class SummitView extends WatchUi.DataField {
     var width = 246;
     var height = 322;
     var fonts as Lang.Array<Graphics.FontType> or Null = null;
-    var fontSizes as Lang.Array<Lang.Number> = [49, 33, 44, 18, 20, 26];
+    var fontSizes as Lang.Array<Lang.Number> = [49, 33, 44, 18, 20, 26, 32];
     var flashRegion = 0;
     var flashUntil = 0;
 
@@ -83,7 +83,7 @@ class SummitView extends WatchUi.DataField {
         lap.update(timerMillis, power, running); lap.updateDistance(meters);
         ride.update(timerMillis, power, running);
         // Prefer Garmin's complete-ride statistic, including after a mid-ride load.
-        ridePower = info.averagePower != null && info.averagePower >= 0 ? info.averagePower : ride.averagePower;
+        ridePower = RideMath.rideAverage(timerMillis, info.averagePower, ride.averagePower);
         rolling.update(timerMillis, power, running);
         grade = gradeEstimator.update(meters, info.altitude, System.getTimer());
         ascent = info.totalAscent;
@@ -153,6 +153,7 @@ class SummitView extends WatchUi.DataField {
             trend.beginLap(info.elapsedTime);
         }
         if (lapNumber != null) { lapNumber += 1; }
+        ui.beganLap();
         WatchUi.requestUpdate();
     }
     function onTimerLap2(trigger) { onTimerLap(); return true; }
@@ -170,7 +171,8 @@ class SummitView extends WatchUi.DataField {
         if (fonts != null) { return; }
         fonts = [WatchUi.loadResource(Rez.Fonts.Primary49), WatchUi.loadResource(Rez.Fonts.Live33),
                  WatchUi.loadResource(Rez.Fonts.Average44), WatchUi.loadResource(Rez.Fonts.Meta18),
-                 WatchUi.loadResource(Rez.Fonts.Chart20), WatchUi.loadResource(Rez.Fonts.Stats26)];
+                 WatchUi.loadResource(Rez.Fonts.Chart20), WatchUi.loadResource(Rez.Fonts.Stats26),
+                 WatchUi.loadResource(Rez.Fonts.Average32)];
     }
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
     function text(dc, x, baseline, index, value, c, align) {
@@ -245,7 +247,7 @@ class SummitView extends WatchUi.DataField {
         var available = 104-textWidth(dc, title, 3)-4;
         var tf = textWidth(dc, time, 5) <= available ? 5 : (textWidth(dc, time, 4) <= available ? 4 : 3);
         text(dc, 238, 123, tf, time, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
-        var af = textWidth(dc, average, 2) <= 67 ? 2 : 1;
+        var af = textWidth(dc, average, 2) <= 67 ? 2 : 6;
         text(dc, 134, 169, af, average, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
         var center = 134+textWidth(dc, average, af)+6+15;
         text(dc, center, 149, 3, "AVG", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);

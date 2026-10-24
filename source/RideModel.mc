@@ -12,6 +12,11 @@ module RideMath {
         // A default zero without a named navigation target is not a remaining route.
         return destination != null && destination.length() > 0 && distance != null && distance >= 0 ? distance : null;
     }
+    function rideAverage(timer, nativePower, observedPower) {
+        // Before a new activity has elapsed, some hosts retain a previous average.
+        if (timer == null || timer <= 0) { return null; }
+        return nativePower != null && nativePower >= 0 ? nativePower : observedPower;
+    }
 
     // Thresholds are upper bounds, inclusive; missing sensor != zero watts.
     function zone(value, limits as Lang.Array<Lang.Number or Lang.Float>) {

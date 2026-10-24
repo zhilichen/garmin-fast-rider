@@ -11,7 +11,8 @@ import argparse
 FONT_SPECS = [
     ('Primary49', 'Garmin_Roboto_Bold.ttf', 49, '0123456789-'),
     ('Live33', 'RobotoCondensed-Regular.ttf', 33, '0123456789.-'),
-    ('Average44', 'RobotoCondensed-Regular.ttf', 44, '0123456789-'),
+    ('Average44', 'RobotoCondensed-Bold.ttf', 44, '0123456789-'),
+    ('Average32', 'RobotoCondensed-Bold.ttf', 32, '0123456789-'),
     ('Meta18', 'DejaVuSans_Cd_SemiBold_WGL4.ttf', 18, '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz %().:-<>'),
     ('Chart20', 'DejaVuSans_Cd_SemiBold_WGL4.ttf', 20, '0123456789().:-'),
     ('Stats26', 'DejaVuSans_Cd_SemiBold_WGL4.ttf', 26, '0123456789mi .:-'),
@@ -31,7 +32,8 @@ def generate(font_dir, out):
         while height<y+row+1: height*=2
         atlas=Image.new('RGBA',(256,height),(255,255,255,0))
         draw=ImageDraw.Draw(atlas)
-        lines=[f'info face="{name}" size={size} bold=0 italic=0 unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1',
+        bold = 1 if 'Bold' in filename else 0
+        lines=[f'info face="{name}" size={size} bold={bold} italic=0 unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1',
                f'common lineHeight={size+6} base={size} scaleW=256 scaleH={height} pages=1 packed=0',
                f'page id=0 file="{name}.png"',f'chars count={len(glyphs)}']
         for c,x,y,w,h,box in glyphs:

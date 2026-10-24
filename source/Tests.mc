@@ -243,14 +243,14 @@ function courseTest(logger) {
 (:test)
 function interactionCyclesTest(logger) {
     var ui = new InteractionState();
-    Test.assertEqual(ui.powerSeconds, 3); Test.assert(!ui.allStats); Test.assertEqual(ui.range, 0);
+    Test.assertEqual(ui.powerSeconds, 3); Test.assert(ui.allStats); Test.assertEqual(ui.range, 0);
     Test.assert(!ui.tap(123, 52)); Test.assert(!ui.tap(150, 100));
     Test.assert(!ui.tap(20, 316)); Test.assert(!ui.tap(246, 30)); Test.assert(!ui.tap(-1, 30));
     for (var p = 0; p < 2; p += 1) {
         for (var s = 0; s < 2; s += 1) {
             for (var r = 0; r < 3; r += 1) {
                 Test.assertEqual(ui.powerSeconds, p == 0 ? 3 : 10);
-                Test.assertEqual(ui.allStats, s != 0); Test.assertEqual(ui.range, r);
+                Test.assertEqual(ui.allStats, s == 0); Test.assertEqual(ui.range, r);
                 Test.assert(ui.tap(123, 238));
             }
             Test.assert(ui.tap(200, 160));
@@ -260,7 +260,7 @@ function interactionCyclesTest(logger) {
     Test.assertEqual(ui.rangeLabel(), "5m");
     ui.tap(124, 97); Test.assertEqual(ui.powerSeconds, 10);
     Test.assert(!ui.tap(124, 98));
-    ui.reset(); Test.assertEqual(ui.powerSeconds, 3);
+    ui.reset(); Test.assertEqual(ui.powerSeconds, 3); Test.assert(ui.allStats);
     return true;
 }
 
@@ -281,7 +281,7 @@ function inputDelegateTest(logger) {
     var target = new TapTarget(); var input = new SummitInputDelegate(target);
     Test.assert(input.onTap(new TapStub(200, 50)));
     Test.assertEqual(target.ui.powerSeconds, 10);
-    Test.assert(input.onTap(new TapStub(200, 160))); Test.assert(target.ui.allStats);
+    Test.assert(input.onTap(new TapStub(200, 160))); Test.assert(!target.ui.allStats);
     Test.assert(input.onTap(new TapStub(100, 260))); Test.assertEqual(target.ui.range, 1);
     Test.assert(!input.onTap(new TapStub(20, 316)));
     var hold = new TapStub(200, 50); hold.type = 1;
@@ -377,14 +377,21 @@ function viewInteractionPreservesDataTest(logger) {
     var time = v.lap.timeMs; var distance = v.lap.distance;
     var laps = v.trend.boundaries.size(); var points = v.trend.points.size();
     Test.assert(v.handleTap(200, 40)); Test.assert(v.handleTap(200, 160)); Test.assert(v.handleTap(123, 238));
-    Test.assertEqual(v.ui.powerSeconds, 10); Test.assert(v.ui.allStats); Test.assertEqual(v.ui.range, 1);
+    Test.assertEqual(v.ui.powerSeconds, 10); Test.assert(!v.ui.allStats); Test.assertEqual(v.ui.range, 1);
     Test.assertEqual(v.lap.timeMs, time); Test.assertEqual(v.lap.distance, distance);
     Test.assertEqual(v.trend.boundaries.size(), laps); Test.assertEqual(v.trend.points.size(), points);
+    // A manually selected All is superseded by the next native lap boundary.
+    v.handleTap(200, 160); Test.assert(v.ui.allStats);
     v.onTimerLap();
     Test.assertEqual(v.lapNumber, 4); Test.assertEqual(v.lap.timeMs, 0);
-    Test.assert(v.ui.allStats); Test.assertEqual(v.ui.powerSeconds, 10); Test.assertEqual(v.ui.range, 1);
+    Test.assert(!v.ui.allStats); Test.assertEqual(v.ui.powerSeconds, 10); Test.assertEqual(v.ui.range, 1);
+    v.handleTap(200, 160); Test.assert(v.ui.allStats);
+    v.onTimerPause(); v.onTimerResume(); Test.assert(v.ui.allStats);
+    Test.assert(v.onTimerLap2({:lapTrigger=>Toybox.WatchUi.DataField.LAP_TRIGGER_DISTANCE}));
+    Test.assertEqual(v.lapNumber, 5); Test.assert(!v.ui.allStats);
+    Test.assertEqual(v.ui.powerSeconds, 10); Test.assertEqual(v.ui.range, 1);
     v.onTimerReset();
-    Test.assertEqual(v.ui.powerSeconds, 3); Test.assert(!v.ui.allStats); Test.assertEqual(v.ui.range, 0);
+    Test.assertEqual(v.ui.powerSeconds, 3); Test.assert(v.ui.allStats); Test.assertEqual(v.ui.range, 0);
     Test.assertEqual(v.trend.whole.points.size(), 0); Test.assert(v.lap.timeMs == null);
     return true;
 }
@@ -400,6 +407,7 @@ function bitmapFontMetricsTest(logger) {
     Test.assert(dc.getTextWidthInPixels("22.4", v.fonts[1]) <= 58);
     Test.assert(dc.getTextWidthInPixels("All", v.fonts[3])+4+dc.getTextWidthInPixels("1:23:08", v.fonts[5]) <= 104);
     Test.assert(dc.getTextWidthInPixels("245", v.fonts[2])+6+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 104);
+    Test.assert(dc.getTextWidthInPixels("1234", v.fonts[6])+6+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 104);
     Test.assert(dc.getTextWidthInPixels("0.42 mi", v.fonts[5]) <= 104);
     Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[0]), 49);
     return true;
@@ -441,5 +449,16 @@ function navigationAvailabilityTest(logger) {
     Test.assert(RideMath.navigationDistance(-1, "Finish") == null);
     Test.assertEqual(RideMath.navigationDistance(0, "Finish"), 0);
     Test.assertEqual(RideMath.navigationDistance(1000, "Finish"), 1000);
+    return true;
+}
+
+(:test)
+function rideAverageAvailabilityTest(logger) {
+    Test.assert(RideMath.rideAverage(0, 195, null) == null);
+    Test.assert(RideMath.rideAverage(null, 195, 100) == null);
+    Test.assertEqual(RideMath.rideAverage(1000, 0, 100), 0);
+    Test.assertEqual(RideMath.rideAverage(1000, 195, 100), 195);
+    Test.assertEqual(RideMath.rideAverage(1000, null, 100), 100);
+    Test.assert(RideMath.rideAverage(1000, null, null) == null);
     return true;
 }
