@@ -194,7 +194,10 @@ class FastRiderView extends WatchUi.DataField {
                  WatchUi.loadResource(Rez.Fonts.Average54), WatchUi.loadResource(Rez.Fonts.Meta18),
                  WatchUi.loadResource(Rez.Fonts.Chart26), WatchUi.loadResource(Rez.Fonts.Stats32),
                  WatchUi.loadResource(Rez.Fonts.Average36), WatchUi.loadResource(Rez.Fonts.Stats30),
-                 WatchUi.loadResource(Rez.Fonts.Zone29)];
+                 WatchUi.loadResource(Rez.Fonts.ZoneDigit44), WatchUi.loadResource(Rez.Fonts.SmallZ14),
+                 WatchUi.loadResource(Rez.Fonts.SmallZ9), WatchUi.loadResource(Rez.Fonts.Climb18),
+                 WatchUi.loadResource(Rez.Fonts.Units18), WatchUi.loadResource(Rez.Fonts.Remaining21),
+                 WatchUi.loadResource(Rez.Fonts.Remaining20), WatchUi.loadResource(Rez.Fonts.Remaining18)];
     }
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
     function text(dc, x, baseline, index, value, c, align) {
@@ -267,8 +270,8 @@ class FastRiderView extends WatchUi.DataField {
         text(dc, 2, DisplayRules.UNIT_BASELINE, 3, "bpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
         var powerUnit = "W "+ui.powerSeconds+"s";
         text(dc, 126, DisplayRules.UNIT_BASELINE, 3, powerUnit, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 120, DisplayRules.ZONE_BASELINE, hf == 0 ? 8 : 3, hz == 0 ? "--" : "Z"+hz, hc, Graphics.TEXT_JUSTIFY_RIGHT);
-        text(dc, 244, DisplayRules.ZONE_BASELINE, pf == 0 ? 8 : 3, pz == 0 ? "--" : "Z"+pz, pc, Graphics.TEXT_JUSTIFY_RIGHT);
+        drawZoneBadge(dc, 120, hz, hf, hc);
+        drawZoneBadge(dc, 244, pz, pf, pc);
         // Keep inline unit icons clear of the Zone lane below the radar.
         var hx = 2+textWidth(dc, "bpm", 3)+4; var iy = DisplayRules.UNIT_BASELINE-14;
         color(dc, 0xC62D32);
@@ -280,6 +283,17 @@ class FastRiderView extends WatchUi.DataField {
         color(dc, pc); dc.fillRectangle(126, DisplayRules.ZONE_BAR_TOP, DisplayRules.CELL_WIDTH, DisplayRules.ZONE_BAR);
         drawZoneMarker(dc, 2, RideMath.zoneFraction(hr, hrLimits, hrMinimum, hrMaximum));
         drawZoneMarker(dc, 126, RideMath.zoneFraction(watts, powerLimits, 0, null));
+    }
+    function zoneBadgeWidth(dc, zone, mainFont) {
+        var zf = mainFont == 0 ? 9 : 10; var nf = mainFont == 0 ? 8 : 4;
+        return textWidth(dc, "Z", zf)+textWidth(dc, zone.format("%d"), nf);
+    }
+    function drawZoneBadge(dc, right, zone, mainFont, c) {
+        if (zone == 0) { text(dc, right, DisplayRules.ZONE_BASELINE, 3, "--", c, Graphics.TEXT_JUSTIFY_RIGHT); return; }
+        var zf = mainFont == 0 ? 9 : 10; var nf = mainFont == 0 ? 8 : 4;
+        var number = zone.format("%d");
+        text(dc, right-textWidth(dc, number, nf), DisplayRules.ZONE_BASELINE, zf, "Z", c, Graphics.TEXT_JUSTIFY_RIGHT);
+        text(dc, right, DisplayRules.ZONE_BASELINE, nf, number, c, Graphics.TEXT_JUSTIFY_RIGHT);
     }
     function drawZoneMarker(dc, left, fraction) {
         if (fraction == null) { return; }
@@ -296,7 +310,7 @@ class FastRiderView extends WatchUi.DataField {
         var time = RideMath.lapDuration(ui.allStats ? timerMillis : lap.timeMs);
         var average = intText(ui.allStats ? ridePower : lap.averagePower);
         var distance = ui.allStats ? meters : lap.distance;
-        var dist = distance == null ? "--" : (distance/1609.344).format(ui.allStats ? "%.1f" : "%.2f");
+        var parts = distanceParts(dc, distance, ui.allStats ? remainingDistance : null, ui.allStats);
         text(dc, 126, 105, 3, title, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
         var tf = textWidth(dc, time, 5) <= 118 ? 5 : (textWidth(dc, time, 7) <= 118 ? 7 : 4);
         text(dc, 244, 132, tf, time, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
@@ -305,15 +319,35 @@ class FastRiderView extends WatchUi.DataField {
         var center = 126+textWidth(dc, average, af)+3+15;
         text(dc, center, 160, 3, "AVG", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
         text(dc, center, 180, 3, "W", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
-        var unitWidth = textWidth(dc, "mi", 3);
-        if (textWidth(dc, dist, 5)+3+unitWidth > 118 && distance != null) { dist = (distance/1609.344).format("%.1f"); }
-        if (textWidth(dc, dist, 5)+3+unitWidth > 118 && distance != null) { dist = (distance/1609.344).format("%.0f"); }
-        text(dc, 126, 212, 5, dist, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 126+textWidth(dc, dist, 5)+3, 212, 3, "mi", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        var x = 126;
+        text(dc, x, 212, parts[2], parts[0], DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
+        x += textWidth(dc, parts[0], parts[2]);
+        text(dc, x, 212, 12, "mi", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        x += textWidth(dc, "mi", 12);
+        if (parts[1] != null) { text(dc, x, 212, parts[3], parts[1], DisplayRules.BLUE, Graphics.TEXT_JUSTIFY_LEFT); }
+    }
+    function distanceParts(dc, distance, remaining, all) as Lang.Array {
+        var shown = distance == null ? "--" : (distance/1609.344).format(all ? "%.1f" : "%.2f");
+        var rest = all ? RideMath.remainingMilesText(remaining, 1) : null;
+        var pairs = [[5,13],[7,14],[4,15]];
+        // Keep full precision first, then round the suffix only when very long.
+        for (var pass = 0; pass < 3; pass += 1) {
+            for (var i = 0; i < pairs.size(); i += 1) {
+                var pair = pairs[i];
+                var w = textWidth(dc, shown, pair[0])+textWidth(dc, "mi", 12)+(rest == null ? 0 : textWidth(dc, rest, pair[1]));
+                if (w <= 118) { return [shown,rest,pair[0],pair[1]]; }
+            }
+            if (pass == 0 && rest != null) { rest = RideMath.remainingMilesText(remaining, 0); }
+            else if (distance != null) { shown = (distance/1609.344).format("%.0f"); }
+        }
+        // Unrepresentable, non-riding-scale values must not overlap the neighbor.
+        return [shown,null,4,15];
     }
     function drawChartHeader(dc) {
         color(dc, DisplayRules.RULE); dc.fillRectangle(2, 220, 242, 2);
-        text(dc, 2, 238, 3, RideMath.ascentFeetText(ascent), DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        var climb = RideMath.ascentFeetValue(ascent);
+        text(dc, 2, 238, 11, climb, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 2+textWidth(dc, climb, 11)+3, 238, 12, "ft", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
         text(dc, 123, 238, 3, "< "+ui.rangeLabel()+" >", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
         var clock = System.getClockTime();
         text(dc, 244, 238, 3, RideMath.clock12(clock.hour, clock.min), DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);

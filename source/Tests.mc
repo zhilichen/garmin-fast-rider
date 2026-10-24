@@ -457,15 +457,18 @@ function bitmapFontMetricsTest(logger) {
     Test.assert(dc.getTextWidthInPixels("1234", v.fonts[6])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 118);
     Test.assert(dc.getTextWidthInPixels("0.42", v.fonts[5])+3+dc.getTextWidthInPixels("mi", v.fonts[3]) <= 118);
     Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[0]), 58);
-    Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[8]), 29);
-    Test.assert(dc.getTextWidthInPixels("Z6", v.fonts[8]) > dc.getTextWidthInPixels("Z6", v.fonts[3]));
-    // Number and half-height zone fit their lanes with at least one pixel gap.
-    Test.assert(dc.getTextWidthInPixels("999", v.fonts[0])+1+dc.getTextWidthInPixels("Z7", v.fonts[8]) <= DisplayRules.CELL_WIDTH);
-    Test.assertEqual(v.fontSizes[0], 2*v.fontSizes[8]);
-    Test.assertEqual(v.fontSizes[6], 2*v.fontSizes[3]);
+    Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[8]), 44);
+    Test.assertEqual(v.zoneBadgeWidth(dc, 6, 0), DisplayRules.ZONE_BADGE_WIDTH);
+    Test.assertEqual(v.zoneBadgeWidth(dc, 7, 6), DisplayRules.ZONE_SMALL_BADGE_WIDTH);
+    Test.assertEqual(dc.getTextWidthInPixels("Z", v.fonts[9]), 8);
+    Test.assertEqual(FontInk.TOP[9], 11);
+    Test.assertEqual(FontInk.TOP[8], 32);
+    // The composite badge retains its previous width and clears the radar.
+    Test.assert(dc.getTextWidthInPixels("999", v.fonts[0])+1+v.zoneBadgeWidth(dc, 7, 0) <= DisplayRules.CELL_WIDTH);
     Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[0] >= 1);
     Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[0] <= 2);
     Test.assert(DisplayRules.ZONE_BASELINE-FontInk.TOP[8] >= DisplayRules.RADAR_BOTTOM);
+    Test.assert(DisplayRules.ZONE_BASELINE+FontInk.BOTTOM[8] < DisplayRules.ZONE_BAR_TOP-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2);
     // AA backdrop clips use ink bounds: adjacent rows must remain disjoint.
     var timeFonts = [5, 7, 4];
     for (var i = 0; i < timeFonts.size(); i += 1) {
@@ -485,9 +488,23 @@ function bitmapFontMetricsTest(logger) {
     Test.assertEqual(RideMath.ascentFeetText(0), "0 ft");
     Test.assertEqual(RideMath.ascentFeetText(304.8), "1000 ft");
     var rangeWidth = dc.getTextWidthInPixels("< 20m >", v.fonts[3]);
-    Test.assert(2+dc.getTextWidthInPixels("99999 ft", v.fonts[3])+4 <= 123-rangeWidth/2);
+    Test.assert(2+v.textWidth(dc, "99999", 11)+3+v.textWidth(dc, "ft", 12)+4 <= 123-rangeWidth/2);
     Test.assert(123+rangeWidth/2+4 <= 244-dc.getTextWidthInPixels("12:59 PM", v.fonts[3]));
-    Test.assert(126+dc.getTextWidthInPixels("W 10s", v.fonts[3])+4+14 < 244-dc.getTextWidthInPixels("Z7", v.fonts[8]));
+    Test.assert(126+dc.getTextWidthInPixels("W 10s", v.fonts[3])+4+14 < 244-v.zoneBadgeWidth(dc, 7, 0));
+    Test.assertEqual(RideMath.remainingMilesText(9.9*1609.344, 1), "(-9.9)");
+    Test.assertEqual(RideMath.remainingMilesText(0, 1), "(0.0)");
+    Test.assert(RideMath.remainingMilesText(null, 1) == null);
+    Test.assert(RideMath.remainingMilesText(-1, 1) == null);
+    var d = v.distanceParts(dc, 10.7*1609.344, 9.9*1609.344, true);
+    Test.assertEqual(d[0], "10.7"); Test.assertEqual(d[1], "(-9.9)");
+    Test.assertEqual(d[2], 5); Test.assertEqual(d[3], 13);
+    Test.assert(FontInk.TOP[d[3]] >= FontInk.TOP[d[2]]*0.63);
+    Test.assert(FontInk.TOP[d[3]] <= FontInk.TOP[d[2]]*0.72);
+    Test.assert(v.distanceParts(dc, 10.7*1609.344, null, true)[1] == null);
+    Test.assert(v.distanceParts(dc, 0.42*1609.344, 9.9*1609.344, false)[1] == null);
+    var longRow = v.distanceParts(dc, 320000.0, 500000.0, true);
+    Test.assert(longRow[1] != null);
+    Test.assert(v.textWidth(dc, longRow[0], longRow[2])+v.textWidth(dc, "mi", 12)+v.textWidth(dc, longRow[1], longRow[3]) <= 118);
     return true;
 }
 
@@ -505,7 +522,7 @@ function nativeRenderStatesTest(logger) {
         }
         v.handleTap(200, 50);
     }
-    // Four-digit primary power also scales its inline Zone to half height.
+    // Four-digit primary power also uses a compact composite Zone badge.
     v.rolling.reset(); v.rolling.update(v.timerMillis, 1234, true); v.hr = 54;
     v.onUpdate(dc);
     // Exercise narrow cells, extended ride/lap time, missing signals and fallbacks.

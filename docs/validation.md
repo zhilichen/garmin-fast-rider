@@ -1,3 +1,14 @@
+# FastRider v0.3.6：加粗实时数值、小Z大区号、All导航剩余距离
+
+- rpm / rear gear / grade / mph数值统一38 px加粗，标签不变。Zone改为14 px小Z和44 px区号：字形可见高约11/32 px，总宽30 px保持原宽；baseline66避开雷达保留区。四位实时功率回退时使用9/26 px，总宽19 px。
+- 图头爬升数值18 px加粗，ft18 px常规。All有有效导航剩余距离时显示`10.7mi(-9.9)`，括号为蓝色、常规字重，21 px后缀数字可见高15 px，对比32 px主数字22 px，约2/3。保留白底灰度抗锯齿。
+- 公开API没有可靠active course ID；实际使用有效命名目的地+非负distanceToDestination判据。无有效导航数据、缺失或负数不显示后缀；Lap始终只显示本圈距离。零剩余显示`(0.0)`。长值先成对缩小字号，再取整；极端无法容纳时隐藏后缀。
+- live / hardware / demo / test均构建通过，无告警。Garmin VM **27/27**，[原始输出](simulator-tests.txt)。原生Dc断言覆盖固定徽标总宽、雷达与marker边界、`10.7mi(-9.9)`完整精度、后缀字高、无导航/Lap隐藏、长距离窄列回退；12种模式与长计时/缺失/4位数均正常绘制。测试VM usedMemory=81,768 bytes（不是实际字段可用堆证明）。
+- [All原生截图](fastrider-edge840-v036-default.png)、[Lap原生截图](fastrider-edge840-v036-lap.png)，均由File→Save Screen Capture输出246×322，使用demo合成值。真实demo字段堆60,840 /127,424 bytes。[像素检查](layout-v036-pixels.json)确认雷达区空白、顶部2px及黑8/白6/黑8 marker保持完整。模拟器实际点击All↔Lap、3s↔10s及5m/20m/All，后缀随All/Lap显示/隐藏，独立切换正常。
+- hardware包**166,796 bytes**沿用同一App ID和开发密钥，已更新到USB连接的Edge840 `GARMIN/APPS/SUMMIT.PRG`并回读逐字节一致。替换前已回读验证并保留旧包。尚待断开USB后设备加载；真实导航剩余距离、雷达覆盖和户外可读性仍需真机观察。
+
+以下保留旧版验收记录。
+
 # FastRider v0.3.5：顶部2px、更大标记、更疏中区与完整图头；合并车铃
 
 主数字上提，可见顶部留白2px。Zone29px仍留在雷达下方，避免其被系统图层盖住；单位行移到baseline62，图标紧邻文字，避免与Zone重叠。位置标记由3×16扩大为4×22px，8px黑色/6px白色/8px黑色；色条上移到y76。

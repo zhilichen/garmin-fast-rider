@@ -1,0 +1,11 @@
+Connect IQ SDK 9.3.0 / edge840 API 6.0.0 / v0.3.6 demo synthetic values
+Native simulator mouse clicks routed through InputDelegate.onTap.
+FastRider demo memory: 60840 / 127424 bytes
+Tap [200,160] -> 3s, LAP, 5m
+Tap [200,160] -> 3s, All, 5m
+Tap [200,50] -> 10s, All, 5m
+Tap [123,238] -> 10s, All, 20m
+Tap [200,50] -> 3s, All, 20m
+Tap [123,238] -> 3s, All, All
+Tap [123,238] -> 3s, All, 5m
+Observed next frame: All shows blue regular remaining-mile suffix; LAP omits it.

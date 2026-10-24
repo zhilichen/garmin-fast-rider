@@ -7,5 +7,12 @@
   <font id="Chart26" filename="Chart26.fnt" antialias="true"/>
   <font id="Stats32" filename="Stats32.fnt" antialias="true"/>
   <font id="Stats30" filename="Stats30.fnt" antialias="true"/>
-  <font id="Zone29" filename="Zone29.fnt" antialias="true"/>
+  <font id="ZoneDigit44" filename="ZoneDigit44.fnt" antialias="true"/>
+  <font id="SmallZ14" filename="SmallZ14.fnt" antialias="true"/>
+  <font id="SmallZ9" filename="SmallZ9.fnt" antialias="true"/>
+  <font id="Climb18" filename="Climb18.fnt" antialias="true"/>
+  <font id="Units18" filename="Units18.fnt" antialias="true"/>
+  <font id="Remaining21" filename="Remaining21.fnt" antialias="true"/>
+  <font id="Remaining20" filename="Remaining20.fnt" antialias="true"/>
+  <font id="Remaining18" filename="Remaining18.fnt" antialias="true"/>
 </fonts>

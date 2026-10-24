@@ -1,0 +1,115 @@
+{
+  "source": "fastrider-edge840-v036-default.png",
+  "regions": {
+    "radar_corner": {
+      "box": [
+        218,
+        0,
+        246,
+        34
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "pixels": 952
+    },
+    "top_margin": {
+      "box": [
+        0,
+        0,
+        246,
+        2
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "pixels": 492
+    },
+    "marker_top": {
+      "box": [
+        38,
+        68,
+        42,
+        76
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "pixels": 32
+    },
+    "marker_inverse": {
+      "box": [
+        38,
+        76,
+        42,
+        82
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "pixels": 24
+    },
+    "marker_bottom": {
+      "box": [
+        38,
+        82,
+        42,
+        90
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "pixels": 32
+    },
+    "HR_digits": {
+      "box": [
+        2,
+        0,
+        90,
+        46
+      ],
+      "ink_top": 2,
+      "ink_bottom": 43
+    },
+    "power_digits": {
+      "box": [
+        126,
+        0,
+        214,
+        46
+      ],
+      "ink_top": 2,
+      "ink_bottom": 43
+    },
+    "zone_digit": {
+      "box": [
+        98,
+        34,
+        120,
+        67
+      ],
+      "ink_top": 35,
+      "ink_bottom": 65
+    },
+    "small_Z": {
+      "box": [
+        90,
+        55,
+        98,
+        67
+      ],
+      "ink_top": 56,
+      "ink_bottom": 65
+    }
+  }
+}
