@@ -4,16 +4,28 @@ Garmin Edge 全屏 Connect IQ 数据字段：大号心率/功率、实时骑行�
 
 ![Edge 840 原生模拟器](docs/validation/screens/edge840.png)
 
-## 支持设备
+## 下载与支持设备
 
-| 设备 | 原生分辨率 | 输入与显示 |
-| --- | --- | --- |
-| Edge 530、540 | 246×322 | 默认视图，无触控功能 |
-| Edge 550 | 420×600 | 默认视图，无触控功能 |
-| Edge 830、840 | 246×322 | 触控切换与双击车铃 |
-| Edge 850 | 420×600 | 触控切换与双击车铃 |
-| Edge 1030、1030 Bontrager、1030 Plus、1040 | 282×470 | 触控切换与双击车铃 |
-| Edge 1050、1060 | 480×800 | 触控切换与双击车铃 |
+<!-- downloads:start -->
+当前版本 **v0.4.0**，下载后即可安装，无需 SDK 或 Java。PRG 可直接复制到设备；ZIP 包含同一程序、安装说明和许可证。
+
+| 设备 | 原生分辨率 | 操作 | PRG 直接下载 | ZIP 下载 |
+| --- | --- | --- | --- | --- |
+| Edge 530 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge530/FastRider-0.4.0-edge530.zip) |
+| Edge 540 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge540/FastRider-0.4.0-edge540.zip) |
+| Edge 550 | 420×600 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge550/FastRider-0.4.0-edge550.zip) |
+| Edge 830 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge830/FastRider-0.4.0-edge830.zip) |
+| Edge 840 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge840/FastRider-0.4.0-edge840.zip) |
+| Edge 850 | 420×600 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge850/FastRider-0.4.0-edge850.zip) |
+| Edge 1030 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1030/FastRider-0.4.0-edge1030.zip) |
+| Edge 1030 Bontrager | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1030bontrager/FastRider-0.4.0-edge1030bontrager.zip) |
+| Edge 1030 Plus | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1030plus/FastRider-0.4.0-edge1030plus.zip) |
+| Edge 1040 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1040/FastRider-0.4.0-edge1040.zip) |
+| Edge 1050 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1050/FastRider-0.4.0-edge1050.zip) |
+| Edge 1060 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/edge1060/FastRider-0.4.0-edge1060.zip) |
+
+[全部型号 ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.0/FastRider-0.4.0.zip) · [SHA256 校验值](releases/v0.4.0/SHA256SUMS) · [版本清单](releases/v0.4.0/manifest.json)
+<!-- downloads:end -->
 
 Solar 版本随 Garmin 对应设备包支持。所有型号使用**单字段全屏布局**。[各机型原生截图](docs/screenshots.md) · [验收记录](docs/validation.md)
 
@@ -36,7 +48,15 @@ Solar 版本随 Garmin 对应设备包支持。所有型号使用**单字段全�
 - 图头：累计爬升 ft、功率窗口和本地 AM/PM 时钟。图中含 FTP、Z2上限及原生 Lap 标记。
 - 功率配色：Z1/Z3灰、Z2蓝、Z4橘、Z5紫、Z6/Z7红；心率独立采用灰/蓝/绿/橘/红五区。
 
-## 安装与构建
+## 安装
+
+1. 在上表下载**对应型号**的 PRG；下载 ZIP 时先解压，使用型号目录内的 `FastRider.prg`。
+2. 将 Edge 以 USB/电脑模式连接，复制 PRG 到设备内部存储的 `GARMIN/APPS/`。Mac 需要通过支持 MTP 的文件传输工具访问 Edge。
+3. 断开 USB，在骑行配置的数据屏幕选择 Connect IQ → FastRider，并设为**单字段全屏布局**。
+
+更新已有安装时沿用原 PRG 文件名；早期安装可能名为 `SUMMIT.PRG`，将下载文件改为这个名字再覆盖。首次安装使用 `FastRider.prg`。
+
+## 从源码构建
 
 安装官方 [Connect IQ SDK Manager](https://developer.garmin.com/connect-iq/sdk/)、JDK 17，以及需要的 **Edge 设备包**。不需要安装全部 Garmin 设备。
 

@@ -68,6 +68,13 @@ python3 scripts/check-font-probe.py <原生246x322截图.png>
 ```bash
 ./scripts/build.sh live all
 python3 scripts/package.py
+# 发布到 Git 并自动更新 README 的逐机型 PRG / ZIP 下载表：
+python3 scripts/package.py --publish
+python3 scripts/check-downloads.py
 ```
 
-ZIP仅包含目标设备的真实live程序、说明、项目许可及字体许可，不包含测试/演示程序、签名密钥、活动文件或SDK。输出位于忽略的`dist/`，并包含每个程序的SHA256。
+ZIP仅包含目标设备的真实live程序、说明、项目许可及字体许可，不包含测试/演示程序、签名密钥、活动文件或SDK。普通打包输出位于忽略的`dist/`。
+
+`--publish`将已经核对构建指纹和SHA256的程序写入`releases/v<version>/`，生成各型号ZIP、完整ZIP、校验值及README下载表。设备列表直接来自同一配置目录。将这个版本目录与README一起提交，其他用户便可直接从GitHub下载。
+
+已发布版本目录不能被不同内容覆盖；应用变化后应先更新`manifest.xml`版本并重新构建、验收。`check-downloads.py`无需SDK，CI会验证已提交的程序、ZIP内容、许可证、SHA256及README链接。

@@ -4,6 +4,7 @@ bin/
 *.pem
 *.iq
 *.prg
+!/releases/v*/edge*/FastRider.prg
 *.prg.debug.xml
 __pycache__/
 .DS_Store
