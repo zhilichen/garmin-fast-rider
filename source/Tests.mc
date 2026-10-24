@@ -168,6 +168,9 @@ function zonePositionTest(logger) {
 
 (:test)
 function timeTest(logger) {
+    Test.assertEqual(RideMath.clock12(0, 5), "12:05 AM");
+    Test.assertEqual(RideMath.clock12(12, 5), "12:05 PM");
+    Test.assertEqual(RideMath.clock12(23, 59), "11:59 PM");
     Test.assertEqual(RideMath.duration(0), "0:00:00");
     Test.assertEqual(RideMath.duration(3661000), "1:01:01");
     Test.assertEqual(RideMath.duration(36000000), "10:00:00");
@@ -273,7 +276,7 @@ function courseTest(logger) {
 function interactionCyclesTest(logger) {
     var ui = new InteractionState();
     Test.assertEqual(ui.powerSeconds, 3); Test.assert(ui.allStats); Test.assertEqual(ui.range, 0);
-    Test.assert(!ui.tap(123, 52)); Test.assert(!ui.tap(150, 100));
+    Test.assert(!ui.tap(123, 52)); Test.assert(!ui.tap(150, 90));
     Test.assert(!ui.tap(20, 320)); Test.assert(!ui.tap(246, 30)); Test.assert(!ui.tap(-1, 30));
     for (var p = 0; p < 2; p += 1) {
         for (var s = 0; s < 2; s += 1) {
@@ -287,9 +290,11 @@ function interactionCyclesTest(logger) {
         Test.assert(ui.tap(200, 50));
     }
     Test.assertEqual(ui.rangeLabel(), "5m");
-    ui.tap(124, 97); Test.assertEqual(ui.powerSeconds, 10);
-    Test.assert(!ui.tap(124, 98));
+    ui.tap(124, 89); Test.assertEqual(ui.powerSeconds, 10);
+    Test.assert(!ui.tap(124, 90));
     Test.assert(!ui.tap(123, 160));
+    Test.assert(ui.tap(124, 91)); Test.assert(!ui.allStats);
+    Test.assert(ui.tap(124, 91)); Test.assert(ui.allStats);
     Test.assert(ui.tap(124, 160)); Test.assert(!ui.allStats);
     Test.assert(ui.tap(244, 160)); Test.assert(ui.allStats);
     Test.assert(ui.tap(4, 319)); Test.assertEqual(ui.range, 1);
@@ -454,26 +459,35 @@ function bitmapFontMetricsTest(logger) {
     Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[0]), 58);
     Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[8]), 29);
     Test.assert(dc.getTextWidthInPixels("Z6", v.fonts[8]) > dc.getTextWidthInPixels("Z6", v.fonts[3]));
-    // Number + half-height zone share a baseline, with at least one pixel gap.
+    // Number and half-height zone fit their lanes with at least one pixel gap.
     Test.assert(dc.getTextWidthInPixels("999", v.fonts[0])+1+dc.getTextWidthInPixels("Z7", v.fonts[8]) <= DisplayRules.CELL_WIDTH);
     Test.assertEqual(v.fontSizes[0], 2*v.fontSizes[8]);
     Test.assertEqual(v.fontSizes[6], 2*v.fontSizes[3]);
-    Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[8] >= DisplayRules.RADAR_BOTTOM);
+    Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[0] >= 1);
+    Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[0] <= 2);
+    Test.assert(DisplayRules.ZONE_BASELINE-FontInk.TOP[8] >= DisplayRules.RADAR_BOTTOM);
     // AA backdrop clips use ink bounds: adjacent rows must remain disjoint.
     var timeFonts = [5, 7, 4];
     for (var i = 0; i < timeFonts.size(); i += 1) {
-        Test.assert(140+FontInk.BOTTOM[timeFonts[i]] < 182-FontInk.TOP[2]);
+        Test.assert(132+FontInk.BOTTOM[timeFonts[i]] < 180-FontInk.TOP[2]);
     }
-    Test.assert(174+FontInk.BOTTOM[3] < 212-FontInk.TOP[1]);
-    Test.assert(DisplayRules.UNIT_BASELINE+3 < DisplayRules.ZONE_BAR_TOP-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2);
-    Test.assert(DisplayRules.ZONE_BAR_TOP+(DisplayRules.ZONE_MARKER_HEIGHT+DisplayRules.ZONE_BAR)/2 <= 100);
+    Test.assert(170+FontInk.BOTTOM[3] < 212-FontInk.TOP[1]);
+    Test.assert(DisplayRules.UNIT_BASELINE+FontInk.BOTTOM[3] < DisplayRules.ZONE_BAR_TOP-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2);
+    Test.assert(DisplayRules.ZONE_BAR_TOP+(DisplayRules.ZONE_MARKER_HEIGHT+DisplayRules.ZONE_BAR)/2 <= DisplayRules.MIDDLE_TOP);
     v.trend.endTime = 600000;
     Test.assertEqual(v.chartX(600000), DisplayRules.PLOT_RIGHT);
     Test.assertEqual(v.chartX(300000), DisplayRules.PLOT_LEFT);
     Test.assertEqual(v.powerY(0), DisplayRules.PLOT_BOTTOM-1);
     Test.assertEqual(v.powerY(v.ftpWatts*1.5), DisplayRules.PLOT_TOP);
     Test.assertEqual(v.powerY(v.ftpWatts*2), DisplayRules.PLOT_TOP);
-    Test.assert(dc.getTextWidthInPixels("< 20m >", v.fonts[3])+4+dc.getTextWidthInPixels("12:59 B", v.fonts[3]) <= 242);
+    Test.assertEqual(RideMath.ascentFeetText(null), "-- ft");
+    Test.assertEqual(RideMath.ascentFeetText(-1), "-- ft");
+    Test.assertEqual(RideMath.ascentFeetText(0), "0 ft");
+    Test.assertEqual(RideMath.ascentFeetText(304.8), "1000 ft");
+    var rangeWidth = dc.getTextWidthInPixels("< 20m >", v.fonts[3]);
+    Test.assert(2+dc.getTextWidthInPixels("99999 ft", v.fonts[3])+4 <= 123-rangeWidth/2);
+    Test.assert(123+rangeWidth/2+4 <= 244-dc.getTextWidthInPixels("12:59 PM", v.fonts[3]));
+    Test.assert(126+dc.getTextWidthInPixels("W 10s", v.fonts[3])+4+14 < 244-dc.getTextWidthInPixels("Z7", v.fonts[8]));
     return true;
 }
 

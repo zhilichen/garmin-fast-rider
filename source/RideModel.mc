@@ -39,6 +39,15 @@ module RideMath {
         return clamp((value-low)/(high-low).toFloat(), 0.0, 1.0);
     }
 
+    function ascentFeetText(meters) {
+        if (meters == null || meters < 0) { return "-- ft"; }
+        return Math.round(meters*3.280839895).toNumber().format("%d")+" ft";
+    }
+    function clock12(hour, minute) {
+        var h = hour%12; if (h == 0) { h = 12; }
+        return h.format("%d")+":"+minute.format("%02d")+(hour < 12 ? " AM" : " PM");
+    }
+
     function duration(ms) {
         var sec = (ms / 1000).toNumber();
         var hour = (sec / 3600).toNumber();

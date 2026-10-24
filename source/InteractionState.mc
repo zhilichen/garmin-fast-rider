@@ -11,8 +11,8 @@ class InteractionState {
     function rangeLabel() { return range == 0 ? "5m" : (range == 1 ? "20m" : "All"); }
     function tap(x, y) {
         if (x < 0 || x >= 246 || y < 0 || y >= 322) { return false; }
-        if (x >= 124 && y < 98) { powerSeconds = powerSeconds == 3 ? 10 : 3; return true; }
-        if (x >= 124 && y >= 102 && y < 214) { allStats = !allStats; return true; }
+        if (x >= 124 && y < DisplayRules.PRIMARY_BOTTOM) { powerSeconds = powerSeconds == 3 ? 10 : 3; return true; }
+        if (x >= 124 && y >= DisplayRules.MIDDLE_TOP && y < 214) { allStats = !allStats; return true; }
         if (y >= 220 && y < 320) { range = (range+1)%3; return true; }
         return false;
     }

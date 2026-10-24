@@ -1,0 +1,85 @@
+import Toybox.Test;
+
+(:test)
+function bellDoubleTapTest(logger) {
+    var bell = new BellGesture();
+    Test.assert(!bell.tap(20, 40, 0));
+    Test.assert(!bell.tap(20, 40, 0)); // Duplicate timestamp is not a second touch.
+    Test.assert(bell.tap(44, 40, 400)); // Inclusive time and distance limits.
+    Test.assert(!bell.tap(20, 40, 500));
+    Test.assert(!bell.tap(20, 40, 600)); // Playback cannot be restarted by more taps.
+    Test.assert(!bell.tap(20, 40, 2000));
+    Test.assert(bell.tap(20, 40, 2100));
+    bell.reset();
+    Test.assert(!bell.tap(20, 40, 100));
+    Test.assert(!bell.tap(20, 40, 501)); // Timeout arms a fresh first touch.
+    Test.assert(bell.tap(20, 40, 601));
+    bell.reset();
+    Test.assert(!bell.tap(20, 40, 100));
+    Test.assert(!bell.tap(45, 40, 200)); // 25px movement is not a double tap.
+    Test.assert(bell.tap(45, 40, 300));
+    return true;
+}
+
+(:test)
+function bellBoundaryAndResetTest(logger) {
+    var bell = new BellGesture();
+    Test.assert(bell.contains(0, 0)); Test.assert(bell.contains(121, 213));
+    Test.assert(!bell.contains(-1, 30)); Test.assert(!bell.contains(122, 30));
+    Test.assert(!bell.contains(20, 214)); Test.assert(!bell.contains(4, 316));
+    bell.tap(20, 40, 100);
+    Test.assert(!bell.tap(200, 40, 200)); // Another panel breaks the pair.
+    Test.assert(!bell.tap(20, 40, 300));
+    bell.cancelPending();
+    Test.assert(!bell.tap(20, 40, 350)); // Hold also breaks the pair.
+    Test.assert(bell.tap(20, 40, 400));
+    Test.assert(!bell.tap(20, 40, 10)); // Monotonic-clock restart clears cooldown.
+    Test.assert(bell.tap(20, 40, 110));
+    return true;
+}
+
+class BellTestField {
+    var width = 246;
+    var height = 322;
+    var ui;
+    function initialize() { ui = new InteractionState(); }
+    function handleTap(x, y) { return ui.tap(x, y); }
+}
+class BellTestDelegate extends FastRiderInputDelegate {
+    var rings = 0;
+    function initialize(view) { FastRiderInputDelegate.initialize(view); }
+    function ringBell() { rings += 1; return true; }
+}
+
+(:test)
+function bellInputRoutingTest(logger) {
+    var field = new BellTestField(); var input = new BellTestDelegate(field);
+    Test.assert(input.handleTapAt(31, 140, 100));
+    Test.assertEqual(input.rings, 0);
+    Test.assert(input.handleTapAt(33, 142, 250));
+    Test.assertEqual(input.rings, 1);
+    Test.assertEqual(field.ui.powerSeconds, 3); Test.assert(field.ui.allStats);
+    Test.assertEqual(field.ui.range, 0);
+    Test.assert(input.handleTapAt(200, 50, 300));
+    Test.assertEqual(field.ui.powerSeconds, 10); // Other panels remain immediate.
+    Test.assert(input.handleTapAt(126, 160, 350)); Test.assert(!field.ui.allStats);
+    Test.assert(input.handleTapAt(4, 316, 400)); Test.assertEqual(field.ui.range, 1);
+    field.width = 120;
+    Test.assert(!input.handleTapAt(20, 40, 2000));
+    Test.assert(!input.handleTapAt(20, 40, 2100));
+    Test.assertEqual(input.rings, 1);
+    return true;
+}
+
+(:test)
+function bellSequenceDurationTest(logger) {
+    var tones = BellAudio.profile(); var total = 0;
+    Test.assertEqual(tones.size(), 8);
+    for (var i = 0; i < tones.size(); i += 1) {
+        Test.assert(tones[i].frequency > 0); Test.assert(tones[i].duration > 0);
+        total += tones[i].duration;
+    }
+    Test.assertEqual(total, BellAudio.DURATION_MS);
+    Test.assertEqual(total, 1500);
+    return true;
+}

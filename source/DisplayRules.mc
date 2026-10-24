@@ -13,12 +13,16 @@ module DisplayRules {
     const RIGHT_EDGE = 244;
     const RADAR_LEFT = 218;
     const RADAR_BOTTOM = 34;
-    const PRIMARY_BASELINE = 56;
-    const UNIT_BASELINE = 76;
-    const ZONE_BAR_TOP = 88;
+    // First atlas row quantizes transparent on Edge 840; visible ink starts y2.
+    const PRIMARY_BASELINE = 43;
+    const ZONE_BASELINE = 56;
+    const PRIMARY_BOTTOM = 90;
+    const MIDDLE_TOP = 91;
+    const UNIT_BASELINE = 62;
+    const ZONE_BAR_TOP = 76;
     const ZONE_BAR = 6;
-    const ZONE_MARKER_WIDTH = 3;
-    const ZONE_MARKER_HEIGHT = 16;
+    const ZONE_MARKER_WIDTH = 4;
+    const ZONE_MARKER_HEIGHT = 22;
     const PLOT_LEFT = 4;
     const PLOT_RIGHT = 242;
     const BANNER_TOP = 220;

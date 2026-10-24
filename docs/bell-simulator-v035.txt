@@ -1,0 +1,5 @@
+Single tap in the left panel: no playback or data toggle.
+Two rapid double-tap pairs in the left panel, followed immediately by a power-panel tap:
+FastRider bell: double tap -> 1500ms
+Tap [200,50] -> 10s, All, 5m
+Only one bell request was emitted during the cooldown; the other panel remained responsive.
