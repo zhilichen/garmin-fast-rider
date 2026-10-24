@@ -22,16 +22,14 @@ class SummitView extends WatchUi.DataField {
     var millis = 0;
     var powerLimits;
     var hrLimits;
-    var tracker;
-    var offset = -1;
+    var history as ElevationHistory = new ElevationHistory();
+    var demoSeeded = false;
     var start;
     var width;
     var height;
-    var profileY as Lang.Array<Lang.Number> or Null = null;
 
     function initialize() {
         DataField.initialize();
-        tracker = new CourseTracker();
         gradeEstimator = new GradeEstimator();
         lap = new LapStats();
         start = System.getTimer();
@@ -41,7 +39,6 @@ class SummitView extends WatchUi.DataField {
     function loadSettings() {
         var ftp = RideMath.clamp(Application.Properties.getValue("ftp"), 50, 600);
         var maxHr = RideMath.clamp(Application.Properties.getValue("maxHr"), 100, 240);
-        offset = Application.Properties.getValue("courseStart");
         powerLimits = [ftp*0.55, ftp*0.75, ftp*0.90, ftp*1.05, ftp*1.20, ftp*1.50];
         hrLimits = [maxHr*0.60, maxHr*0.70, maxHr*0.80, maxHr*0.90];
         if (!BuildMode.DEMO) {
@@ -62,19 +59,25 @@ class SummitView extends WatchUi.DataField {
     function compute(info) {
         if (BuildMode.DEMO) {
             var t = (System.getTimer() - start) / 1000.0;
-            var p = (t.toNumber() % 180) / 180.0;
             power = (220 + 135*Math.sin(t/12.0)).toNumber();
             hr = (147 + 28*Math.sin(t/19.0)).toNumber();
             cadence = (90 + 7*Math.sin(t/11.0)).toNumber();
             gear = RideMath.gears(2, 5+((t.toNumber()/15).toNumber()%7));
-            meters = CourseData.LENGTH * (0.37 + 0.25*p);
+            meters = 16600.0+t*8.0;
             millis = 4980000 + (t*1000).toNumber();
             lapMillis = (312000+(t*1000).toNumber())%360000;
             lapPower = (243+8*Math.sin(t/25.0)).toNumber();
             lapSynced = true;
-            tracker.distance = meters;
-            tracker.state = "DEMO";
-            grade = RideMath.courseGrade(meters);
+            var now = System.getTimer();
+            if (!demoSeeded) {
+                for (var i = 0; i < 160; i += 1) {
+                    var d = 16600.0*i/159;
+                    history.update(d, RideMath.demoAltitude(d), true, now-(159-i)*1000);
+                }
+                demoSeeded = true;
+            }
+            history.update(meters, RideMath.demoAltitude(meters), true, now);
+            grade = 5*(RideMath.demoAltitude(meters+10)-RideMath.demoAltitude(meters-10));
             return;
         }
         power = info.currentPower;
@@ -83,20 +86,16 @@ class SummitView extends WatchUi.DataField {
         cadence = info.currentCadence;
         if (cadence != null && cadence < 0) { cadence = null; }
         gear = RideMath.gears(info.frontDerailleurIndex, info.rearDerailleurIndex);
-        meters = info.elapsedDistance != null ? info.elapsedDistance : 0.0;
+        meters = info.elapsedDistance;
         millis = info.elapsedTime;
         lap.update(info.timerTime, power, info.timerState == Activity.TIMER_STATE_ON);
         lapMillis = lap.timeMs; lapPower = lap.averagePower; lapSynced = lap.synced;
         grade = gradeEstimator.update(info.elapsedDistance, info.altitude, System.getTimer());
-        tracker.update(info.currentLocation);
-        if (tracker.distance == null && offset >= 0) {
-            tracker.distance = RideMath.clamp(meters-offset, 0, CourseData.LENGTH);
-            tracker.state = "ODO EST.";
-        }
+        history.update(info.elapsedDistance, info.altitude, info.timerState == Activity.TIMER_STATE_ON, System.getTimer());
     }
 
     function onTimerReset() {
-        tracker = new CourseTracker();
+        history.reset(); demoSeeded = false;
         gradeEstimator.reset();
         grade = null;
         lap.reset(); lapMillis = null; lapPower = null; lapSynced = false;
@@ -106,9 +105,9 @@ class SummitView extends WatchUi.DataField {
     }
 
     function onTimerStart() { lap.started(Activity.getActivityInfo().timerTime); }
-    function onTimerPause() { lap.breakSample(); }
-    function onTimerResume() { lap.breakSample(); }
-    function onTimerStop() { lap.breakSample(); }
+    function onTimerPause() { lap.breakSample(); history.breakSample(); }
+    function onTimerResume() { lap.breakSample(); history.breakSample(); }
+    function onTimerStop() { lap.breakSample(); history.breakSample(); }
 
     function onTimerLap() {
         var info = Activity.getActivityInfo();
@@ -167,8 +166,8 @@ class SummitView extends WatchUi.DataField {
         color(dc, DisplayRules.RULE); dc.fillRectangle(122, 8, DisplayRules.STROKE, 104);
         metric(dc, 8, "HEART RATE", hr == null ? "--" : hr.format("%d"), "bpm", RideMath.zone(hr, hrLimits));
         metric(dc, 130, "PWR", power == null ? "--" : power.format("%d"), "W", RideMath.zone(power, powerLimits));
-        var badge = BuildMode.DEMO ? "DEMO" : (CourseData.IS_SAMPLE ? "SAMPLE" : "");
-        text(dc, 238, 10, Graphics.FONT_SMALL, badge, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        var badge = BuildMode.DEMO ? "DEMO" : (history.distance == null ? "DIST --" : (history.altitude == null ? "ALT --" : ""));
+        text(dc, 238, BuildMode.DEMO ? 10 : 8, BuildMode.DEMO ? Graphics.FONT_SMALL : Graphics.FONT_MEDIUM, badge, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
         text(dc, 8, 124, Graphics.FONT_MEDIUM, "CADENCE", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
         text(dc, 116, 126, Graphics.FONT_SMALL, gear, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
         text(dc, 46, 144, Graphics.FONT_NUMBER_MEDIUM, cadence == null ? "--" : cadence.format("%d"), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
@@ -203,19 +202,9 @@ class SummitView extends WatchUi.DataField {
         var slope = RideMath.gradeText(grade);
         var font = fitFont(dc, slope, 84, false);
         text(dc, 8, 214, font == null ? Graphics.FONT_MEDIUM : font, slope, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
-        var d = tracker.distance;
-        var total = (CourseData.LENGTH/1000.0).format("%.1f");
-        var current = d == null ? "--" : (d/1000.0).format("%.1f");
-        var dist = current + " / " + total + " km";
-        if (d == null) {
-            dist = (tracker.state.equals("OFF COURSE") ? "OFF" : "GPS --") + " / " + total + " km";
-        } else if (tracker.state.equals("ODO EST.")) { dist = "~"+dist; }
+        var dist = meters == null ? "-- km" : (meters/1000.0).format("%.1f")+" km";
         if (dc.getTextWidthInPixels(dist, Graphics.FONT_MEDIUM) > 144) {
-            total = (CourseData.LENGTH/1000.0).format("%.0f");
-            current = d == null ? "--" : (d/1000.0).format("%.0f");
-            dist = current + " / " + total + " km";
-            if (d == null) { dist = (tracker.state.equals("OFF COURSE") ? "OFF" : "GPS --")+" / "+total+" km"; }
-            else if (tracker.state.equals("ODO EST.")) { dist = "~"+dist; }
+            dist = (meters/1000.0).format("%.0f")+" km";
         }
         text(dc, 238, 192, Graphics.FONT_MEDIUM, dist, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
         var time = millis == null ? "--" : RideMath.duration(millis);
@@ -224,36 +213,36 @@ class SummitView extends WatchUi.DataField {
     }
 
     function drawProfile(dc) {
-        var d = tracker.distance;
         var left = DisplayRules.PLOT_LEFT; var right = DisplayRules.PLOT_RIGHT;
         var top = DisplayRules.PLOT_TOP; var bottom = DisplayRules.PLOT_BOTTOM;
-        var range = CourseData.HIGH-CourseData.LOW;
-        if (range < 40) { range = 40; }
-        var marker = d == null ? -1 : DisplayRules.pixel(left + (right-left)*d/CourseData.LENGTH);
-        if (profileY == null) {
-            profileY = [];
-            for (var col = 0; col <= right-left; col += 1) {
-                var at = col*CourseData.LENGTH/(right-left).toFloat();
-                profileY.add(DisplayRules.pixel(bottom-8-(RideMath.elevation(at)-CourseData.LOW)*(bottom-top-16)/range));
-            }
-        }
-        // Fill first, outline second: later columns must not erase a 2 px stroke.
+        var bounds = history.window();
+        var startD = bounds[0]; var endD = bounds[1];
+        var low = bounds[2]; var range = bounds[3]-low;
+        var ys = [];
+        var segments = [];
+        // Only interpolate measured segments. Missing readings create gaps.
         for (var px = left; px <= right; px += 1) {
-            var py = profileY[px-left];
-            color(dc, px <= marker ? DisplayRules.DONE_FILL : DisplayRules.FUTURE_FILL);
-            dc.fillRectangle(px, py, 1, bottom-py+1);
+            var d = startD+(endD-startD)*(px-left)/(right-left).toFloat();
+            var sample = history.sample(d);
+            if (sample == null) { ys.add(null); segments.add(null); continue; }
+            var py = DisplayRules.pixel(bottom-8-(sample[0]-low)*(bottom-top-16)/range);
+            ys.add(py); segments.add(sample[1]);
+            color(dc, DisplayRules.DONE_FILL); dc.fillRectangle(px, py, 1, bottom-py+1);
         }
         dc.setPenWidth(DisplayRules.STROKE);
+        color(dc, DisplayRules.BLUE);
         for (var px = left+1; px <= right; px += 1) {
-            color(dc, px <= marker ? DisplayRules.BLUE : DisplayRules.FUTURE);
-            dc.drawLine(px-1, profileY[px-left-1], px, profileY[px-left]);
+            var i = px-left;
+            if (ys[i-1] != null && ys[i] != null && segments[i-1] == segments[i]) {
+                dc.drawLine(px-1, ys[i-1], px, ys[i]);
+            }
         }
-        if (d != null) {
-            var markerY = profileY[marker-left];
-            color(dc, DisplayRules.BLUE); dc.fillRectangle(marker-1, top, DisplayRules.MARKER_STROKE, bottom-top+1);
-            color(dc, Graphics.COLOR_WHITE); dc.fillCircle(marker, markerY, DisplayRules.MARKER_HALO);
-            color(dc, DisplayRules.BLUE); dc.fillCircle(marker, markerY, DisplayRules.MARKER_RADIUS);
-            color(dc, Graphics.COLOR_WHITE); dc.fillCircle(marker, markerY, 2);
+        if (history.distance != null && history.altitude != null) {
+            var markerY = DisplayRules.pixel(bottom-8-(history.altitude-low)*(bottom-top-16)/range);
+            color(dc, DisplayRules.BLUE); dc.fillRectangle(right-1, top, DisplayRules.MARKER_STROKE, bottom-top+1);
+            color(dc, Graphics.COLOR_WHITE); dc.fillCircle(right, markerY, DisplayRules.MARKER_HALO);
+            color(dc, DisplayRules.BLUE); dc.fillCircle(right, markerY, DisplayRules.MARKER_RADIUS);
+            color(dc, Graphics.COLOR_WHITE); dc.fillCircle(right, markerY, 2);
         }
     }
 }

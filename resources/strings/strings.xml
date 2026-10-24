@@ -2,5 +2,4 @@
   <string id="AppName">Summit</string>
   <string id="FtpTitle">Fallback FTP (watts)</string>
   <string id="HrTitle">Fallback maximum heart rate</string>
-  <string id="OffsetTitle">Course start on activity odometer (m); -1 = GPS only</string>
 </strings>

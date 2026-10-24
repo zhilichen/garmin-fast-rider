@@ -1,4 +1,10 @@
 ------------------------------------------------------------------------------
+Executing test measuredHistoryTest...
+PASS
+------------------------------------------------------------------------------
+Executing test boundedHistoryTest...
+PASS
+------------------------------------------------------------------------------
 Executing test zonesTest...
 PASS
 ------------------------------------------------------------------------------
@@ -20,12 +26,14 @@ PASS
 ==============================================================================
 RESULTS
 Test:                               Status:
+measuredHistoryTest                 PASS
+boundedHistoryTest                  PASS
 zonesTest                           PASS
 timeTest                            PASS
 gearTest                            PASS
 lapStatsTest                        PASS
 gradeTest                           PASS
 courseTest                          PASS
-Ran 6 tests
+Ran 8 tests
 
-PASSED (passed=6, failed=0, errors=0)
+PASSED (passed=8, failed=0, errors=0)

@@ -1,6 +1,60 @@
 import Toybox.Test;
 import Toybox.Position;
 
+(:test)
+function measuredHistoryTest(logger) {
+    var h = new ElevationHistory();
+    h.update(0, 100, true, 0);
+    h.update(10, 110, true, 1000);
+    assertNear(h.sample(5)[0], 105.0);
+    Test.assert(h.sample(-1) == null && h.sample(11) == null);
+    // Missing altitude breaks the measured line, rather than borrowing GPX.
+    h.update(15, null, true, 2000);
+    h.update(20, 120, true, 3000);
+    Test.assert(h.sample(15) == null);
+    h.update(24, 124, true, 3500);
+    assertNear(h.sample(22)[0], 122.0);
+    h.update(24, 124, false, 4000);
+    h.update(30, 130, true, 5000);
+    Test.assert(h.sample(27) == null);
+    h.update(40, 140, true, 12000);
+    Test.assert(h.sample(35) == null);
+    // Even a pause/resume between consecutive compute calls breaks the line.
+    h.breakSample();
+    h.update(45, 145, true, 12500);
+    Test.assert(h.sample(42) == null);
+    h.update(2, 99, true, 13000);
+    Test.assertEqual(h.points.size(), 1);
+    assertNear(h.sample(2)[0], 99.0);
+    Test.assert(h.sample(1) == null && h.sample(3) == null);
+    var bounds = h.window();
+    assertNear(bounds[1], 2.0);
+    assertNear(bounds[1]-bounds[0], 100.0);
+    Test.assert(bounds[3]-bounds[2] >= 40);
+    h.update(null, null, true, 14000);
+    Test.assert(h.distance == null && h.altitude == null);
+    return true;
+}
+
+(:test)
+function boundedHistoryTest(logger) {
+    var h = new ElevationHistory();
+    for (var i = 0; i < 400; i += 1) { h.update(i*5.0, 100+(i%23)*2.0, true, i*1000); }
+    Test.assert(h.points.size() <= 160);
+    assertNear(h.points[0][0], 0.0);
+    assertNear(h.points[h.points.size()-1][0], 1995.0);
+    // Compaction keeps actual samples, never averaged or planned elevations.
+    for (var i = 0; i < h.points.size(); i += 1) {
+        var p = h.points[i];
+        assertNear(p[1], 100+((p[0]/5).toNumber()%23)*2.0);
+    }
+    Test.assert(h.sample(1996) == null);
+    h.reset();
+    Test.assertEqual(h.points.size(), 0);
+    Test.assert(h.sample(0) == null);
+    return true;
+}
+
 function assertNear(actual, expected) {
     // Monkey C assertEqual also compares numeric types; interpolation is Float.
     Test.assert(actual >= expected-0.05 && actual <= expected+0.05);

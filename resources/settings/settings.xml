@@ -1,5 +1,4 @@
 <settings>
   <setting propertyKey="@Properties.ftp" title="@Strings.FtpTitle"><settingConfig type="numeric" min="50" max="600"/></setting>
   <setting propertyKey="@Properties.maxHr" title="@Strings.HrTitle"><settingConfig type="numeric" min="100" max="240"/></setting>
-  <setting propertyKey="@Properties.courseStart" title="@Strings.OffsetTitle"><settingConfig type="numeric" min="-1" max="1000000"/></setting>
 </settings>

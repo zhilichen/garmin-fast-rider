@@ -1,10 +1,10 @@
 # Summit · Garmin Edge 840 全屏数据页
 
-Monkey C / Connect IQ 数据字段。浅色大字界面，上方为带 Zone 编号与颜色的**心率、功率**；中央左侧为**踏频与较小的前/后档位**，右侧为**当前 Lap 时间与均功率估计**。底部横幅集中显示**全程海拔、当前位置、当前估算坡度、路线进度/总距离、已耗时**。
+Monkey C / Connect IQ 数据字段。浅色大字界面，上方为带 Zone 编号与颜色的**心率、功率**；中央左侧为**踏频与较小的前/后档位**，右侧为**当前 Lap 时间与均功率估计**。底部横幅集中显示**已记录的实测海拔历史、当前位置、当前估算坡度、活动已骑距离、已耗时**。
 
-![含当前 Lap 区的 246 × 322 设计预览，非模拟器截图](docs/design/summit-lap-preview.png)
+![仅实测历史的 246 × 322 设计预览，非模拟器截图](docs/design/summit-history-preview.png)
 
-首版已在 Edge 840 模拟器（API 6.0.0）跑通动态演示；本次新版完成 demo/live 构建及 6 项 Garmin VM、3 项 Python 测试。上图是可审阅的原生尺寸设计稿；Mac 当前锁屏，新版截图及原生 Lap 按键/自动圈联调待解锁后完成，详见 [验证记录](docs/validation.md)。[矢量源文件](docs/design/summit-lap.svg)。
+首版已在 Edge 840 模拟器（API 6.0.0）跑通动态演示；本次新版完成 demo/live 构建及 8 项 Garmin VM、3 项 Python 测试。上图是可审阅的原生尺寸设计稿；Mac 当前锁屏，新版截图及原生 Lap 按键/自动圈联调待解锁后完成，详见 [验证记录](docs/validation.md)。[矢量源文件](docs/design/summit-history.svg)。
 
 原生像素设计规范：[最小图元、字高、间距与对比度](docs/edge840-design-rules.md)；[246 × 322 矢量图元校准卡](docs/design/edge840-atoms.svg)。界面绘图常量集中在 `source/DisplayRules.mc`。
 
@@ -30,28 +30,24 @@ VS Code 中也可通过 Terminal → Run Task 选择对应的 Summit 任务。F5
 
 模拟器请使用 **Data Fields → Layout → 1 Field**（或选择只有一个字段的全屏布局）。数据字段实际绘制尺寸以 Garmin 提供的 Dc 为准；不足一整页时会提示选择单字段布局。
 
-## 路线与当前位置
+## 实测海拔历史与当前位置
 
-Garmin 的 `PersistedContent.Course` 只提供名称、ID 和启动导航等接口，**不公开当前导航路线的完整海拔点列**。本项目采用编译前导入 GPX 的方式；不会把骑行历史冒充未来路线。
+当前版本**只显示实际骑过并已采集的海拔**。读取 `Activity.Info.altitude / elapsedDistance`，在活动计时运行时记录，约每前进 5 m 留一个样本。最多保留 160 个实测点；达到上限后按局部三角形面积压缩，优先保留地形变化，保留首尾点，不用计划路线高度替代实测值。压缩后的轮廓是历史概览，细小起伏可能被省略。
 
-```bash
-python3 scripts/import_course.py /absolute/path/to/your-course.gpx
-./scripts/run.sh demo
-./scripts/build.sh live
-```
+- 从数据页加载时开始记录；中途加载不会补回此前未采集的轨迹，退出/重新加载后不恢复历史。Garmin 原生 Lap 不清空历史，活动重置才清空。
+- 缺失海拔、距离、暂停或超过 5 秒的采样断流会分段，不跨缺口连线；无有效当前位置时隐藏圆点。关键状态显示 `ALT -- / DIST --`。
+- 横轴显示本次已记录距离，最小跨度 100 m；纵轴按实测范围缩放，最小跨度 40 m。当前位置固定在 `x=228`，圆点白色外环最右到 `x=236`，右侧保留 **9 px 空白**。短于 100 m 的初始历史只占右侧一小段。
+- 距离显示活动已骑距离，TIME 显示 `elapsedTime`（含暂停）。当前没有可靠的原生 course 总长，因此不显示总距离。
+- 按当前产品选择，**暂不显示未来海拔线**，包括正在导航时。公开 DataField / Course API 无法读取正在导航的 course ID 和完整海拔点列，未来部分等待原生接口方案，不以导入 GPX 推测导航状态。
 
-导入文件必须是连续、带海拔的 GPX track / route。生成的 `source/CourseData.mc` 包含最多 160 个等距离采样点，控制 Edge 内存占用。当前内置 `courses/demo.gpx` 是**合成演示路线**，约 44 km、累计上升约 1052 m；不是实际道路导航文件。换成自己的 GPX 后重新编译并安装。
-
-真实数据版本以 `Activity.Info.currentLocation` 投影到导入路线，显示路线进度；GPS 缺失时距离分子显示 `GPS --`，距路线超过 150 m 显示 `OFF` 并隐藏标记。自交路段会结合上一次路线位置选择，但重叠道路、来回路线和较差 GPS 仍可能产生歧义；160 点采样也可能切掉急弯。这是原型级路线匹配，尚需实骑验证。示例路线在真实版中同样标为 `SAMPLE`，应先导入自己的路线。
-
-设置 `courseStart` 为活动里程表中路线起点对应的米数（默认 `-1`，关闭）后，在没有可用 GPS 匹配时可使用里程估算；界面在距离前加 `~`。绕路时里程估算会偏离路线位置。底部的距离分子是匹配到的**路线进度**，分母是导入 GPX 的全长；位置未知时分子改为 GPS 缺失或偏航状态。已耗时使用 `Activity.Info.elapsedTime`（含暂停时间）。
+演示版通过独立的合成传感器海拔序列展示历史，标记 DEMO。实机版本无需导入 GPX。仓库中的 `scripts/import_course.py`、`CourseData.mc`、`CourseTracker.mc` 及其测试保留为旧路线原型，当前界面不调用这些路线数据或匹配逻辑。
 
 ## 踏频、档位与坡度
 
 - 踏频直接读取 `Activity.Info.currentCadence`，单位 rpm；零踏频有效，缺失信号显示 `--`。
 - 踏频标签旁边的小字为前/后档位，直接读取 `frontDerailleurIndex / rearDerailleurIndex`，如 `2/7`。需要设备已配对并能报告档位的电子变速系统；缺失位置显示 `--`，不从速度/踏频猜档位。
 - `~GRADE %` 为测得海拔与活动里程差计算的平滑坡度估计：每前进 5 m 采样，使用至少 20 m 基线并平滑更新。初始数据不足、海拔缺失、停车后 15 秒没有新距离样本、重置或异常海拔跳变时显示 `--`。本实现会滞后于短促的坡度变化，尚需实骑校准。
-- 演示构建的坡度来自导入路线的海拔剖面，演示踏频和档位为合成数据，界面明确标记 DEMO。真实构建的坡度使用当前测得海拔。
+- 演示构建的坡度、海拔、踏频和档位为独立合成数据，界面明确标记 DEMO。真实构建的坡度使用当前测得海拔。
 
 指标来源参见 [Garmin Activity.Info 官方 API](https://developer.garmin.com/connect-iq/api-docs/Toybox/Activity/Info.html)。
 
@@ -79,7 +75,7 @@ Garmin 模拟器可从 Simulation 菜单设置活动数据、播放 FIT 等。`d
 1. 构建 `./scripts/build.sh live`。
 2. USB 连接 Edge 840，将 `bin/Summit-live.prg` 复制到设备 `GARMIN/APPS/`。
 3. 安全弹出并启动设备，在所用骑行活动配置中添加数据页，布局设为 **1 个字段**，选择 Connect IQ → Summit。
-4. 导航时使用与导入 GPX 一致的路线。此数据字段仅显示剖面和位置，不负责发起导航。
+4. 启动活动计时，数据页开始采集实测海拔历史，无需导入路线。此数据字段不负责发起导航。
 
 ## 参考
 
