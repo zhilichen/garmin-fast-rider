@@ -1,0 +1,62 @@
+{
+  "source": "fastrider-edge840-v034-default.png",
+  "description": "Native simulator screenshot, constant demo HR158. Marker fraction = (158-152)/(171-152), x=38.",
+  "regions": {
+    "marker_top": {
+      "box": [
+        38,
+        83,
+        41,
+        88
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "pixel_count": 15
+    },
+    "marker_inverse": {
+      "box": [
+        38,
+        88,
+        41,
+        94
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "pixel_count": 18
+    },
+    "marker_bottom": {
+      "box": [
+        38,
+        94,
+        41,
+        99
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "pixel_count": 15
+    },
+    "radar_corner": {
+      "box": [
+        218,
+        0,
+        246,
+        34
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ],
+      "pixel_count": 952
+    }
+  }
+}

@@ -452,9 +452,21 @@ function bitmapFontMetricsTest(logger) {
     Test.assert(dc.getTextWidthInPixels("1234", v.fonts[6])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 118);
     Test.assert(dc.getTextWidthInPixels("0.42", v.fonts[5])+3+dc.getTextWidthInPixels("mi", v.fonts[3]) <= 118);
     Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[0]), 58);
-    Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[8]), 28);
+    Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[8]), 29);
     Test.assert(dc.getTextWidthInPixels("Z6", v.fonts[8]) > dc.getTextWidthInPixels("Z6", v.fonts[3]));
-    Test.assert(126+dc.getTextWidthInPixels("W 10s", v.fonts[3])+4 <= 244-dc.getTextWidthInPixels("Z7", v.fonts[8]));
+    // Number + half-height zone share a baseline, with at least one pixel gap.
+    Test.assert(dc.getTextWidthInPixels("999", v.fonts[0])+1+dc.getTextWidthInPixels("Z7", v.fonts[8]) <= DisplayRules.CELL_WIDTH);
+    Test.assertEqual(v.fontSizes[0], 2*v.fontSizes[8]);
+    Test.assertEqual(v.fontSizes[6], 2*v.fontSizes[3]);
+    Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[8] >= DisplayRules.RADAR_BOTTOM);
+    // AA backdrop clips use ink bounds: adjacent rows must remain disjoint.
+    var timeFonts = [5, 7, 4];
+    for (var i = 0; i < timeFonts.size(); i += 1) {
+        Test.assert(140+FontInk.BOTTOM[timeFonts[i]] < 182-FontInk.TOP[2]);
+    }
+    Test.assert(174+FontInk.BOTTOM[3] < 212-FontInk.TOP[1]);
+    Test.assert(DisplayRules.UNIT_BASELINE+3 < DisplayRules.ZONE_BAR_TOP-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2);
+    Test.assert(DisplayRules.ZONE_BAR_TOP+(DisplayRules.ZONE_MARKER_HEIGHT+DisplayRules.ZONE_BAR)/2 <= 100);
     v.trend.endTime = 600000;
     Test.assertEqual(v.chartX(600000), DisplayRules.PLOT_RIGHT);
     Test.assertEqual(v.chartX(300000), DisplayRules.PLOT_LEFT);
@@ -479,6 +491,9 @@ function nativeRenderStatesTest(logger) {
         }
         v.handleTap(200, 50);
     }
+    // Four-digit primary power also scales its inline Zone to half height.
+    v.rolling.reset(); v.rolling.update(v.timerMillis, 1234, true); v.hr = 54;
+    v.onUpdate(dc);
     // Exercise narrow cells, extended ride/lap time, missing signals and fallbacks.
     v.ui.allStats = true; v.timerMillis = 43201000; v.millis = 43201000;
     v.meters = 320000.0; v.ascent = 6000; v.remainingDistance = 500000.0;
@@ -486,6 +501,7 @@ function nativeRenderStatesTest(logger) {
     v.hr = null; v.cadence = 101; v.grade = -16.4; v.speed = 45.0;
     v.onUpdate(dc);
     v.remainingDistance = null; v.remainingAscent = null; v.onUpdate(dc);
+    v.timerMillis = 360001000; v.millis = 360001000; v.onUpdate(dc);
     var stats = Toybox.System.getSystemStats();
     logger.debug("Native render memory used="+stats.usedMemory+" free="+stats.freeMemory);
     // Unit-test mode has a larger heap; compare used bytes to the real field limit.

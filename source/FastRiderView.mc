@@ -39,7 +39,7 @@ class FastRiderView extends WatchUi.DataField {
     var width = 246;
     var height = 322;
     var fonts as Lang.Array<Graphics.FontType> or Null = null;
-    var fontSizes as Lang.Array<Lang.Number> = [58, 38, 54, 18, 26, 32, 36, 30, 28];
+    var fontSizes as Lang.Array<Lang.Number> = FontInk.SIZES;
     var flashRegion = 0;
     var flashUntil = 0;
     var sensorMask = -1;
@@ -194,13 +194,18 @@ class FastRiderView extends WatchUi.DataField {
                  WatchUi.loadResource(Rez.Fonts.Average54), WatchUi.loadResource(Rez.Fonts.Meta18),
                  WatchUi.loadResource(Rez.Fonts.Chart26), WatchUi.loadResource(Rez.Fonts.Stats32),
                  WatchUi.loadResource(Rez.Fonts.Average36), WatchUi.loadResource(Rez.Fonts.Stats30),
-                 WatchUi.loadResource(Rez.Fonts.Zone28)];
+                 WatchUi.loadResource(Rez.Fonts.Zone29)];
     }
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
     function text(dc, x, baseline, index, value, c, align) {
         // Use the known white page background for font coverage blending.
         dc.setColor(c, Graphics.COLOR_WHITE);
+        var top = RideMath.clamp(baseline-FontInk.TOP[index], 0, height);
+        var bottom = RideMath.clamp(baseline+FontInk.BOTTOM[index], 0, height);
+        if (bottom <= top) { return; }
+        dc.setClip(0, top, width, bottom-top);
         dc.drawText(x, baseline-fontSizes[index], fonts[index], value, align);
+        dc.clearClip();
     }
     function textWidth(dc, value, index) { return dc.getTextWidthInPixels(value, fonts[index]); }
     function intText(value) { return value == null ? "--" : Math.round(value).toNumber().format("%d"); }
@@ -252,30 +257,36 @@ class FastRiderView extends WatchUi.DataField {
     function drawPrimary(dc) {
         color(dc, DisplayRules.RULE); dc.fillRectangle(DisplayRules.COLUMN_DIVIDER, 2, DisplayRules.STROKE, 80);
         // Keep x=218..245 / y=0..33 clear for the native radar overlay.
-        color(dc, 0xC62D32);
-        dc.fillPolygon([[110,40],[108,38],[105,38],[102,41],[102,44],[104,47],[110,52],[116,47],[118,44],[118,41],[115,38],[112,38]]);
-        color(dc, DisplayRules.BLUE); dc.fillPolygon([[236,36],[227,46],[232,46],[229,52],[241,42],[235,42],[239,36]]);
         var watts = rolling.average(ui.powerSeconds);
         var hz = RideMath.zone(hr, hrLimits); var pz = RideMath.zone(watts, powerLimits);
         var hc = DisplayRules.zoneColor(hz); var pc = DisplayRules.powerColor(pz);
         var h = intText(hr); var p = intText(watts);
-        text(dc, 2, 44, primaryFont(dc, h), h, hc, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 126, 44, primaryFont(dc, p), p, pc, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 2, 80, 3, "bpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 126, 80, 3, "W "+ui.powerSeconds+"s", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, 120, 80, 8, hz == 0 ? "--" : "Z"+hz, hc, Graphics.TEXT_JUSTIFY_RIGHT);
-        text(dc, 244, 80, 8, pz == 0 ? "--" : "Z"+pz, pc, Graphics.TEXT_JUSTIFY_RIGHT);
-        color(dc, hc); dc.fillRectangle(2, 88, DisplayRules.CELL_WIDTH, DisplayRules.ZONE_BAR);
-        color(dc, pc); dc.fillRectangle(126, 88, DisplayRules.CELL_WIDTH, DisplayRules.ZONE_BAR);
+        var hf = primaryFont(dc, h); var pf = primaryFont(dc, p);
+        text(dc, 2, DisplayRules.PRIMARY_BASELINE, hf, h, hc, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 126, DisplayRules.PRIMARY_BASELINE, pf, p, pc, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 2, DisplayRules.UNIT_BASELINE, 3, "bpm", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 126, DisplayRules.UNIT_BASELINE, 3, "W "+ui.powerSeconds+"s", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 120, DisplayRules.PRIMARY_BASELINE, hf == 0 ? 8 : 3, hz == 0 ? "--" : "Z"+hz, hc, Graphics.TEXT_JUSTIFY_RIGHT);
+        text(dc, 244, DisplayRules.PRIMARY_BASELINE, pf == 0 ? 8 : 3, pz == 0 ? "--" : "Z"+pz, pc, Graphics.TEXT_JUSTIFY_RIGHT);
+        // Unit-row icons match the bpm/W cap height and share the same baseline.
+        color(dc, 0xC62D32);
+        dc.fillPolygon([[110,64],[108,62],[105,62],[102,65],[102,68],[104,71],[110,76],[116,71],[118,68],[118,65],[115,62],[112,62]]);
+        color(dc, DisplayRules.BLUE);
+        dc.fillPolygon([[236,62],[227,70],[232,70],[229,76],[241,67],[235,67],[239,62]]);
+        color(dc, hc); dc.fillRectangle(2, DisplayRules.ZONE_BAR_TOP, DisplayRules.CELL_WIDTH, DisplayRules.ZONE_BAR);
+        color(dc, pc); dc.fillRectangle(126, DisplayRules.ZONE_BAR_TOP, DisplayRules.CELL_WIDTH, DisplayRules.ZONE_BAR);
         drawZoneMarker(dc, 2, RideMath.zoneFraction(hr, hrLimits, hrMinimum, hrMaximum));
         drawZoneMarker(dc, 126, RideMath.zoneFraction(watts, powerLimits, 0, null));
     }
     function drawZoneMarker(dc, left, fraction) {
         if (fraction == null) { return; }
         var x = left+DisplayRules.pixel(fraction*(DisplayRules.CELL_WIDTH-DisplayRules.ZONE_MARKER_WIDTH));
-        var y = 88-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2;
+        var y = DisplayRules.ZONE_BAR_TOP-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2;
         color(dc, 0x000000);
         dc.fillRectangle(x, y, DisplayRules.ZONE_MARKER_WIDTH, DisplayRules.ZONE_MARKER_HEIGHT);
+        // Invert only the part crossing the colored bar; retain black end caps.
+        color(dc, Graphics.COLOR_WHITE);
+        dc.fillRectangle(x, DisplayRules.ZONE_BAR_TOP, DisplayRules.ZONE_MARKER_WIDTH, DisplayRules.ZONE_BAR);
     }
     function drawStats(dc) {
         var title = ui.allStats ? "All" : "LAP "+(lapNumber == null ? "?" : lapNumber.format("%d"));
