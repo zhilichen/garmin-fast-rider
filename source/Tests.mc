@@ -274,7 +274,7 @@ function interactionCyclesTest(logger) {
     var ui = new InteractionState();
     Test.assertEqual(ui.powerSeconds, 3); Test.assert(ui.allStats); Test.assertEqual(ui.range, 0);
     Test.assert(!ui.tap(123, 52)); Test.assert(!ui.tap(150, 100));
-    Test.assert(!ui.tap(20, 316)); Test.assert(!ui.tap(246, 30)); Test.assert(!ui.tap(-1, 30));
+    Test.assert(!ui.tap(20, 320)); Test.assert(!ui.tap(246, 30)); Test.assert(!ui.tap(-1, 30));
     for (var p = 0; p < 2; p += 1) {
         for (var s = 0; s < 2; s += 1) {
             for (var r = 0; r < 3; r += 1) {
@@ -289,6 +289,10 @@ function interactionCyclesTest(logger) {
     Test.assertEqual(ui.rangeLabel(), "5m");
     ui.tap(124, 97); Test.assertEqual(ui.powerSeconds, 10);
     Test.assert(!ui.tap(124, 98));
+    Test.assert(!ui.tap(123, 160));
+    Test.assert(ui.tap(124, 160)); Test.assert(!ui.allStats);
+    Test.assert(ui.tap(244, 160)); Test.assert(ui.allStats);
+    Test.assert(ui.tap(4, 319)); Test.assertEqual(ui.range, 1);
     ui.reset(); Test.assertEqual(ui.powerSeconds, 3); Test.assert(ui.allStats);
     return true;
 }
@@ -312,7 +316,7 @@ function inputDelegateTest(logger) {
     Test.assertEqual(target.ui.powerSeconds, 10);
     Test.assert(input.onTap(new TapStub(200, 160))); Test.assert(!target.ui.allStats);
     Test.assert(input.onTap(new TapStub(100, 260))); Test.assertEqual(target.ui.range, 1);
-    Test.assert(!input.onTap(new TapStub(20, 316)));
+    Test.assert(!input.onTap(new TapStub(20, 320)));
     var hold = new TapStub(200, 50); hold.type = 1;
     Test.assert(!input.onTap(hold)); Test.assertEqual(target.ui.powerSeconds, 10);
     return true;
@@ -434,21 +438,30 @@ function bitmapFontMetricsTest(logger) {
     var v = new FastRiderView(); v.loadFonts();
     // Ordinary 3-digit and fallback 4-digit power stay left of the radar overlay.
     Test.assertEqual(dc.getTextWidthInPixels("303", v.fonts[0]), 87);
-    Test.assert(130+dc.getTextWidthInPixels("999", v.fonts[v.primaryFont(dc, "999")]) <= DisplayRules.RADAR_LEFT);
-    Test.assert(130+dc.getTextWidthInPixels("1234", v.fonts[v.primaryFont(dc, "1234")]) <= DisplayRules.RADAR_LEFT);
+    Test.assert(126+dc.getTextWidthInPixels("999", v.fonts[v.primaryFont(dc, "999")]) <= DisplayRules.RADAR_LEFT);
+    Test.assert(126+dc.getTextWidthInPixels("1234", v.fonts[v.primaryFont(dc, "1234")]) <= DisplayRules.RADAR_LEFT);
     Test.assert(dc.getTextWidthInPixels("120", v.fonts[1]) <= 60);
     Test.assertEqual(v.liveInteger(dc, 120, 60), "120");
     Test.assertEqual(v.compactValue(dc, 22.4, 58), "22");
     Test.assertEqual(v.compactValue(dc, 6.4, 54), "6.4");
     Test.assertEqual(v.compactValue(dc, -16.4, 54), "-16");
     Test.assertEqual(v.compactValue(dc, 100.7, 58), "101");
-    Test.assert(dc.getTextWidthInPixels("1:23:08", v.fonts[5]) <= 108);
-    Test.assert(dc.getTextWidthInPixels("12:23:08", v.fonts[7]) <= 108);
-    Test.assert(dc.getTextWidthInPixels("245", v.fonts[2])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 110);
-    Test.assert(dc.getTextWidthInPixels("1234", v.fonts[6])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 110);
-    Test.assert(dc.getTextWidthInPixels("0.42", v.fonts[5])+3+dc.getTextWidthInPixels("mi", v.fonts[3]) <= 108);
-    Test.assert(dc.getTextWidthInPixels("12:23:08", v.fonts[8])+8+2 <= 125-dc.getTextWidthInPixels("< 20m >", v.fonts[3])/2);
+    Test.assert(dc.getTextWidthInPixels("1:23:08", v.fonts[5]) <= 118);
+    Test.assert(dc.getTextWidthInPixels("12:23:08", v.fonts[7]) <= 118);
+    Test.assert(dc.getTextWidthInPixels("245", v.fonts[2])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 118);
+    Test.assert(dc.getTextWidthInPixels("1234", v.fonts[6])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 118);
+    Test.assert(dc.getTextWidthInPixels("0.42", v.fonts[5])+3+dc.getTextWidthInPixels("mi", v.fonts[3]) <= 118);
     Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[0]), 58);
+    Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[8]), 28);
+    Test.assert(dc.getTextWidthInPixels("Z6", v.fonts[8]) > dc.getTextWidthInPixels("Z6", v.fonts[3]));
+    Test.assert(126+dc.getTextWidthInPixels("W 10s", v.fonts[3])+4 <= 244-dc.getTextWidthInPixels("Z7", v.fonts[8]));
+    v.trend.endTime = 600000;
+    Test.assertEqual(v.chartX(600000), DisplayRules.PLOT_RIGHT);
+    Test.assertEqual(v.chartX(300000), DisplayRules.PLOT_LEFT);
+    Test.assertEqual(v.powerY(0), DisplayRules.PLOT_BOTTOM-1);
+    Test.assertEqual(v.powerY(v.ftpWatts*1.5), DisplayRules.PLOT_TOP);
+    Test.assertEqual(v.powerY(v.ftpWatts*2), DisplayRules.PLOT_TOP);
+    Test.assert(dc.getTextWidthInPixels("< 20m >", v.fonts[3])+4+dc.getTextWidthInPixels("12:59 B", v.fonts[3]) <= 242);
     return true;
 }
 

@@ -12,8 +12,8 @@ class InteractionState {
     function tap(x, y) {
         if (x < 0 || x >= 246 || y < 0 || y >= 322) { return false; }
         if (x >= 124 && y < 98) { powerSeconds = powerSeconds == 3 ? 10 : 3; return true; }
-        if (x >= 128 && y >= 102 && y < 214) { allStats = !allStats; return true; }
-        if (y >= 220 && y < 298) { range = (range+1)%3; return true; }
+        if (x >= 124 && y >= 102 && y < 214) { allStats = !allStats; return true; }
+        if (y >= 220 && y < 320) { range = (range+1)%3; return true; }
         return false;
     }
 }

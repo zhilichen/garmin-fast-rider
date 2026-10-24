@@ -1,305 +1,298 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" role="img" aria-labelledby="title desc">
-  <title id="title">FastRider · large numerals and radar clearance · v0.3.0</title>
-  <desc id="desc">Design only. Tap live power block to cycle 3s and 10s averages. Tap the right-middle statistics block to cycle current LAP and whole Ride, titled All. Tap chart header or plot to cycle 5m, 20m, All. Modes are independent, with no data reset; history All covers the entire Ride regardless of statistics scope. Remaining course values and all sensor values are illustrative. Current implementation defaults to 3s / All statistics / 5m. Each native lap boundary selects the newest lap. Statistics average power uses bold type. Black 3 by 10 px ticks show position within the original numbered heart-rate or power zone. Current layout: left-aligned 58px primary numerals, right-side icons, reserved x218–245/y0–33 for native radar. Other numeric values enlarged; 18px labels retained.</desc>
+  <title id="title">FastRider · 2px margin, large zones, expanded power plot · v0.3.2</title>
+  <desc id="desc">Edge 840 246x322 design reference with illustrative sensor data. Primary values align left at x2/x126, baseline44. Heart and bolt align at bottom52. Zones use 28px; native radar corner remains clear. The chart has only an 18px range and clock header, no elapsed time or distance/ascent footer. Plot spans x4..242/y243..319. Tap cycles 3s/10s, All/LAP, 5m/20m/All independently.</desc>
   <rect width="246" height="322" fill="white" />
-  <rect x="122" y="17" width="2" height="65" fill="#83909B" shape-rendering="crispEdges" />
-  <text x="8" y="60" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#8F5B00">158</text>
-  <text x="8" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550">bpm</text>
-  <text x="116" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="end" fill="#8F5B00">Z4</text>
-  <rect x="8" y="88" width="108" height="6" fill="#8F5B00" shape-rendering="crispEdges" />
-  <rect x="41" y="86" width="3" height="10" fill="#000000" shape-rendering="crispEdges" id="heart-zone-position" />
-  <text x="130" y="60" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#B62612" data-power-group="z6-z7" id="live-power-value">303</text>
-  <text x="130" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="live-power-average-window-label" id="live-power-unit">W 3s</text>
-  <text x="238" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="end" fill="#B62612" data-power-group="z6-z7" id="live-power-zone">Z6</text>
-  <rect x="130" y="88" width="108" height="6" fill="#B62612" shape-rendering="crispEdges" data-power-group="z6-z7" id="live-power-bar" />
-  <rect x="134" y="86" width="3" height="10" fill="#000000" shape-rendering="crispEdges" id="power-zone-position" />
-  <text x="33" y="153" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="400" text-anchor="middle" fill="#991B1B" data-metric="current-cadence" data-color-rule="lt70-deep-red;gt100-deep-purple;otherwise-neutral">64</text>
+  <rect x="122" y="2" width="2" height="80" fill="#83909B" shape-rendering="crispEdges" />
+  <text x="2" y="44" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#8F5B00">158</text>
+  <text x="2" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550">bpm</text>
+  <text x="120" y="80" font-family="'Roboto Condensed', Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="end" fill="#8F5B00">Z4</text>
+  <rect x="2" y="88" width="118" height="6" fill="#8F5B00" shape-rendering="crispEdges" />
+  <rect x="38" y="86" width="3" height="10" fill="#000000" shape-rendering="crispEdges" id="heart-zone-position" />
+  <text x="126" y="44" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#B62612" data-power-group="z6-z7" id="live-power-value">303</text>
+  <text x="126" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="live-power-average-window-label" id="live-power-unit">W 3s</text>
+  <text x="244" y="80" font-family="'Roboto Condensed', Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="end" fill="#B62612" data-power-group="z6-z7" id="live-power-zone">Z6</text>
+  <rect x="126" y="88" width="118" height="6" fill="#B62612" shape-rendering="crispEdges" data-power-group="z6-z7" id="live-power-bar" />
+  <rect x="131" y="86" width="3" height="10" fill="#000000" shape-rendering="crispEdges" id="power-zone-position" />
+  <text x="31" y="153" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="400" text-anchor="middle" fill="#991B1B" data-metric="current-cadence" data-color-rule="lt70-deep-red;gt100-deep-purple;otherwise-neutral">64</text>
   <rect x="122" y="102" width="2" height="111" fill="#83909B" shape-rendering="crispEdges" />
-  <text x="130" y="113" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" id="stats-title">All</text>
-  <text x="238" y="140" font-family="'Roboto Condensed', Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="end" fill="#15212B" id="stats-time">1:23:08</text>
-  <text x="130" y="182" font-family="'Roboto Condensed', Arial, sans-serif" font-size="50" font-weight="bold" text-anchor="start" fill="#15212B" data-metric="current-lap-average-power" id="stats-power">212</text>
-  <rect x="8" y="220" width="230" height="2" fill="#83909B" shape-rendering="crispEdges" />
-  <text x="8" y="242" font-family="'Roboto Condensed', Arial, sans-serif" font-size="26" text-anchor="start" fill="#354550" data-metric="activity-elapsed-time" font-weight="bold">1:23:08</text>
-  <polygon points="108,14 105,11 101,11 98,14 98,19 100,22 108,29 116,22 118,19 118,14 115,11 111,11" fill="#C62D32" shape-rendering="crispEdges" />
-  <polygon points="230,37 220,49 226,49 222,57 238,44 230,44 234,37" fill="#005AA8" shape-rendering="crispEdges" />
+  <text x="126" y="113" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" id="stats-title">All</text>
+  <text x="244" y="140" font-family="'Roboto Condensed', Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="end" fill="#15212B" id="stats-time">1:23:08</text>
+  <text x="126" y="182" font-family="'Roboto Condensed', Arial, sans-serif" font-size="54" font-weight="bold" text-anchor="start" fill="#15212B" data-metric="current-lap-average-power" id="stats-power">212</text>
+  <rect x="2" y="220" width="242" height="2" fill="#83909B" shape-rendering="crispEdges" />
+  <polygon points="110,40 108,38 105,38 102,41 102,44 104,47 110,52 116,47 118,44 118,41 115,38 112,38" fill="#C62D32" shape-rendering="crispEdges" />
+  <polygon points="236,36 227,46 232,46 229,52 241,42 235,42 239,36" fill="#005AA8" shape-rendering="crispEdges" />
   <text x="92" y="153" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="400" text-anchor="middle" fill="#15212B" data-metric="rear-gear-index">5</text>
   <text x="92" y="174" font-size="18" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" text-anchor="middle" fill="#354550" font-weight="normal">mph</text>
   <text x="92" y="212" font-size="38" font-family="'Roboto Condensed', Arial, sans-serif" text-anchor="middle" fill="#15212B" font-weight="400" data-metric="current-speed-mph">22</text>
-  <text x="130" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="32" text-anchor="start" fill="#15212B" font-weight="bold" data-metric="current-lap-distance" id="stats-distance">10.4</text>
-  <text x="226" y="242" font-family="'Roboto Condensed', Arial, sans-serif" font-size="26" text-anchor="end" fill="#354550" data-metric="local-clock" font-weight="bold">9:41</text>
-  <text x="33" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" text-anchor="middle" fill="#B45309" data-metric="current-estimated-grade" font-weight="400" data-color-rule="gt15-deep-purple;gt10-deep-red;gt5-orange;otherwise-neutral">6.4</text>
-  <text x="125" y="242" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" data-metric="history-window" font-weight="normal" id="chart-range">&lt; 5m &gt;</text>
-  <text x="238" y="242" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="end" fill="#354550" data-metric="clock-half-day" data-am-label="A" data-pm-label="B" font-weight="normal">A</text>
-  <text x="223" y="162" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">AVG</text>
-  <text x="223" y="182" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">W</text>
-  <text x="33" y="114" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">rpm</text>
+  <text x="126" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="32" text-anchor="start" fill="#15212B" font-weight="bold" data-metric="current-lap-distance" id="stats-distance">10.4</text>
+  <text x="232" y="238" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="end" fill="#354550" data-metric="local-clock" font-weight="normal">9:41</text>
+  <text x="31" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" text-anchor="middle" fill="#B45309" data-metric="current-estimated-grade" font-weight="400" data-color-rule="gt15-deep-purple;gt10-deep-red;gt5-orange;otherwise-neutral">6.4</text>
+  <text x="2" y="238" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="start" fill="#354550" data-metric="history-window" font-weight="normal" id="chart-range">&lt; 5m &gt;</text>
+  <text x="244" y="238" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="end" fill="#354550" data-metric="clock-half-day" data-am-label="A" data-pm-label="B" font-weight="normal">A</text>
+  <text x="225" y="162" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">AVG</text>
+  <text x="225" y="182" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">W</text>
+  <text x="31" y="114" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">rpm</text>
   <text x="92" y="114" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">gear</text>
-  <text x="33" y="174" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">%</text>
-  <text x="6" y="318" font-family="'Roboto Condensed', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#354550" data-metric="distance-total-and-remaining" data-part="total">10</text>
-  <text x="32" y="318" font-family="'Roboto Condensed', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#005AA8" data-metric="distance-total-and-remaining" data-part="remaining">(12)</text>
-  <text x="75" y="318" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="distance-total-and-remaining" data-part="unit">mi</text>
-  <text x="110" y="318" font-family="'Roboto Condensed', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#354550" data-metric="ascent-total-and-remaining" data-part="total">2238</text>
-  <text x="160" y="318" font-family="'Roboto Condensed', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#005AA8" data-metric="ascent-total-and-remaining" data-part="remaining">(1200)</text>
-  <text x="227" y="318" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="ascent-total-and-remaining" data-part="unit">ft</text>
-  <rect x="16" y="263" width="2" height="31" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="293.568" />
-  <rect x="19" y="264" width="2" height="30" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="290.336" />
-  <polyline points="17,263 20,264" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="21" y="265" width="2" height="29" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="278.505" />
-  <polyline points="20,264 22,265" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="23" y="268" width="2" height="26" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="265.717" />
-  <polyline points="22,265 24,268" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="25" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="259.378" />
-  <polyline points="24,268 26,269" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
-  <rect x="27" y="268" width="2" height="26" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="263.996" />
-  <polyline points="26,269 28,268" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="29" y="265" width="2" height="29" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="279.550" />
-  <polyline points="28,268 30,265" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="31" y="260" width="2" height="34" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="301.458" />
-  <polyline points="30,265 32,260" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="33" y="257" width="2" height="37" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="322.154" />
-  <polyline points="32,260 34,257" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="35" y="255" width="2" height="39" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="333.732" />
-  <polyline points="34,257 36,255" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="38" y="255" width="2" height="39" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="330.724" />
-  <polyline points="36,255 39,255" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="40" y="258" width="2" height="36" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="312.043" />
-  <polyline points="39,255 41,258" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="42" y="265" width="2" height="29" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="281.419" />
-  <polyline points="41,258 43,265" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="44" y="272" width="2" height="22" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="246.164" />
-  <polyline points="43,265 45,272" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
-  <rect x="46" y="278" width="2" height="16" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="214.702" />
-  <polyline points="45,272 47,278" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="48" y="282" width="2" height="12" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="193.724" />
-  <polyline points="47,278 49,282" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="50" y="284" width="2" height="10" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="185.957" />
-  <polyline points="49,282 51,284" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="52" y="283" width="2" height="11" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="189.324" />
-  <polyline points="51,284 53,283" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="55" y="282" width="2" height="12" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="197.793" />
-  <polyline points="53,283 56,282" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="57" y="281" width="2" height="13" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="203.601" />
-  <polyline points="56,282 58,281" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="59" y="282" width="2" height="12" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="200.087" />
-  <polyline points="58,281 60,282" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="61" y="284" width="2" height="10" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="184.135" />
-  <polyline points="60,282 62,284" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="63" y="289" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="157.368" />
-  <polyline points="62,284 64,289" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="65" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="125.681" data-clipped="below-minimum" />
-  <polyline points="64,289 66,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="67" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="97.270" data-clipped="below-minimum" />
-  <polyline points="66,292 68,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="69" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="79.834" data-clipped="below-minimum" />
-  <polyline points="68,292 70,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="72" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="77.948" data-clipped="below-minimum" />
-  <polyline points="70,292 73,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="74" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="91.498" data-clipped="below-minimum" />
-  <polyline points="73,292 75,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="76" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="115.741" data-clipped="below-minimum" />
-  <polyline points="75,292 77,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="78" y="292" width="2" height="2" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="142.963" />
-  <polyline points="77,292 79,292" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="80" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="165.156" />
-  <polyline points="79,292 81,287" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="82" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="176.773" />
-  <polyline points="81,287 83,285" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="84" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="176.617" />
-  <polyline points="83,285 85,285" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="86" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="168.185" />
-  <polyline points="85,285 87,287" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="88" y="289" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="158.361" />
-  <polyline points="87,287 89,289" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="91" y="289" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="154.912" />
-  <polyline points="89,289 92,289" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="93" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="163.670" />
-  <polyline points="92,289 94,287" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="95" y="284" width="2" height="10" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="186.377" />
-  <rect x="97" y="277" width="2" height="17" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="219.958" />
-  <polyline points="96,284 98,277" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="99" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="257.473" />
-  <polyline points="98,277 100,271" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
-  <rect x="101" y="264" width="2" height="30" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="290.426" />
-  <polyline points="100,271 102,264" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="103" y="258" width="2" height="36" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="311.613" />
-  <polyline points="102,264 104,258" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="105" y="258" width="2" height="36" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="317.535" />
-  <polyline points="104,258 106,258" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="108" y="259" width="2" height="35" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="309.522" />
-  <polyline points="106,258 109,259" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="110" y="263" width="2" height="31" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="293.184" />
-  <polyline points="109,259 111,263" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="112" y="266" width="2" height="28" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="276.382" />
-  <polyline points="111,263 113,266" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="114" y="268" width="2" height="26" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="266.426" />
-  <polyline points="113,266 115,268" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="116" y="268" width="2" height="26" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="267.490" />
-  <polyline points="115,268 117,268" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="118" y="265" width="2" height="29" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="279.130" />
-  <polyline points="117,268 119,265" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="120" y="263" width="2" height="31" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="296.449" />
-  <polyline points="119,265 121,263" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="122" y="258" width="2" height="36" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="311.820" />
-  <polyline points="121,263 123,258" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="125" y="258" width="2" height="36" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="317.598" />
-  <polyline points="123,258 126,258" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="127" y="259" width="2" height="35" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="308.838" />
-  <polyline points="126,258 128,259" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="129" y="264" width="2" height="30" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="285.104" />
-  <polyline points="128,259 130,264" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="131" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="250.703" />
-  <polyline points="130,264 132,271" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
-  <rect x="133" y="278" width="2" height="16" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="213.280" />
-  <polyline points="132,271 134,278" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="135" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="181.259" />
-  <polyline points="134,278 136,285" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="137" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="161.012" />
-  <polyline points="136,285 138,287" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="139" y="289" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="154.757" />
-  <polyline points="138,287 140,289" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="141" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="159.900" />
-  <polyline points="140,289 142,287" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="144" y="286" width="2" height="8" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="170.063" />
-  <polyline points="142,287 145,286" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="146" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="177.424" />
-  <polyline points="145,286 147,285" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="148" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="175.558" />
-  <polyline points="147,285 149,285" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="150" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="161.774" />
-  <polyline points="149,285 151,287" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="152" y="292" width="2" height="2" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="138.142" />
-  <polyline points="151,287 153,292" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="154" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="110.836" data-clipped="below-minimum" />
-  <polyline points="153,292 155,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="156" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="88.027" data-clipped="below-minimum" />
-  <polyline points="155,292 157,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="158" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="77.069" data-clipped="below-minimum" />
-  <polyline points="157,292 159,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="161" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="81.938" data-clipped="below-minimum" />
-  <polyline points="159,292 162,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="163" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="101.845" data-clipped="below-minimum" />
-  <polyline points="162,292 164,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="165" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="131.484" data-clipped="below-minimum" />
-  <polyline points="164,292 166,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="167" y="287" width="2" height="7" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="162.850" />
-  <polyline points="166,292 168,287" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="169" y="283" width="2" height="11" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="187.973" />
-  <polyline points="168,287 170,283" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="171" y="281" width="2" height="13" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="201.628" />
-  <polyline points="170,283 172,281" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="173" y="281" width="2" height="13" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="203.074" />
-  <polyline points="172,281 174,281" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="175" y="282" width="2" height="12" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="196.212" />
-  <polyline points="174,281 176,282" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="178" y="283" width="2" height="11" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="188.110" />
-  <polyline points="176,282 179,283" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="180" y="284" width="2" height="10" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="186.422" />
-  <rect x="182" y="282" width="2" height="12" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="196.590" />
-  <polyline points="181,284 183,282" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="184" y="277" width="2" height="17" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="219.827" />
-  <polyline points="183,282 185,277" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="186" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="252.570" />
-  <polyline points="185,277 187,271" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
-  <rect x="188" y="264" width="2" height="30" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="287.614" />
-  <polyline points="187,271 189,264" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="190" y="258" width="2" height="36" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="316.522" />
-  <polyline points="189,264 191,258" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="192" y="255" width="2" height="39" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="332.480" />
-  <polyline points="191,258 193,255" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="194" y="255" width="2" height="39" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="332.594" />
-  <polyline points="193,255 195,255" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="197" y="258" width="2" height="36" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="318.834" />
-  <polyline points="195,255 198,258" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
-  <rect x="199" y="262" width="2" height="32" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="297.297" />
-  <polyline points="198,258 200,262" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="201" y="266" width="2" height="28" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="276.042" />
-  <polyline points="200,262 202,266" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="203" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="262.268" />
-  <polyline points="202,266 204,269" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
-  <rect x="205" y="269" width="2" height="25" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="259.796" />
-  <polyline points="204,269 206,269" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
-  <rect x="207" y="268" width="2" height="26" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="267.767" />
-  <polyline points="206,269 208,268" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="209" y="265" width="2" height="29" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="280.980" />
-  <polyline points="208,268 210,265" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="211" y="264" width="2" height="30" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="291.769" />
-  <polyline points="210,265 212,264" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="214" y="263" width="2" height="31" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="292.761" />
-  <polyline points="212,264 215,263" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="216" y="265" width="2" height="29" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="279.537" />
-  <polyline points="215,263 217,265" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
-  <rect x="218" y="271" width="2" height="23" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="252.277" />
-  <polyline points="217,265 219,271" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
-  <rect x="220" y="278" width="2" height="16" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="215.812" />
-  <polyline points="219,271 221,278" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
-  <rect x="222" y="285" width="2" height="9" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="178.048" />
-  <polyline points="221,278 223,285" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="224" y="291" width="2" height="3" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="147.327" />
-  <polyline points="223,285 225,291" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
-  <rect x="226" y="292" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="129.634" data-clipped="below-minimum" />
-  <polyline points="225,291 227,292" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
-  <rect x="15" y="271" width="6" height="4" fill="white" />
-  <rect x="16" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="23" y="271" width="6" height="4" fill="white" />
-  <rect x="24" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="31" y="271" width="6" height="4" fill="white" />
-  <rect x="32" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="39" y="271" width="6" height="4" fill="white" />
-  <rect x="40" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="47" y="271" width="6" height="4" fill="white" />
-  <rect x="48" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="55" y="271" width="6" height="4" fill="white" />
-  <rect x="56" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="63" y="271" width="6" height="4" fill="white" />
-  <rect x="64" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="71" y="271" width="6" height="4" fill="white" />
-  <rect x="72" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="79" y="271" width="6" height="4" fill="white" />
-  <rect x="80" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="87" y="271" width="6" height="4" fill="white" />
-  <rect x="88" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="95" y="271" width="6" height="4" fill="white" />
-  <rect x="96" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="103" y="271" width="6" height="4" fill="white" />
-  <rect x="104" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="111" y="271" width="6" height="4" fill="white" />
-  <rect x="112" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="119" y="271" width="6" height="4" fill="white" />
-  <rect x="120" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="127" y="271" width="6" height="4" fill="white" />
-  <rect x="128" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="135" y="271" width="6" height="4" fill="white" />
-  <rect x="136" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="143" y="271" width="6" height="4" fill="white" />
-  <rect x="144" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="151" y="271" width="6" height="4" fill="white" />
-  <rect x="152" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="159" y="271" width="6" height="4" fill="white" />
-  <rect x="160" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="167" y="271" width="6" height="4" fill="white" />
-  <rect x="168" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="175" y="271" width="6" height="4" fill="white" />
-  <rect x="176" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="183" y="271" width="6" height="4" fill="white" />
-  <rect x="184" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="191" y="271" width="6" height="4" fill="white" />
-  <rect x="192" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="199" y="271" width="6" height="4" fill="white" />
-  <rect x="200" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="207" y="271" width="6" height="4" fill="white" />
-  <rect x="208" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="215" y="271" width="6" height="4" fill="white" />
-  <rect x="216" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="223" y="271" width="6" height="4" fill="white" />
-  <rect x="224" y="271" width="4" height="2" fill="#59636E" />
-  <rect x="16" y="282" width="213" height="4" fill="white" />
-  <rect x="16" y="283" width="213" height="2" fill="#005AA8" shape-rendering="crispEdges" role="img" aria-label="Z2 upper limit, 75% FTP" />
-  <rect x="93" y="247" width="4" height="47" fill="white" />
-  <rect x="94" y="247" width="2" height="47" fill="#15212B" />
-  <rect x="92" y="247" width="6" height="4" fill="#15212B" />
-  <rect x="178" y="247" width="4" height="47" fill="white" />
-  <rect x="179" y="247" width="2" height="47" fill="#15212B" />
-  <rect x="177" y="247" width="6" height="4" fill="#15212B" />
-  <rect x="227" y="247" width="3" height="47" fill="#005AA8" />
-  <text x="190" y="212" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" fill="#354550">mi</text>
+  <text x="31" y="174" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" text-anchor="middle" fill="#354550" font-weight="normal">%</text>
+  <rect x="4" y="269" width="2" height="51" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="293.568" />
+  <rect x="7" y="271" width="2" height="49" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="290.336" />
+  <polyline points="5,269 8,271" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="10" y="273" width="2" height="47" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="278.505" />
+  <polyline points="8,271 11,273" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="12" y="278" width="2" height="42" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="265.717" />
+  <polyline points="11,273 13,278" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="14" y="279" width="2" height="41" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="259.378" />
+  <polyline points="13,278 15,279" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
+  <rect x="16" y="278" width="2" height="42" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="263.996" />
+  <polyline points="15,279 17,278" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="19" y="273" width="2" height="47" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="279.550" />
+  <polyline points="17,278 20,273" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="21" y="264" width="2" height="56" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="301.458" />
+  <polyline points="20,273 22,264" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="23" y="260" width="2" height="60" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="322.154" />
+  <polyline points="22,264 24,260" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="25" y="256" width="2" height="64" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="333.732" />
+  <polyline points="24,260 26,256" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="29" y="256" width="2" height="64" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="330.724" />
+  <polyline points="26,256 30,256" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="31" y="261" width="2" height="59" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="312.043" />
+  <polyline points="30,256 32,261" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="33" y="273" width="2" height="47" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="281.419" />
+  <polyline points="32,261 34,273" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="35" y="284" width="2" height="36" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="246.164" />
+  <polyline points="34,273 37,284" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
+  <rect x="38" y="294" width="2" height="26" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="214.702" />
+  <polyline points="37,284 39,294" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="40" y="301" width="2" height="19" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="193.724" />
+  <polyline points="39,294 41,301" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="42" y="304" width="2" height="16" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="185.957" />
+  <polyline points="41,301 43,304" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="44" y="302" width="2" height="18" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="189.324" />
+  <polyline points="43,304 46,302" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="48" y="301" width="2" height="19" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="197.793" />
+  <polyline points="46,302 49,301" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="50" y="299" width="2" height="21" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="203.601" />
+  <polyline points="49,301 51,299" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="52" y="301" width="2" height="19" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="200.087" />
+  <polyline points="51,299 53,301" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="55" y="304" width="2" height="16" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="184.135" />
+  <polyline points="53,301 56,304" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="57" y="312" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="157.368" />
+  <polyline points="56,304 58,312" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="59" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="125.681" data-clipped="below-minimum" />
+  <polyline points="58,312 60,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="61" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="97.270" data-clipped="below-minimum" />
+  <polyline points="60,317 62,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="64" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="79.834" data-clipped="below-minimum" />
+  <polyline points="62,317 65,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="67" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="77.948" data-clipped="below-minimum" />
+  <polyline points="65,317 68,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="69" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="91.498" data-clipped="below-minimum" />
+  <polyline points="68,317 70,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="71" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="115.741" data-clipped="below-minimum" />
+  <polyline points="70,317 72,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="74" y="317" width="2" height="2" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="142.963" />
+  <polyline points="72,317 75,317" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="76" y="309" width="2" height="11" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="165.156" />
+  <polyline points="75,317 77,309" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="78" y="306" width="2" height="14" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="176.773" />
+  <polyline points="77,309 79,306" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="80" y="306" width="2" height="14" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="176.617" />
+  <polyline points="79,306 81,306" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="83" y="309" width="2" height="11" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="168.185" />
+  <polyline points="81,306 84,309" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="85" y="312" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="158.361" />
+  <polyline points="84,309 86,312" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="88" y="312" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="154.912" />
+  <polyline points="86,312 89,312" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="90" y="309" width="2" height="11" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="163.670" />
+  <polyline points="89,312 92,309" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="93" y="304" width="2" height="16" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="186.377" />
+  <rect x="95" y="293" width="2" height="27" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="219.958" />
+  <polyline points="94,304 96,293" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="97" y="283" width="2" height="37" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="257.473" />
+  <polyline points="96,293 98,283" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
+  <rect x="99" y="271" width="2" height="49" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="290.426" />
+  <polyline points="98,283 101,271" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="102" y="261" width="2" height="59" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="311.613" />
+  <polyline points="101,271 103,261" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="104" y="261" width="2" height="59" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="317.535" />
+  <polyline points="103,261 105,261" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="107" y="263" width="2" height="57" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="309.522" />
+  <polyline points="105,261 108,263" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="110" y="269" width="2" height="51" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="293.184" />
+  <polyline points="108,263 111,269" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="112" y="274" width="2" height="46" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="276.382" />
+  <polyline points="111,269 113,274" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="114" y="278" width="2" height="42" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="266.426" />
+  <polyline points="113,274 115,278" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="116" y="278" width="2" height="42" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="267.490" />
+  <polyline points="115,278 117,278" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="119" y="273" width="2" height="47" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="279.130" />
+  <polyline points="117,278 120,273" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="121" y="269" width="2" height="51" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="296.449" />
+  <polyline points="120,273 122,269" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="123" y="261" width="2" height="59" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="311.820" />
+  <polyline points="122,269 124,261" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="126" y="261" width="2" height="59" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="317.598" />
+  <polyline points="124,261 127,261" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="129" y="263" width="2" height="57" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="308.838" />
+  <polyline points="127,261 130,263" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="131" y="271" width="2" height="49" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="285.104" />
+  <polyline points="130,263 132,271" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="133" y="283" width="2" height="37" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="250.703" />
+  <polyline points="132,271 134,283" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
+  <rect x="135" y="294" width="2" height="26" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="213.280" />
+  <polyline points="134,283 136,294" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="138" y="306" width="2" height="14" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="181.259" />
+  <polyline points="136,294 139,306" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="140" y="309" width="2" height="11" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="161.012" />
+  <polyline points="139,306 141,309" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="142" y="312" width="2" height="5" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="154.757" />
+  <polyline points="141,309 143,312" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="144" y="309" width="2" height="11" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="159.900" />
+  <polyline points="143,312 145,309" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="148" y="307" width="2" height="13" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="170.063" />
+  <polyline points="145,309 149,307" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="150" y="306" width="2" height="14" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="177.424" />
+  <polyline points="149,307 151,306" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="152" y="306" width="2" height="14" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="175.558" />
+  <polyline points="151,306 153,306" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="154" y="309" width="2" height="11" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="161.774" />
+  <polyline points="153,306 156,309" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="157" y="317" width="2" height="2" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="138.142" />
+  <polyline points="156,309 158,317" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="159" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="110.836" data-clipped="below-minimum" />
+  <polyline points="158,317 160,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="161" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="88.027" data-clipped="below-minimum" />
+  <polyline points="160,317 162,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="163" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="77.069" data-clipped="below-minimum" />
+  <polyline points="162,317 165,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="167" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="81.938" data-clipped="below-minimum" />
+  <polyline points="165,317 168,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="169" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="101.845" data-clipped="below-minimum" />
+  <polyline points="168,317 170,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="171" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="131.484" data-clipped="below-minimum" />
+  <polyline points="170,317 172,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="174" y="309" width="2" height="11" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="162.850" />
+  <polyline points="172,317 175,309" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="176" y="302" width="2" height="18" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="187.973" />
+  <polyline points="175,309 177,302" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="178" y="299" width="2" height="21" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="201.628" />
+  <polyline points="177,302 179,299" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="180" y="299" width="2" height="21" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="203.074" />
+  <polyline points="179,299 181,299" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="182" y="301" width="2" height="19" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="196.212" />
+  <polyline points="181,299 184,301" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="186" y="302" width="2" height="18" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="188.110" />
+  <polyline points="184,301 187,302" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="188" y="304" width="2" height="16" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="186.422" />
+  <rect x="190" y="301" width="2" height="19" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="196.590" />
+  <polyline points="189,304 191,301" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="193" y="293" width="2" height="27" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="219.827" />
+  <polyline points="191,301 194,293" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="195" y="283" width="2" height="37" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="252.570" />
+  <polyline points="194,293 196,283" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
+  <rect x="197" y="271" width="2" height="49" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="287.614" />
+  <polyline points="196,283 198,271" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="199" y="261" width="2" height="59" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="316.522" />
+  <polyline points="198,271 200,261" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="202" y="256" width="2" height="64" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="332.480" />
+  <polyline points="200,261 203,256" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="204" y="256" width="2" height="64" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="332.594" />
+  <polyline points="203,256 205,256" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="207" y="261" width="2" height="59" fill="#DC322F" fill-opacity="0.80" data-zone="Z6" data-display-group="z6-z7" data-watts="318.834" />
+  <polyline points="205,256 208,261" fill="none" stroke="#DC322F" stroke-width="2" stroke-opacity="1" data-zone="Z6" data-display-group="z6-z7" />
+  <rect x="209" y="268" width="2" height="52" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="297.297" />
+  <polyline points="208,261 211,268" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="212" y="274" width="2" height="46" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="276.042" />
+  <polyline points="211,268 213,274" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="214" y="279" width="2" height="41" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="262.268" />
+  <polyline points="213,274 215,279" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
+  <rect x="216" y="279" width="2" height="41" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="259.796" />
+  <polyline points="215,279 217,279" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
+  <rect x="218" y="278" width="2" height="42" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="267.767" />
+  <polyline points="217,279 220,278" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="221" y="273" width="2" height="47" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="280.980" />
+  <polyline points="220,278 222,273" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="223" y="271" width="2" height="49" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="291.769" />
+  <polyline points="222,273 224,271" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="226" y="269" width="2" height="51" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="292.761" />
+  <polyline points="224,271 227,269" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="229" y="273" width="2" height="47" fill="#7B3FC6" fill-opacity="0.80" data-zone="Z5" data-display-group="z5" data-watts="279.537" />
+  <polyline points="227,269 230,273" fill="none" stroke="#7B3FC6" stroke-width="2" stroke-opacity="1" data-zone="Z5" data-display-group="z5" />
+  <rect x="231" y="283" width="2" height="37" fill="#E26A18" fill-opacity="0.80" data-zone="Z4" data-display-group="threshold" data-watts="252.277" />
+  <polyline points="230,273 232,283" fill="none" stroke="#E26A18" stroke-width="2" stroke-opacity="1" data-zone="Z4" data-display-group="threshold" />
+  <rect x="233" y="294" width="2" height="26" fill="#7D8794" fill-opacity="0.80" data-zone="Z3" data-display-group="neutral" data-watts="215.812" />
+  <polyline points="232,283 234,294" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z3" data-display-group="neutral" />
+  <rect x="235" y="306" width="2" height="14" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="178.048" />
+  <polyline points="234,294 236,306" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="238" y="316" width="2" height="3" fill="#0075C9" fill-opacity="0.80" data-zone="Z2" data-display-group="endurance" data-watts="147.327" />
+  <polyline points="236,306 239,316" fill="none" stroke="#0075C9" stroke-width="2" stroke-opacity="1" data-zone="Z2" data-display-group="endurance" />
+  <rect x="240" y="317" width="2" height="2" fill="#7D8794" fill-opacity="0.80" data-zone="Z1" data-display-group="neutral" data-watts="129.634" data-clipped="below-minimum" />
+  <polyline points="239,316 241,317" fill="none" stroke="#7D8794" stroke-width="2" stroke-opacity="1" data-zone="Z1" data-display-group="neutral" />
+  <rect x="3" y="283" width="6" height="4" fill="white" />
+  <rect x="4" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="12" y="283" width="6" height="4" fill="white" />
+  <rect x="13" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="21" y="283" width="6" height="4" fill="white" />
+  <rect x="22" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="30" y="283" width="6" height="4" fill="white" />
+  <rect x="31" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="39" y="283" width="6" height="4" fill="white" />
+  <rect x="40" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="48" y="283" width="6" height="4" fill="white" />
+  <rect x="49" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="57" y="283" width="6" height="4" fill="white" />
+  <rect x="58" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="66" y="283" width="6" height="4" fill="white" />
+  <rect x="67" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="75" y="283" width="6" height="4" fill="white" />
+  <rect x="76" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="84" y="283" width="6" height="4" fill="white" />
+  <rect x="85" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="93" y="283" width="6" height="4" fill="white" />
+  <rect x="94" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="102" y="283" width="6" height="4" fill="white" />
+  <rect x="103" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="111" y="283" width="6" height="4" fill="white" />
+  <rect x="112" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="120" y="283" width="6" height="4" fill="white" />
+  <rect x="121" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="129" y="283" width="6" height="4" fill="white" />
+  <rect x="130" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="138" y="283" width="6" height="4" fill="white" />
+  <rect x="139" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="147" y="283" width="6" height="4" fill="white" />
+  <rect x="148" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="156" y="283" width="6" height="4" fill="white" />
+  <rect x="157" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="165" y="283" width="6" height="4" fill="white" />
+  <rect x="166" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="174" y="283" width="6" height="4" fill="white" />
+  <rect x="175" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="182" y="283" width="6" height="4" fill="white" />
+  <rect x="184" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="191" y="283" width="6" height="4" fill="white" />
+  <rect x="193" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="200" y="283" width="6" height="4" fill="white" />
+  <rect x="202" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="209" y="283" width="6" height="4" fill="white" />
+  <rect x="211" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="218" y="283" width="6" height="4" fill="white" />
+  <rect x="220" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="227" y="283" width="6" height="4" fill="white" />
+  <rect x="229" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="236" y="283" width="6" height="4" fill="white" />
+  <rect x="238" y="283" width="4" height="2" fill="#59636E" />
+  <rect x="4" y="301" width="239" height="4" fill="white" />
+  <rect x="4" y="302" width="239" height="2" fill="#005AA8" shape-rendering="crispEdges" role="img" aria-label="Z2 upper limit, 75% FTP" />
+  <rect x="90" y="243" width="4" height="77" fill="white" />
+  <rect x="92" y="243" width="2" height="77" fill="#15212B" />
+  <rect x="89" y="243" width="6" height="4" fill="#15212B" />
+  <rect x="186" y="243" width="4" height="77" fill="white" />
+  <rect x="187" y="243" width="2" height="77" fill="#15212B" />
+  <rect x="185" y="243" width="6" height="4" fill="#15212B" />
+  <rect x="242" y="243" width="2" height="77" fill="#005AA8" />
+  <text x="186" y="212" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" fill="#354550">mi</text>
 </svg>
