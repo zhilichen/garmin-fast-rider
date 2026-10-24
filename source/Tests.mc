@@ -2,6 +2,70 @@ import Toybox.Test;
 import Toybox.Position;
 
 (:test)
+function powerHistoryTest(logger) {
+    var h = new PowerHistory();
+    h.started(50000);
+    Test.assert(h.lapStart == null);
+    Test.assertEqual(h.startLabel(), "LAP SYNC");
+    h.update(50000, 100, true);
+    h.update(51000, 0, true);
+    h.update(52000, 300, true);
+    // 50 s is in a different aligned bucket from 51/52 s.
+    Test.assertEqual(h.points.size(), 2);
+    assertNear(h.points[1][2]/h.points[1][3].toFloat(), 150.0);
+    h.update(52000, 999, true);
+    Test.assertEqual(h.points[1][3], 2);
+    h.update(52500, null, true);
+    h.update(53000, 200, true);
+    Test.assert(h.points[2][4] != h.points[1][4]);
+    h.update(53500, 800, false);
+    h.update(54000, 200, true);
+    Test.assert(h.points[3][4] != h.points[2][4]);
+    h.breakSample(); h.update(55000, 200, true);
+    Test.assert(h.points[4][4] != h.points[3][4]);
+    h.update(60000, 400, true);
+    Test.assert(h.points[5][4] != h.points[4][4]);
+    assertNear(h.ceiling(250), 500.0);
+    h.beginLap(60000); h.beginLap(60000);
+    Test.assertEqual(h.boundaries.size(), 1);
+    h.update(61000, 300, true);
+    Test.assertEqual(h.startLabel(), "LAP START -0:01");
+    Test.assert(h.points[6][4] != h.points[5][4]);
+    h.update(0, 100, true);
+    Test.assertEqual(h.points.size(), 1);
+    Test.assertEqual(h.boundaries.size(), 1);
+    Test.assertEqual(h.startLabel(), "LAP START -0:00");
+    return true;
+}
+
+(:test)
+function powerWindowTest(logger) {
+    var h = new PowerHistory(); h.started(0);
+    for (var i = 0; i <= 700; i += 1) {
+        if (i == 100 || i == 500) { h.beginLap(i*1000); }
+        h.update(i*1000, 250, true);
+    }
+    Test.assert(h.points.size() <= 102);
+    Test.assert(h.points[0][1] >= 400000);
+    Test.assertEqual(h.boundaries.size(), 1);
+    Test.assertEqual(h.boundaries[0], 500000);
+    Test.assertEqual(h.startLabel(), "LAP START -3:20");
+    h.update(801000, null, false);
+    Test.assertEqual(h.startLabel(), "LAP START <-5m");
+    Test.assertEqual(h.boundaries.size(), 0);
+    // Many breaks and laps remain bounded even within the five-minute window.
+    h.reset();
+    for (var i = 0; i < 250; i += 1) {
+        h.beginLap(i*1000); h.update(i*1000, 0, true);
+    }
+    Test.assertEqual(h.points.size(), 160);
+    Test.assertEqual(h.boundaries.size(), 100);
+    h.reset();
+    Test.assert(h.endTime == null && h.points.size() == 0 && h.lapStart == null);
+    return true;
+}
+
+(:test)
 function measuredHistoryTest(logger) {
     var h = new ElevationHistory();
     h.update(0, 100, true, 0);

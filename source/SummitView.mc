@@ -22,7 +22,9 @@ class SummitView extends WatchUi.DataField {
     var millis = 0;
     var powerLimits;
     var hrLimits;
-    var history as ElevationHistory = new ElevationHistory();
+    var trend as PowerHistory = new PowerHistory();
+    var ftpWatts = 250;
+    var ascent = null;
     var demoSeeded = false;
     var start;
     var width;
@@ -50,33 +52,38 @@ class SummitView extends WatchUi.DataField {
             if (UserProfile has :getFunctionalThresholdPower) {
                 var deviceFtp = UserProfile.getFunctionalThresholdPower(Activity.SPORT_CYCLING);
                 if (deviceFtp != null && deviceFtp > 0) {
+                    ftp = deviceFtp;
                     powerLimits = [deviceFtp*0.55, deviceFtp*0.75, deviceFtp*0.90, deviceFtp*1.05, deviceFtp*1.20, deviceFtp*1.50];
                 }
             }
         }
+        ftpWatts = ftp;
     }
 
     function compute(info) {
         if (BuildMode.DEMO) {
             var t = (System.getTimer() - start) / 1000.0;
-            power = (220 + 135*Math.sin(t/12.0)).toNumber();
+            power = RideMath.demoPower(300+t).toNumber();
             hr = (147 + 28*Math.sin(t/19.0)).toNumber();
             cadence = (90 + 7*Math.sin(t/11.0)).toNumber();
             gear = RideMath.gears(2, 5+((t.toNumber()/15).toNumber()%7));
             meters = 16600.0+t*8.0;
             millis = 4980000 + (t*1000).toNumber();
-            lapMillis = (312000+(t*1000).toNumber())%360000;
+            var chartTime = 300000+(t*1000).toNumber();
+            var lapTime = (chartTime/120000).toNumber()*120000;
+            lapMillis = chartTime-lapTime;
             lapPower = (243+8*Math.sin(t/25.0)).toNumber();
             lapSynced = true;
-            var now = System.getTimer();
             if (!demoSeeded) {
-                for (var i = 0; i < 160; i += 1) {
-                    var d = 16600.0*i/159;
-                    history.update(d, RideMath.demoAltitude(d), true, now-(159-i)*1000);
+                for (var i = 0; i <= 300; i += 1) {
+                    if (i%120 == 0) { trend.beginLap(i*1000); }
+                    trend.update(i*1000, RideMath.demoPower(i), true);
                 }
                 demoSeeded = true;
             }
-            history.update(meters, RideMath.demoAltitude(meters), true, now);
+            trend.beginLap(lapTime);
+            trend.update(chartTime, power, true);
+            ascent = 682+(t/10).toNumber();
             grade = 5*(RideMath.demoAltitude(meters+10)-RideMath.demoAltitude(meters-10));
             return;
         }
@@ -91,11 +98,12 @@ class SummitView extends WatchUi.DataField {
         lap.update(info.timerTime, power, info.timerState == Activity.TIMER_STATE_ON);
         lapMillis = lap.timeMs; lapPower = lap.averagePower; lapSynced = lap.synced;
         grade = gradeEstimator.update(info.elapsedDistance, info.altitude, System.getTimer());
-        history.update(info.elapsedDistance, info.altitude, info.timerState == Activity.TIMER_STATE_ON, System.getTimer());
+        ascent = info.totalAscent;
+        trend.update(info.elapsedTime, power, info.timerState == Activity.TIMER_STATE_ON);
     }
 
     function onTimerReset() {
-        history.reset(); demoSeeded = false;
+        trend.reset(); demoSeeded = false; ascent = null;
         gradeEstimator.reset();
         grade = null;
         lap.reset(); lapMillis = null; lapPower = null; lapSynced = false;
@@ -104,14 +112,19 @@ class SummitView extends WatchUi.DataField {
         start = System.getTimer();
     }
 
-    function onTimerStart() { lap.started(Activity.getActivityInfo().timerTime); }
-    function onTimerPause() { lap.breakSample(); history.breakSample(); }
-    function onTimerResume() { lap.breakSample(); history.breakSample(); }
-    function onTimerStop() { lap.breakSample(); history.breakSample(); }
+    function onTimerStart() {
+        var info = Activity.getActivityInfo();
+        lap.started(info.timerTime);
+        if (!BuildMode.DEMO) { trend.started(info.elapsedTime); }
+    }
+    function onTimerPause() { lap.breakSample(); trend.breakSample(); }
+    function onTimerResume() { lap.breakSample(); trend.breakSample(); }
+    function onTimerStop() { lap.breakSample(); trend.breakSample(); }
 
     function onTimerLap() {
         var info = Activity.getActivityInfo();
         lap.begin(info.timerTime, info.currentPower);
+        if (!BuildMode.DEMO) { trend.beginLap(info.elapsedTime); }
         lapMillis = lap.timeMs; lapPower = lap.averagePower; lapSynced = lap.synced;
         WatchUi.requestUpdate();
     }
@@ -178,7 +191,7 @@ class SummitView extends WatchUi.DataField {
         color(dc, DisplayRules.BANNER_FILL); dc.fillRectangle(0, DisplayRules.BANNER_TOP, width, height-DisplayRules.BANNER_TOP);
         color(dc, DisplayRules.RULE); dc.fillRectangle(8, DisplayRules.BANNER_TOP, 230, DisplayRules.STROKE);
         drawBannerStats(dc);
-        drawProfile(dc);
+        drawPowerTrend(dc);
     }
 
     function drawLap(dc) {
@@ -213,37 +226,50 @@ class SummitView extends WatchUi.DataField {
         text(dc, 238, 216, Graphics.FONT_MEDIUM, time, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
     }
 
-    function drawProfile(dc) {
+    function powerY(watts, ceiling) {
+        return DisplayRules.pixel(DisplayRules.PLOT_BOTTOM-watts*(DisplayRules.PLOT_BOTTOM-DisplayRules.PLOT_TOP)/ceiling);
+    }
+
+    function chartX(t) {
+        return DisplayRules.pixel(DisplayRules.PLOT_RIGHT+(t-trend.endTime)*(DisplayRules.PLOT_RIGHT-DisplayRules.PLOT_LEFT)/300000.0);
+    }
+
+    function drawPowerTrend(dc) {
         var left = DisplayRules.PLOT_LEFT; var right = DisplayRules.PLOT_RIGHT;
         var top = DisplayRules.PLOT_TOP; var bottom = DisplayRules.PLOT_BOTTOM;
-        var bounds = history.window();
-        var startD = bounds[0]; var endD = bounds[1];
-        var low = bounds[2]; var range = bounds[3]-low;
-        var ys = [];
-        var segments = [];
-        // Only interpolate measured segments. Missing readings create gaps.
-        for (var px = left; px <= right; px += 1) {
-            var d = startD+(endD-startD)*(px-left)/(right-left).toFloat();
-            var sample = history.sample(d);
-            if (sample == null) { ys.add(null); segments.add(null); continue; }
-            var py = DisplayRules.pixel(bottom-8-(sample[0]-low)*(bottom-top-16)/range);
-            ys.add(py); segments.add(sample[1]);
-            color(dc, DisplayRules.DONE_FILL); dc.fillRectangle(px, py, 1, bottom-py+1);
-        }
+        text(dc, 8, 244, Graphics.FONT_SMALL, "PWR 5m", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 123, 244, Graphics.FONT_SMALL, "FTP "+ftpWatts.toNumber().format("%d"), DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
+        var climb = ascent == null ? "UP --" : "UP "+ascent.toNumber().format("%d")+"m";
+        text(dc, 238, 244, Graphics.FONT_SMALL, climb, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        var ceiling = trend.ceiling(ftpWatts);
+        var previousX = -1; var previousY = 0; var previousSegment = -1;
         dc.setPenWidth(DisplayRules.STROKE);
-        color(dc, DisplayRules.BLUE);
-        for (var px = left+1; px <= right; px += 1) {
-            var i = px-left;
-            if (ys[i-1] != null && ys[i] != null && segments[i-1] == segments[i]) {
-                dc.drawLine(px-1, ys[i-1], px, ys[i]);
+        for (var i = 0; i < trend.points.size(); i += 1) {
+            var p = trend.points[i];
+            var px = chartX((p[0]+p[1])/2.0);
+            if (px < left || px > right) { previousX = -1; continue; }
+            var watts = p[2]/p[3].toFloat(); var py = powerY(watts, ceiling);
+            color(dc, DisplayRules.zoneColor(RideMath.zone(watts, powerLimits)));
+            dc.fillRectangle(px-1, py, 2, bottom-py+1);
+            if (previousX >= left && previousSegment == p[4]) {
+                dc.drawLine(previousX, previousY, px, py);
             }
+            previousX = px; previousY = py; previousSegment = p[4];
         }
-        if (history.distance != null && history.altitude != null) {
-            var markerY = DisplayRules.pixel(bottom-8-(history.altitude-low)*(bottom-top-16)/range);
-            color(dc, DisplayRules.BLUE); dc.fillRectangle(right-1, top, DisplayRules.MARKER_STROKE, bottom-top+1);
-            color(dc, Graphics.COLOR_WHITE); dc.fillCircle(right, markerY, DisplayRules.MARKER_HALO);
-            color(dc, DisplayRules.BLUE); dc.fillCircle(right, markerY, DisplayRules.MARKER_RADIUS);
-            color(dc, Graphics.COLOR_WHITE); dc.fillCircle(right, markerY, 2);
+        // Dashed reference is FTP; solid capped lines are native lap end/start.
+        var ftpY = powerY(ftpWatts, ceiling);
+        color(dc, DisplayRules.RULE);
+        for (var x = left; x < right; x += 8) { dc.fillRectangle(x, ftpY, 4, 2); }
+        text(dc, 8, 306, Graphics.FONT_SMALL, "-5m", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, 123, 306, Graphics.FONT_SMALL, trend.startLabel(), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
+        text(dc, 238, 306, Graphics.FONT_SMALL, "NOW", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        for (var i = 0; i < trend.boundaries.size(); i += 1) {
+            var px = chartX(trend.boundaries[i]);
+            if (px < left || px > right) { continue; }
+            color(dc, DisplayRules.BANNER_FILL); dc.fillRectangle(px-2, top, 4, bottom-top+1);
+            color(dc, DisplayRules.INK); dc.fillRectangle(px-1, top, 2, bottom-top+1);
+            dc.fillRectangle(px-3, top, 6, 4);
         }
+        color(dc, DisplayRules.BLUE); dc.fillRectangle(right-1, top, 3, bottom-top+1);
     }
 }

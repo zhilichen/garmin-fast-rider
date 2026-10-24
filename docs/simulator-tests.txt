@@ -1,4 +1,10 @@
 ------------------------------------------------------------------------------
+Executing test powerHistoryTest...
+PASS
+------------------------------------------------------------------------------
+Executing test powerWindowTest...
+PASS
+------------------------------------------------------------------------------
 Executing test measuredHistoryTest...
 PASS
 ------------------------------------------------------------------------------
@@ -26,6 +32,8 @@ PASS
 ==============================================================================
 RESULTS
 Test:                               Status:
+powerHistoryTest                    PASS
+powerWindowTest                     PASS
 measuredHistoryTest                 PASS
 boundedHistoryTest                  PASS
 zonesTest                           PASS
@@ -34,6 +42,6 @@ gearTest                            PASS
 lapStatsTest                        PASS
 gradeTest                           PASS
 courseTest                          PASS
-Ran 8 tests
+Ran 10 tests
 
-PASSED (passed=8, failed=0, errors=0)
+PASSED (passed=10, failed=0, errors=0)

@@ -46,6 +46,7 @@ module RideMath {
 
     // Synthetic measured-altitude feed for DEMO only; independent of GPX.
     function demoAltitude(d) { return 180+0.009*d+90*Math.sin(d/1700.0)+14*Math.sin(d/280.0); }
+    function demoPower(t) { return 210+95*Math.sin(t/19.0)+40*Math.sin(t/5.0); }
 
     function courseGrade(distance) {
         distance = clamp(distance, 0, CourseData.LENGTH);

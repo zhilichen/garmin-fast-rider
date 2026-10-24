@@ -17,8 +17,8 @@ module DisplayRules {
     const PLOT_LEFT = 16;
     const PLOT_RIGHT = 228;
     const BANNER_TOP = 184;
-    const PLOT_TOP = 250;
-    const PLOT_BOTTOM = 312;
+    const PLOT_TOP = 264;
+    const PLOT_BOTTOM = 302;
 
     const INK = 0x15212B;
     const LABEL = 0x354550;

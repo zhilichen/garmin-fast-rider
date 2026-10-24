@@ -1,0 +1,270 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" role="img" aria-labelledby="title desc">
+  <title id="title">Summit · five-minute power trend with native lap boundaries</title>
+  <desc id="desc">246 by 322 vector design preview, not a simulator screenshot. Synthetic power, three-second sample means, zone colors, dashed FTP reference, capped black native lap end/start boundaries, latest time at right. Current lap started 1 minute 8 seconds ago. Clock is a sample time.</desc>
+  <rect width="246" height="322" fill="white" />
+  <rect x="122" y="8" width="2" height="104" fill="#83909B" shape-rendering="crispEdges" />
+  <text x="8" y="23" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#354550">HEART RATE</text>
+  <text x="62" y="76" font-family="'Garmin Robo Units', Arial, sans-serif" font-size="47" font-weight="bold" text-anchor="middle" fill="#8F5B00">158</text>
+  <text x="8" y="105" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="start" fill="#354550">bpm</text>
+  <text x="116" y="105" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="end" fill="#8F5B00">Z4</text>
+  <rect x="8" y="116" width="108" height="4" fill="#8F5B00" shape-rendering="crispEdges" />
+  <text x="130" y="23" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#354550">PWR</text>
+  <text x="184" y="76" font-family="'Garmin Robo Units', Arial, sans-serif" font-size="47" font-weight="bold" text-anchor="middle" fill="#55616A">126</text>
+  <text x="130" y="105" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="start" fill="#354550">W</text>
+  <text x="238" y="105" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="end" fill="#55616A">Z1</text>
+  <rect x="130" y="116" width="108" height="4" fill="#55616A" shape-rendering="crispEdges" />
+  <text x="8" y="139" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#354550">CADENCE</text>
+  <text x="46" y="178" font-family="'Garmin Robo Units', Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#15212B">94</text>
+  <text x="86" y="173" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="start" fill="#354550">rpm</text>
+  <text x="116" y="139" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="end" fill="#354550">2/5</text>
+  <text x="238" y="23" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="end" fill="#354550">09:41</text>
+  <rect x="122" y="124" width="2" height="54" fill="#83909B" shape-rendering="crispEdges" />
+  <text x="130" y="137" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="start" fill="#354550">LAP</text>
+  <text x="238" y="139" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="end" fill="#15212B">01:08</text>
+  <text x="130" y="174" font-family="'Garmin Robo Units', Arial, sans-serif" font-size="30" font-weight="bold" text-anchor="start" fill="#15212B">245</text>
+  <text x="238" y="171" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="end" fill="#354550">~AVG W</text>
+  <rect x="0" y="184" width="246" height="138" fill="#F4F7F9" shape-rendering="crispEdges" />
+  <rect x="8" y="184" width="230" height="2" fill="#83909B" shape-rendering="crispEdges" />
+  <text x="8" y="207" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#354550">~GRADE %</text>
+  <text x="8" y="242" font-family="'Garmin Robo Units', Arial, sans-serif" font-size="30" font-weight="bold" text-anchor="start" fill="#15212B">-8.9</text>
+  <text x="238" y="207" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="end" fill="#15212B">16.7 km</text>
+  <text x="98" y="231" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="start" fill="#354550">TIME</text>
+  <text x="238" y="231" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="end" fill="#15212B">1:23:08</text>
+  <text x="8" y="257" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" text-anchor="start" fill="#354550">PWR 5m</text>
+  <text x="123" y="257" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" text-anchor="middle" fill="#354550">FTP 250</text>
+  <text x="238" y="257" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" text-anchor="end" fill="#354550">UP 682m</text>
+  <rect x="16" y="272" width="2" height="31" fill="#B62612" />
+  <rect x="19" y="273" width="2" height="30" fill="#B62612" />
+  <polyline points="17,272 20,273" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="21" y="274" width="2" height="29" fill="#B62612" />
+  <polyline points="20,273 22,274" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="23" y="275" width="2" height="28" fill="#B62612" />
+  <polyline points="22,274 24,275" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="25" y="276" width="2" height="27" fill="#8F5B00" />
+  <polyline points="24,275 26,276" fill="none" stroke="#8F5B00" stroke-width="2" />
+  <rect x="27" y="275" width="2" height="28" fill="#B62612" />
+  <polyline points="26,276 28,275" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="29" y="274" width="2" height="29" fill="#B62612" />
+  <polyline points="28,275 30,274" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="31" y="271" width="2" height="32" fill="#8620A0" />
+  <polyline points="30,274 32,271" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="33" y="269" width="2" height="34" fill="#8620A0" />
+  <polyline points="32,271 34,269" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="35" y="268" width="2" height="35" fill="#8620A0" />
+  <polyline points="34,269 36,268" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="38" y="268" width="2" height="35" fill="#8620A0" />
+  <polyline points="36,268 39,268" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="40" y="270" width="2" height="33" fill="#8620A0" />
+  <polyline points="39,268 41,270" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="42" y="273" width="2" height="30" fill="#B62612" />
+  <polyline points="41,270 43,273" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="44" y="277" width="2" height="26" fill="#8F5B00" />
+  <polyline points="43,273 45,277" fill="none" stroke="#8F5B00" stroke-width="2" />
+  <rect x="46" y="280" width="2" height="23" fill="#006B3C" />
+  <polyline points="45,277 47,280" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="48" y="282" width="2" height="21" fill="#006B3C" />
+  <polyline points="47,280 49,282" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="50" y="283" width="2" height="20" fill="#005AA8" />
+  <polyline points="49,282 51,283" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="52" y="283" width="2" height="20" fill="#006B3C" />
+  <polyline points="51,283 53,283" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="55" y="282" width="2" height="21" fill="#006B3C" />
+  <polyline points="53,283 56,282" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="57" y="281" width="2" height="22" fill="#006B3C" />
+  <polyline points="56,282 58,281" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="59" y="282" width="2" height="21" fill="#006B3C" />
+  <polyline points="58,281 60,282" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="61" y="283" width="2" height="20" fill="#005AA8" />
+  <polyline points="60,282 62,283" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="63" y="286" width="2" height="17" fill="#005AA8" />
+  <polyline points="62,283 64,286" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="65" y="289" width="2" height="14" fill="#55616A" />
+  <polyline points="64,286 66,289" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="67" y="292" width="2" height="11" fill="#55616A" />
+  <polyline points="66,289 68,292" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="69" y="294" width="2" height="9" fill="#55616A" />
+  <polyline points="68,292 70,294" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="72" y="294" width="2" height="9" fill="#55616A" />
+  <polyline points="70,294 73,294" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="74" y="293" width="2" height="10" fill="#55616A" />
+  <polyline points="73,294 75,293" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="76" y="290" width="2" height="13" fill="#55616A" />
+  <polyline points="75,293 77,290" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="78" y="288" width="2" height="15" fill="#005AA8" />
+  <polyline points="77,290 79,288" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="80" y="285" width="2" height="18" fill="#005AA8" />
+  <polyline points="79,288 81,285" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="82" y="284" width="2" height="19" fill="#005AA8" />
+  <polyline points="81,285 83,284" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="84" y="284" width="2" height="19" fill="#005AA8" />
+  <polyline points="83,284 85,284" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="86" y="285" width="2" height="18" fill="#005AA8" />
+  <polyline points="85,284 87,285" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="88" y="286" width="2" height="17" fill="#005AA8" />
+  <polyline points="87,285 89,286" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="91" y="286" width="2" height="17" fill="#005AA8" />
+  <polyline points="89,286 92,286" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="93" y="285" width="2" height="18" fill="#005AA8" />
+  <polyline points="92,286 94,285" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="95" y="283" width="2" height="20" fill="#005AA8" />
+  <rect x="97" y="280" width="2" height="23" fill="#006B3C" />
+  <polyline points="96,283 98,280" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="99" y="276" width="2" height="27" fill="#8F5B00" />
+  <polyline points="98,280 100,276" fill="none" stroke="#8F5B00" stroke-width="2" />
+  <rect x="101" y="273" width="2" height="30" fill="#B62612" />
+  <polyline points="100,276 102,273" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="103" y="270" width="2" height="33" fill="#8620A0" />
+  <polyline points="102,273 104,270" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="105" y="270" width="2" height="33" fill="#8620A0" />
+  <polyline points="104,270 106,270" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="108" y="271" width="2" height="32" fill="#8620A0" />
+  <polyline points="106,270 109,271" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="110" y="272" width="2" height="31" fill="#B62612" />
+  <polyline points="109,271 111,272" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="112" y="274" width="2" height="29" fill="#B62612" />
+  <polyline points="111,272 113,274" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="114" y="275" width="2" height="28" fill="#B62612" />
+  <polyline points="113,274 115,275" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="116" y="275" width="2" height="28" fill="#B62612" />
+  <polyline points="115,275 117,275" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="118" y="274" width="2" height="29" fill="#B62612" />
+  <polyline points="117,275 119,274" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="120" y="272" width="2" height="31" fill="#B62612" />
+  <polyline points="119,274 121,272" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="122" y="270" width="2" height="33" fill="#8620A0" />
+  <polyline points="121,272 123,270" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="125" y="270" width="2" height="33" fill="#8620A0" />
+  <polyline points="123,270 126,270" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="127" y="271" width="2" height="32" fill="#8620A0" />
+  <polyline points="126,270 128,271" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="129" y="273" width="2" height="30" fill="#B62612" />
+  <polyline points="128,271 130,273" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="131" y="277" width="2" height="26" fill="#8F5B00" />
+  <polyline points="130,273 132,277" fill="none" stroke="#8F5B00" stroke-width="2" />
+  <rect x="133" y="280" width="2" height="23" fill="#006B3C" />
+  <polyline points="132,277 134,280" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="135" y="284" width="2" height="19" fill="#005AA8" />
+  <polyline points="134,280 136,284" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="137" y="286" width="2" height="17" fill="#005AA8" />
+  <polyline points="136,284 138,286" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="139" y="286" width="2" height="17" fill="#005AA8" />
+  <polyline points="138,286 140,286" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="141" y="286" width="2" height="17" fill="#005AA8" />
+  <polyline points="140,286 142,286" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="144" y="285" width="2" height="18" fill="#005AA8" />
+  <polyline points="142,286 145,285" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="146" y="284" width="2" height="19" fill="#005AA8" />
+  <polyline points="145,285 147,284" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="148" y="284" width="2" height="19" fill="#005AA8" />
+  <polyline points="147,284 149,284" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="150" y="286" width="2" height="17" fill="#005AA8" />
+  <polyline points="149,284 151,286" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="152" y="288" width="2" height="15" fill="#005AA8" />
+  <polyline points="151,286 153,288" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="154" y="291" width="2" height="12" fill="#55616A" />
+  <polyline points="153,288 155,291" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="156" y="293" width="2" height="10" fill="#55616A" />
+  <polyline points="155,291 157,293" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="158" y="294" width="2" height="9" fill="#55616A" />
+  <polyline points="157,293 159,294" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="161" y="294" width="2" height="9" fill="#55616A" />
+  <polyline points="159,294 162,294" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="163" y="292" width="2" height="11" fill="#55616A" />
+  <polyline points="162,294 164,292" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="165" y="289" width="2" height="14" fill="#55616A" />
+  <polyline points="164,292 166,289" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="167" y="285" width="2" height="18" fill="#005AA8" />
+  <polyline points="166,289 168,285" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="169" y="283" width="2" height="20" fill="#006B3C" />
+  <polyline points="168,285 170,283" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="171" y="282" width="2" height="21" fill="#006B3C" />
+  <polyline points="170,283 172,282" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="173" y="281" width="2" height="22" fill="#006B3C" />
+  <polyline points="172,282 174,281" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="175" y="282" width="2" height="21" fill="#006B3C" />
+  <polyline points="174,281 176,282" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="178" y="283" width="2" height="20" fill="#006B3C" />
+  <polyline points="176,282 179,283" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="180" y="283" width="2" height="20" fill="#005AA8" />
+  <rect x="182" y="282" width="2" height="21" fill="#006B3C" />
+  <polyline points="181,283 183,282" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="184" y="280" width="2" height="23" fill="#006B3C" />
+  <polyline points="183,282 185,280" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="186" y="276" width="2" height="27" fill="#8F5B00" />
+  <polyline points="185,280 187,276" fill="none" stroke="#8F5B00" stroke-width="2" />
+  <rect x="188" y="273" width="2" height="30" fill="#B62612" />
+  <polyline points="187,276 189,273" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="190" y="270" width="2" height="33" fill="#8620A0" />
+  <polyline points="189,273 191,270" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="192" y="268" width="2" height="35" fill="#8620A0" />
+  <polyline points="191,270 193,268" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="194" y="268" width="2" height="35" fill="#8620A0" />
+  <polyline points="193,268 195,268" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="197" y="270" width="2" height="33" fill="#8620A0" />
+  <polyline points="195,268 198,270" fill="none" stroke="#8620A0" stroke-width="2" />
+  <rect x="199" y="272" width="2" height="31" fill="#B62612" />
+  <polyline points="198,270 200,272" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="201" y="274" width="2" height="29" fill="#B62612" />
+  <polyline points="200,272 202,274" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="203" y="275" width="2" height="28" fill="#8F5B00" />
+  <polyline points="202,274 204,275" fill="none" stroke="#8F5B00" stroke-width="2" />
+  <rect x="205" y="276" width="2" height="27" fill="#8F5B00" />
+  <polyline points="204,275 206,276" fill="none" stroke="#8F5B00" stroke-width="2" />
+  <rect x="207" y="275" width="2" height="28" fill="#B62612" />
+  <polyline points="206,276 208,275" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="209" y="274" width="2" height="29" fill="#B62612" />
+  <polyline points="208,275 210,274" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="211" y="272" width="2" height="31" fill="#B62612" />
+  <polyline points="210,274 212,272" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="214" y="272" width="2" height="31" fill="#B62612" />
+  <polyline points="212,272 215,272" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="216" y="274" width="2" height="29" fill="#B62612" />
+  <polyline points="215,272 217,274" fill="none" stroke="#B62612" stroke-width="2" />
+  <rect x="218" y="276" width="2" height="27" fill="#8F5B00" />
+  <polyline points="217,274 219,276" fill="none" stroke="#8F5B00" stroke-width="2" />
+  <rect x="220" y="280" width="2" height="23" fill="#006B3C" />
+  <polyline points="219,276 221,280" fill="none" stroke="#006B3C" stroke-width="2" />
+  <rect x="222" y="284" width="2" height="19" fill="#005AA8" />
+  <polyline points="221,280 223,284" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="224" y="287" width="2" height="16" fill="#005AA8" />
+  <polyline points="223,284 225,287" fill="none" stroke="#005AA8" stroke-width="2" />
+  <rect x="226" y="289" width="2" height="14" fill="#55616A" />
+  <polyline points="225,287 227,289" fill="none" stroke="#55616A" stroke-width="2" />
+  <rect x="16" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="24" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="32" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="40" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="48" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="56" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="64" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="72" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="80" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="88" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="96" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="104" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="112" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="120" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="128" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="136" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="144" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="152" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="160" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="168" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="176" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="184" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="192" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="200" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="208" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="216" y="277" width="4" height="2" fill="#83909B" />
+  <rect x="224" y="277" width="4" height="2" fill="#83909B" />
+  <text x="8" y="319" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" text-anchor="start" fill="#354550">-5m</text>
+  <text x="123" y="319" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" text-anchor="middle" fill="#15212B">LAP START -1:08</text>
+  <text x="238" y="319" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" text-anchor="end" fill="#354550">NOW</text>
+  <rect x="93" y="264" width="4" height="39" fill="#F4F7F9" />
+  <rect x="94" y="264" width="2" height="39" fill="#15212B" />
+  <rect x="92" y="264" width="6" height="4" fill="#15212B" />
+  <rect x="178" y="264" width="4" height="39" fill="#F4F7F9" />
+  <rect x="179" y="264" width="2" height="39" fill="#15212B" />
+  <rect x="177" y="264" width="6" height="4" fill="#15212B" />
+  <rect x="227" y="264" width="3" height="39" fill="#005AA8" />
+</svg>
