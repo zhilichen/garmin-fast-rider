@@ -35,14 +35,16 @@ def generate(font_dir, out, scale, metrics_path):
     numeric = {}
     for name, filename, base_size, characters in FONT_SPECS:
         size = max(1, math.floor(base_size*scale) if name in ('Chart26', 'Remaining21') else round(base_size*scale))
-        font = ImageFont.truetype(str(font_dir / filename), size)
+        # These atlases contain individual Latin glyphs. Explicit BASIC layout
+        # keeps their advances independent of optional host RAQM/HarfBuzz builds.
+        font = ImageFont.truetype(str(font_dir / filename), size, layout_engine=ImageFont.Layout.BASIC)
         glyphs=[]; x=y=1; row=0
         character_fonts = {}
         if name.startswith('Remaining'):
             # Keep regular-weight parentheses at the bold digits' cap height;
             # they must not enlarge the text backdrop into neighboring rows.
             cap = max(-font.getbbox(c, anchor='ls')[1] for c in '0123456789')
-            choices = [ImageFont.truetype(str(font_dir / 'RobotoCondensed-Regular.ttf'), n) for n in range(8, size+1)]
+            choices = [ImageFont.truetype(str(font_dir / 'RobotoCondensed-Regular.ttf'), n, layout_engine=ImageFont.Layout.BASIC) for n in range(8, size+1)]
             small = min(choices, key=lambda f: abs((f.getbbox('(', anchor='ls')[3]-f.getbbox('(', anchor='ls')[1])-cap))
             for c in '()':
                 b = small.getbbox(c, anchor='ls'); h = b[3]-b[1]
@@ -72,7 +74,7 @@ def generate(font_dir, out, scale, metrics_path):
                 # 4x so the small Z gains weight without a whole-pixel outline.
                 raster_scale = 4
                 mask = Image.new('L', (w*raster_scale, h*raster_scale), 0)
-                heavy = ImageFont.truetype(str(font_dir / filename), size*raster_scale)
+                heavy = ImageFont.truetype(str(font_dir / filename), size*raster_scale, layout_engine=ImageFont.Layout.BASIC)
                 ImageDraw.Draw(mask).text((-box[0]*raster_scale, (-box[1]+shift)*raster_scale), c,
                     font=heavy, anchor='ls', fill=255, stroke_width=1, stroke_fill=255)
                 mask = mask.resize((w,h), Image.Resampling.LANCZOS)
