@@ -1,3 +1,16 @@
+# FastRider v0.3.12：两秒“铛铛铛”铃声
+
+- 改为单次入队的自定义ToneProfile音调，不依赖loud beep或系统提示预设。三次敲击位于0/600/1200ms，两个600ms短段与一个800ms长尾段合计**2000ms**（含静音）；末音在1975ms开始，2000ms结束，未用尾部静音凑时长。
+- 5600Hz/25ms起音，2800/4400Hz交替，尾部通过稀疏短音与静音近似余响。44个音符/静音均使用25ms网格，1275ms有声+725ms静音。0Hz休止用法来自官方SDK 9.3.0 Attention样例的`resources-jsondata/jsondata.xml`生日歌。公开API只有频率和时长，不能控制真实音量包络或同时叠加泛音；铃感仍需真机试听。
+- 删除每秒compute调度、BellPattern状态机及其取消回调；整个序列一次交给原生引擎，无Timer、sleep、忙等待、repeatCount或未知长度的预设兜底。提交前再次检查总和为2000ms。输入冷却2100ms（含100ms防重触发余量），不延长发声。2000ms为提交的精确谱面长度；固件计时精度、起停延迟及其他系统声音的影响尚未用麦克风测量，不宣称声学硬实时误差为零。
+- live / hardware / demo / test构建成功，无告警；Garmin VM **29/29**，[输出](simulator-tests.txt)。测试直接读取构造后的ToneProfile，验证总长2000ms、三击起点、25ms网格、零频静音、末音非静音、冷却边界和2秒后可再次触发。原有全部布局/数据/交互回归通过。
+- [谱面](bell-score-v0312.json)、[原生触控日志](bell-simulator-v0312.txt)：连续双击只提交一次44段/2000ms请求，含静音的完整数组被原生API接受，无异常；冷却后可再次响铃，右侧功率正常切换。真实demo字段堆63,408 /127,424 bytes。该记录证明API接受及配置时长，不是实机音频录音。
+- hardware包**170,668 bytes**已更新到USB连接的Edge840 `GARMIN/APPS/SUMMIT.PRG`并回读逐字节一致。替换前已备份并核对旧pending包；保留原App ID、签名、活动和设置。断开USB后双击左侧区域试听；UI、字体和默认3s/All/5m不变。
+
+[官方ToneProfile文档](https://developer.garmin.com/connect-iq/api-docs/Toybox/Attention/ToneProfile.html) · [车铃说明](bell-interaction.md)
+
+以下保留旧版验收记录。
+
 # FastRider v0.3.11：分隔左移15 px、重排横向分布与范围闪电
 
 - 上下竖分隔从x122统一移至x107，均宽2 px；左内容宽103 px，右内容宽133 px（增加15 px），功率起点x111。心率Zone右沿x105，两条色条分别宽103/133 px，位置标记按各自条宽重新映射。

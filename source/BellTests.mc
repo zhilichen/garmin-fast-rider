@@ -88,37 +88,34 @@ function bellCooldownExpiryTest(logger) {
 }
 
 (:test)
-function bellPatternCadenceTest(logger) {
-    var p = new BellPattern();
-    Test.assertEqual(p.start(100), Toybox.Attention.TONE_LOUD_BEEP);
-    Test.assert(p.next(899) == null);
-    // At the real field's 1 Hz cadence, each update emits one different stage.
-    Test.assertEqual(p.next(1100), Toybox.Attention.TONE_ALERT_HI);
-    Test.assert(p.next(1100) == null);
-    Test.assertEqual(p.next(2100), Toybox.Attention.TONE_LOUD_BEEP);
-    Test.assertEqual(p.next(3100), Toybox.Attention.TONE_ALERT_LO);
-    Test.assertEqual(p.next(4100), Toybox.Attention.TONE_LOUD_BEEP);
-    Test.assert(!p.active); Test.assert(p.next(5100) == null);
+function bellExactDurationTest(logger) {
+    var tones = BellAudio.profile(); var total = 0; var strikes = 0;
+    var sounding = 0; var silence = 0;
+    for (var i = 0; i < tones.size(); i += 1) {
+        var tone = tones[i];
+        Test.assert(tone.duration > 0); Test.assertEqual(tone.duration%25, 0);
+        Test.assert(tone.frequency >= 0);
+        if (tone.frequency == 5600) { Test.assertEqual(total, strikes*600); strikes += 1; }
+        if (tone.frequency == 0) { silence += tone.duration; }
+        else { sounding += tone.duration; }
+        total += tone.duration;
+    }
+    Test.assertEqual(total, 2000); Test.assertEqual(BellAudio.duration(tones), 2000);
+    Test.assertEqual(strikes, 3);
+    Test.assert(silence > 0); Test.assert(sounding > silence);
+    // The final audible pulse ends at 2000ms, rather than padding with silence.
+    Test.assert(tones[tones.size()-1].frequency > 0);
     return true;
 }
 
 (:test)
-function bellPatternCancellationTest(logger) {
-    var p = new BellPattern(); p.start(1000);
-    Test.assert(p.next(999) == null); Test.assert(!p.active);
-    p.start(0);
-    // Do not burst overdue sounds after an interrupted/stalled compute feed.
-    Test.assert(p.next(2400) == null); Test.assert(!p.active);
-    p.start(0); p.next(2200); p.next(3700);
-    Test.assert(p.next(5000) == null); Test.assert(!p.active);
-    p.start(100); p.cancel();
-    Test.assert(p.next(1100) == null); Test.assert(!p.active);
-    // Reopening the page or resetting the activity cancels the module's future notes.
-    BellAudio.pattern = new BellPattern(); BellAudio.pattern.start(100);
-    var view = new FastRiderView(); view.onHide();
-    Test.assert(!BellAudio.pattern.active);
-    BellAudio.pattern.start(100); view.onTimerReset(); Test.assert(!BellAudio.pattern.active);
-    BellAudio.pattern.start(100); Toybox.Application.getApp().onStop(null);
-    Test.assert(!BellAudio.pattern.active);
+function bellRepeatAfterTwoSecondsTest(logger) {
+    var bell = new BellGesture();
+    bell.tap(20, 40, 100); Test.assert(bell.tap(20, 40, 200));
+    // Late taps inside the sound cannot arm an immediate restart.
+    Test.assert(!bell.tap(20, 40, 2199));
+    Test.assert(!bell.tap(20, 40, 2299));
+    Test.assert(!bell.tap(20, 40, 2300));
+    Test.assert(bell.tap(20, 40, 2400));
     return true;
 }

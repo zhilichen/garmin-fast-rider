@@ -1,0 +1,12 @@
+Connect IQ SDK 9.3.0 / edge840 API 6.0.0 / FastRider v0.3.12
+Native double-click at [30,50], repeated double-click inside the cooldown,
+then power panel click at [110,50]. After cooldown, one more double-click.
+FastRider demo memory: 63408 / 127424 bytes
+FastRider bell: triple clang, 44 profiles, 2000ms, attacks=0/600/1200ms
+Tap [110,50] -> 10s, All, 5m
+FastRider bell: triple clang, 44 profiles, 2000ms, attacks=0/600/1200ms
+Tap [110,50] -> 3s, All, 5m
+One profile request per accepted gesture; zero-Hz rests accepted without
+API error. UI power switching remained operational. This is native API
+acceptance plus exact submitted duration, not a microphone measurement
+of the physical buzzer's waveform, latency or clock tolerance.
