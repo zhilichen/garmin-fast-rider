@@ -14,6 +14,9 @@ PASS
 Executing test zonesTest...
 PASS
 ------------------------------------------------------------------------------
+Executing test zonePositionTest...
+PASS
+------------------------------------------------------------------------------
 Executing test timeTest...
 PASS
 ------------------------------------------------------------------------------
@@ -62,7 +65,7 @@ Executing test bitmapFontMetricsTest...
 PASS
 ------------------------------------------------------------------------------
 Executing test nativeRenderStatesTest...
-Summit demo memory: 69368 / 8384568 bytes
+Summit demo memory: 71368 / 8384568 bytes
 Tap [123,238] -> 3s, All, 20m
 Tap [123,238] -> 3s, All, All
 Tap [123,238] -> 3s, All, 5m
@@ -81,7 +84,7 @@ Tap [123,238] -> 10s, LAP, All
 Tap [123,238] -> 10s, LAP, 5m
 Tap [200,160] -> 10s, All, 5m
 Tap [200,50] -> 3s, All, 5m
-DEBUG (12:02): Native render memory used=69384 free=8315184
+DEBUG (12:21): Native render memory used=71384 free=8313184
 PASS
 ------------------------------------------------------------------------------
 Executing test navigationAvailabilityTest...
@@ -98,6 +101,7 @@ powerWindowTest                     PASS
 measuredHistoryTest                 PASS
 boundedHistoryTest                  PASS
 zonesTest                           PASS
+zonePositionTest                    PASS
 timeTest                            PASS
 gearTest                            PASS
 lapStatsTest                        PASS
@@ -115,6 +119,6 @@ bitmapFontMetricsTest               PASS
 nativeRenderStatesTest              PASS
 navigationAvailabilityTest          PASS
 rideAverageAvailabilityTest         PASS
-Ran 22 tests
+Ran 23 tests
 
-PASSED (passed=22, failed=0, errors=0)
+PASSED (passed=23, failed=0, errors=0)

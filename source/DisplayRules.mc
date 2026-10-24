@@ -9,6 +9,8 @@ module DisplayRules {
     const CELL_WIDTH = 108;
     const STROKE = 2;
     const ZONE_BAR = 6;
+    const ZONE_MARKER_WIDTH = 3;
+    const ZONE_MARKER_HEIGHT = 10;
     const PLOT_LEFT = 16;
     const PLOT_RIGHT = 228;
     const BANNER_TOP = 220;

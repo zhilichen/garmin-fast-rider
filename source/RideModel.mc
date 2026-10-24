@@ -27,6 +27,18 @@ module RideMath {
         return limits.size() + 1;
     }
 
+    // Position within the original numbered zone, independent of color grouping.
+    function zoneFraction(value, limits as Lang.Array<Lang.Number or Lang.Float>, minimum, maximum) {
+        var z = zone(value, limits);
+        if (z == 0) { return null; }
+        var low = z == 1 ? minimum : limits[z-2];
+        var high = z <= limits.size() ? limits[z-1] : maximum;
+        // Power Z7 has no finite upper bound; indicate overflow at the right edge.
+        if (high == null) { return 1.0; }
+        if (high <= low) { return null; }
+        return clamp((value-low)/(high-low).toFloat(), 0.0, 1.0);
+    }
+
     function duration(ms) {
         var sec = (ms / 1000).toNumber();
         var hour = (sec / 3600).toNumber();

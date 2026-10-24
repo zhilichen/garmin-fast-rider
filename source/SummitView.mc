@@ -29,6 +29,8 @@ class SummitView extends WatchUi.DataField {
     var ui as InteractionState;
     var powerLimits;
     var hrLimits;
+    var hrMinimum = 0;
+    var hrMaximum = 190;
     var trend as PowerHistory;
     var ftpWatts = 250;
     var demoSeeded = false;
@@ -40,6 +42,7 @@ class SummitView extends WatchUi.DataField {
     var fontSizes as Lang.Array<Lang.Number> = [49, 33, 44, 18, 20, 26, 32];
     var flashRegion = 0;
     var flashUntil = 0;
+    var sensorMask = -1;
 
     function initialize() {
         DataField.initialize();
@@ -49,14 +52,23 @@ class SummitView extends WatchUi.DataField {
         trend = new PowerHistory();
         start = System.getTimer();
         loadSettings();
+        hardwareLog("boot: live Activity.Info, defaults=3s/All/5m");
+    }
+    function hardwareLog(message) {
+        if (BuildMode.DIAGNOSTICS) { System.println("SUMMIT "+message); }
     }
     function loadSettings() {
         var ftp = RideMath.clamp(Application.Properties.getValue("ftp"), 50, 600);
         var maxHr = RideMath.clamp(Application.Properties.getValue("maxHr"), 100, 240);
         hrLimits = [maxHr*0.60, maxHr*0.70, maxHr*0.80, maxHr*0.90];
+        hrMinimum = 0; hrMaximum = maxHr;
         if (!BuildMode.DEMO) {
             var zones = UserProfile.getHeartRateZones(UserProfile.HR_ZONE_SPORT_BIKING);
-            if (zones != null && zones.size() == 6 && zones[1] > 0) { hrLimits = [zones[1], zones[2], zones[3], zones[4]]; }
+            if (zones != null && zones.size() == 6 && zones[1] > 0) {
+                hrLimits = [zones[1], zones[2], zones[3], zones[4]];
+                if (zones[0] >= 0 && zones[0] < zones[1]) { hrMinimum = zones[0]; }
+                if (zones[5] > zones[4]) { hrMaximum = zones[5]; }
+            }
             if (UserProfile has :getFunctionalThresholdPower) {
                 var deviceFtp = UserProfile.getFunctionalThresholdPower(Activity.SPORT_CYCLING);
                 if (deviceFtp != null && deviceFtp > 0) { ftp = deviceFtp; }
@@ -93,6 +105,11 @@ class SummitView extends WatchUi.DataField {
         // from destination elevation or the GPX prototype.
         remainingAscent = null;
         trend.update(millis, power, running);
+        if (BuildMode.DIAGNOSTICS) {
+            // Availability only; do not log health readings or GPS coordinates.
+            var mask = (power != null ? 1 : 0)|(hr != null ? 2 : 0)|(cadence != null ? 4 : 0)|(rearGear != null ? 8 : 0)|(speed != null ? 16 : 0);
+            if (mask != sensorMask) { hardwareLog("sensor availability P=1 H=2 C=4 G=8 S=16 mask="+mask); sensorMask = mask; }
+        }
     }
     function demoMeters(seconds) { return 16737.1776+(seconds-4988)*9.94; }
     function seedDemo() {
@@ -123,14 +140,17 @@ class SummitView extends WatchUi.DataField {
         trend.update(millis, power, true);
     }
     function onTimerReset() {
+        hardwareLog("timer reset -> defaults=3s/All/5m");
         trend.reset(); rolling.reset(); lap.reset(); ride.reset(); ui.reset();
         gradeEstimator.reset(); grade = null; lapNumber = null;
         demoSeeded = false; demoDiagnostics = false; ascent = null; remainingDistance = null; remainingAscent = null;
         meters = null; millis = null; timerMillis = null; ridePower = null;
         power = null; hr = null; cadence = null; speed = null; rearGear = null;
         flashRegion = 0; start = System.getTimer();
+        sensorMask = -1;
     }
     function onTimerStart() {
+        hardwareLog("timer start");
         if (BuildMode.DEMO) { return; }
         var info = Activity.getActivityInfo();
         if (info.timerTime != null && info.timerTime == 0) {
@@ -140,9 +160,9 @@ class SummitView extends WatchUi.DataField {
         trend.started(info.elapsedTime); rolling.reset();
     }
     function breakSamples() { lap.breakSample(); ride.breakSample(); trend.breakSample(); rolling.reset(); }
-    function onTimerPause() { breakSamples(); }
-    function onTimerResume() { breakSamples(); }
-    function onTimerStop() { breakSamples(); }
+    function onTimerPause() { hardwareLog("timer pause"); breakSamples(); }
+    function onTimerResume() { hardwareLog("timer resume"); breakSamples(); }
+    function onTimerStop() { hardwareLog("timer stop"); breakSamples(); }
     function onTimerLap() {
         if (BuildMode.DEMO) {
             if (!demoSeeded) { computeDemo(); }
@@ -154,6 +174,7 @@ class SummitView extends WatchUi.DataField {
         }
         if (lapNumber != null) { lapNumber += 1; }
         ui.beganLap();
+        hardwareLog("native lap -> latest lap="+(lapNumber == null ? "?" : lapNumber.format("%d"))+", power="+ui.powerSeconds+"s, graph="+ui.rangeLabel());
         WatchUi.requestUpdate();
     }
     function onTimerLap2(trigger) { onTimerLap(); return true; }
@@ -161,7 +182,7 @@ class SummitView extends WatchUi.DataField {
         if (width != 246 || height != 322 || !ui.tap(x, y)) { return false; }
         flashRegion = y < 98 ? 1 : (y < 214 ? 2 : 3);
         flashUntil = System.getTimer()+180;
-        if (BuildMode.DEMO) {
+        if (BuildMode.DEMO || BuildMode.DIAGNOSTICS) {
             System.println("Tap ["+x+","+y+"] -> "+ui.powerSeconds+"s, "+(ui.allStats ? "All" : "LAP")+", "+ui.rangeLabel());
         }
         WatchUi.requestUpdate();
@@ -207,9 +228,9 @@ class SummitView extends WatchUi.DataField {
         text(dc, 33, 207, 1, compactValue(dc, g, 50), DisplayRules.gradeColor(grade), Graphics.TEXT_JUSTIFY_CENTER);
         text(dc, 92, 207, 1, compactValue(dc, speed == null ? null : speed*2.236936292, 58), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);
         drawStats(dc); drawChartHeader(dc); drawPowerTrend(dc); drawFooter(dc);
-        if (BuildMode.DEMO && !demoDiagnostics) {
+        if ((BuildMode.DEMO || BuildMode.DIAGNOSTICS) && !demoDiagnostics) {
             var stats = System.getSystemStats();
-            System.println("Summit demo memory: "+stats.usedMemory+" / "+stats.totalMemory+" bytes");
+            System.println((BuildMode.DEMO ? "Summit demo memory: " : "SUMMIT device memory: ")+stats.usedMemory+" / "+stats.totalMemory+" bytes");
             demoDiagnostics = true;
         }
         if (flashRegion != 0 && System.getTimer() < flashUntil) {
@@ -234,8 +255,17 @@ class SummitView extends WatchUi.DataField {
         text(dc, 130, 76, 3, "W "+ui.powerSeconds+"s", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
         text(dc, 116, 76, 3, hz == 0 ? "--" : "Z"+hz, hc, Graphics.TEXT_JUSTIFY_RIGHT);
         text(dc, 238, 76, 3, pz == 0 ? "--" : "Z"+pz, pc, Graphics.TEXT_JUSTIFY_RIGHT);
-        color(dc, hc); dc.fillRectangle(8, 88, 108, 6);
-        color(dc, pc); dc.fillRectangle(130, 88, 108, 6);
+        color(dc, hc); dc.fillRectangle(8, 88, 108, DisplayRules.ZONE_BAR);
+        color(dc, pc); dc.fillRectangle(130, 88, 108, DisplayRules.ZONE_BAR);
+        drawZoneMarker(dc, 8, RideMath.zoneFraction(hr, hrLimits, hrMinimum, hrMaximum));
+        drawZoneMarker(dc, 130, RideMath.zoneFraction(watts, powerLimits, 0, null));
+    }
+    function drawZoneMarker(dc, left, fraction) {
+        if (fraction == null) { return; }
+        var x = left+DisplayRules.pixel(fraction*(DisplayRules.CELL_WIDTH-DisplayRules.ZONE_MARKER_WIDTH));
+        var y = 88-(DisplayRules.ZONE_MARKER_HEIGHT-DisplayRules.ZONE_BAR)/2;
+        color(dc, 0x000000);
+        dc.fillRectangle(x, y, DisplayRules.ZONE_MARKER_WIDTH, DisplayRules.ZONE_MARKER_HEIGHT);
     }
     function drawStats(dc) {
         var title = ui.allStats ? "All" : "LAP "+(lapNumber == null ? "?" : lapNumber.format("%d"));

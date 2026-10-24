@@ -7,8 +7,9 @@ mode="${1:-live}"
 case "$mode" in
   live) jungle=monkey.jungle ;;
   demo) jungle=demo.jungle ;;
+  hardware) jungle=hardware.jungle ;;
   test) jungle=demo.jungle ;;
-  *) echo 'Usage: scripts/build.sh [live|demo|test]' >&2; exit 2 ;;
+  *) echo 'Usage: scripts/build.sh [live|demo|hardware|test]' >&2; exit 2 ;;
 esac
 if [ ! -f "$TASK_KEY" ]; then
   mkdir -p "$(dirname "$TASK_KEY")"

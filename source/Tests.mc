@@ -138,6 +138,35 @@ function zonesTest(logger) {
 }
 
 (:test)
+function zonePositionTest(logger) {
+    var power = [137.5, 187.5, 225, 262.5, 300, 375];
+    Test.assert(RideMath.zoneFraction(null, power, 0, null) == null);
+    assertNear(RideMath.zoneFraction(0, power, 0, null), 0.0);
+    assertNear(RideMath.zoneFraction(137.5, power, 0, null), 1.0);
+    assertNear(RideMath.zoneFraction(137.6, power, 0, null), 0.002);
+    assertNear(RideMath.zoneFraction(162.5, power, 0, null), 0.5);
+    assertNear(RideMath.zoneFraction(187.5, power, 0, null), 1.0);
+    assertNear(RideMath.zoneFraction(337.5, power, 0, null), 0.5);
+    assertNear(RideMath.zoneFraction(500, power, 0, null), 1.0);
+    var heart = [114, 133, 152, 171];
+    assertNear(RideMath.zoneFraction(60, heart, 95, 190), 0.0);
+    assertNear(RideMath.zoneFraction(104.5, heart, 95, 190), 0.5);
+    assertNear(RideMath.zoneFraction(158, heart, 95, 190), 6.0/19);
+    assertNear(RideMath.zoneFraction(180.5, heart, 95, 190), 0.5);
+    assertNear(RideMath.zoneFraction(200, heart, 95, 190), 1.0);
+    Test.assert(RideMath.zoneFraction(200, heart, 95, 171) == null);
+    // The tick uses the same selected rolling mean as the power number and zone.
+    var rolling = new PowerAverage();
+    for (var i = 0; i <= 10; i += 1) { rolling.update(i*1000, i < 7 ? 150 : 250, true); }
+    var short = rolling.average(3); var long = rolling.average(10);
+    Test.assertEqual(RideMath.zone(short, power), 4);
+    Test.assertEqual(RideMath.zone(long, power), 3);
+    assertNear(RideMath.zoneFraction(short, power, 0, null), (short-225)/37.5);
+    assertNear(RideMath.zoneFraction(long, power, 0, null), (long-187.5)/37.5);
+    return true;
+}
+
+(:test)
 function timeTest(logger) {
     Test.assertEqual(RideMath.duration(0), "0:00:00");
     Test.assertEqual(RideMath.duration(3661000), "1:01:01");
