@@ -19,8 +19,8 @@ module DisplayRules {
     const PRIMARY_BOTTOM = 90;
     const MIDDLE_TOP = 91;
     const UNIT_BASELINE = 62;
-    const ZONE_BADGE_WIDTH = 30;
-    const ZONE_SMALL_BADGE_WIDTH = 19;
+    const ZONE_BADGE_WIDTH = 31;
+    const ZONE_SMALL_BADGE_WIDTH = 20;
     const ZONE_BAR_TOP = 76;
     const ZONE_BAR = 6;
     const ZONE_MARKER_WIDTH = 4;

@@ -460,11 +460,13 @@ function bitmapFontMetricsTest(logger) {
     Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[8]), 44);
     Test.assertEqual(v.zoneBadgeWidth(dc, 6, 0), DisplayRules.ZONE_BADGE_WIDTH);
     Test.assertEqual(v.zoneBadgeWidth(dc, 7, 6), DisplayRules.ZONE_SMALL_BADGE_WIDTH);
-    Test.assertEqual(dc.getTextWidthInPixels("Z", v.fonts[9]), 8);
-    Test.assertEqual(FontInk.TOP[9], 11);
+    Test.assertEqual(dc.getTextWidthInPixels("Z", v.fonts[9]), 9);
+    Test.assertEqual(FontInk.TOP[9], 12);
     Test.assertEqual(FontInk.TOP[8], 32);
-    // The composite badge retains its previous width and clears the radar.
-    Test.assert(dc.getTextWidthInPixels("999", v.fonts[0])+1+v.zoneBadgeWidth(dc, 7, 0) <= DisplayRules.CELL_WIDTH);
+    // The larger small Z sits below the primary digits; the large zone digit
+    // has its own clear horizontal lane, including with 3-digit primary values.
+    Test.assert(dc.getTextWidthInPixels("999", v.fonts[0])+1+v.textWidth(dc, "7", 8) <= DisplayRules.CELL_WIDTH);
+    Test.assert(DisplayRules.ZONE_BASELINE-FontInk.TOP[9] > DisplayRules.PRIMARY_BASELINE+FontInk.BOTTOM[0]);
     Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[0] >= 1);
     Test.assert(DisplayRules.PRIMARY_BASELINE-FontInk.TOP[0] <= 2);
     Test.assert(DisplayRules.ZONE_BASELINE-FontInk.TOP[8] >= DisplayRules.RADAR_BOTTOM);
@@ -498,8 +500,8 @@ function bitmapFontMetricsTest(logger) {
     var d = v.distanceParts(dc, 10.7*1609.344, 9.9*1609.344, true);
     Test.assertEqual(d[0], "10.7"); Test.assertEqual(d[1], "(-9.9)");
     Test.assertEqual(d[2], 5); Test.assertEqual(d[3], 13);
-    Test.assert(FontInk.TOP[d[3]] >= FontInk.TOP[d[2]]*0.63);
-    Test.assert(FontInk.TOP[d[3]] <= FontInk.TOP[d[2]]*0.72);
+    Test.assert(FontInk.TOP[d[3]] > FontInk.TOP[12]);
+    Test.assert(FontInk.TOP[d[3]] < FontInk.TOP[d[2]]);
     Test.assert(v.distanceParts(dc, 10.7*1609.344, null, true)[1] == null);
     Test.assert(v.distanceParts(dc, 0.42*1609.344, 9.9*1609.344, false)[1] == null);
     var longRow = v.distanceParts(dc, 320000.0, 500000.0, true);

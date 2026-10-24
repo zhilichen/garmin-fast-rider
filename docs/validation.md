@@ -1,3 +1,14 @@
+# FastRider v0.3.9：加厚小Z与更清楚的剩余里程
+
+- 小Z从14 px字体增至16 px（原字形高11→12 px，宽8→9 px），字形内增加0.25 px加厚笔画，以4倍采样保留抗锯齿；原生截图可见字高10→11 px，约+10%。区号44 px及baseline66保持不变，组合总宽31 px；四位主功率回退时使用10 px小Z+26 px区号，总宽20 px。Z位于主数字下方，不会与主数字争用同一行。
+- All剩余距离改为24 px粗体数字/负号，括号单独用Regular字形并对齐高度，mi维持18 px常规。长值成对回退32/24、30/22、26/21 px，后缀和mi收紧字间距，保持原字形比例。正常示例`10.7mi(-9.9)`使用32/24 px，原生Dc宽115 px；demo的`10.5mi(-12.4)`使用30/22 px，宽118 px。
+- live / hardware / demo / test构建成功，无告警；Garmin VM **27/27**，[输出](simulator-tests.txt)。原生Dc字宽测试覆盖大小关系、Z与主数字上下避让、单位/图标间距、雷达留白、长距离回退；全部12种模式及缺失、四位数、长计时仍正常绘制。
+- [原生246×322截图](fastrider-edge840-v039-default.png)，File→Save Screen Capture输出，demo合成数据。真实demo字段堆60,448 /127,424 bytes。[像素与字体记录](type-v039-pixels.json)：截图中已骑行/剩余/mi的字形高分别21/16/13 px，右侧1px边距、雷达区、顶部留白及黑白marker通过检查。
+- SDK模拟器首次启动停在空白transport会话，重启本任务模拟器/MonkeyDo后成功加载，没有改动程序绕过该问题。
+- hardware包**166,396 bytes**已写入USB连接中的Edge840 `GARMIN/APPS/SUMMIT.PRG`，回读逐字节一致。沿用App ID与签名；替换前已备份并验证旧pending包。断开USB后才加载新版，实际屏幕可读性仍待实测。
+
+以下保留旧版验收记录。
+
 # FastRider v0.3.8：车铃改用原生响亮蜂鸣
 
 - `Attention.playTone(Attention.TONE_LOUD_BEEP)`替换1500ms自定义音调序列。该预设由Garmin文档明确称为响亮蜂鸣；公开API没有音量/振幅控制，未测量其声压，也不声称超过其他所有原生声音。响度及实际时长由Edge固件决定。

@@ -194,10 +194,10 @@ class FastRiderView extends WatchUi.DataField {
                  WatchUi.loadResource(Rez.Fonts.Average54), WatchUi.loadResource(Rez.Fonts.Meta18),
                  WatchUi.loadResource(Rez.Fonts.Chart26), WatchUi.loadResource(Rez.Fonts.Stats32),
                  WatchUi.loadResource(Rez.Fonts.Average36), WatchUi.loadResource(Rez.Fonts.Stats30),
-                 WatchUi.loadResource(Rez.Fonts.ZoneDigit44), WatchUi.loadResource(Rez.Fonts.SmallZ14),
-                 WatchUi.loadResource(Rez.Fonts.SmallZ9), WatchUi.loadResource(Rez.Fonts.Climb18),
-                 WatchUi.loadResource(Rez.Fonts.Units18), WatchUi.loadResource(Rez.Fonts.Remaining21),
-                 WatchUi.loadResource(Rez.Fonts.Remaining20), WatchUi.loadResource(Rez.Fonts.Remaining18)];
+                 WatchUi.loadResource(Rez.Fonts.ZoneDigit44), WatchUi.loadResource(Rez.Fonts.SmallZ16),
+                 WatchUi.loadResource(Rez.Fonts.SmallZ10), WatchUi.loadResource(Rez.Fonts.Climb18),
+                 WatchUi.loadResource(Rez.Fonts.Units18), WatchUi.loadResource(Rez.Fonts.Remaining24),
+                 WatchUi.loadResource(Rez.Fonts.Remaining22), WatchUi.loadResource(Rez.Fonts.Remaining21)];
     }
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
     function text(dc, x, baseline, index, value, c, align) {

@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" role="img" aria-labelledby="title desc">
-  <title id="title">FastRider · saturated, consistent zone colors · v0.3.7</title>
-  <desc id="desc">246x322 Edge840 reference. 14px Z + 44px digit retains 30px badge width, baseline66 clears radar. Bold live values and climb digits; regular ft. All shows ridden mi plus blue regular remaining miles, about 2/3 digit height. Saturated anchors shared by text, bars and plot; 90% plot fill. Synthetic example data.</desc>
+  <title id="title">FastRider · heavier small Z and larger bold remaining miles · v0.3.9</title>
+  <desc id="desc">246x322 Edge840 reference. 16px heavier Z + 44px digit makes a 31px badge, baseline66 clears radar. Bold live values and climb digits; regular ft. All shows ridden mi plus blue bold 24px remaining digits with regular parentheses, between main digits and mi in height. Saturated anchors shared by text, bars and plot; 90% plot fill. Synthetic example data.</desc>
   <rect width="246" height="322" fill="white" />
   <rect x="122" y="2" width="2" height="66" fill="#83909B" />
   <text x="2" y="43" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#D05A00">158</text>
   <text x="2" y="62" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550">bpm</text>
-  <text x="120" y="66" font-family="'Roboto Condensed', Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="end" fill="#D05A00"><tspan x="98" font-size="14">Z</tspan><tspan x="120" font-size="44">4</tspan></text>
+  <text x="120" y="66" font-family="'Roboto Condensed', Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="end" fill="#D05A00"><tspan x="98" font-size="16" stroke="#D05A00" stroke-width="0.25">Z</tspan><tspan x="120" font-size="44">4</tspan></text>
   <rect x="2" y="76" width="118" height="6" fill="#D05A00" />
   <rect x="38" y="68" width="4" height="22" fill="#000000" id="heart-zone-position" />
   <rect x="38" y="76" width="4" height="6" fill="white" id="heart-zone-position-inverse" />
   <text x="126" y="43" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#D00020" data-power-group="z6-z7" id="live-power-value">303</text>
   <text x="126" y="62" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="live-power-average-window-label" id="live-power-unit">W 3s</text>
-  <text x="244" y="66" font-family="'Roboto Condensed', Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="end" fill="#D00020" data-power-group="z6-z7" id="live-power-zone"><tspan x="222" font-size="14">Z</tspan><tspan x="244" font-size="44">6</tspan></text>
+  <text x="244" y="66" font-family="'Roboto Condensed', Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="end" fill="#D00020" data-power-group="z6-z7" id="live-power-zone"><tspan x="222" font-size="16" stroke="#D00020" stroke-width="0.25">Z</tspan><tspan x="244" font-size="44">6</tspan></text>
   <rect x="126" y="76" width="118" height="6" fill="#D00020" data-power-group="z6-z7" id="live-power-bar" />
   <rect x="131" y="68" width="4" height="22" fill="#000000" id="power-zone-position" />
   <rect x="131" y="76" width="4" height="6" fill="white" id="power-zone-position-inverse" />
@@ -297,4 +297,4 @@
   <rect x="242" y="243" width="2" height="77" fill="#004CFF" />
   <text x="183" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="18" fill="#354550" font-weight="normal">mi</text>
   <text x="2" y="238" font-family="'Roboto Condensed', Arial, sans-serif" font-size="18" fill="#354550" data-metric="total-ascent-feet" font-weight="bold">2238<tspan dx="3" font-weight="normal">ft</tspan></text>
-<text x="201" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="21" font-weight="normal" fill="#004CFF" data-metric="navigation-remaining-miles">(-9.9)</text></svg>
+<text x="200" y="212" font-family="'Roboto Condensed', Arial, sans-serif" font-size="24" font-weight="normal" fill="#004CFF" letter-spacing="-1" data-metric="navigation-remaining-miles"><tspan font-size="14" dy="-5">(</tspan><tspan font-weight="bold" dy="5">-9.9</tspan><tspan font-size="14" dy="-5">)</tspan></text></svg>

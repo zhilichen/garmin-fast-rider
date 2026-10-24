@@ -1,0 +1,127 @@
+{
+  "source": "fastrider-edge840-v039-default.png",
+  "regions": {
+    "radar_blank": {
+      "box": [
+        218,
+        0,
+        246,
+        34
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ]
+    },
+    "top_margin": {
+      "box": [
+        0,
+        0,
+        246,
+        2
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ]
+    },
+    "row_right_margin": {
+      "box": [
+        245,
+        190,
+        246,
+        214
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ]
+    },
+    "marker_top": {
+      "box": [
+        38,
+        68,
+        42,
+        76
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ]
+    },
+    "marker_inverse": {
+      "box": [
+        38,
+        76,
+        42,
+        82
+      ],
+      "rgb": [
+        255,
+        250,
+        255
+      ]
+    },
+    "marker_bottom": {
+      "box": [
+        38,
+        82,
+        42,
+        90
+      ],
+      "rgb": [
+        0,
+        0,
+        0
+      ]
+    },
+    "small_Z": {
+      "box": [
+        89,
+        53,
+        98,
+        67
+      ],
+      "visible_bounds": [
+        90,
+        55,
+        98,
+        66
+      ]
+    },
+    "main_zone_digit": {
+      "box": [
+        98,
+        34,
+        120,
+        67
+      ],
+      "visible_bounds": [
+        98,
+        35,
+        119,
+        66
+      ]
+    }
+  },
+  "font_checks": {
+    "example_primary_Stats30_digit_height": 21,
+    "example_remaining_Remaining22_digit_height": 16,
+    "unit_mi_Units18_height": 13,
+    "remaining_digit_face": "RobotoCondensed-Bold",
+    "parenthesis_face": "RobotoCondensed-Regular",
+    "glyph_tracking_pixels": -1,
+    "Z_extra_stroke_pixels": 0.25
+  },
+  "comparison": "fastrider-edge840-v037-default.png",
+  "previous_small_Z_visible_bounds": [
+    92,
+    56,
+    98,
+    66
+  ]
+}
