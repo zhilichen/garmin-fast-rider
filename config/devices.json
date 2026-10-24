@@ -1,0 +1,95 @@
+{
+  "minimum_api": "3.3.0",
+  "profiles": {
+    "246x322": {
+      "width": 246,
+      "height": 322
+    },
+    "282x470": {
+      "width": 282,
+      "height": 470
+    },
+    "420x600": {
+      "width": 420,
+      "height": 600
+    },
+    "480x800": {
+      "width": 480,
+      "height": 800
+    }
+  },
+  "devices": {
+    "edge530": {
+      "profile": "246x322",
+      "touch": false,
+      "legacy_api": true,
+      "icon_size": 35
+    },
+    "edge540": {
+      "profile": "246x322",
+      "touch": false,
+      "legacy_api": false,
+      "icon_size": 35
+    },
+    "edge550": {
+      "profile": "420x600",
+      "touch": false,
+      "legacy_api": false,
+      "icon_size": 56
+    },
+    "edge830": {
+      "profile": "246x322",
+      "touch": true,
+      "legacy_api": true,
+      "icon_size": 35
+    },
+    "edge840": {
+      "profile": "246x322",
+      "touch": true,
+      "legacy_api": false,
+      "icon_size": 35
+    },
+    "edge850": {
+      "profile": "420x600",
+      "touch": true,
+      "legacy_api": false,
+      "icon_size": 56
+    },
+    "edge1030": {
+      "profile": "282x470",
+      "touch": true,
+      "legacy_api": true,
+      "icon_size": 36
+    },
+    "edge1030bontrager": {
+      "profile": "282x470",
+      "touch": true,
+      "legacy_api": true,
+      "icon_size": 36
+    },
+    "edge1030plus": {
+      "profile": "282x470",
+      "touch": true,
+      "legacy_api": true,
+      "icon_size": 36
+    },
+    "edge1040": {
+      "profile": "282x470",
+      "touch": true,
+      "legacy_api": false,
+      "icon_size": 40
+    },
+    "edge1050": {
+      "profile": "480x800",
+      "touch": true,
+      "legacy_api": false,
+      "icon_size": 68
+    },
+    "edge1060": {
+      "profile": "480x800",
+      "touch": true,
+      "legacy_api": false,
+      "icon_size": 62
+    }
+  }
+}

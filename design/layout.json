@@ -1,0 +1,80 @@
+{
+  "reference": [
+    246,
+    322
+  ],
+  "banner_fraction": 0.6832298136645962,
+  "middle_reference": [
+    91,
+    220
+  ],
+  "x": {
+    "MARGIN": 2,
+    "STROKE": 2,
+    "COLUMN_DIVIDER": 112,
+    "RIGHT_START": 116,
+    "RIGHT_EDGE": 244,
+    "LEFT_EDGE": 2,
+    "LEFT_RIGHT": 110,
+    "LEFT_WIDTH": 108,
+    "RIGHT_WIDTH": 128,
+    "LIVE_LEFT_CENTER": 26,
+    "LIVE_RIGHT_CENTER": 81,
+    "LIVE_LEFT_WIDTH": 48,
+    "LIVE_RIGHT_WIDTH": 58,
+    "STATS_VALUE_WIDTH": 118,
+    "RADAR_LEFT": 218,
+    "ZONE_BADGE_WIDTH": 31,
+    "ZONE_SMALL_BADGE_WIDTH": 20,
+    "ZONE_BAR": 6,
+    "ZONE_MARKER_WIDTH": 4,
+    "ZONE_MARKER_HEIGHT": 22,
+    "PLOT_LEFT": 4,
+    "PLOT_RIGHT": 242,
+    "HEART_TRACKING": 3,
+    "PACKED_GAP": 1,
+    "INLINE_GAP": 4,
+    "STATS_GAP": 3,
+    "AVERAGE_VALUE_WIDTH": 84,
+    "DOUBLE_TAP_RADIUS": 24,
+    "BOLT_WIDTH": 14,
+    "HEART_WIDTH": 16,
+    "RULE_WIDTH": 242,
+    "PLOT_LINE_WIDTH": 2,
+    "BUCKET_WIDTH": 2,
+    "GUIDE_DASH": 4,
+    "GUIDE_STEP": 8,
+    "GUIDE_HALO_WIDTH": 6,
+    "GUIDE_HALO_HEIGHT": 4,
+    "LAP_CAP_WIDTH": 6
+  },
+  "top": {
+    "PRIMARY_BASELINE": 43,
+    "ZONE_BASELINE": 66,
+    "PRIMARY_BOTTOM": 90,
+    "UNIT_BASELINE": 62,
+    "ZONE_BAR_TOP": 76,
+    "RADAR_BOTTOM": 34,
+    "TOP_RULE_Y": 2,
+    "TOP_RULE_HEIGHT": 66
+  },
+  "middle": {
+    "MIDDLE_TOP": 91,
+    "LIVE_LABEL_TOP": 106,
+    "LIVE_VALUE_TOP": 149,
+    "LIVE_LABEL_BOTTOM": 170,
+    "LIVE_VALUE_BOTTOM": 212,
+    "STATS_TITLE_BASELINE": 105,
+    "STATS_TIME_BASELINE": 132,
+    "STATS_AVERAGE_BASELINE": 180,
+    "STATS_AVERAGE_LABEL_BASELINE": 160,
+    "STATS_DISTANCE_BASELINE": 212,
+    "STATS_BOTTOM": 214
+  },
+  "header": {
+    "HEADER_BASELINE": 18,
+    "HEADER_BOLT_TOP": 4,
+    "PLOT_OFFSET": 23
+  },
+  "bottom_margin": 3
+}

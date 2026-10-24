@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 source "$(dirname "$0")/env.sh"
-java -version
-if [ ! -x "$CIQ_SDK_PATH/bin/monkeyc" ]; then
-  echo "Missing SDK: $CIQ_SDK_PATH" >&2; exit 1
+device="${1:-edge840}"
+if [ -z "${CIQ_SDK_PATH:-}" ] || [ ! -x "$CIQ_SDK_PATH/bin/monkeyc" ]; then
+  echo 'Install the official Connect IQ SDK, or set CIQ_SDK_PATH to its extracted directory.' >&2; exit 1
 fi
-monkeyc -v
-TASK_DEVICE_HOME="$TASK_CIQ_HOME"
-if [ -f "$TASK_CIQ_HOME/sdkmanager-download-location.cfg" ]; then
-  TASK_DEVICE_HOME="$(cat "$TASK_CIQ_HOME/sdkmanager-download-location.cfg" | tr -d '\r\n')"
+if ! java -version >/dev/null 2>&1; then echo 'Install JDK 17 and put java on PATH.' >&2; exit 1; fi
+if [ ! -f "$TASK_DEVICE_HOME/Devices/$device/compiler.json" ]; then
+  echo "Missing $device package. Install that Edge device in the official SDK Manager." >&2; exit 1
 fi
-if [ ! -f "$TASK_DEVICE_HOME/Devices/edge840/compiler.json" ]; then
-  echo 'Missing Edge 840 device package. In Garmin SDK Manager → Devices, install Edge 840 and wait for the download to finish (sign in if prompted).' >&2
-  exit 1
-fi
-echo "Ready: $TASK_DEVICE_HOME/Devices/edge840"

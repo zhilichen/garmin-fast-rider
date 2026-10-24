@@ -1,0 +1,32 @@
+# 原生模拟器画面
+
+v0.4.0，单字段全屏。截图由各目标的 Connect IQ 模拟器直接导出，使用固定合成指标和15:47时钟；图片尺寸就是数据字段的原生像素尺寸。
+
+| 246×322：Edge 840 | 282×470：Edge 1040 |
+| --- | --- |
+| ![Edge 840](validation/screens/edge840.png) | ![Edge 1040](validation/screens/edge1040.png) |
+
+| 420×600：Edge 850 | 480×800：Edge 1060 |
+| --- | --- |
+| <img src="validation/screens/edge850.png" width="252" alt="Edge 850"> | <img src="validation/screens/edge1060.png" width="288" alt="Edge 1060"> |
+
+放大预览时可能产生浏览器插值，请打开原图检查像素边界。
+
+| 型号 | 原图 | 输入 |
+| --- | --- | --- |
+| Edge 530 | [246×322](validation/screens/edge530.png) | 默认视图 |
+| Edge 540 | [246×322](validation/screens/edge540.png) | 默认视图 |
+| Edge 550 | [420×600](validation/screens/edge550.png) | 默认视图 |
+| Edge 830 | [246×322](validation/screens/edge830.png) | 触屏 |
+| Edge 840 | [246×322](validation/screens/edge840.png) | 触屏 |
+| Edge 850 | [420×600](validation/screens/edge850.png) | 触屏 |
+| Edge 1030 | [282×470](validation/screens/edge1030.png) | 触屏 |
+| Edge 1030 Bontrager | [282×470](validation/screens/edge1030bontrager.png) | 触屏 |
+| Edge 1030 Plus | [282×470](validation/screens/edge1030plus.png) | 触屏 |
+| Edge 1040 | [282×470](validation/screens/edge1040.png) | 触屏 |
+| Edge 1050 | [480×800](validation/screens/edge1050.png) | 触屏 |
+| Edge 1060 | [480×800](validation/screens/edge1060.png) | 触屏 |
+
+触屏切换后的10s / Lap / 20m：[850](validation/screens/edge850-interaction.png)、[1060](validation/screens/edge1060-interaction.png)。真实数据入口的缺失传感器画面：[530](validation/screens/edge530-live.png)、[1060](validation/screens/edge1060-live.png)。
+
+[验收方法与结果](validation.md) · [840的12种逐像素对照](validation/edge840/pixel-regression.json)

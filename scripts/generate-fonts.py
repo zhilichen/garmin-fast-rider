@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Generate small BMFont atlases matching the approved 246x322 design.
 
-Requires Pillow and the fonts shipped in the local Connect IQ SDK installation.
+Requires Pillow; source fonts and their licenses are bundled in third_party/fonts.
 Only raster glyph subsets are packaged; no TTF files are copied to the app.
 """
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 import argparse
+import math
 
 FONT_SPECS = [
     ('Primary58', 'RobotoCondensed-Bold.ttf', 58, '0123456789-'),
@@ -27,12 +28,13 @@ FONT_SPECS = [
     ('Remaining21', 'RobotoCondensed-Bold.ttf', 21, '0123456789().-'),
 ]
 
-def generate(font_dir, out):
+def generate(font_dir, out, scale, metrics_path):
     out.mkdir(parents=True, exist_ok=True)
     resources = ['<fonts>']
     ink = {}
     numeric = {}
-    for name, filename, size, characters in FONT_SPECS:
+    for name, filename, base_size, characters in FONT_SPECS:
+        size = max(1, math.floor(base_size*scale) if name in ('Chart26', 'Remaining21') else round(base_size*scale))
         font = ImageFont.truetype(str(font_dir / filename), size)
         glyphs=[]; x=y=1; row=0
         character_fonts = {}
@@ -68,10 +70,10 @@ def generate(font_dir, out):
             if name.startswith('SmallZ'):
                 # Add a quarter-pixel stroke within the glyph bounds. Render at
                 # 4x so the small Z gains weight without a whole-pixel outline.
-                scale = 4
-                mask = Image.new('L', (w*scale, h*scale), 0)
-                heavy = ImageFont.truetype(str(font_dir / filename), size*scale)
-                ImageDraw.Draw(mask).text((-box[0]*scale, (-box[1]+shift)*scale), c,
+                raster_scale = 4
+                mask = Image.new('L', (w*raster_scale, h*raster_scale), 0)
+                heavy = ImageFont.truetype(str(font_dir / filename), size*raster_scale)
+                ImageDraw.Draw(mask).text((-box[0]*raster_scale, (-box[1]+shift)*raster_scale), c,
                     font=heavy, anchor='ls', fill=255, stroke_width=1, stroke_fill=255)
                 mask = mask.resize((w,h), Image.Resampling.LANCZOS)
                 atlas.paste((255,255,255), (x,y,x+w,y+h), mask)
@@ -113,8 +115,17 @@ def generate(font_dir, out):
         rows = [[numeric[name].get(c, (0,0))[column] for c in '0123456789.-()mi'] for name in order]
         metrics += f'    const {field} = '+str(rows)+';\n'
     metrics += '}\n'
-    (Path(__file__).resolve().parents[1]/'source/FontInk.mc').write_text(metrics)
+    metrics_path.parent.mkdir(parents=True, exist_ok=True)
+    metrics_path.write_text(metrics)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--font-dir',type=Path,default=Path.home()/'Library/Application Support/Garmin/ConnectIQ/Fonts');args=p.parse_args()
-    generate(args.font_dir,Path(__file__).resolve().parents[1]/'resources/fonts')
+    import json
+    root=Path(__file__).resolve().parents[1]
+    profiles=json.loads((root/'config/devices.json').read_text())['profiles']
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--font-dir',type=Path,default=root/'third_party/fonts')
+    p.add_argument('--profile',choices=['all']+list(profiles),default='all')
+    args=p.parse_args()
+    for key,profile in profiles.items():
+        if args.profile not in ('all',key):continue
+        generate(args.font_dir,root/'resources/fonts'/key,profile['width']/246,root/'config/display'/key/'FontInk.mc')

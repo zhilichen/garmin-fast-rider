@@ -1,0 +1,25 @@
+FastRider 0.4.0 — native simulator interaction acceptance, 2026-10-24
+SDK 9.3.0; frozen synthetic snapshot; coordinates below are native field pixels.
+
+Edge 840: all 12 combinations exported after native simulator taps.
+3s / 10s × All / Lap × 5m / 20m / All.
+Every exported frame is RGB-identical to the v0.3.15 reference.
+
+Edge 850 (420x600): default 3s / All / 5m.
+Tap power (201,85) -> 10s / All / 5m.
+Tap stats (201,236) -> 10s / Lap 3 / 5m.
+Tap graph (210,441) -> 10s / Lap 3 / 20m.
+Export: screens/edge850-interaction.png.
+
+Edge 1060 (480x800): default 3s / All / 5m.
+Tap power (230,98) -> 10s / All / 5m.
+Tap stats (230,295) -> 10s / Lap 3 / 5m.
+Tap graph (240,582) -> 10s / Lap 3 / 20m.
+Export: screens/edge1060-interaction.png.
+
+Button-only targets 530, 540, 550: native tests verify a single view without
+delegate, no tap state changes, and 3s / All / 5m after native lap/reset/pause/resume.
+Default frames exported for all three models.
+
+These are simulator results; physical touch, sound timbre, sensors and radar
+overlay on devices other than the previously tested 840 are not validated here.

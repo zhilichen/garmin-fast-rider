@@ -1,9 +1,50 @@
 {
-  "version":"2.0.0",
-  "tasks":[
-    {"label":"FastRider: build live","type":"shell","command":"./scripts/build.sh live","group":{"kind":"build","isDefault":true},"problemMatcher":[]},
-    {"label":"FastRider: run demo","type":"shell","command":"./scripts/run.sh demo","problemMatcher":[]},
-    {"label":"FastRider: run live","type":"shell","command":"./scripts/run.sh live","problemMatcher":[]},
-    {"label":"FastRider: tests","type":"shell","command":"./scripts/run.sh test","group":"test","problemMatcher":[]}
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "FastRider: build",
+      "type": "shell",
+      "command": "./scripts/build.sh live ${input:device}",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "FastRider: demo",
+      "type": "shell",
+      "command": "./scripts/run.sh demo ${input:device}",
+      "problemMatcher": []
+    },
+    {
+      "label": "FastRider: test",
+      "type": "shell",
+      "command": "./scripts/run.sh test ${input:device}",
+      "group": "test",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "device",
+      "type": "pickString",
+      "description": "Target Edge",
+      "options": [
+        "edge530",
+        "edge540",
+        "edge550",
+        "edge830",
+        "edge840",
+        "edge850",
+        "edge1030",
+        "edge1030bontrager",
+        "edge1030plus",
+        "edge1040",
+        "edge1050",
+        "edge1060"
+      ],
+      "default": "edge840"
+    }
   ]
 }

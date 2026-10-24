@@ -1,0 +1,14 @@
+openjdk version "17.0.19" 2026-04-21 LTS
+OpenJDK Runtime Environment Corretto-17.0.19.10.1 (build 17.0.19+10-LTS)
+OpenJDK 64-Bit Server VM Corretto-17.0.19.10.1 (build 17.0.19+10-LTS, mixed mode, sharing)
+Connect IQ Compiler version: 9.3.0
+Ready: $CIQ_HOME//Devices/edge840
+BUILD SUCCESSFUL
+Summit demo memory: 53536 / 127424 bytes
+Tap [200,160] -> 3s, LAP, 5m
+Tap [200,160] -> 3s, All, 5m
+Tap [200,50] -> 10s, All, 5m
+Tap [200,50] -> 3s, All, 5m
+Tap [123,260] -> 3s, All, 20m
+Tap [123,260] -> 3s, All, All
+Tap [123,260] -> 3s, All, 5m

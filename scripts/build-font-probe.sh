@@ -8,8 +8,8 @@ from pathlib import Path
 import shutil,sys
 root=Path(sys.argv[1]);fixture=root/'.local/font-probe'
 (fixture/'source').mkdir(parents=True,exist_ok=True)
-for p in (root/'source').glob('*.mc'):shutil.copyfile(p,fixture/'source'/p.name)
-p=fixture/'source/FastRiderView.mc';s=p.read_text();start=s.index('    function onUpdate(dc) {');end=s.index('    function drawPrimary(dc)',start)
+shutil.copytree(root/'source',fixture/'source',dirs_exist_ok=True)
+p=fixture/'source/app/FastRiderView.mc';s=p.read_text();start=s.index('    function onUpdate(dc) {');end=s.index('    function drawPrimary(dc)',start)
 s=s[:start]+'''    function onUpdate(dc) {
         width = dc.getWidth(); height = dc.getHeight(); loadFonts();
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE); dc.clear();
@@ -41,6 +41,6 @@ s=s[:start]+'''    function onUpdate(dc) {
         }
     }
 ''' +s[end:];p.write_text(s)
-(fixture/'probe.jungle').write_text('project.manifest = ../../manifest.xml\nbase.sourcePath = source;../../config/demo\nbase.resourcePath = ../../resources\n')
+(fixture/'probe.jungle').write_text('project.manifest = ../../manifest.xml\nbase.sourcePath = source/app;source/model;source/ui;source/input/touch;../../config/demo;../../config/display/246x322\nbase.resourcePath = ../../resources/common;../../resources/fonts/246x322;../../resources/icons/35\n')
 PY
 monkeyc -f .local/font-probe/probe.jungle -d edge840 -o .local/FastRider-font-probe.prg -y "$TASK_KEY" -w
