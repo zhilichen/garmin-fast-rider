@@ -2,7 +2,7 @@
 
 Connect IQ / Monkey C 数据字段，按 Edge 840 原生 **246 × 322** 实现已确认的交互设计。只针对 Edge 840 构建；使用单字段全屏布局。
 
-![v0.3.2 Edge 840 原生模拟器截图，demo 合成数据](docs/fastrider-edge840-v032-default.png)
+![v0.3.3 Edge 840 原生模拟器截图（抗锯齿），demo 合成数据](docs/fastrider-edge840-v033-aa.png)
 
 ## 显示与点击
 
@@ -51,7 +51,7 @@ python3 -m unittest discover -s tests -v
 
 ## 字体与历史内存
 
-为保持小屏可读性，使用与矢量稿对应的九组精简位图字体：58/54/38/36/32/30/28/26/18 px。已提交生成后的字形资源，日常构建无需 Pillow。重新生成需 Pillow 和 SDK 自带字体：
+为保持小屏可读性，使用与矢量稿对应的九组精简位图字体：58/54/38/36/32/30/28/26/18 px。已提交生成后的字形资源，日常构建无需 Pillow。 图形使用`Dc.setAntiAlias(true)`；九套自定义字库以黑底灰度PNG保存覆盖率，并以`antialias="true"`导入，文字按白色页面背景混合。直线、色条和竖向标记继续落在整数像素上。参见[Garmin字体资源说明](https://developer.garmin.com/connect-iq/articles/core-topics/Resources.html#fonts)和[图形抗锯齿说明](https://developer.garmin.com/connect-iq/articles/core-topics/Graphics.html#anti-aliasing)。重新生成需 Pillow 和 SDK 自带字体：
 
 ```bash
 python3 scripts/generate-fonts.py

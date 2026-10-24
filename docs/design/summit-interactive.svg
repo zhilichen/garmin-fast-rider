@@ -1,26 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" role="img" aria-labelledby="title desc">
-  <title id="title">FastRider · 2px margin, large zones, expanded power plot · v0.3.2</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" role="img" aria-labelledby="title desc">
+  <title id="title">FastRider · 2px margin, large zones, expanded power plot · v0.3.3</title>
   <desc id="desc">Edge 840 246x322 design reference with illustrative sensor data. Primary values align left at x2/x126, baseline44. Heart and bolt align at bottom52. Zones use 28px; native radar corner remains clear. The chart has only an 18px range and clock header, no elapsed time or distance/ascent footer. Plot spans x4..242/y243..319. Tap cycles 3s/10s, All/LAP, 5m/20m/All independently.</desc>
   <rect width="246" height="322" fill="white" />
-  <rect x="122" y="2" width="2" height="80" fill="#83909B" shape-rendering="crispEdges" />
+  <rect x="122" y="2" width="2" height="80" fill="#83909B" />
   <text x="2" y="44" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#8F5B00">158</text>
   <text x="2" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550">bpm</text>
   <text x="120" y="80" font-family="'Roboto Condensed', Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="end" fill="#8F5B00">Z4</text>
-  <rect x="2" y="88" width="118" height="6" fill="#8F5B00" shape-rendering="crispEdges" />
-  <rect x="38" y="86" width="3" height="10" fill="#000000" shape-rendering="crispEdges" id="heart-zone-position" />
+  <rect x="2" y="88" width="118" height="6" fill="#8F5B00" />
+  <rect x="38" y="86" width="3" height="10" fill="#000000" id="heart-zone-position" />
   <text x="126" y="44" font-family="'Roboto Condensed', Arial, sans-serif" font-size="58" font-weight="bold" text-anchor="start" fill="#B62612" data-power-group="z6-z7" id="live-power-value">303</text>
   <text x="126" y="80" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" data-metric="live-power-average-window-label" id="live-power-unit">W 3s</text>
   <text x="244" y="80" font-family="'Roboto Condensed', Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="end" fill="#B62612" data-power-group="z6-z7" id="live-power-zone">Z6</text>
-  <rect x="126" y="88" width="118" height="6" fill="#B62612" shape-rendering="crispEdges" data-power-group="z6-z7" id="live-power-bar" />
-  <rect x="131" y="86" width="3" height="10" fill="#000000" shape-rendering="crispEdges" id="power-zone-position" />
+  <rect x="126" y="88" width="118" height="6" fill="#B62612" data-power-group="z6-z7" id="live-power-bar" />
+  <rect x="131" y="86" width="3" height="10" fill="#000000" id="power-zone-position" />
   <text x="31" y="153" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="400" text-anchor="middle" fill="#991B1B" data-metric="current-cadence" data-color-rule="lt70-deep-red;gt100-deep-purple;otherwise-neutral">64</text>
-  <rect x="122" y="102" width="2" height="111" fill="#83909B" shape-rendering="crispEdges" />
+  <rect x="122" y="102" width="2" height="111" fill="#83909B" />
   <text x="126" y="113" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="start" fill="#354550" id="stats-title">All</text>
   <text x="244" y="140" font-family="'Roboto Condensed', Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="end" fill="#15212B" id="stats-time">1:23:08</text>
   <text x="126" y="182" font-family="'Roboto Condensed', Arial, sans-serif" font-size="54" font-weight="bold" text-anchor="start" fill="#15212B" data-metric="current-lap-average-power" id="stats-power">212</text>
-  <rect x="2" y="220" width="242" height="2" fill="#83909B" shape-rendering="crispEdges" />
-  <polygon points="110,40 108,38 105,38 102,41 102,44 104,47 110,52 116,47 118,44 118,41 115,38 112,38" fill="#C62D32" shape-rendering="crispEdges" />
-  <polygon points="236,36 227,46 232,46 229,52 241,42 235,42 239,36" fill="#005AA8" shape-rendering="crispEdges" />
+  <rect x="2" y="220" width="242" height="2" fill="#83909B" />
+  <polygon points="110,40 108,38 105,38 102,41 102,44 104,47 110,52 116,47 118,44 118,41 115,38 112,38" fill="#C62D32" />
+  <polygon points="236,36 227,46 232,46 229,52 241,42 235,42 239,36" fill="#005AA8" />
   <text x="92" y="153" font-family="'Roboto Condensed', Arial, sans-serif" font-size="38" font-weight="400" text-anchor="middle" fill="#15212B" data-metric="rear-gear-index">5</text>
   <text x="92" y="174" font-size="18" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" text-anchor="middle" fill="#354550" font-weight="normal">mph</text>
   <text x="92" y="212" font-size="38" font-family="'Roboto Condensed', Arial, sans-serif" text-anchor="middle" fill="#15212B" font-weight="400" data-metric="current-speed-mph">22</text>
@@ -286,7 +286,7 @@
   <rect x="236" y="283" width="6" height="4" fill="white" />
   <rect x="238" y="283" width="4" height="2" fill="#59636E" />
   <rect x="4" y="301" width="239" height="4" fill="white" />
-  <rect x="4" y="302" width="239" height="2" fill="#005AA8" shape-rendering="crispEdges" role="img" aria-label="Z2 upper limit, 75% FTP" />
+  <rect x="4" y="302" width="239" height="2" fill="#005AA8" role="img" aria-label="Z2 upper limit, 75% FTP" />
   <rect x="90" y="243" width="4" height="77" fill="white" />
   <rect x="92" y="243" width="2" height="77" fill="#15212B" />
   <rect x="89" y="243" width="6" height="4" fill="#15212B" />

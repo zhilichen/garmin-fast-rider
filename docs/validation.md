@@ -1,3 +1,17 @@
+# FastRider v0.3.3：图形与文字抗锯齿
+
+修复三层渲染设置：原先显式关闭的图形AA改为开启；字体资源明确antialias=true；字库由白RGB/透明alpha改为黑底灰度覆盖率PNG，文字使用实际白色页面背景混合。字体尺寸、字宽、布局、训练区间及点击规则不变。
+
+- 按[Garmin图形文档](https://developer.garmin.com/connect-iq/articles/core-topics/Graphics.html#anti-aliasing)开启原生多边形/线条AA；按[字体资源文档](https://developer.garmin.com/connect-iq/articles/core-topics/Resources.html#fonts)保留自定义字体的抗锯齿信息。灰度字库和白底绘制的组合已经用原生输出像素验证有效。
+- **不是只检查开关**：比较未经处理的246×322截图，固定demo HR158区域由2种颜色增至4种、cadence64与Z4编号也由2增至4、红心由2增至12；图形和文字均实际产生过渡色。见[像素证据](antialias-pixels.json)、[原生AA截图](fastrider-edge840-v033-aa.png)及此前v0.3.2截图。
+- 同一HR色条（含黑色位置标记）与中央竖分隔的裁剪区域，前后逐字节相同；整数坐标的色条/分隔没有因开启AA变模糊；右上雷达保留区及顶部/底部2px边距也经像素检查保持全白。
+- 初次只开启图形/字体资源开关时，图标已平滑但HR仍只有2色；该诊断截图保存在本地。最终灰度字体输出才记为完成。
+- live / hardware / demo / test构建均通过，无编译告警；Garmin VM **23/23**，包括9套字体字宽、12种原生绘制模式和24h历史压缩。[原始输出](simulator-tests.txt)。新字体资源通过完整回归，未添加镜像开关的测试。
+- 目视检查确认数字、标签、图标、曲线平滑，字符/图形没有重叠或黑底矩形。真实demo字段heap读数54,704 /127,424 bytes；这是字段heap，不代表字体/图形资源额外开销为零。字体全部加载及12种状态绘制未出现内存错误。
+- v0.3.3硬件候选包156,476 bytes；设备当前未USB连接，最终AA版本尚未写入真机。
+
+以下保留旧版本记录。
+
 # FastRider v0.3.2：大号Zone、2px外边距与简化图表
 
 整合两轮界面要求：Zone从18增至28 px；内容外扩至2 px边距，曲线及Lap顶帽在边缘仍保留1–2 px。主数字x2/x126、baseline44；红心16×14、闪电14×16，底端均y52。中间分隔对齐x122，统计区扩至x126…244，均功率54 px；右上雷达保留区不变。

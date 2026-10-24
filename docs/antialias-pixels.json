@@ -1,0 +1,256 @@
+{
+  "source": "Unmodified native 246x322 simulator screen captures. Constant demo values and same ROI coordinates.",
+  "before": "fastrider-edge840-v032-default.png",
+  "after": "fastrider-edge840-v033-aa.png",
+  "regions": {
+    "HR158": [
+      0,
+      0,
+      98,
+      54
+    ],
+    "heart": [
+      100,
+      35,
+      121,
+      56
+    ],
+    "cadence64": [
+      0,
+      120,
+      62,
+      155
+    ],
+    "HR_zone_Z4": [
+      86,
+      56,
+      120,
+      86
+    ]
+  },
+  "measurements": {
+    "before": {
+      "HR158": {
+        "distinct_colors": 2,
+        "most_common": [
+          [
+            [
+              255,
+              250,
+              255
+            ],
+            3405
+          ],
+          [
+            [
+              139,
+              89,
+              0
+            ],
+            1887
+          ]
+        ]
+      },
+      "heart": {
+        "distinct_colors": 2,
+        "most_common": [
+          [
+            [
+              255,
+              250,
+              255
+            ],
+            264
+          ],
+          [
+            [
+              197,
+              44,
+              49
+            ],
+            177
+          ]
+        ]
+      },
+      "cadence64": {
+        "distinct_colors": 2,
+        "most_common": [
+          [
+            [
+              255,
+              250,
+              255
+            ],
+            1701
+          ],
+          [
+            [
+              156,
+              24,
+              24
+            ],
+            469
+          ]
+        ]
+      },
+      "HR_zone_Z4": {
+        "distinct_colors": 2,
+        "most_common": [
+          [
+            [
+              255,
+              250,
+              255
+            ],
+            695
+          ],
+          [
+            [
+              139,
+              89,
+              0
+            ],
+            325
+          ]
+        ]
+      }
+    },
+    "after": {
+      "HR158": {
+        "distinct_colors": 4,
+        "most_common": [
+          [
+            [
+              255,
+              250,
+              255
+            ],
+            3544
+          ],
+          [
+            [
+              139,
+              89,
+              0
+            ],
+            1526
+          ]
+        ]
+      },
+      "heart": {
+        "distinct_colors": 12,
+        "most_common": [
+          [
+            [
+              255,
+              250,
+              255
+            ],
+            269
+          ],
+          [
+            [
+              197,
+              44,
+              49
+            ],
+            138
+          ]
+        ]
+      },
+      "cadence64": {
+        "distinct_colors": 4,
+        "most_common": [
+          [
+            [
+              255,
+              250,
+              255
+            ],
+            1740
+          ],
+          [
+            [
+              156,
+              24,
+              24
+            ],
+            317
+          ]
+        ]
+      },
+      "HR_zone_Z4": {
+        "distinct_colors": 4,
+        "most_common": [
+          [
+            [
+              255,
+              250,
+              255
+            ],
+            708
+          ],
+          [
+            [
+              139,
+              89,
+              0
+            ],
+            258
+          ]
+        ]
+      }
+    }
+  },
+  "aligned_geometry": {
+    "heart_rate_zone_bar": {
+      "box": [
+        2,
+        88,
+        120,
+        94
+      ],
+      "pixel_identical": true,
+      "distinct_colors": 2
+    },
+    "column_divider": {
+      "box": [
+        122,
+        2,
+        124,
+        82
+      ],
+      "pixel_identical": true,
+      "distinct_colors": 1
+    }
+  },
+  "blank_regions": {
+    "radar_corner": {
+      "box": [
+        218,
+        0,
+        246,
+        34
+      ],
+      "white_only": true
+    },
+    "top_margin": {
+      "box": [
+        0,
+        0,
+        246,
+        2
+      ],
+      "white_only": true
+    },
+    "bottom_margin": {
+      "box": [
+        0,
+        320,
+        246,
+        322
+      ],
+      "white_only": true
+    }
+  }
+}

@@ -198,7 +198,9 @@ class FastRiderView extends WatchUi.DataField {
     }
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
     function text(dc, x, baseline, index, value, c, align) {
-        color(dc, c); dc.drawText(x, baseline-fontSizes[index], fonts[index], value, align);
+        // Use the known white page background for font coverage blending.
+        dc.setColor(c, Graphics.COLOR_WHITE);
+        dc.drawText(x, baseline-fontSizes[index], fonts[index], value, align);
     }
     function textWidth(dc, value, index) { return dc.getTextWidthInPixels(value, fonts[index]); }
     function intText(value) { return value == null ? "--" : Math.round(value).toNumber().format("%d"); }
@@ -216,7 +218,8 @@ class FastRiderView extends WatchUi.DataField {
     function onUpdate(dc) {
         width = dc.getWidth(); height = dc.getHeight();
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE); dc.clear();
-        dc.setPenWidth(2); if (dc has :setAntiAlias) { dc.setAntiAlias(false); }
+        // Primitive AA is independent of font resource antialiasing.
+        dc.setPenWidth(2); if (dc has :setAntiAlias) { dc.setAntiAlias(true); }
         loadFonts();
         if (width != 246 || height != 322) {
             text(dc, width/2, height/2, 3, "FastRider", DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);

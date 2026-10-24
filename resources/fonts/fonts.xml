@@ -1,11 +1,11 @@
 <fonts>
-  <font id="Primary58" filename="Primary58.fnt"/>
-  <font id="Live38" filename="Live38.fnt"/>
-  <font id="Average54" filename="Average54.fnt"/>
-  <font id="Average36" filename="Average36.fnt"/>
-  <font id="Meta18" filename="Meta18.fnt"/>
-  <font id="Chart26" filename="Chart26.fnt"/>
-  <font id="Stats32" filename="Stats32.fnt"/>
-  <font id="Stats30" filename="Stats30.fnt"/>
-  <font id="Zone28" filename="Zone28.fnt"/>
+  <font id="Primary58" filename="Primary58.fnt" antialias="true"/>
+  <font id="Live38" filename="Live38.fnt" antialias="true"/>
+  <font id="Average54" filename="Average54.fnt" antialias="true"/>
+  <font id="Average36" filename="Average36.fnt" antialias="true"/>
+  <font id="Meta18" filename="Meta18.fnt" antialias="true"/>
+  <font id="Chart26" filename="Chart26.fnt" antialias="true"/>
+  <font id="Stats32" filename="Stats32.fnt" antialias="true"/>
+  <font id="Stats30" filename="Stats30.fnt" antialias="true"/>
+  <font id="Zone28" filename="Zone28.fnt" antialias="true"/>
 </fonts>
