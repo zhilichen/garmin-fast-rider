@@ -1,28 +1,18 @@
 import Toybox.Attention;
-import Toybox.Lang;
 import Toybox.System;
 
 module BellAudio {
-    const DURATION_MS = 1500;
-    // Two 750ms electronic ding-ringing phrases. No undocumented zero-Hz pauses.
-    const NOTES = [[3300,90],[2500,160],[3300,90],[2500,410],
-                   [3300,90],[2500,160],[3300,90],[2500,410]];
-
-    function profile() as Lang.Array<Attention.ToneProfile> {
-        var tones = [];
-        for (var i = 0; i < NOTES.size(); i += 1) {
-            tones.add(new Attention.ToneProfile(NOTES[i][0], NOTES[i][1]));
-        }
-        return tones;
-    }
+    // The native loud-beep preset owns its amplitude and duration. The public
+    // API has no volume control; this is an input cooldown, not a sound length.
+    const COOLDOWN_MS = 1600;
 
     function play() {
-        if (!(Attention has :playTone) || !(Attention has :ToneProfile)) { return false; }
+        if (!(Attention has :playTone)) { return false; }
         try {
-            // Submit one complete sequence; no sleeps or timers in the input path.
-            Attention.playTone({:toneProfile=>profile()});
+            // Use Garmin's loud preset in one non-blocking request.
+            Attention.playTone(Attention.TONE_LOUD_BEEP);
             if (BuildMode.DEMO || BuildMode.DIAGNOSTICS) {
-                System.println("FastRider bell: double tap -> 1500ms");
+                System.println("FastRider bell: double tap -> TONE_LOUD_BEEP");
             }
             return true;
         } catch (error) {

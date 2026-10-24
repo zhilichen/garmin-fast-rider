@@ -1,3 +1,15 @@
+# FastRider v0.3.8：车铃改用原生响亮蜂鸣
+
+- `Attention.playTone(Attention.TONE_LOUD_BEEP)`替换1500ms自定义音调序列。该预设由Garmin文档明确称为响亮蜂鸣；公开API没有音量/振幅控制，未测量其声压，也不声称超过其他所有原生声音。响度及实际时长由Edge固件决定。
+- 保留左区双击和1600ms输入冷却；将冷却常量与声音时长解耦，避免把系统预设误称为1500ms。未新增sleep/定时轮询，右侧切换立即处理。
+- live / hardware / demo / test构建成功，无告警；Garmin VM **27/27**，包括冷却精确到期及期间点击不能累计成下一双击。[测试输出](simulator-tests.txt)。移除无效的自定义序列时长测试，改为实际冷却边界回归。
+- [原生双击日志](bell-simulator-v038.txt)：连续双击两组仅触发一次`TONE_LOUD_BEEP`请求，随后右侧功率立即切换10s，无API异常。真实demo字段堆60,480 /127,424 bytes。这验证API调用，不等同于实机音量或时长试听。
+- hardware包**166,156 bytes**已更新到连接中的Edge840 `GARMIN/APPS/SUMMIT.PRG`，回读逐字节一致。保留原App ID、签名、设置与活动数据；旧pending包已回读校验并备份。断开USB后加载，双击左侧心率/实时区即可试听。
+
+[官方API依据](https://developer.garmin.com/connect-iq/api-docs/Toybox/Attention.html#playTone-instance_function) · [车铃说明](bell-interaction.md)
+
+以下保留旧版验收记录。
+
 # FastRider v0.3.7：高饱和、统一色相的状态配色
 
 - 彩色锚点统一为蓝`#004CFF`、绿`#008A20`、橘`#D05A00`、红`#D00020`、紫`#8000D8`，均为100% HSV饱和度；中性灰`#555555`。主数字、Zone、色条及功率曲线共享色值，心率Z4由棕黄改为橘色。坡度和踏频沿用既有阈值，分别使用同一橘/红/紫。红心与警示红一致，蓝色图标/剩余里程使用新蓝。

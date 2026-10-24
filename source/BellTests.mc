@@ -72,14 +72,13 @@ function bellInputRoutingTest(logger) {
 }
 
 (:test)
-function bellSequenceDurationTest(logger) {
-    var tones = BellAudio.profile(); var total = 0;
-    Test.assertEqual(tones.size(), 8);
-    for (var i = 0; i < tones.size(); i += 1) {
-        Test.assert(tones[i].frequency > 0); Test.assert(tones[i].duration > 0);
-        total += tones[i].duration;
-    }
-    Test.assertEqual(total, BellAudio.DURATION_MS);
-    Test.assertEqual(total, 1500);
+function bellCooldownExpiryTest(logger) {
+    var bell = new BellGesture();
+    Test.assert(!bell.tap(20, 40, 100));
+    Test.assert(bell.tap(20, 40, 200));
+    Test.assert(!bell.tap(20, 40, 1799));
+    // Cooldown taps cannot become the first half of the next double tap.
+    Test.assert(!bell.tap(20, 40, 1800));
+    Test.assert(bell.tap(20, 40, 1801));
     return true;
 }

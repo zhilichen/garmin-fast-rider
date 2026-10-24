@@ -24,7 +24,7 @@ class BellGesture {
             var dx = x-pendingX; var dy = y-pendingY;
             if (elapsed > 0 && elapsed <= DOUBLE_TAP_MS && dx*dx+dy*dy <= MAX_DISTANCE_SQUARED) {
                 cancelPending();
-                busyUntil = now+BellAudio.DURATION_MS+100;
+                busyUntil = now+BellAudio.COOLDOWN_MS;
                 return true;
             }
         }

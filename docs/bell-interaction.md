@@ -2,10 +2,10 @@
 
 - 响应区：左侧心率及实时数据，原生坐标 `0 ≤ x < 122`、`0 ≤ y < 214`。中央分隔、右侧统计和功率图不属于响铃区域。
 - 单击不修改数据；两次点击间隔不超过400ms、落点相距不超过24px时响一次。跨区域、长按或时钟回退会清理待配对点击。
-- 一次提交8个ToneProfile，3300/2500Hz高低音交替两组，总长1500ms。触控路径没有sleep或定时轮询。
-- 播放及其后100ms内忽略该区的新点击，防止连点反复重启声音。其他区域的切换仍立即响应。
-- 沿用App ID和界面，不增加显示元素。铃声是蜂鸣器音调组合，实际音色/响度需要Edge840试听。
+- 使用Garmin原生`Attention.TONE_LOUD_BEEP`响亮蜂鸣预设，一次`playTone`调用。公开API没有音量/振幅参数，不能设置“100%音量”或保证声压高于其他所有预设；该预设是官方明确标为响亮的蜂鸣。响度与时长由设备原生实现决定，不再使用此前1500ms自定义音调序列。
+- 触发后1600ms内忽略左侧新点击，防止连点反复触发；这是输入冷却时间，不代表铃声时长。没有sleep或定时轮询，其他区域切换立即响应。
+- 沿用App ID和界面；实际硬件响度仍需Edge840试听。
 
-`BellTests.mc`覆盖双击时间/距离边界、冷却、跨区、长按/时钟重置、路由、非全屏禁用以及序列总时长；该测试不播放真实声音。
+`BellTests.mc`覆盖双击时间/距离边界、冷却精确到期、跨区、长按/时钟重置、路由和非全屏禁用；模型测试不播放真实声音。
 
-验证状态：已合入主聊天的v0.3.5隔离工作树，与最新布局共同构建；四项新增VM测试和原有23项全部通过（27/27）。模拟器原生双击已调用Attention.playTone，日志记录1500ms请求；连续双击只触发一次，随后右侧功率仍立即切换。未连接真机，因此实际音色、响度和硬件试听仍待Edge840确认。API参考：[Attention.playTone](https://developer.garmin.com/connect-iq/api-docs/Toybox/Attention.html#playTone-instance_function)。
+API参考：[Attention.playTone与TONE_LOUD_BEEP](https://developer.garmin.com/connect-iq/api-docs/Toybox/Attention.html#playTone-instance_function)。

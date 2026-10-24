@@ -1,0 +1,8 @@
+Connect IQ SDK 9.3.0 / Edge840 API 6.0.0 / FastRider v0.3.8
+Native double-click at [30,50], second double-click during cooldown,
+then immediate native power panel click at [200,50].
+FastRider demo memory: 60480 / 127424 bytes
+FastRider bell: double tap -> TONE_LOUD_BEEP
+Tap [200,50] -> 10s, All, 5m
+One loud-beep request, no exception, other panel remained responsive.
+This verifies the native call, not acoustic volume or a duration measurement.
