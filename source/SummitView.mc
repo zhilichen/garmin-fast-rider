@@ -166,8 +166,9 @@ class SummitView extends WatchUi.DataField {
         color(dc, DisplayRules.RULE); dc.fillRectangle(122, 8, DisplayRules.STROKE, 104);
         metric(dc, 8, "HEART RATE", hr == null ? "--" : hr.format("%d"), "bpm", RideMath.zone(hr, hrLimits));
         metric(dc, 130, "PWR", power == null ? "--" : power.format("%d"), "W", RideMath.zone(power, powerLimits));
-        var badge = BuildMode.DEMO ? "DEMO" : (history.distance == null ? "DIST --" : (history.altitude == null ? "ALT --" : ""));
-        text(dc, 238, BuildMode.DEMO ? 10 : 8, BuildMode.DEMO ? Graphics.FONT_SMALL : Graphics.FONT_MEDIUM, badge, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
+        var clock = System.getClockTime();
+        var clockText = clock.hour.format("%02d")+":"+clock.min.format("%02d");
+        text(dc, 238, 10, Graphics.FONT_SMALL, clockText, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
         text(dc, 8, 124, Graphics.FONT_MEDIUM, "CADENCE", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
         text(dc, 116, 126, Graphics.FONT_SMALL, gear, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_RIGHT);
         text(dc, 46, 144, Graphics.FONT_NUMBER_MEDIUM, cadence == null ? "--" : cadence.format("%d"), DisplayRules.INK, Graphics.TEXT_JUSTIFY_CENTER);

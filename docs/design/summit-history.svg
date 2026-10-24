@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="246" height="322" viewBox="0 0 246 322" role="img" aria-labelledby="title desc">
   <title id="title">Summit · measured elevation history · no future course</title>
-  <desc id="desc">246 by 322 vector design preview, not a simulator screenshot. All elevation samples are from a synthetic measured-history feed marked DEMO. No GPX elevation or future course is drawn. The current marker is at x=228 with nine empty pixels beyond its isolation halo.</desc>
+  <desc id="desc">246 by 322 vector design preview, not a simulator screenshot. All elevation samples are from a synthetic measured-history feed. The upper-right clock shows a sample local time in HH:mm format. No GPX elevation or future course is drawn. The current marker is at x=228 with nine empty pixels beyond its isolation halo.</desc>
   <rect width="246" height="322" fill="white" />
   <rect x="122" y="8" width="2" height="104" fill="#83909B" shape-rendering="crispEdges" />
   <text x="8" y="23" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#354550">HEART RATE</text>
@@ -17,7 +17,7 @@
   <text x="46" y="178" font-family="'Garmin Robo Units', Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#15212B">94</text>
   <text x="86" y="173" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="start" fill="#354550">rpm</text>
   <text x="116" y="139" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="end" fill="#354550">2/5</text>
-  <text x="238" y="23" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="end" fill="#354550">DEMO</text>
+  <text x="238" y="23" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="end" fill="#354550">09:41</text>
   <rect x="122" y="124" width="2" height="54" fill="#83909B" shape-rendering="crispEdges" />
   <text x="130" y="137" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="start" fill="#354550">LAP</text>
   <text x="238" y="139" font-family="'DejaVu Sans Medium Condensed B', Arial, sans-serif" font-size="19" font-weight="normal" text-anchor="end" fill="#15212B">05:12</text>
