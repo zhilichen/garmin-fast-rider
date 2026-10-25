@@ -41,8 +41,8 @@ def download_table(manifest, language='en'):
 def screenshot_table(manifest, language='en'):
     zh = language == 'zh-CN'
     rows = [SCREENSHOTS_START,
-        (f'v{manifest["version"]} 原生模拟器截图。预览按同宽等比缩放，点击可查看原生像素；全部使用合成指标。' if zh else
-         f'v{manifest["version"]} native simulator captures, using synthetic data. Previews share a display width while keeping their aspect ratio; open an image to inspect native pixels.'), '']
+        ('原生日间模拟器截图。预览按同宽等比缩放，点击可查看原生像素；全部使用合成指标。' if zh else
+         'Native day-mode simulator captures, using synthetic data. Previews share a display width while keeping their aspect ratio; open an image to inspect native pixels.'), '']
     devices = manifest['devices']
     for start in range(0,len(devices),3):
         group = devices[start:start+3]

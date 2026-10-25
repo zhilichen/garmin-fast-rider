@@ -19,7 +19,8 @@ flowchart TD
 | --- | --- | --- |
 | `source/model` | 功率窗口、历史、圈统计、坡度和格式 | 否 |
 | `source/app/FastRiderView.mc` | 真实指标采样和共用渲染 | 否 |
-| `source/ui/DisplayRules.mc` | Zone与状态颜色 | 否 |
+| `source/ui/DisplayRules.mc` | Zone分组与状态阈值 | 否 |
+| `source/ui/DisplayTheme.mc` | 跟随系统背景的日夜配色、标记与图表填充 | 否 |
 | `source/ui/InteractionState.mc` | 默认状态、分圈行为和触控区域 | 否 |
 | `source/input/touch` | 点击切换、双击车铃及触控应用入口 | 否 |
 | `source/input/buttons` | 单视图入口；不引用触控或车铃实现 | 否 |
@@ -40,8 +41,16 @@ flowchart TD
 
 ## 改信息与加设备
 
-修改数据来源或显示内容时，更新共用的采样/渲染函数。需要新位置时只在`design/layout.json`增加或调整锚点，重新生成即可同步全部显示档。颜色只改`DisplayRules.mc`。
+修改数据来源或显示内容时，更新共用的采样/渲染函数。需要新位置时只在`design/layout.json`增加或调整锚点，重新生成即可同步全部显示档。Zone分组和提示阈值只改`DisplayRules.mc`；日夜色板统一在`DisplayTheme.mc`维护。
 
 增加同分辨率设备时，只需在设备目录加入目标及能力，确认设备包中的启动图标尺寸，运行生成器并构建、测试。新分辨率在`profiles`增加宽高后，先生成字库，再生成布局；仍需原生截图验收字体回退、雷达留白及触控边界。
 
 旧版GPX导入、路线投影和已走海拔图原型已经移除。历史设计和验收资料集中于`docs/archive/v0.3`，不参与应用构建。
+
+## 日夜模式
+
+每次`onUpdate`先读取原生`DataField.getBackgroundColor()`，再由每个视图持有的`DisplayTheme`选择日间或夜间色板。时间/日出日落由码表的原生自动模式决定，不另设时刻或位置权限。API从1.2起可用，全部支持机型均可使用。
+
+同一主题实例只在系统背景改变时更新属性，不重新创建数据模型、历史或输入状态。BMFont仍使用原始灰度覆盖资源，所有文字绘制使用当前背景作为抗锯齿底色。图表填充按90%不透明度混合到当前背景；FTP/Z2/Lap辅助线用同一背景描边，Zone位置标记在黑底下改用白色端点与黑色切口。
+
+夜间色彩锚点采用旧款MIP屏的64色RGB立方体，降低颜色量化导致色系混淆的风险。[原生截图与测试记录](validation/themes/v0.4.2/README.md)。

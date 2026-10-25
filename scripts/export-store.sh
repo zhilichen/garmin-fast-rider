@@ -43,7 +43,7 @@ record={'version':version(),'mode':'live','release':True,'bytes':len(data),
     'sha256':hashlib.sha256(data).hexdigest(),
     'devices':[{ 'device':d,'inputs_sha256':inputs_hash(d,'live')} for d in devices],
     'regional_part_numbers':sorted(included),
-    'acceptance_record':'docs/validation.md; docs/validation/layout-v041'}
+    'acceptance_record':'docs/validation.md'}
 p.with_suffix('.json').write_text(json.dumps(record,indent=2)+'\n')
 print('Store upload file: '+str(p))
 print('SHA256: '+record['sha256'])

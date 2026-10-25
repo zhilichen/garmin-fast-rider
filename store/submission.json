@@ -1,7 +1,7 @@
 {
-  "status": "awaiting_owner_review",
-  "app_name": "FastRider",
-  "candidate_version": "0.4.1",
+  "status": "pending_review",
+  "app_name": "Fast Rider",
+  "candidate_version": "0.4.2",
   "app_type": "datafield",
   "intended_visibility": "public",
   "price": "free",
@@ -12,14 +12,17 @@
   "store_upload": "../dist/connect-iq/v0.4.1/FastRider-0.4.1.iq",
   "new_native_screenshots_accepted": true,
   "uploaded": true,
-  "submitted_for_review": false,
-  "store_url": null,
+  "submitted_for_review": true,
+  "store_url": "https://apps.garmin.com/apps/ba487f91-82ad-4baa-94f0-9002f86d6a53",
   "uploaded_by": "assistant_with_owner_authorization",
   "campaign": "campaign/v0.4.1",
   "campaign_images": 10,
   "local_manifest_signature": "openssl_sha256_verified",
-  "store_signature": "failure_displayed_on_owner_upload_form",
+  "store_signature": "warning_displayed_upload_accepted_pending_review",
   "uploaded_images": 9,
   "screen_image_limit": 5,
-  "listing_filled": true
+  "listing_filled": true,
+  "submitted_version": "0.4.1",
+  "prepared_upload": "../dist/connect-iq/v0.4.2/FastRider-0.4.2.iq",
+  "candidate_submitted_for_review": false
 }

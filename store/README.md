@@ -1,6 +1,6 @@
 # Connect IQ Store submission
 
-The intended listing is **FastRider**, a free, public cycling Data Field for the
+The Store listing is **Fast Rider**, a free, public cycling Data Field for the
 12 Edge models in `config/devices.json`. Source and support use the public
 GitHub repository. No paid account, subscription or payment integration is used.
 
@@ -34,13 +34,9 @@ device package declares CIQ3.2.5. Newer optional native APIs remain guarded.
 The exporter verifies all 17 regional product numbers across the 12 models and
 refuses a package which silently omits a variant.
 
-Native acceptance is complete for v0.4.1; see
-`../docs/validation/layout-v041`. The owner will upload the package and complete
-the Connect IQ form. No app file has been uploaded or submitted by this task.
-The prepared file is `../dist/connect-iq/v0.4.1/FastRider-0.4.1.iq` (735,207 bytes),
-SHA256 `b24cf77ca6a3afd8615c5541ffd9b853dbd2d7810c5e3bf996230c6a74c57ced`.
-The public privacy notice is already available at the GitHub URL in
-`submission.json`.
+The owner-visible listing is [Fast Rider](https://apps.garmin.com/apps/ba487f91-82ad-4baa-94f0-9002f86d6a53). Version **0.4.1** was submitted with the owner's authorization and its page confirms **App pending**. It is not publicly downloadable until Garmin approves it.
+
+Version **0.4.2** adds native day/night themes. Its verified live IQ export is prepared locally at `../dist/connect-iq/v0.4.2/FastRider-0.4.2.iq`; it has not been uploaded to replace the pending 0.4.1 submission. See the [theme acceptance record](../docs/validation/themes/v0.4.2/README.md) and `submission.json` for the distinction between submitted and prepared versions.
 
 Garmin reviews a new app before it becomes publicly downloadable. Record the
 actual resulting app URL and submission status; a prepared IQ file or a saved

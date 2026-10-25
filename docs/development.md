@@ -50,7 +50,7 @@ SNAPSHOT_CASE=stress ./scripts/build.sh snapshot edge1050
 SNAPSHOT_CASE=missing ./scripts/build.sh snapshot edge530
 ```
 
-snapshot固定合成指标、骑行时长和时钟，绘图仍使用正式渲染代码。通过模拟器File→Save Screen Capture导出原生截图。840的12种组合基准位于`tests/fixtures/edge840-v0315`；重构后的对照位于`docs/validation/edge840`。
+snapshot固定合成指标、骑行时长和时钟，绘图仍使用正式渲染代码。日夜验收使用模拟器 Data Fields → Background Color → White / Black；主题来自原生背景接口，每次重绘跟随改变。修改配色后，至少重新导出四种分辨率的日夜截图，并检查一次 White → Black → White 往返和日间像素回归。通过模拟器File→Save Screen Capture导出原生截图。840的12种组合基准位于`tests/fixtures/edge840-v0315`；重构后的对照位于`docs/validation/edge840`。
 
 840的UI应在246×322原生像素下比较，不以设备外框截图或被缩放的预览判定。当前12组回归零像素差异。以后若有意更改840设计，应在评审时明确更新基准，不能通过放宽图像相等检查掩盖变化。
 

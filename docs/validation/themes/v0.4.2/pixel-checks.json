@@ -1,0 +1,71 @@
+{
+  "version": "0.4.2",
+  "day_night_day_840_changed_pixels": 0,
+  "captures": [
+    {
+      "device": "edge530",
+      "size": [
+        246,
+        322
+      ],
+      "day_changed_pixels": 0,
+      "night_background": "000000",
+      "heap_bytes_at_first_draw": 86480,
+      "heap_limit_bytes": 127424,
+      "day_sha256": "e246dc87eb8c51108a365a60991585d7f0acb5b6f72eee6fa666a477205fc3b7",
+      "night_sha256": "5b586f9c35c05e39e6bc1529f643629de5977184eaab0fe1a6da100e383b9408"
+    },
+    {
+      "device": "edge840",
+      "size": [
+        246,
+        322
+      ],
+      "day_changed_pixels": 0,
+      "night_background": "000000",
+      "heap_bytes_at_first_draw": 62144,
+      "heap_limit_bytes": 127424,
+      "day_sha256": "e246dc87eb8c51108a365a60991585d7f0acb5b6f72eee6fa666a477205fc3b7",
+      "night_sha256": "5b586f9c35c05e39e6bc1529f643629de5977184eaab0fe1a6da100e383b9408"
+    },
+    {
+      "device": "edge1040",
+      "size": [
+        282,
+        470
+      ],
+      "day_changed_pixels": 0,
+      "night_background": "000000",
+      "heap_bytes_at_first_draw": 65784,
+      "heap_limit_bytes": 127424,
+      "day_sha256": "6c95a592e0e1382c4b4e48eed0f500ef8614c8ccc007df245c9219871f981c26",
+      "night_sha256": "1012fb47fee50f4080569b1432515b4dd1a6d9d89790d08c702586d077fbac17"
+    },
+    {
+      "device": "edge850",
+      "size": [
+        420,
+        600
+      ],
+      "day_changed_pixels": 0,
+      "night_background": "000000",
+      "heap_bytes_at_first_draw": 65976,
+      "heap_limit_bytes": 127424,
+      "day_sha256": "1baca79ca6cfe83e0045dc6c705154c770ed262840f325d14b1d6ab00bed7b5e",
+      "night_sha256": "75ec10f0c62b23cc6868558a235338ffe722e29526dfb70f820057256473cf05"
+    },
+    {
+      "device": "edge1050",
+      "size": [
+        480,
+        800
+      ],
+      "day_changed_pixels": 0,
+      "night_background": "000000",
+      "heap_bytes_at_first_draw": 65880,
+      "heap_limit_bytes": 127424,
+      "day_sha256": "e1c37e7a4bb03acd280f156c41284cc7c33d468f636cf058ae875852e3c0083f",
+      "night_sha256": "117f04eb540c662e34177f9fd021cb255370b43c6262482fc4c198c0833ecfe2"
+    }
+  ]
+}
