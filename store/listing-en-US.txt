@@ -2,7 +2,7 @@ FastRider – Ride in Color
 
 Power, heart rate, lap stats and your ride essentials — on one screen!
 
-FastRider turns your Garmin Edge into a clear, colorful cycling dashboard. Big numbers, useful training guides and a friendly touch bell keep the essentials close, whether you ride gravel, road or the indoor trainer.
+FastRider turns your Garmin Edge into a clear, colorful cycling dashboard. Big numbers, useful training guides and a friendly touch bell keep the essentials close, whether you ride on the road, explore new routes or train indoors.
 
 YOUR RIDE, COLOR CODED
 Power and heart rate use bold zone colors, with a moving mark showing where you are inside the current zone. Cadence and gradient have their own color alerts. Power uses the same colors in the live number and graph: blue for Z2, orange for Z4, purple for Z5, red for Z6/Z7, and gray for Z1/Z3. Spot a change in effort at a glance.

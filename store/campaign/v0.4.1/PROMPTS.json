@@ -1,20 +1,23 @@
 {
   "tool": "built-in image_gen.imagegen",
-  "purpose": "Original FastRider promotional illustration; crisp copy and native device UI are separately typeset on SVG artboards.",
-  "master": {
-    "transparent_background": true,
-    "prompt": "Use case: illustration-story. Original energetic adult cartoon gravel cyclist riding toward the right, entire rider and gravel bike visible, on genuinely transparent background. Warm friendly smile, electric-blue cycling helmet and jersey with one white lightning emblem, navy shorts, cream socks; teal flared-drop-bar gravel bike, chunky tan-wall tires, disc brakes, coral frame bag. Mechanically plausible cycling pose, hands on hoods, feet on pedals. Light playful editorial cartoon with chunky navy outlines, vivid flat colors and restrained cel shading. No words, no Garmin elements, no watermark. Palette #1355FF #19B39C #FF705D #FFF8EB #122B3B."
-  },
+  "revision": 3,
+  "purpose": "Male FastRider road cyclist wearing cycling sunglasses, with paved-road scenery. Native Edge hardware and screenshots stay separate; an SVG silhouette clip removes exterior white canvas.",
   "rider_edit": {
-    "output": "source/gravel-rider.png",
+    "output": "source/road-rider.png",
     "transparent_background": true,
-    "prompt": "Use case: precise-object-edit. Edit target: the supplied cartoon gravel cyclist. Make a clean, flat editorial sticker illustration of this SAME cyclist and same teal gravel bike, same face, hair, electric-blue helmet/jersey and coral frame bag. Keep the entire rider and two wheels and anatomical pose. CHANGE ONLY the rendering: remove every glow, haze, vignette, cast shadow and dark translucent cloud around the silhouette. Keep the genuinely transparent background perfectly clean. Use crisp chunky navy outlines and 2-3 flat fills per object, with very restrained cel shading, fewer spokes and simpler drivetrain detail. The image should feel light, cheerful and legible at a small size, with no gray muddy halo. Keep the whole bicycle, no crop, no text, no watermark. No white or black background. This is a reusable transparent cutout for pale cream marketing layouts.",
-    "sha256": "4dd351b32f531efcbfa80fd090344b1f305cfbbbe3888caafda86cae28e71c04"
+    "prompt": "Use case: precise-object-edit. Edit target: supplied male FastRider cyclist wearing mirrored wraparound cycling sunglasses. Change the BICYCLE and riding kit styling from gravel to a modern fast ROAD RACING BIKE. Same friendly adult male, short hair, light stubble, blue helmet, blue jersey with white lightning, navy close-fitting bib shorts, white socks, blue road shoes, teal frame. Replace the chunky knobby gravel tires with narrow smooth 28 mm black road tires, deep-section navy carbon road rims, elegant aero road frame, compact road drop handlebars, no flared gravel bars, realistic road drivetrain and small disc brakes. REMOVE the coral triangle frame bag completely; clean open frame triangle, one small blue bottle on down tube acceptable. Athletic forward road riding posture with hands on brake hoods. Preserve the cheerful cartoon style, crisp navy outlines, full rider and both wheels, same right-facing composition and approximate proportions. Transparent background, including wheel interiors and frame triangle. No ground, no shadow/haze, no text or watermark. This must unmistakably look like a road cyclist on a road racing bicycle, not gravel or mountain biking.",
+    "sha256": "dfb6bc59a7f6a3835dd982dfe4dd3a3715fec449ba78ca61e8a2f6a17e7ead08"
   },
   "icon": {
     "output": "source/rider-icon.png",
     "transparent_background": false,
-    "prompt": "Use case: logo-brand. Asset type: original FastRider app cover and small on-device app icon, square composition. Use the SAME friendly cartoon cyclist identity as the supplied reference, but create a highly simplified close portrait of just the rider's head and shoulders. Big electric-blue cycling helmet with 3-4 clear vent shapes, smiling warm face, dark hair, short blue jersey shoulders, small white lightning bolt on the jersey. Solid warm cream #FFF8EB background, no outer border, no rounded-square masking. Flat clean bold editorial cartoon, very thick navy outline, only a handful of vivid color blocks, no gradients, no shadows, no tiny texture. Put the portrait comfortably inside a central 82% safe area with generous all-edge padding. This must read clearly at 128x128. Original cohesive app identity, no Garmin elements or product picture. No text, no letters, no watermark. High-resolution 1024x1024 square source.",
-    "sha256": "9b0d667c53e3217601dd7de6d36e2594f515427b95e9e144f279c26bb362fa17"
+    "prompt": "Use case: precise-object-edit. Image 1 is the app icon to update; Image 2 is the new male FastRider character identity reference. Update the square head-and-shoulders app icon to the SAME adult MALE cyclist as Image 2: short brown hair, no ponytail, lightly stubbled angular jaw, confident friendly smile, big blue-teal mirrored wraparound CYCLING SUNGLASSES with navy frame. Preserve Image 1's blue helmet, navy bold outline, blue jersey with single white lightning bolt, warm cream background, generous outer safe margins, simple flat cartoon look. Add two very subtle pale mint hill silhouettes behind the shoulders, a soft warm sun disk behind the helmet, restrained light outdoor feel. Face and sunglasses must be instantly clear at 128x128. Crisp large shapes, no texture, no fine decorative noise, no text, no watermark. Entire helmet safely inside frame. Square output.",
+    "sha256": "4dbfdef222c24a0f5a3897c2f9d3664f755ba0d31a83b096587c3161b3747ade"
+  },
+  "landscape": {
+    "output": "source/road-landscape.png",
+    "transparent_background": false,
+    "prompt": "Use case: precise-object-edit. Edit target: supplied landscape background. Change ONLY the winding pale gravel trail into a smooth clean PAVED ROAD for road cycling. Same road position and perspective, winding through the hills from bottom center toward upper right. Road surface light slate-gray smooth asphalt, thin cream/white edge lines, a restrained dashed pale yellow centerline following its perspective. Remove all scattered gravel/pebbles from the road surface; keep roadside grass and rocks off the pavement. Preserve the original warm ivory sky, gold sun, clouds, green and mint rolling hills, cheerful editorial illustration style, 2:1 wide composition, quiet upper-left copy space. No vehicles, no people, no bicycles, no devices, no text, no logos. This is an inviting road-cycling landscape, not gravel or a dirt path.",
+    "sha256": "28942cadf9ace1e30f3c48628a627fb6616d07a5b76701263d7ac137e8d02cff"
   }
 }

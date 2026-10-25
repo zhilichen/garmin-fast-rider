@@ -7,7 +7,7 @@ const root=__dirname, out=path.join(root,'upload');fs.mkdirSync(out,{recursive:t
   const image=sharp(fs.readFileSync(j.svg)).resize(j.width,j.height).flatten({background:'#FFF8EB'}).removeAlpha().toColourspace('srgb');
   let buffer,filename;
   if(j.name.includes('hero')){buffer=await image.png({compressionLevel:9}).toBuffer();filename=j.name+'.png';if(buffer.length>2048000)throw Error('Hero too large');}
-  else {filename=j.name+'.jpg';for(const quality of [94,91,88,85,82,78,74]){buffer=await image.clone().jpeg({quality,chromaSubsampling:'4:4:4'}).toBuffer();if(buffer.length<149000)break;}if(buffer.length>=150000)throw Error('Screen image too large: '+filename);}
+  else {filename=j.name+'.jpg';for(const quality of [94,91,88,85,82,78,74]){buffer=await image.clone().jpeg({quality,chromaSubsampling:'4:4:4',mozjpeg:true}).toBuffer();if(buffer.length<149000)break;}if(buffer.length>=150000)throw Error('Screen image too large: '+filename);}
   fs.writeFileSync(path.join(out,filename),buffer);manifest.push({file:filename,width:j.width,height:j.height,bytes:buffer.length});
  }
  const icon=path.join(root,'source/rider-icon.png');

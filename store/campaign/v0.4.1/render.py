@@ -24,22 +24,29 @@ def lines(items,x,y,size=26,leading=38,fill=NAVY,bold=False):return ''.join(text
 def title(a,b):return text(a,48,129,57,NAVY,True)+text(b,48,191,57,BLUE,True)
 def bolt(x,y,scale=1,color=BLUE):return f'<path d="M18 0 0 22h13L8 42l30-27H23L29 0Z" fill="{color}" transform="translate({x},{y}) scale({scale})"/>'
 def chip(s,x,y,w,fill=BLUE,txt='white',size=20):return rect(x,y,w,42,fill,21)+text(s,x+w/2,y+28,size,txt,True,'middle')
-def rider(x,y,w):return image(BASE/'source/gravel-rider.png',x,y,w,w*2/3)
+def rider(x,y,w):return image(BASE/'source/road-rider.png',x,y,w,w*2/3)
 def ui_file(name='default'):
  paths={'default':ROOT/'docs/validation/screens/edge840.png','controls':ROOT/'docs/validation/edge840/10s-lap-20m.png','whole':ROOT/'docs/validation/edge840/3s-all-all.png','z2':BASE/'source/edge840-z2.png','threshold':BASE/'source/edge840-threshold.png'}
  return paths[name]
 def device(x,y,w,name='default'):
  # Skin screen opening is 246x322 at (69,78), exactly matching the native field.
- return f'<svg x="{x}" y="{y}" width="{w}" height="{w*518/382}" viewBox="0 0 382 518">'+image(ui_file(name),69,78,246,322)+image(SKIN,0,0,382,518)+'</svg>'
+ # Clip only the native skin's exterior white canvas. Hardware and screen pixels
+ # remain the original SDK/capture images; the screen opening keeps its alpha.
+ outline='M191 8 C101 8 23 27 22 78 L22 101 H18.5 V176 H22 V222 H18.5 V284 L22 295 L18.5 317 V371 H22 V421 C22 478 84 508 191 511 C298 508 357 477 357 421 V372 H361 V299 H357 V176 H361 V101 H357 V78 C357 27 281 8 191 8 Z'
+ return f'<svg x="{x}" y="{y}" width="{w}" height="{w*518/382}" viewBox="0 0 382 518"><defs><clipPath id="device-outline"><path d="{outline}"/></clipPath></defs><g clip-path="url(#device-outline)">'+image(ui_file(name),69,78,246,322)+image(SKIN,0,0,382,518)+'</g></svg>'
 def head(n):return bolt(48,34,.7)+text('FastRider',86,60,27,BLUE,True)+text(f'{n:02d}',952,60,23,NAVY,True,'end')
 def footer(s='Edge 840 shown. Synthetic example data.'):
  return text(s,48,961,19,'#53636D')
 def svg(body,w=1000,h=1000):
- return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">'+rect(0,0,w,h,CREAM,0)+body+'</svg>'
+ landscape=BASE/'source/road-landscape.png'
+ # A quiet cream fade protects headings; hills and a road add depth at the base.
+ scene=f'<image href="{uri(landscape)}" x="0" y="0" width="{w}" height="{h}" preserveAspectRatio="xMidYMid slice"/>'
+ fade='<defs><linearGradient id="scene-fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8EB" stop-opacity="0.18"/><stop offset="0.7" stop-color="#FFF8EB" stop-opacity="0.25"/><stop offset="1" stop-color="#FFF8EB" stop-opacity="0.05"/></linearGradient></defs>' if w>h else '<defs><linearGradient id="scene-fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8EB" stop-opacity="0.65"/><stop offset="0.7" stop-color="#FFF8EB" stop-opacity="0.86"/><stop offset="1" stop-color="#FFF8EB" stop-opacity="0.45"/></linearGradient></defs>'
+ return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">'+rect(0,0,w,h,CREAM,0)+scene+fade+rect(0,0,w,h,'url(#scene-fade)',0)+body+'</svg>'
 def save(name,body,w=1000,h=1000):
  p=OUT/(name+'.svg');p.write_text(svg(body,w,h));return {'name':name,'svg':str(p),'width':w,'height':h}
 def card_body(n,a,b,name='default'):
- return head(n)+title(a,b)+rect(36,219,476,666,'white',32)+device(43,228,462,name)
+ return head(n)+title(a,b)+device(43,228,462,name)
 def note(heading,body,x,y,w=394,tint='white',accent=BLUE):
  return rect(x,y,w,133,tint,24)+text(heading,x+24,y+39,23,accent,True)+lines(body,x+24,y+77,23,32)
 
@@ -48,9 +55,9 @@ def main():
  hero=bolt(64,54,1.15)+text('FastRider',119,93,48,BLUE,True)
  hero+=text('Your ride.',64,200,80,NAVY,True)+text('One screen.',64,286,80,BLUE,True)
  hero+=lines(['Power. Heart rate. Lap stats.','The essentials, together.'],68,338,27,36)
- hero+=chip('COLOR-CODED EFFORT',66,437,300)+chip('TOUCH BELL',66,494,226,TEAL)+chip('Z2 + THRESHOLD',66,551,270,ORANGE)
+ hero+=chip('COLOR-CODED EFFORT',66,437,300)+chip('TOUCH BELL',66,494,226,TEAL)+chip('Power Graph',66,551,240,ORANGE)
  hero+=rider(355,296,630)
- hero+=rect(978,34,410,652,'white',34)+device(989,55,390,'threshold' if ui_file('threshold').exists() else 'default')+text('Edge 840 • sample data',1183,643,19,'#53636D',False,'middle')
+ hero+=device(989,55,390,'threshold' if ui_file('threshold').exists() else 'default')+rect(1063,619,240,38,CREAM,19)+text('Edge 840 • sample data',1183,644,19,'#53636D',False,'middle')
  jobs.append(save('01-hero-en',hero,1440,720))
  b=card_body(1,'Your key numbers.','One screen.')
  b+=note('POWER + HEART RATE',['Big numbers. Bold zones.'],550,243)

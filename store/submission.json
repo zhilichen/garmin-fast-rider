@@ -1,5 +1,5 @@
 {
-  "status": "owner_preparing_listing",
+  "status": "awaiting_owner_review",
   "app_name": "FastRider",
   "candidate_version": "0.4.1",
   "app_type": "datafield",
@@ -14,9 +14,12 @@
   "uploaded": true,
   "submitted_for_review": false,
   "store_url": null,
-  "uploaded_by": "owner",
+  "uploaded_by": "assistant_with_owner_authorization",
   "campaign": "campaign/v0.4.1",
   "campaign_images": 10,
   "local_manifest_signature": "openssl_sha256_verified",
-  "store_signature": "failure_displayed_on_owner_upload_form"
+  "store_signature": "failure_displayed_on_owner_upload_form",
+  "uploaded_images": 9,
+  "screen_image_limit": 5,
+  "listing_filled": true
 }
