@@ -10,6 +10,7 @@ END = '<!-- downloads:end -->'
 SCREENSHOTS_START = '<!-- screenshots:start -->'
 SCREENSHOTS_END = '<!-- screenshots:end -->'
 RAW = 'https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/'
+README_LANGUAGES = {'README.md': 'en', 'README.zh-CN.md': 'zh-CN'}
 
 def zip_bytes(files):
     buffer = io.BytesIO()
@@ -20,22 +21,28 @@ def zip_bytes(files):
             z.writestr(info, data)
     return buffer.getvalue()
 
-def download_table(manifest):
+def download_table(manifest, language='en'):
     ver = manifest['version']
     prefix = RAW + 'releases/v' + ver + '/'
-    rows = [START, f'当前版本 **v{ver}**，下载后即可安装，无需 SDK 或 Java。PRG 可直接复制到设备；ZIP 包含同一程序、安装说明和许可证。', '',
-        '| 设备 | 原生分辨率 | 操作 | PRG 直接下载 | ZIP 下载 |',
+    zh = language == 'zh-CN'
+    intro = (f'当前版本 **v{ver}**，下载后即可安装，无需 SDK 或 Java。PRG 可直接复制到设备；ZIP 包含同一程序、安装说明和许可证。' if zh else
+        f'Current version: **v{ver}**. No SDK or Java needed to install. Choose a PRG to copy directly, or a ZIP with the same program, installation instructions and licenses.')
+    heading = '| 设备 | 原生分辨率 | 操作 | PRG 直接下载 | ZIP 下载 |' if zh else '| Device | Native resolution | Interaction | Direct PRG | ZIP |'
+    rows = [START, intro, '', heading,
         '| --- | --- | --- | --- | --- |']
     for d in manifest['devices']:
         model = d['device'][4:].replace('bontrager', ' Bontrager').replace('plus', ' Plus')
-        action = '触控切换与车铃' if d['touch'] else '默认视图'
+        action = ('触控切换与车铃' if d['touch'] else '默认视图') if zh else ('Touch controls + bell' if d['touch'] else 'Fixed default view')
         rows.append(f'| Edge {model} | {d["profile"].replace("x", "×")} | {action} | [PRG]({prefix+d["file"]}) | [ZIP]({prefix+d["archive"]}) |')
-    rows += ['', f'[全部型号 ZIP]({prefix+manifest["bundle"]["file"]}) · [SHA256 校验值](releases/v{ver}/SHA256SUMS) · [版本清单](releases/v{ver}/manifest.json)', END]
+    labels = ('全部型号 ZIP', 'SHA256 校验值', '版本清单') if zh else ('All devices ZIP', 'SHA256 checksums', 'Release manifest')
+    rows += ['', f'[{labels[0]}]({prefix+manifest["bundle"]["file"]}) · [{labels[1]}](releases/v{ver}/SHA256SUMS) · [{labels[2]}](releases/v{ver}/manifest.json)', END]
     return '\n'.join(rows)
 
-def screenshot_table(manifest):
+def screenshot_table(manifest, language='en'):
+    zh = language == 'zh-CN'
     rows = [SCREENSHOTS_START,
-        f'v{manifest["version"]} 原生模拟器截图。预览按同宽等比缩放，点击可查看原生像素；全部使用合成指标。', '']
+        (f'v{manifest["version"]} 原生模拟器截图。预览按同宽等比缩放，点击可查看原生像素；全部使用合成指标。' if zh else
+         f'v{manifest["version"]} native simulator captures, using synthetic data. Previews share a display width while keeping their aspect ratio; open an image to inspect native pixels.'), '']
     devices = manifest['devices']
     for start in range(0,len(devices),3):
         group = devices[start:start+3]
@@ -46,7 +53,8 @@ def screenshot_table(manifest):
             path = 'docs/validation/screens/'+d['device']+'.png'
             cells.append(f'<a href="{path}"><img src="{path}" width="246" alt="{label} {d["profile"]}"></a>')
         rows += ['| '+' | '.join(cells)+' |', '']
-    rows += ['[更多状态、原图与验收记录](docs/screenshots.md)', SCREENSHOTS_END]
+    label = '更多状态、原图与验收记录' if zh else 'More states, native captures and validation notes'
+    rows += [f'[{label}](docs/screenshots.md)', SCREENSHOTS_END]
     return '\n'.join(rows)
 
 def publish_downloads(files, manifest, bundle):
@@ -76,18 +84,20 @@ def publish_downloads(files, manifest, bundle):
         existing = {str(p.relative_to(folder)): p.read_bytes() for p in folder.rglob('*') if p.is_file()}
         if existing != outputs:
             raise SystemExit('Published version already exists with different files; bump manifest.xml version.')
-    readme = (ROOT/'README.md').read_text()
-    if readme.count(START) != 1 or readme.count(END) != 1:
-        raise SystemExit('README must contain one downloads:start/end marker pair.')
-    updated = readme[:readme.index(START)] + download_table(release) + readme[readme.index(END)+len(END):]
-    if updated.count(SCREENSHOTS_START)!=1 or updated.count(SCREENSHOTS_END)!=1:
-        raise SystemExit('README must contain one screenshots:start/end marker pair.')
-    updated = updated[:updated.index(SCREENSHOTS_START)] + screenshot_table(release) + updated[updated.index(SCREENSHOTS_END)+len(SCREENSHOTS_END):]
+    readmes = {}
+    for filename, language in README_LANGUAGES.items():
+        updated = (ROOT/filename).read_text()
+        for start, end, render in [(START, END, download_table), (SCREENSHOTS_START, SCREENSHOTS_END, screenshot_table)]:
+            if updated.count(start) != 1 or updated.count(end) != 1:
+                raise SystemExit(f'{filename} must contain one {start}/{end} marker pair.')
+            updated = updated[:updated.index(start)] + render(release, language) + updated[updated.index(end)+len(end):]
+        readmes[filename] = updated
     for name, data in outputs.items():
         p = folder/name
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_bytes(data)
-    (ROOT/'README.md').write_text(updated)
+    for filename, updated in readmes.items():
+        (ROOT/filename).write_text(updated)
     print(str(folder))
 
 def main():

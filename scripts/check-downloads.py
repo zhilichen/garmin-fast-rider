@@ -5,7 +5,7 @@ import json
 import zipfile
 
 from build_metadata import ROOT, version
-from package import END, LICENSE_FILES, START, SCREENSHOTS_START, SCREENSHOTS_END, download_table, screenshot_table
+from package import END, LICENSE_FILES, README_LANGUAGES, START, SCREENSHOTS_START, SCREENSHOTS_END, download_table, screenshot_table
 
 
 def require(condition, message):
@@ -74,16 +74,15 @@ def main():
             require([d['device'] for d in manifest['devices']] == list(catalog), 'Download models differ from catalog')
             for d in manifest['devices']:
                 require(all(d[k] == catalog[d['device']][k] for k in ['profile', 'touch']), 'Download capabilities differ')
-            readme = (ROOT/'README.md').read_text()
-            require(readme.count(START) == 1 and readme.count(END) == 1, 'Missing README download markers')
-            section = readme[readme.index(START):readme.index(END)+len(END)]
-            require(section == download_table(manifest), 'README download links are stale')
-            require(readme.count(SCREENSHOTS_START)==1 and readme.count(SCREENSHOTS_END)==1,'Missing README screenshot markers')
-            section=readme[readme.index(SCREENSHOTS_START):readme.index(SCREENSHOTS_END)+len(SCREENSHOTS_END)]
-            require(section==screenshot_table(manifest),'README screenshot gallery is stale')
+            for filename, language in README_LANGUAGES.items():
+                readme = (ROOT/filename).read_text()
+                for start, end, render in [(START, END, download_table), (SCREENSHOTS_START, SCREENSHOTS_END, screenshot_table)]:
+                    require(readme.count(start) == 1 and readme.count(end) == 1, f'Missing {filename} markers: {start}')
+                    section = readme[readme.index(start):readme.index(end)+len(end)]
+                    require(section == render(manifest, language), f'{filename} generated section is stale: {start}')
             for d in manifest['devices']:
                 require((ROOT/'docs/validation/screens'/(d['device']+'.png')).exists(),'Missing model screenshot: '+d['device'])
-    print('README direct-download links match the published version and device catalog.')
+    print('English and Chinese README downloads and galleries match the published version and device catalog.')
 
 
 if __name__ == '__main__':

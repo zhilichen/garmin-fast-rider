@@ -1,57 +1,118 @@
 # FastRider
 
-Garmin Edge 全屏 Connect IQ 数据字段：大号心率/功率、实时骑行数据、Lap/All 统计及带分圈标记的功率趋势。
+**English** · [简体中文](README.zh-CN.md)
 
-![Edge 840 原生模拟器](docs/validation/screens/edge840.png)
+[![FastRider: a road cyclist in cycling sunglasses beside an Edge 840, showing power, heart rate, lap statistics and a power graph](store/campaign/v0.4.1/upload/01-hero-en.png)](#download)
 
-## 下载与支持设备
+**Power, heart rate, lap stats and your ride essentials — on one screen.**
+
+A free, open-source Connect IQ data field for **12 Garmin Edge models**. Built for readable ride data, steady Z2 sessions and long threshold intervals.
+
+**[Download](#download)** · [Install](#install) · [Controls](#controls) · [Build from source](#develop) · [Contribute](#contribute)
+
+## For riders
+
+- **See the essentials together.** Large heart rate and power, rear gear, cadence, grade, speed, lap/ride statistics and total ascent.
+- **Recognize your effort.** Zone colors and position markers for heart rate and power; matching colors in the power graph.
+- **Review an interval at a glance.** Z2 and FTP guide lines, native lap markers, and 5-minute, 20-minute or whole-ride history.
+- **Tap for a bell.** A two-second, three-strike electronic bell effect on supported touch models, even without a native bike-bell feature.
+
+<table>
+<tr>
+<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-01-one-screen.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-01-one-screen.jpg" width="440" alt="Edge 840 dashboard: heart rate, power, gear, cadence, speed, grade and All/current-lap statistics"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-02-touch-bell.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-02-touch-bell.jpg" width="440" alt="Double-tap the left side for a two-second electronic bell effect on touch-enabled Edge models"></a></td>
+</tr>
+</table>
+
+### A graph built around your effort
+
+**Z2 stays blue; threshold stays orange.** In the power graph, Z2 spans above 55% through 75% of FTP, and Z4 spans above 90% through 105%. A change in color makes a change in effort easier to spot. The guide lines and native lap markers help you review steady endurance work or a session such as 3 × 20 minutes.
+
+<table>
+<tr>
+<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-03-z2-training.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-03-z2-training.jpg" width="440" alt="Blue Z2 example at 180 W with FTP 250 W, including the Z2 ceiling guide"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-04-threshold-intervals.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-04-threshold-intervals.jpg" width="440" alt="Orange threshold example at 245 W with FTP 250 W, showing three work intervals and recovery periods"></a></td>
+</tr>
+</table>
+
+Power colors: **gray Z1/Z3 · blue Z2 · orange Z4 · purple Z5 · red Z6/Z7**. Heart-rate zones are independent; cadence and grade use their own alerts. These are visual training guides, not a workout controller.
+
+*Illustrations show an Edge 840 with actual simulator-rendered UI and synthetic ride data. Open an image for the full-size version.*
+
+## Download
 
 <!-- downloads:start -->
-当前版本 **v0.4.1**，下载后即可安装，无需 SDK 或 Java。PRG 可直接复制到设备；ZIP 包含同一程序、安装说明和许可证。
+Current version: **v0.4.1**. No SDK or Java needed to install. Choose a PRG to copy directly, or a ZIP with the same program, installation instructions and licenses.
 
-| 设备 | 原生分辨率 | 操作 | PRG 直接下载 | ZIP 下载 |
+| Device | Native resolution | Interaction | Direct PRG | ZIP |
 | --- | --- | --- | --- | --- |
-| Edge 530 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge530/FastRider-0.4.1-edge530.zip) |
-| Edge 540 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge540/FastRider-0.4.1-edge540.zip) |
-| Edge 550 | 420×600 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge550/FastRider-0.4.1-edge550.zip) |
-| Edge 830 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge830/FastRider-0.4.1-edge830.zip) |
-| Edge 840 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge840/FastRider-0.4.1-edge840.zip) |
-| Edge 850 | 420×600 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge850/FastRider-0.4.1-edge850.zip) |
-| Edge 1030 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030/FastRider-0.4.1-edge1030.zip) |
-| Edge 1030 Bontrager | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030bontrager/FastRider-0.4.1-edge1030bontrager.zip) |
-| Edge 1030 Plus | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030plus/FastRider-0.4.1-edge1030plus.zip) |
-| Edge 1040 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1040/FastRider-0.4.1-edge1040.zip) |
-| Edge 1050 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1050/FastRider-0.4.1-edge1050.zip) |
-| Edge 1060 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1060/FastRider-0.4.1-edge1060.zip) |
+| Edge 530 | 246×322 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge530/FastRider-0.4.1-edge530.zip) |
+| Edge 540 | 246×322 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge540/FastRider-0.4.1-edge540.zip) |
+| Edge 550 | 420×600 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge550/FastRider-0.4.1-edge550.zip) |
+| Edge 830 | 246×322 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge830/FastRider-0.4.1-edge830.zip) |
+| Edge 840 | 246×322 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge840/FastRider-0.4.1-edge840.zip) |
+| Edge 850 | 420×600 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge850/FastRider-0.4.1-edge850.zip) |
+| Edge 1030 | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030/FastRider-0.4.1-edge1030.zip) |
+| Edge 1030 Bontrager | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030bontrager/FastRider-0.4.1-edge1030bontrager.zip) |
+| Edge 1030 Plus | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1030plus/FastRider-0.4.1-edge1030plus.zip) |
+| Edge 1040 | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1040/FastRider-0.4.1-edge1040.zip) |
+| Edge 1050 | 480×800 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1050/FastRider-0.4.1-edge1050.zip) |
+| Edge 1060 | 480×800 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/edge1060/FastRider-0.4.1-edge1060.zip) |
 
-[全部型号 ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/FastRider-0.4.1.zip) · [SHA256 校验值](releases/v0.4.1/SHA256SUMS) · [版本清单](releases/v0.4.1/manifest.json)
+[All devices ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.1/FastRider-0.4.1.zip) · [SHA256 checksums](releases/v0.4.1/SHA256SUMS) · [Release manifest](releases/v0.4.1/manifest.json)
 <!-- downloads:end -->
 
-Solar 版本随 Garmin 对应设备包支持。所有型号使用**单字段全屏布局**。[各机型原生截图](docs/screenshots.md) · [验收记录](docs/validation.md)
+Choose the file for your **exact device model**. Solar variants follow the matching Garmin device package. Every model uses a **one-field, full-screen** activity page.
 
-## 显示与操作
+These direct downloads are ready to sideload. A Connect IQ Store link will be added when the public listing is available.
 
-默认 **3s / All / 5m**。触屏机型支持：
+## Install
 
-| 区域 | 操作 | 结果 |
+1. Download your model's **PRG**, or unzip its **ZIP** and find `FastRider.prg` inside the model folder.
+2. Connect the Edge in USB/computer mode. Copy that file to the device's internal `GARMIN/APPS/` folder. On macOS, use an MTP-capable file-transfer application if the Edge is not shown as a mounted drive.
+3. Disconnect USB. In your cycling profile, add/select **Connect IQ → FastRider** on a data page and set its layout to **one field**.
+
+For an update, replace the existing file **using its existing filename**. Early installations may use `SUMMIT.PRG`; rename the new download to that name before replacing it. New installations use `FastRider.prg`.
+
+Pair the sensors that supply the values you want to see. Power, heart rate, cadence and rear gear require compatible data sources; rear gear needs electronic-shifting data. Missing values display dashes. Current units are **mi, mph and ft**.
+
+## Controls
+
+The initial view is **3s power / All ride / 5m graph**.
+
+| Touch area | Gesture | Result |
 | --- | --- | --- |
-| 右上实时功率 | 点击 | 3s ↔ 10s 平均功率 |
-| 右中统计 | 点击 | All ↔ 当前 Lap |
-| 功率图标题或曲线 | 点击 | 5m → 20m → All |
-| 左侧心率及实时信息 | 双击 | 2秒三击车铃 |
+| Top-right power | Tap | 3s ↔ 10s average |
+| Right-side statistics | Tap | All ride ↔ current lap |
+| Graph or its range label | Tap | 5m → 20m → All |
+| Left heart-rate/live-data area | Double-tap | Two-second electronic bell |
 
-触屏机型在原生手动/自动分圈后自动显示最新 Lap。Garmin 从活动开始便进入第1圈，第一次分圈开始第2圈；本页初始显示 All。**无触屏机型始终保留默认视图**，分圈仅更新历史标记与内部圈数据，不切换统计模式，也不包含触控委托或车铃代码。
+Touch models select the newest lap after a native manual or automatic lap boundary. Garmin begins the activity in lap 1; the first completed lap starts lap 2. FastRider initially shows **All**.
 
-- 心率、功率采用 Zone 配色，色条上的黑白标记指示当前编号 Zone 内的位置。
-- 实时四格：左列 gear / 坡度，右列 rpm / mph。速度一位小数，坡度取整；踏频和坡度另有阈值配色。
-- All/Lap 统计：时长、平均功率、距离。All 在有有效命名导航目的地时显示剩余距离，如 `300.5mi(-200.5)`。
-- 图头：累计爬升 ft、功率窗口和本地 AM/PM 时钟。图中含 FTP、Z2上限及原生 Lap 标记。
-- 功率配色：Z1/Z3灰、Z2蓝、Z4橘、Z5紫、Z6/Z7红；心率独立采用灰/蓝/绿/橘/红五区。
+**Edge 530, 540 and 550 keep the fixed 3s / All / 5m view.** They have no touch controls or electronic bell; lap boundaries still appear in the graph. Bell sound and loudness depend on device tone support. The effect uses device tones, not Garmin's native bike-bell function.
 
-## 各机型截图
+[View the touch-control card](store/campaign/v0.4.1/upload/04-screen-06-tap-controls.jpg) · [View the color guide](store/campaign/v0.4.1/upload/04-screen-05-color-coded.jpg)
+
+### What the numbers mean
+
+| Value | Source and behavior |
+| --- | --- |
+| FTP / heart-rate zones | Cycling profile when available, with app-setting fallbacks. Default fallback FTP: 250 W. |
+| Power | Valid zero watts are included. Missing, paused or interrupted samples do not reuse an old average. |
+| All / Lap average power | All prefers Garmin's ride average. Lap is estimated locally and can differ from Garmin's own lap statistic. |
+| Time | Statistics exclude paused time; the graph's elapsed-time axis includes it. |
+| Grade / remaining distance | Grade is estimated from altitude and distance. Remaining distance appears when Garmin supplies a valid named navigation destination. |
+| History | Starts when the field runs. Earlier ride samples, future course elevation and an already-started lap's full state cannot be reconstructed. |
+
+### See your device
+
+The layout uses four display profiles, with larger numeric fonts on larger screens. **All 12 models have native simulator captures**; this is not a claim of physical-device testing on every model.
+
+<details>
+<summary><strong>Expand the 12-model native screenshot gallery</strong></summary>
 
 <!-- screenshots:start -->
-v0.4.1 原生模拟器截图。预览按同宽等比缩放，点击可查看原生像素；全部使用合成指标。
+v0.4.1 native simulator captures, using synthetic data. Previews share a display width while keeping their aspect ratio; open an image to inspect native pixels.
 
 | Edge 530 | Edge 540 | Edge 550 |
 | --- | --- | --- |
@@ -69,50 +130,91 @@ v0.4.1 原生模拟器截图。预览按同宽等比缩放，点击可查看原�
 | --- | --- | --- |
 | <a href="docs/validation/screens/edge1040.png"><img src="docs/validation/screens/edge1040.png" width="246" alt="Edge 1040 282x470"></a> | <a href="docs/validation/screens/edge1050.png"><img src="docs/validation/screens/edge1050.png" width="246" alt="Edge 1050 480x800"></a> | <a href="docs/validation/screens/edge1060.png"><img src="docs/validation/screens/edge1060.png" width="246" alt="Edge 1060 480x800"></a> |
 
-[更多状态、原图与验收记录](docs/screenshots.md)
+[More states, native captures and validation notes](docs/screenshots.md)
 <!-- screenshots:end -->
 
-## 安装
+</details>
 
-1. 在上表下载**对应型号**的 PRG；下载 ZIP 时先解压，使用型号目录内的 `FastRider.prg`。
-2. 将 Edge 以 USB/电脑模式连接，复制 PRG 到设备内部存储的 `GARMIN/APPS/`。Mac 需要通过支持 MTP 的文件传输工具访问 Edge。
-3. 断开 USB，在骑行配置的数据屏幕选择 Connect IQ → FastRider，并设为**单字段全屏布局**。
+## Develop
 
-更新已有安装时沿用原 PRG 文件名；早期安装可能名为 `SUMMIT.PRG`，将下载文件改为这个名字再覆盖。首次安装使用 `FastRider.prg`。
+![FastRider architecture: shared metrics and renderer, four generated display profiles, twelve device builds, then build, VM tests, native screenshots and packaging](docs/media/developer-map.png)
 
-## 从源码构建
+**Change the metrics and design in shared code.** Model-specific differences live in the device catalog; layouts and font resources are generated by display profile. Adding an existing screen size should not require a separate renderer.
 
-安装官方 [Connect IQ SDK Manager](https://developer.garmin.com/connect-iq/sdk/)、JDK 17，以及需要的 **Edge 设备包**。不需要安装全部 Garmin 设备。
+### Start locally
+
+Install the official [Connect IQ SDK Manager](https://developer.garmin.com/connect-iq/sdk/), **JDK 17**, Bash and **Python 3.10+**. Download only the Edge device packages you need. The documented build/simulator workflow has been exercised on macOS.
 
 ```bash
+git clone https://github.com/zhilichen/garmin-fast-rider.git
+cd garmin-fast-rider
+
+./scripts/check-env.sh edge840
 ./scripts/build.sh live edge840
-./scripts/build.sh live edge1050
-./scripts/build.sh live all
+./scripts/run.sh demo edge840
 ```
 
-输出为 `bin/<device>/FastRider-live.prg`。将**对应设备**的文件复制到 USB 连接设备的 `GARMIN/APPS/`，断开 USB 后在骑行配置中选择 Connect IQ → FastRider，设为单字段全屏。
+The production output is `bin/edge840/FastRider-live.prg`. `demo` uses synthetic data; use `live` to read real activity information. Normal app builds use committed font resources and do not require the marketing-image tools.
+
+The scripts discover the SDK Manager's selected SDK, or accept `CIQ_SDK_PATH`, `CIQ_HOME` and `JAVA_HOME`. The first build creates a local signing key in ignored `.local/developer_key.der`; `CIQ_DEVELOPER_KEY` selects an existing key. Keep the same key for updates. Use your own app ID and key when publishing a separate fork.
+
+### Where to make a change
+
+| Change | Shared source |
+| --- | --- |
+| Metrics, power windows, lap statistics, history | [source/model](source/model/) |
+| Activity sampling and drawing | [FastRiderView.mc](source/app/FastRiderView.mc) |
+| Zone colors and alerts | [DisplayRules.mc](source/ui/DisplayRules.mc) |
+| Default views, tap regions and lap behavior | [InteractionState.mc](source/ui/InteractionState.mc) |
+| Touch/bell or button-only entry points | [source/input](source/input/) |
+| Positions and spacing | [design/layout.json](design/layout.json) |
+| Models, display profiles and capabilities | [config/devices.json](config/devices.json) |
+
+After layout/catalog changes, run `python3 scripts/generate-project.py`. For a new font size or resolution, run `python3 scripts/generate-fonts.py` first, then regenerate the project. Generated layouts live in `config/display/`; native font resources live in `resources/fonts/`.
+
+### Validate a change
 
 ```bash
-./scripts/run.sh demo edge850       # 合成演示数据
-./scripts/run.sh live edge840       # 真实 Activity.Info
-./scripts/run.sh test edge530       # 原生 VM 测试
+# SDK-free source, font, download and recorded-image checks
+python3 -m pip install -r requirements-dev.txt
+python3 scripts/generate-project.py --check
+python3 scripts/check-downloads.py
+python3 scripts/check-generated-fonts.py
+python3 -m unittest discover -s tests/python -v
+
+# Native tests for one target
+./scripts/run.sh test edge840
+
+# All configured devices (macOS; close other CIQ simulators first)
+source scripts/env.sh
+python3 scripts/test-matrix.py
 ```
 
-脚本优先读取 SDK Manager 的当前 SDK 设置，也可设置 `CIQ_SDK_PATH`、`CIQ_HOME`、`JAVA_HOME`。开发签名默认保存在忽略的 `.local/developer_key.der`；可用 `CIQ_DEVELOPER_KEY` 指定已有密钥。保留同一签名用于更新同一应用。普通构建使用已提交资源，无需 Python 图形依赖或下载字体。
+For UI changes, build a deterministic capture with `./scripts/build.sh snapshot edge840`, run it in the simulator and export the **native screen**. Also inspect long values, missing sensors and affected display profiles. The approved 840 baseline has 12 view combinations; intentional design changes should update it explicitly.
 
-[开发与测试](docs/development.md) · [共享架构与扩展方式](docs/architecture.md) · [贡献说明](CONTRIBUTING.md)
+Recorded **v0.4.1** validation: 345 native test executions passed across 12 models, with zero changed pixels in the 12 Edge 840 reference states. [Validation evidence](docs/validation.md) · [CI results](https://github.com/zhilichen/garmin-fast-rider/actions)
 
-## 数据口径
+### Package a build
 
-- FTP 优先使用原生骑行 FTP，否则使用应用设置；缺省250 W。心率区优先使用原生骑行区间，否则由最大心率设置计算。
-- 功率平均包含有效0 W；缺失、暂停和断流不会沿用旧平均值。图表保留实际采集的历史，不补造加载前的数据。
-- All 均功率优先使用 Garmin 的整次活动统计；Lap 均功率按有效采样时间加权估算，可能与 Garmin 原生圈均功率的零值/丢包处理不同。
-- 圈统计时间不含暂停，图表时间轴使用含暂停的 elapsed time。中途加载无法恢复完整原生圈号和圈起点，不编造圈号。
-- 坡度来自实测海拔与里程估算；剩余距离来自导航目的地信息。没有未来路线海拔读取或 GPX 绑定功能。
-- gear 读取电子变速传感器的后拨档位，不推测档位。距离/速度/爬升使用 mi / mph / ft。
+```bash
+./scripts/build.sh live all
+python3 scripts/package.py          # Local dist/ archive
+python3 scripts/package.py --publish
+python3 scripts/check-downloads.py
+```
 
-截图均为固定合成指标；正式 live 包读取真实数据。模拟器验收不代表各机型的实体屏幕、传感器和雷达叠层均已真机验证。
+`--publish` writes versioned files under `releases/` and updates the download/gallery blocks in **both READMEs**. It does not push Git or submit to Garmin. Published version directories are immutable; changed app builds need a new version and validation.
 
-## 许可证
+[Detailed development guide (中文)](docs/development.md) · [Architecture notes (中文)](docs/architecture.md) · [Visual source and regeneration](docs/media/README.md)
 
-项目代码为 [MIT](LICENSE)。字库分别遵循 Apache-2.0、Bitstream Vera/Arev 许可，原文件、许可和生成来源见 [第三方说明](THIRD_PARTY_NOTICES.md)。数据处理方式见[隐私说明](PRIVACY.md)。与 Garmin 无隶属关系。
+## Contribute
+
+[Open an issue](https://github.com/zhilichen/garmin-fast-rider/issues) with your device model, firmware/app version, page layout and steps to reproduce. For visual problems, include a screenshot and whether it is from a device or the simulator. Use synthetic fixtures when possible; do not include signing keys or private ride files.
+
+Pull requests should explain the resulting behavior, affected display profiles and validation. Start with [CONTRIBUTING.md](CONTRIBUTING.md); keep metrics, formatting and drawing shared across models.
+
+## License and privacy
+
+Project code: [MIT](LICENSE). Bundled fonts have separate [third-party licenses](THIRD_PARTY_NOTICES.md). The app does not collect or upload data to the developer; see the [privacy policy](PRIVACY.md).
+
+Independent project, not affiliated with Garmin. Garmin retains its device-design and trademark rights. Campaign artwork and editable diagram sources are documented in [visual credits](docs/media/README.md).
