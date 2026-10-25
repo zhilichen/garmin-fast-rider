@@ -91,4 +91,4 @@ Solar 版本随 Garmin 对应设备包支持。所有型号使用**单字段全�
 
 ## 许可证
 
-项目代码为 [MIT](LICENSE)。字库分别遵循 Apache-2.0、Bitstream Vera/Arev 许可，原文件、许可和生成来源见 [第三方说明](THIRD_PARTY_NOTICES.md)。与 Garmin 无隶属关系。
+项目代码为 [MIT](LICENSE)。字库分别遵循 Apache-2.0、Bitstream Vera/Arev 许可，原文件、许可和生成来源见 [第三方说明](THIRD_PARTY_NOTICES.md)。数据处理方式见[隐私说明](PRIVACY.md)。与 Garmin 无隶属关系。
