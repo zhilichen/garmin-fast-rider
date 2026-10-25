@@ -1,5 +1,5 @@
 {
-  "status": "ready_for_owner_upload",
+  "status": "owner_preparing_listing",
   "app_name": "FastRider",
   "candidate_version": "0.4.1",
   "app_type": "datafield",
@@ -11,7 +11,12 @@
   "privacy_url": "https://github.com/zhilichen/garmin-fast-rider/blob/main/PRIVACY.md",
   "store_upload": "../dist/connect-iq/v0.4.1/FastRider-0.4.1.iq",
   "new_native_screenshots_accepted": true,
-  "uploaded": false,
+  "uploaded": true,
   "submitted_for_review": false,
-  "store_url": null
+  "store_url": null,
+  "uploaded_by": "owner",
+  "campaign": "campaign/v0.4.1",
+  "campaign_images": 10,
+  "local_manifest_signature": "openssl_sha256_verified",
+  "store_signature": "failure_displayed_on_owner_upload_form"
 }

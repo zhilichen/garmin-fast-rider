@@ -4,6 +4,8 @@ The intended listing is **FastRider**, a free, public cycling Data Field for the
 12 Edge models in `config/devices.json`. Source and support use the public
 GitHub repository. No paid account, subscription or payment integration is used.
 
+Latest complete upload kit: [campaign/v0.4.1](campaign/v0.4.1/README.md), with exact-size images, per-field copy and a local HTML preview.
+
 Prepared material:
 
 - `listing-en-US.txt`: primary description, setup and data limitations.

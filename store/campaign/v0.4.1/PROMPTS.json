@@ -1,0 +1,20 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "purpose": "Original FastRider promotional illustration; crisp copy and native device UI are separately typeset on SVG artboards.",
+  "master": {
+    "transparent_background": true,
+    "prompt": "Use case: illustration-story. Original energetic adult cartoon gravel cyclist riding toward the right, entire rider and gravel bike visible, on genuinely transparent background. Warm friendly smile, electric-blue cycling helmet and jersey with one white lightning emblem, navy shorts, cream socks; teal flared-drop-bar gravel bike, chunky tan-wall tires, disc brakes, coral frame bag. Mechanically plausible cycling pose, hands on hoods, feet on pedals. Light playful editorial cartoon with chunky navy outlines, vivid flat colors and restrained cel shading. No words, no Garmin elements, no watermark. Palette #1355FF #19B39C #FF705D #FFF8EB #122B3B."
+  },
+  "rider_edit": {
+    "output": "source/gravel-rider.png",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Edit target: the supplied cartoon gravel cyclist. Make a clean, flat editorial sticker illustration of this SAME cyclist and same teal gravel bike, same face, hair, electric-blue helmet/jersey and coral frame bag. Keep the entire rider and two wheels and anatomical pose. CHANGE ONLY the rendering: remove every glow, haze, vignette, cast shadow and dark translucent cloud around the silhouette. Keep the genuinely transparent background perfectly clean. Use crisp chunky navy outlines and 2-3 flat fills per object, with very restrained cel shading, fewer spokes and simpler drivetrain detail. The image should feel light, cheerful and legible at a small size, with no gray muddy halo. Keep the whole bicycle, no crop, no text, no watermark. No white or black background. This is a reusable transparent cutout for pale cream marketing layouts.",
+    "sha256": "4dd351b32f531efcbfa80fd090344b1f305cfbbbe3888caafda86cae28e71c04"
+  },
+  "icon": {
+    "output": "source/rider-icon.png",
+    "transparent_background": false,
+    "prompt": "Use case: logo-brand. Asset type: original FastRider app cover and small on-device app icon, square composition. Use the SAME friendly cartoon cyclist identity as the supplied reference, but create a highly simplified close portrait of just the rider's head and shoulders. Big electric-blue cycling helmet with 3-4 clear vent shapes, smiling warm face, dark hair, short blue jersey shoulders, small white lightning bolt on the jersey. Solid warm cream #FFF8EB background, no outer border, no rounded-square masking. Flat clean bold editorial cartoon, very thick navy outline, only a handful of vivid color blocks, no gradients, no shadows, no tiny texture. Put the portrait comfortably inside a central 82% safe area with generous all-edge padding. This must read clearly at 128x128. Original cohesive app identity, no Garmin elements or product picture. No text, no letters, no watermark. High-resolution 1024x1024 square source.",
+    "sha256": "9b0d667c53e3217601dd7de6d36e2594f515427b95e9e144f279c26bb362fa17"
+  }
+}

@@ -1,0 +1,11 @@
+First public release — v0.4.1
+
+• One full-screen dashboard for 12 Garmin Edge models.
+• Zone-colored heart rate and 3s/10s power, with within-zone position markers.
+• Gear, cadence, speed, gradient and native-lap/whole-ride statistics.
+• A 5m / 20m / All power graph with Z2 and FTP guides and lap markers.
+• A two-second electronic bell effect and tap controls on touch models.
+• Larger adaptive numbers for tall and high-resolution displays; the approved Edge 840 layout is preserved.
+• Default 3s / All / 5m view for button-only Edge 530, 540 and 550.
+
+Units: mi / mph / ft. Screenshots show synthetic example data.

@@ -1,0 +1,85 @@
+[
+  {
+    "file": "01-hero-en.png",
+    "width": 1440,
+    "height": 720,
+    "bytes": 351099,
+    "sha256": "172574eccbddf7ea4128b373d62ffffccfe3578fa7c4300c722e8f41ded140d0",
+    "size_limit_bytes": 2048000
+  },
+  {
+    "file": "04-screen-01-one-screen.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 136904,
+    "sha256": "8d5f606ee1bc97da2526f17a4aba5d75acb843c6339a7b8ebdd1f5ac0ef6571d",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-02-touch-bell.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 144399,
+    "sha256": "322b6e6ebf9e9b88de9599a2f3cccef809cd716b7a2692c7996d703f399a3730",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-03-z2-training.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 139385,
+    "sha256": "aa4ed245e5f908b2406183e7f97eb1589c9aceea67db6755a16f546ec56e442b",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-04-threshold-intervals.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 142328,
+    "sha256": "46b886aa19e051a57a0c9231cadea8d5f76434a0cac31da0a545543a3e77dd01",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-05-color-coded.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 141600,
+    "sha256": "f1a7de9350d774bc6268e004874b946f07f518d4a12beac58f59f53aade3a700",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-06-tap-controls.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 144902,
+    "sha256": "9554bfb6a59c1d06767f53ab5df0b903fa38f6c3c6c91453c82d1f3707153942",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "02-cover-500.png",
+    "width": 500,
+    "height": 500,
+    "bytes": 272468,
+    "sha256": "19c612257b8f8c9a303619ecb9166f3211df81ea82bd266574f18fda0941bec7",
+    "size_limit_bytes": 300000
+  },
+  {
+    "file": "03-device-icon-24-bit.png",
+    "width": 128,
+    "height": 128,
+    "bytes": 24083,
+    "colors": "24-bit sRGB",
+    "sha256": "c7e818eb691e9ae436571f25f233244dc5229141095abc5f84a15f77cf6c7b0a",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "03-device-icon-64-color.png",
+    "width": 128,
+    "height": 128,
+    "bytes": 3117,
+    "colors": "Garmin RGB cube, at most 64",
+    "sha256": "74e356294046bfacb046bc95d4e7a8bd75d410ad3d2b4334132731bcfc5edaac",
+    "size_limit_bytes": 150000,
+    "actual_colors": 25
+  }
+]
