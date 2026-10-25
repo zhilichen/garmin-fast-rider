@@ -485,6 +485,36 @@ function responsiveGeometryTest(logger) {
 }
 
 (:test)
+function numericEmphasisTest(logger) {
+    var dc = TestPlatform.dc(16,16); var v = new FastRiderView(); v.loadFonts();
+    Test.assertEqual(v.fonts.size(),FontInk.SIZES.size());
+    if (!FontInk.PACK_STATS) { Test.assertEqual(v.fonts.size(),16); return true; }
+    // Enlarged faces must fit without sacrificing decimal precision or cropping.
+    var values = ["64","120","22.4","100.5"];
+    for (var i = 0; i < values.size(); i += 1) {
+        var face = v.liveFont(values[i],Layout.LIVE_RIGHT_WIDTH);
+        Test.assert(v.packedWidth(values[i],face) <= Layout.LIVE_RIGHT_WIDTH);
+    }
+    Test.assert(v.fontSizes[v.liveFont("64",Layout.LIVE_RIGHT_WIDTH)] > v.fontSizes[1]);
+    Test.assert(v.fontSizes[v.liveFont("22.4",Layout.LIVE_RIGHT_WIDTH)] > v.fontSizes[5]);
+    var tf = v.statsFace(dc,"1:23:08",FontInk.STATS_FACES,Layout.STATS_VALUE_WIDTH);
+    Test.assert(v.fontSizes[tf] > v.fontSizes[5]);
+    Test.assert(v.statsWidth(dc,"1:23:08",tf) <= Layout.STATS_VALUE_WIDTH);
+    Test.assert(Layout.STATS_TITLE_BASELINE+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD+Layout.u(2) <= Layout.STATS_TIME_BASELINE-FontInk.TOP[tf]);
+    var available = Layout.RIGHT_WIDTH-v.textWidth(dc,"AVG",3)-Layout.STATS_GAP;
+    var af = v.statsFace(dc,"212",FontInk.AVERAGE_FACES,available);
+    Test.assert(v.fontSizes[af] > v.fontSizes[2]);
+    Test.assert(v.statsWidth(dc,"212",af) <= available);
+    Test.assert(Layout.STATS_TIME_BASELINE+FontInk.BOTTOM[tf]+FontInk.NATIVE_BOTTOM_PAD+Layout.u(2) <= Layout.STATS_AVERAGE_BASELINE-FontInk.TOP[af]);
+    var d = v.distanceParts(dc,10.4*1609.344,12.4*1609.344,true);
+    Test.assertEqual(d[0],"10.4"); Test.assertEqual(d[1],"(-12.4)");
+    Test.assert(v.fontSizes[d[2]] > v.fontSizes[5]);
+    Test.assert(v.distanceRowWidth(d) <= Layout.RIGHT_WIDTH);
+    Test.assert(Layout.STATS_AVERAGE_BASELINE+FontInk.BOTTOM[af]+FontInk.NATIVE_BOTTOM_PAD+Layout.u(2) <= Layout.STATS_DISTANCE_BASELINE-FontInk.TOP[d[2]]);
+    return true;
+}
+
+(:test)
 function buttonOnlyDefaultViewTest(logger) {
     if (InputSupport.ENABLED) { return true; }
     var v = new FastRiderView(); v.computeDemo();

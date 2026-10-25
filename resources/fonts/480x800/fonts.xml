@@ -15,4 +15,8 @@
   <font id="Remaining24" filename="Remaining24.fnt" antialias="true"/>
   <font id="Remaining22" filename="Remaining22.fnt" antialias="true"/>
   <font id="Remaining21" filename="Remaining21.fnt" antialias="true"/>
+  <font id="LiveEmphasis" filename="LiveEmphasis.fnt" antialias="true"/>
+  <font id="StatsEmphasis" filename="StatsEmphasis.fnt" antialias="true"/>
+  <font id="AverageEmphasis" filename="AverageEmphasis.fnt" antialias="true"/>
+  <font id="RemainingEmphasis" filename="RemainingEmphasis.fnt" antialias="true"/>
 </fonts>

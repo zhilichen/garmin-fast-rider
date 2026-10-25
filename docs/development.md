@@ -22,7 +22,7 @@ python3 -m unittest discover -s tests/python -v
 
 VS Code任务的设备选择来自同一个设备目录。调试配置默认840，也可在Monkey C扩展中选择其他受支持设备。
 
-修改布局/设备目录后运行`python3 scripts/generate-project.py`。修改统一字体定义后运行`python3 scripts/generate-fonts.py`并提交生成结果。源字体随仓库提供，生成不依赖SDK字体目录或宿主系统字体。CI会核对目录、布局、字库、长里程宽度和已记录的840图像回归。
+修改布局/设备目录后运行`python3 scripts/generate-project.py`。修改字体定义、显示档字号策略或新增分辨率时，依次运行`python3 scripts/generate-fonts.py`、`python3 scripts/generate-project.py`并提交生成结果；布局生成器会使用新字形边界平衡统计行。源字体随仓库提供，生成不依赖SDK字体目录或宿主系统字体。CI会核对目录、布局、字库、长里程宽度和已记录的840图像回归。
 
 `check-generated-fonts.py`在临时目录重建字库，逐像素比较PNG、逐字节比较FNT及度量文件。生成器显式使用BASIC单字形布局，不依赖宿主是否安装RAQM/HarfBuzz。不同平台的PNG压缩字节可能不同，校验不比较压缩流，也不改写已提交的840原始资源。
 

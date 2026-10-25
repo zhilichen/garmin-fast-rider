@@ -7,6 +7,8 @@ LICENSE_FILES = ['LICENSE', 'THIRD_PARTY_NOTICES.md',
     'third_party/fonts/LICENSE-Apache-2.0.txt', 'third_party/fonts/LICENSE-DejaVu.txt']
 START = '<!-- downloads:start -->'
 END = '<!-- downloads:end -->'
+SCREENSHOTS_START = '<!-- screenshots:start -->'
+SCREENSHOTS_END = '<!-- screenshots:end -->'
 RAW = 'https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/'
 
 def zip_bytes(files):
@@ -29,6 +31,22 @@ def download_table(manifest):
         action = '触控切换与车铃' if d['touch'] else '默认视图'
         rows.append(f'| Edge {model} | {d["profile"].replace("x", "×")} | {action} | [PRG]({prefix+d["file"]}) | [ZIP]({prefix+d["archive"]}) |')
     rows += ['', f'[全部型号 ZIP]({prefix+manifest["bundle"]["file"]}) · [SHA256 校验值](releases/v{ver}/SHA256SUMS) · [版本清单](releases/v{ver}/manifest.json)', END]
+    return '\n'.join(rows)
+
+def screenshot_table(manifest):
+    rows = [SCREENSHOTS_START,
+        f'v{manifest["version"]} 原生模拟器截图。预览按同宽等比缩放，点击可查看原生像素；全部使用合成指标。', '']
+    devices = manifest['devices']
+    for start in range(0,len(devices),3):
+        group = devices[start:start+3]
+        labels = ['Edge '+d['device'][4:].replace('bontrager',' Bontrager').replace('plus',' Plus') for d in group]
+        rows += ['| '+' | '.join(labels)+' |', '| '+' | '.join(['---']*len(group))+' |']
+        cells = []
+        for d,label in zip(group,labels):
+            path = 'docs/validation/screens/'+d['device']+'.png'
+            cells.append(f'<a href="{path}"><img src="{path}" width="246" alt="{label} {d["profile"]}"></a>')
+        rows += ['| '+' | '.join(cells)+' |', '']
+    rows += ['[更多状态、原图与验收记录](docs/screenshots.md)', SCREENSHOTS_END]
     return '\n'.join(rows)
 
 def publish_downloads(files, manifest, bundle):
@@ -62,6 +80,9 @@ def publish_downloads(files, manifest, bundle):
     if readme.count(START) != 1 or readme.count(END) != 1:
         raise SystemExit('README must contain one downloads:start/end marker pair.')
     updated = readme[:readme.index(START)] + download_table(release) + readme[readme.index(END)+len(END):]
+    if updated.count(SCREENSHOTS_START)!=1 or updated.count(SCREENSHOTS_END)!=1:
+        raise SystemExit('README must contain one screenshots:start/end marker pair.')
+    updated = updated[:updated.index(SCREENSHOTS_START)] + screenshot_table(release) + updated[updated.index(SCREENSHOTS_END)+len(SCREENSHOTS_END):]
     for name, data in outputs.items():
         p = folder/name
         p.parent.mkdir(parents=True, exist_ok=True)

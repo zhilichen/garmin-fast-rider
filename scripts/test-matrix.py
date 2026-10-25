@@ -38,6 +38,7 @@ def main():
     if not binary.exists():raise SystemExit('This batch driver requires macOS. Other hosts: scripts/run.sh test <device>.')
     if simulator_pids(binary):raise SystemExit('Close the existing simulator before starting the owned-process test matrix.')
     out=ROOT/'.local/test-results';out.mkdir(parents=True,exist_ok=True);report=[]
+    (out/'matrix.json').write_text('[]\n')
     for device in targets:
         if not a.no_build:subprocess.run([str(ROOT/'scripts/build.sh'),'test',device],cwd=ROOT,check=True)
         launcher,pid=launch(binary)
@@ -46,6 +47,7 @@ def main():
             text=result.stdout+result.stderr;(out/(device+'.txt')).write_text(text.replace(str(ROOT),'<workspace>'))
             match=re.search(r'^PASSED \(passed=(\d+), failed=0, errors=0\)$',text,re.M)
             record={'device':device,'passed':int(match[1]) if match else 0,'ok':bool(match)};report.append(record);print(json.dumps(record),flush=True)
+            (out/'matrix.json').write_text(json.dumps(report,indent=2)+'\n')
             if not match:print(text[-5000:],flush=True)
         finally:
             try:os.kill(pid,signal.SIGTERM)

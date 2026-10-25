@@ -43,4 +43,19 @@ class DeviceProjectTests(unittest.TestCase):
             self.assertEqual(a.size,(246,322));self.assertEqual(b.size,a.size)
             self.assertIsNone(ImageChops.difference(a,b).getbbox(),p.name)
 
+    def test_emphasized_rows_have_real_ink_clearance(self):
+        profiles=json.loads((ROOT/'config/devices.json').read_text())['profiles']
+        for name,profile in profiles.items():
+            if not profile.get('emphasize_numbers',False):continue
+            folder=ROOT/'config/display'/name
+            ink=(folder/'FontInk.mc').read_text();layout=(folder/'Layout.mc').read_text()
+            def metric(key):return json.loads(re.search('const '+key+' = (.*);',ink)[1])
+            def anchor(key):return int(re.search('const '+key+' = (.*);',layout)[1])
+            top,bottom=metric('TOP'),metric('BOTTOM')
+            self.assertEqual(len(metric('SIZES')),20)
+            self.assertGreater(metric('NUMERIC_RIGHT')[16][16],metric('NUMERIC_LEFT')[16][16])
+            self.assertLess(anchor('STATS_TITLE_BASELINE')+bottom[3]+1,anchor('STATS_TIME_BASELINE')-top[16],name)
+            self.assertLess(anchor('STATS_TIME_BASELINE')+bottom[16]+1,anchor('STATS_AVERAGE_BASELINE')-top[18],name)
+            self.assertLess(anchor('STATS_AVERAGE_BASELINE')+bottom[18]+1,anchor('STATS_DISTANCE_BASELINE')-top[17],name)
+
 if __name__=='__main__':unittest.main()

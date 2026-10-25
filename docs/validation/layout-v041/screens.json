@@ -1,0 +1,110 @@
+[
+  {
+    "device": "edge530",
+    "size": [
+      246,
+      322
+    ],
+    "file": "docs/validation/screens/edge530.png",
+    "sha256": "e246dc87eb8c51108a365a60991585d7f0acb5b6f72eee6fa666a477205fc3b7"
+  },
+  {
+    "device": "edge540",
+    "size": [
+      246,
+      322
+    ],
+    "file": "docs/validation/screens/edge540.png",
+    "sha256": "e246dc87eb8c51108a365a60991585d7f0acb5b6f72eee6fa666a477205fc3b7"
+  },
+  {
+    "device": "edge550",
+    "size": [
+      420,
+      600
+    ],
+    "file": "docs/validation/screens/edge550.png",
+    "sha256": "1baca79ca6cfe83e0045dc6c705154c770ed262840f325d14b1d6ab00bed7b5e"
+  },
+  {
+    "device": "edge830",
+    "size": [
+      246,
+      322
+    ],
+    "file": "docs/validation/screens/edge830.png",
+    "sha256": "e246dc87eb8c51108a365a60991585d7f0acb5b6f72eee6fa666a477205fc3b7"
+  },
+  {
+    "device": "edge840",
+    "size": [
+      246,
+      322
+    ],
+    "file": "docs/validation/screens/edge840.png",
+    "sha256": "e246dc87eb8c51108a365a60991585d7f0acb5b6f72eee6fa666a477205fc3b7"
+  },
+  {
+    "device": "edge850",
+    "size": [
+      420,
+      600
+    ],
+    "file": "docs/validation/screens/edge850.png",
+    "sha256": "1baca79ca6cfe83e0045dc6c705154c770ed262840f325d14b1d6ab00bed7b5e"
+  },
+  {
+    "device": "edge1030",
+    "size": [
+      282,
+      470
+    ],
+    "file": "docs/validation/screens/edge1030.png",
+    "sha256": "6c95a592e0e1382c4b4e48eed0f500ef8614c8ccc007df245c9219871f981c26"
+  },
+  {
+    "device": "edge1030bontrager",
+    "size": [
+      282,
+      470
+    ],
+    "file": "docs/validation/screens/edge1030bontrager.png",
+    "sha256": "a8954fd96393a4291e53b4ef459d8d518b4a37fcce87b45940cc19703124b81a"
+  },
+  {
+    "device": "edge1030plus",
+    "size": [
+      282,
+      470
+    ],
+    "file": "docs/validation/screens/edge1030plus.png",
+    "sha256": "6c95a592e0e1382c4b4e48eed0f500ef8614c8ccc007df245c9219871f981c26"
+  },
+  {
+    "device": "edge1040",
+    "size": [
+      282,
+      470
+    ],
+    "file": "docs/validation/screens/edge1040.png",
+    "sha256": "6c95a592e0e1382c4b4e48eed0f500ef8614c8ccc007df245c9219871f981c26"
+  },
+  {
+    "device": "edge1050",
+    "size": [
+      480,
+      800
+    ],
+    "file": "docs/validation/screens/edge1050.png",
+    "sha256": "e1c37e7a4bb03acd280f156c41284cc7c33d468f636cf058ae875852e3c0083f"
+  },
+  {
+    "device": "edge1060",
+    "size": [
+      480,
+      800
+    ],
+    "file": "docs/validation/screens/edge1060.png",
+    "sha256": "e1c37e7a4bb03acd280f156c41284cc7c33d468f636cf058ae875852e3c0083f"
+  }
+]

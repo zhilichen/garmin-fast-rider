@@ -28,6 +28,7 @@ module Layout {
     const PLOT_RIGHT = 242;
     const HEART_TRACKING = 3;
     const PACKED_GAP = 1;
+    const COLON_GAP = 1;
     const INLINE_GAP = 4;
     const STATS_GAP = 3;
     const AVERAGE_VALUE_WIDTH = 84;

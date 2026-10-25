@@ -5,7 +5,7 @@ import json
 import zipfile
 
 from build_metadata import ROOT, version
-from package import END, LICENSE_FILES, START, download_table
+from package import END, LICENSE_FILES, START, SCREENSHOTS_START, SCREENSHOTS_END, download_table, screenshot_table
 
 
 def require(condition, message):
@@ -78,6 +78,11 @@ def main():
             require(readme.count(START) == 1 and readme.count(END) == 1, 'Missing README download markers')
             section = readme[readme.index(START):readme.index(END)+len(END)]
             require(section == download_table(manifest), 'README download links are stale')
+            require(readme.count(SCREENSHOTS_START)==1 and readme.count(SCREENSHOTS_END)==1,'Missing README screenshot markers')
+            section=readme[readme.index(SCREENSHOTS_START):readme.index(SCREENSHOTS_END)+len(SCREENSHOTS_END)]
+            require(section==screenshot_table(manifest),'README screenshot gallery is stale')
+            for d in manifest['devices']:
+                require((ROOT/'docs/validation/screens'/(d['device']+'.png')).exists(),'Missing model screenshot: '+d['device'])
     print('README direct-download links match the published version and device catalog.')
 
 

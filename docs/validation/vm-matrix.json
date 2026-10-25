@@ -1,62 +1,62 @@
 [
   {
     "device": "edge530",
-    "passed": 21,
+    "passed": 22,
     "ok": true
   },
   {
     "device": "edge540",
-    "passed": 21,
+    "passed": 22,
     "ok": true
   },
   {
     "device": "edge550",
-    "passed": 21,
+    "passed": 22,
     "ok": true
   },
   {
     "device": "edge830",
-    "passed": 30,
+    "passed": 31,
     "ok": true
   },
   {
     "device": "edge840",
-    "passed": 30,
+    "passed": 31,
     "ok": true
   },
   {
     "device": "edge850",
-    "passed": 30,
+    "passed": 31,
     "ok": true
   },
   {
     "device": "edge1030",
-    "passed": 30,
+    "passed": 31,
     "ok": true
   },
   {
     "device": "edge1030bontrager",
-    "passed": 30,
+    "passed": 31,
     "ok": true
   },
   {
     "device": "edge1030plus",
-    "passed": 30,
+    "passed": 31,
     "ok": true
   },
   {
     "device": "edge1040",
-    "passed": 30,
+    "passed": 31,
     "ok": true
   },
   {
     "device": "edge1050",
-    "passed": 30,
+    "passed": 31,
     "ok": true
   },
   {
     "device": "edge1060",
-    "passed": 30,
+    "passed": 31,
     "ok": true
   }
 ]

@@ -1,0 +1,17 @@
+{
+  "status": "ready_for_owner_upload",
+  "app_name": "FastRider",
+  "candidate_version": "0.4.1",
+  "app_type": "datafield",
+  "intended_visibility": "public",
+  "price": "free",
+  "primary_listing": "listing-en-US.txt",
+  "translated_listing": "listing-zh-CN.txt",
+  "support_url": "https://github.com/zhilichen/garmin-fast-rider/issues",
+  "privacy_url": "https://github.com/zhilichen/garmin-fast-rider/blob/main/PRIVACY.md",
+  "store_upload": "../dist/connect-iq/v0.4.1/FastRider-0.4.1.iq",
+  "new_native_screenshots_accepted": true,
+  "uploaded": false,
+  "submitted_for_review": false,
+  "store_url": null
+}

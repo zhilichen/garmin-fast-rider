@@ -1,101 +1,142 @@
 {
-  "version": "0.4.0",
+  "version": "0.4.1",
   "devices": [
     {
       "device": "edge530",
       "file": "edge530/FastRider.prg",
       "profile": "246x322",
       "touch": false,
-      "bytes": 166796,
-      "sha256": "36f325c3a545c15f579ff0869c0df630b275d9a04cc866a9cbd02d248f61d042"
+      "bytes": 168540,
+      "sha256": "a2db788992f7ce505ed4a5a2875665a668236a5d37a430c248c5931635b811a2",
+      "archive": "edge530/FastRider-0.4.1-edge530.zip",
+      "archive_bytes": 82790,
+      "archive_sha256": "64bd73aa5f5c4bc0135bebb3a4e517598fd36019601c2eb03fb9c86b68551ab1"
     },
     {
       "device": "edge540",
       "file": "edge540/FastRider.prg",
       "profile": "246x322",
       "touch": false,
-      "bytes": 156636,
-      "sha256": "3ef0086d749e98c3a058610067fa11317ab6271ad1db84ff4de0a79ee5fd0941"
+      "bytes": 157948,
+      "sha256": "b164daec9c2aad864b9a5616acd5c68c18ea1c36c98d522ecee38b28303ca003",
+      "archive": "edge540/FastRider-0.4.1-edge540.zip",
+      "archive_bytes": 82100,
+      "archive_sha256": "755e66709a2d0db8175a38376a098d771a6e5ab450f6d49dfbe562fd0e60d1a4"
     },
     {
       "device": "edge550",
       "file": "edge550/FastRider.prg",
       "profile": "420x600",
       "touch": false,
-      "bytes": 178428,
-      "sha256": "2b744e11dc4ea14cd7c0ca907d20ad244fc310f298ca299388f80de6c99b04fd"
+      "bytes": 193468,
+      "sha256": "a21bcdeec7c5f3ab704a5532b1cb5522908c8305c9eb9ad66e3e71161b3fba81",
+      "archive": "edge550/FastRider-0.4.1-edge550.zip",
+      "archive_bytes": 98809,
+      "archive_sha256": "22953fe62afd72cf3ced19a67f819f8d4bdb277b20640cae65b99c9b52b66922"
     },
     {
       "device": "edge830",
       "file": "edge830/FastRider.prg",
       "profile": "246x322",
       "touch": true,
-      "bytes": 172188,
-      "sha256": "50ccf7a02e5d60115efc7ebf92e4dd92b75de342dacc6489a8c5bf493648a335"
+      "bytes": 173932,
+      "sha256": "3cbb900a9c68aa9dfd77c535485f330400a74d7bf0360590145a43a24d199f87",
+      "archive": "edge830/FastRider-0.4.1-edge830.zip",
+      "archive_bytes": 84533,
+      "archive_sha256": "8e8814883d6d7824c82e9cf0f4c3e3f2a3b4e704b7c87f076e6cfd2958c02a1c"
     },
     {
       "device": "edge840",
       "file": "edge840/FastRider.prg",
       "profile": "246x322",
       "touch": true,
-      "bytes": 161020,
-      "sha256": "066da76280548d3f68909f0c2f57bed42d1f9ad343d05392ad61764e1caa94cf"
+      "bytes": 162332,
+      "sha256": "ce54aba2769d3fb6675dfaa1c594b5ef94afb0f196356d3243e87fab85f5ee2f",
+      "archive": "edge840/FastRider-0.4.1-edge840.zip",
+      "archive_bytes": 83919,
+      "archive_sha256": "982ccd2d27810ad31801e1985d569c489b45a348d40f957dca741bba8690dd57"
     },
     {
       "device": "edge850",
       "file": "edge850/FastRider.prg",
       "profile": "420x600",
       "touch": true,
-      "bytes": 182812,
-      "sha256": "f38e271793b9c929f1b896f88c57099a3374353e5e8274b9a25a60c1f452cf4a"
+      "bytes": 197852,
+      "sha256": "3def441fcd281ed2f0f5bb62823a5ff85ed66f65d381116f35e42e5b1028e2ab",
+      "archive": "edge850/FastRider-0.4.1-edge850.zip",
+      "archive_bytes": 100613,
+      "archive_sha256": "30cf00f9fe944e2f7b5cb00196fc25a153ef1378bd23ed7d0be5aa774b72820f"
     },
     {
       "device": "edge1030",
       "file": "edge1030/FastRider.prg",
       "profile": "282x470",
       "touch": true,
-      "bytes": 175868,
-      "sha256": "0b554eda1f91fc73d4fda0cd031c1689781d35e5b8a1eab64b7d07758584854e"
+      "bytes": 188140,
+      "sha256": "ab2c7dfdf4e60031538b1b22ee46353ca62e481a957e7dddf4f5356f4eaf8b05",
+      "archive": "edge1030/FastRider-0.4.1-edge1030.zip",
+      "archive_bytes": 90846,
+      "archive_sha256": "2878d16e9e0a58ab852757a3897d6383fe12a4ffba727af55f2fb626616e7055"
     },
     {
       "device": "edge1030bontrager",
       "file": "edge1030bontrager/FastRider.prg",
       "profile": "282x470",
       "touch": true,
-      "bytes": 175884,
-      "sha256": "af0a7459ad2329b16e21e2b44f436345336d03a20a59f62d6894612db4abd832"
+      "bytes": 188140,
+      "sha256": "991326fc4a5d757a63959e3778383743cd8ef9ed37288e583c6d5d23ff384596",
+      "archive": "edge1030bontrager/FastRider-0.4.1-edge1030bontrager.zip",
+      "archive_bytes": 90893,
+      "archive_sha256": "a2548fe6772dd825e45accc425e5c164268fd3cedaae12c6b721f68fbf9ad897"
     },
     {
       "device": "edge1030plus",
       "file": "edge1030plus/FastRider.prg",
       "profile": "282x470",
       "touch": true,
-      "bytes": 175884,
-      "sha256": "aca23c6e6310c93efab9f812dc179a305dd856fa8ea80bc65bb24c25a4c10509"
+      "bytes": 188140,
+      "sha256": "ec562ce1c57b70460747a2f60c21f0aa214fe6f03bbcf4a2094db7b5d4d81c5e",
+      "archive": "edge1030plus/FastRider-0.4.1-edge1030plus.zip",
+      "archive_bytes": 90874,
+      "archive_sha256": "5ba2b46d5c1eafeafa22dc736cadcab9ba14efd33e02d1cd7c3a0221f777e563"
     },
     {
       "device": "edge1040",
       "file": "edge1040/FastRider.prg",
       "profile": "282x470",
       "touch": true,
-      "bytes": 165724,
-      "sha256": "b5360a69842083d693b2f0bcdca6ecd8dc7ee095f03b5df78e2946eb411f16c4"
+      "bytes": 176284,
+      "sha256": "bbdcb1bb75dec3bc41f70f680e4ce7b22910982dd409d9de781aadb900b5ffbb",
+      "archive": "edge1040/FastRider-0.4.1-edge1040.zip",
+      "archive_bytes": 90107,
+      "archive_sha256": "03230bc8a0f4c7d42aac9fa93e3dd0bdecb3edc4c16bcc23df8a2a52270c5308"
     },
     {
       "device": "edge1050",
       "file": "edge1050/FastRider.prg",
       "profile": "480x800",
       "touch": true,
-      "bytes": 193084,
-      "sha256": "c7e3e427b45b51233b119c6e86046ad209befdaac8bf55cabfa9aaa283008529"
+      "bytes": 210092,
+      "sha256": "b219ff08600c21d45f933c728f4fb014364128ce676e3b32fc5394096dfa9153",
+      "archive": "edge1050/FastRider-0.4.1-edge1050.zip",
+      "archive_bytes": 106162,
+      "archive_sha256": "1a5e2d9070ec7d0b28e5dbbdea98cbe3889f9139d5313c0f377712ec6f2e9e18"
     },
     {
       "device": "edge1060",
       "file": "edge1060/FastRider.prg",
       "profile": "480x800",
       "touch": true,
-      "bytes": 190748,
-      "sha256": "e492fa8736493d2c7820bdd078ea5c1a47fec62db32183a0394bf64aa52d3e83"
+      "bytes": 207740,
+      "sha256": "c1bfdf8365be85f61f771d7b7284c5166cf2c698e1020af0280d5cea0fb59094",
+      "archive": "edge1060/FastRider-0.4.1-edge1060.zip",
+      "archive_bytes": 106101,
+      "archive_sha256": "c18d9146ec75f0da87428bb5eb1d4fd30d27817040197f4b7066798bf276f084"
     }
-  ]
+  ],
+  "bundle": {
+    "file": "FastRider-0.4.1.zip",
+    "bytes": 1018832,
+    "sha256": "f30ef4cd59ae0fef4aa93da76dae11ff6e0b35ebbdd42ef94459e53ac6357aba"
+  }
 }

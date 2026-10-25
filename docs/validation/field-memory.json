@@ -1,62 +1,62 @@
 [
   {
     "device": "edge530",
-    "used": 83024,
+    "used": 84712,
     "total": 127424
   },
   {
     "device": "edge540",
-    "used": 57064,
+    "used": 58296,
     "total": 127424
   },
   {
     "device": "edge550",
-    "used": 57272,
+    "used": 62128,
     "total": 127424
   },
   {
     "device": "edge830",
-    "used": 87032,
+    "used": 88712,
     "total": 127424
   },
   {
     "device": "edge840",
-    "used": 59560,
+    "used": 60800,
     "total": 127424
   },
   {
     "device": "edge850",
-    "used": 59776,
+    "used": 64632,
     "total": 127424
   },
   {
     "device": "edge1030",
-    "used": 90608,
+    "used": 103944,
     "total": 127424
   },
   {
     "device": "edge1030bontrager",
-    "used": 90704,
+    "used": 104040,
     "total": 127424
   },
   {
     "device": "edge1030plus",
-    "used": 90664,
+    "used": 104000,
     "total": 127424
   },
   {
     "device": "edge1040",
-    "used": 59688,
+    "used": 64440,
     "total": 127424
   },
   {
     "device": "edge1050",
-    "used": 59784,
+    "used": 64528,
     "total": 127424
   },
   {
     "device": "edge1060",
-    "used": 59784,
+    "used": 64528,
     "total": 127424
   }
 ]

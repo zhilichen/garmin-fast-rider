@@ -1,0 +1,34 @@
+Application type: Data Field, cycling, full-screen single-field layout.
+Distribution: public, free; no external payment, account, ads or subscription.
+
+The production build uses config/live (BuildMode.DEMO=false and DIAGNOSTICS=false).
+Synthetic metrics are confined to demo/snapshot/test builds and store screenshots.
+The store build must be exported from monkey.jungle, never demo.jungle.
+
+Requested permission: UserProfile, to read native cycling FTP and heart-rate zones.
+No Communications or Positioning permission is requested. Native Activity.Info
+provides ride/sensor/navigation values. FastRider does not directly pair with
+or connect to ANT/ANT+ sensors; sensor connections are managed by Garmin.
+
+Supported products come from manifest.xml/config/devices.json (12 Edge targets).
+Button-only products compile a single-view input module, without touch delegates
+or electronic-bell code. Touch products have three independent tap-cycle areas
+and a two-second bell gesture where tone playback is supported.
+
+Initial view: 3s / All / 5m. Activity start remains All. A native lap boundary
+selects the new lap on touch products; button-only products remain All.
+
+Native lap 1 begins with the activity. Mid-ride loading cannot recover the full
+original lap number/history; the app does not fabricate it. Lap average power is
+estimated from effective sampled time, not a claim to Garmin's internal statistic.
+
+The UI currently uses mi/mph/ft. This is stated in the public description.
+The graph contains measured power history, not future course elevation.
+Remaining distance is native navigation-to-destination data, not a course ID.
+
+All screenshot metrics are synthetic. Actual missing sensors are shown as dashes.
+The source code and third-party font licenses are publicly available in the
+repository. Privacy and support URLs are supplied in the listing.
+
+Release validation must be complete before submission. See docs/validation.md
+and docs/validation/layout-v041 for the candidate's current acceptance status.

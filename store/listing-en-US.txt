@@ -1,0 +1,32 @@
+FastRider
+
+Full-screen cycling data for Garmin Edge, with clear zone colors and lap power trends.
+
+See the numbers that matter at a glance:
+• Large heart rate and 3s/10s average power, with independent zone colors.
+• A moving mark on each color bar shows your position within the current zone.
+• Rear gear, cadence, estimated gradient and current speed.
+• All-ride or current-lap duration, average power and distance.
+• A power graph with 5-minute, 20-minute and All ranges, FTP and Z2 guides, and native lap markers.
+• Total ascent and the current AM/PM clock above the graph.
+
+Touch-enabled Edge devices:
+Tap power to switch 3s/10s; tap statistics to switch All/Lap; tap the graph to change its range. A native manual or automatic lap selects the latest lap. Double-tap the left heart-rate/live-data area to play a two-second electronic bell effect, where supported by the device.
+
+Button-only Edge 530, 540 and 550:
+Use the default 3s / All / 5m view. Touch controls and the electronic bell are not included.
+
+Setup:
+Add FastRider to a cycling activity data screen and choose a one-field, full-screen layout. Defaults are 3s / All / 5m. Units in this version are mi, mph and ft.
+
+Data and sensors:
+Heart rate, power and cadence require the corresponding data source. Rear gear requires compatible electronic shifting. Missing values appear as dashes. Cycling FTP and heart-rate zones use your Garmin profile when available; fallback values can be changed in app settings.
+
+Gradient is estimated from measured altitude and distance. Remaining distance is shown only when Garmin supplies valid distance to a named navigation destination. Future course elevation is not displayed. The graph contains samples collected since the field started; it cannot restore earlier ride history. Lap average power is locally estimated and may differ from Garmin's native lap statistic.
+
+Free and open source. No advertising, external account or developer data collection. Screenshots use synthetic sample metrics.
+
+Source and support: https://github.com/zhilichen/garmin-fast-rider
+Privacy: https://github.com/zhilichen/garmin-fast-rider/blob/main/PRIVACY.md
+
+FastRider is an independent project and is not affiliated with Garmin.

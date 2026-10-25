@@ -190,14 +190,7 @@ class FastRiderView extends WatchUi.DataField {
     }
     function loadFonts() {
         if (fonts != null) { return; }
-        fonts = [WatchUi.loadResource(Rez.Fonts.Primary58), WatchUi.loadResource(Rez.Fonts.Live38),
-                 WatchUi.loadResource(Rez.Fonts.Average54), WatchUi.loadResource(Rez.Fonts.Meta18),
-                 WatchUi.loadResource(Rez.Fonts.Chart26), WatchUi.loadResource(Rez.Fonts.Stats32),
-                 WatchUi.loadResource(Rez.Fonts.Average36), WatchUi.loadResource(Rez.Fonts.Stats30),
-                 WatchUi.loadResource(Rez.Fonts.ZoneDigit44), WatchUi.loadResource(Rez.Fonts.SmallZ16),
-                 WatchUi.loadResource(Rez.Fonts.SmallZ10), WatchUi.loadResource(Rez.Fonts.Climb18),
-                 WatchUi.loadResource(Rez.Fonts.Units18), WatchUi.loadResource(Rez.Fonts.Remaining24),
-                 WatchUi.loadResource(Rez.Fonts.Remaining22), WatchUi.loadResource(Rez.Fonts.Remaining21)];
+        fonts = FontInk.load();
     }
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
     function text(dc, x, baseline, index, value, c, align) {
@@ -218,6 +211,7 @@ class FastRiderView extends WatchUi.DataField {
         if (ch.equals(".")) { return 10; } if (ch.equals("-")) { return 11; }
         if (ch.equals("(")) { return 12; } if (ch.equals(")")) { return 13; }
         if (ch.equals("m")) { return 14; } if (ch.equals("i")) { return 15; }
+        if (ch.equals(":")) { return 16; }
         return ch.toNumber();
     }
     function numberBounds(dc, value, index, tracking) as Lang.Array {
@@ -254,13 +248,18 @@ class FastRiderView extends WatchUi.DataField {
         var bounds = numberBounds(dc, value, 0, tracking);
         return bounds[1]+textWidth(dc, "7", 8)+Layout.PACKED_GAP <= Layout.LEFT_WIDTH ? 0 : 6;
     }
+    function packedGap(value, position) {
+        if (position >= value.length()-1) { return 0; }
+        var punctuation = value.substring(position,position+1).equals(":") || value.substring(position+1,position+2).equals(":");
+        return Layout.PACKED_GAP+(punctuation ? Layout.COLON_GAP : 0);
+    }
     function packedWidth(value, index) {
         var w = 0;
         for (var i = 0; i < value.length(); i += 1) {
             var d = digitIndex(value.substring(i,i+1));
-            w += FontInk.NUMERIC_RIGHT[index][d]-FontInk.NUMERIC_LEFT[index][d];
+            w += FontInk.NUMERIC_RIGHT[index][d]-FontInk.NUMERIC_LEFT[index][d]+packedGap(value,i);
         }
-        return w+(value.length()-1)*Layout.PACKED_GAP;
+        return w;
     }
     function drawPacked(dc, x, baseline, index, value, c) {
         var top = baseline-FontInk.TOP[index]; var h = FontInk.TOP[index]+FontInk.BOTTOM[index]+FontInk.NATIVE_BOTTOM_PAD;
@@ -271,11 +270,11 @@ class FastRiderView extends WatchUi.DataField {
             var w = FontInk.NUMERIC_RIGHT[index][d]-left;
             dc.setClip(cursor, top, w, h); dc.setColor(c, Graphics.COLOR_WHITE);
             dc.drawText(cursor-left, baseline-fontSizes[index], fonts[index], ch, Graphics.TEXT_JUSTIFY_LEFT);
-            dc.clearClip(); cursor += w+Layout.PACKED_GAP;
+            dc.clearClip(); cursor += w+packedGap(value,i);
         }
     }
     function liveFont(value, available) {
-        var faces = [1,5,7,4];
+        var faces = FontInk.LIVE_FACES;
         for (var i = 0; i < faces.size(); i += 1) {
             if (packedWidth(value, faces[i]) <= available) { return faces[i]; }
         }
@@ -285,6 +284,20 @@ class FastRiderView extends WatchUi.DataField {
         var face = liveFont(value, available);
         var x = center-DisplayRules.pixel(packedWidth(value, face)/2.0);
         drawPacked(dc, x, baseline, face, value, c);
+    }
+    function statsWidth(dc, value, face) {
+        return FontInk.PACK_STATS ? packedWidth(value, face) : textWidth(dc, value, face);
+    }
+    function statsFace(dc, value, faces as Lang.Array, available) {
+        for (var i = 0; i < faces.size(); i += 1) {
+            if (statsWidth(dc, value, faces[i]) <= available) { return faces[i]; }
+        }
+        return faces[faces.size()-1];
+    }
+    function drawStatsNumber(dc, x, baseline, face, value, align) {
+        if (!FontInk.PACK_STATS) { text(dc, x, baseline, face, value, DisplayRules.INK, align); return; }
+        if (align == Graphics.TEXT_JUSTIFY_RIGHT) { x -= packedWidth(value, face); }
+        drawPacked(dc, x, baseline, face, value, DisplayRules.INK);
     }
     function onUpdate(dc) {
         width = dc.getWidth(); height = dc.getHeight();
@@ -372,12 +385,14 @@ class FastRiderView extends WatchUi.DataField {
         var distance = ui.allStats ? meters : lap.distance;
         var parts = distanceParts(dc, distance, ui.allStats ? remainingDistance : null, ui.allStats);
         text(dc, Layout.RIGHT_START, Layout.STATS_TITLE_BASELINE, 3, title, DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_LEFT);
-        var tf = textWidth(dc, time, 5) <= Layout.STATS_VALUE_WIDTH ? 5 : (textWidth(dc, time, 7) <= Layout.STATS_VALUE_WIDTH ? 7 : 4);
-        text(dc, Layout.RIGHT_EDGE, Layout.STATS_TIME_BASELINE, tf, time, DisplayRules.INK, Graphics.TEXT_JUSTIFY_RIGHT);
-        var af = textWidth(dc, average, 2) <= Layout.AVERAGE_VALUE_WIDTH ? 2 : 6;
-        var aw = textWidth(dc, average, af); var uw = textWidth(dc, "AVG", 3);
+        var tf = statsFace(dc, time, FontInk.STATS_FACES, Layout.STATS_VALUE_WIDTH);
+        drawStatsNumber(dc, Layout.RIGHT_EDGE, Layout.STATS_TIME_BASELINE, tf, time, Graphics.TEXT_JUSTIFY_RIGHT);
+        var uw = textWidth(dc, "AVG", 3);
+        var available = FontInk.PACK_STATS ? Layout.RIGHT_WIDTH-uw-Layout.STATS_GAP : Layout.AVERAGE_VALUE_WIDTH;
+        var af = statsFace(dc, average, FontInk.AVERAGE_FACES, available);
+        var aw = statsWidth(dc, average, af);
         var ax = Layout.RIGHT_START+DisplayRules.pixel((Layout.RIGHT_WIDTH-aw-Layout.STATS_GAP-uw)/2.0);
-        text(dc, ax, Layout.STATS_AVERAGE_BASELINE, af, average, DisplayRules.INK, Graphics.TEXT_JUSTIFY_LEFT);
+        drawStatsNumber(dc, ax, Layout.STATS_AVERAGE_BASELINE, af, average, Graphics.TEXT_JUSTIFY_LEFT);
         var center = ax+aw+Layout.STATS_GAP+uw/2;
         text(dc, center, Layout.STATS_AVERAGE_LABEL_BASELINE, 3, "AVG", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
         text(dc, center, Layout.STATS_AVERAGE_BASELINE, 3, "W", DisplayRules.LABEL, Graphics.TEXT_JUSTIFY_CENTER);
@@ -395,7 +410,7 @@ class FastRiderView extends WatchUi.DataField {
     function distanceParts(dc, distance, remaining, all) as Lang.Array {
         var shown = distance == null ? "--" : (distance/1609.344).format(all ? "%.1f" : "%.2f");
         var rest = all ? RideMath.remainingMilesText(remaining, 1) : null;
-        var pairs = [[5,13],[7,14],[4,15]];
+        var pairs = FontInk.DISTANCE_PAIRS;
         // Fit complete decimal strings before considering extreme-value rounding.
         for (var pass = 0; pass < 3; pass += 1) {
             for (var i = 0; i < pairs.size(); i += 1) {

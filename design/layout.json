@@ -33,6 +33,7 @@
     "PLOT_RIGHT": 242,
     "HEART_TRACKING": 3,
     "PACKED_GAP": 1,
+    "COLON_GAP": 1,
     "INLINE_GAP": 4,
     "STATS_GAP": 3,
     "AVERAGE_VALUE_WIDTH": 84,

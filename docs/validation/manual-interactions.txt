@@ -1,4 +1,4 @@
-FastRider 0.4.0 — native simulator interaction acceptance, 2026-10-24
+FastRider 0.4.1 — native simulator interaction acceptance, 2026-10-24
 SDK 9.3.0; frozen synthetic snapshot; coordinates below are native field pixels.
 
 Edge 840: all 12 combinations exported after native simulator taps.

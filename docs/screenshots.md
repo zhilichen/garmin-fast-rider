@@ -1,6 +1,6 @@
 # 原生模拟器画面
 
-v0.4.0，单字段全屏。截图由各目标的 Connect IQ 模拟器直接导出，使用固定合成指标和15:47时钟；图片尺寸就是数据字段的原生像素尺寸。
+v0.4.1，单字段全屏。截图由各目标的 Connect IQ 模拟器直接导出，使用固定合成指标和15:47时钟；图片尺寸就是数据字段的原生像素尺寸。
 
 | 246×322：Edge 840 | 282×470：Edge 1040 |
 | --- | --- |
@@ -30,3 +30,15 @@ v0.4.0，单字段全屏。截图由各目标的 Connect IQ 模拟器直接导�
 触屏切换后的10s / Lap / 20m：[850](validation/screens/edge850-interaction.png)、[1060](validation/screens/edge1060-interaction.png)。真实数据入口的缺失传感器画面：[530](validation/screens/edge530-live.png)、[1060](validation/screens/edge1060-live.png)。
 
 [验收方法与结果](validation.md) · [840的12种逐像素对照](validation/edge840/pixel-regression.json)
+
+## 长数字与缺失传感器
+
+以下同样由原生模拟器导出，使用独立的合成测试输入。长数字保留`300.5mi(-200.5)`完整精度；缺失值显示`--`。
+
+| 分辨率 | 长数字 | 缺失数据 |
+| --- | --- | --- |
+| 282×470 | [1040](validation/screens/edge1040-stress.png) | [1040](validation/screens/edge1040-missing.png) |
+| 420×600 | [850](validation/screens/edge850-stress.png) | [850](validation/screens/edge850-missing.png) |
+| 480×800 | [1060](validation/screens/edge1060-stress.png) | [1060](validation/screens/edge1060-missing.png) |
+
+大屏数字字号与间距说明：[v0.4.1验收记录](validation/layout-v041/README.md)。对照v0.4.0原图：[1040](validation/layout-v041/before/edge1040.png)、[850](validation/layout-v041/before/edge850.png)、[1060](validation/layout-v041/before/edge1060.png)。

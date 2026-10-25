@@ -1,5 +1,5 @@
 {
-  "minimum_api": "3.3.0",
+  "minimum_api": "3.2.0",
   "profiles": {
     "246x322": {
       "width": 246,
@@ -7,15 +7,18 @@
     },
     "282x470": {
       "width": 282,
-      "height": 470
+      "height": 470,
+      "emphasize_numbers": true
     },
     "420x600": {
       "width": 420,
-      "height": 600
+      "height": 600,
+      "emphasize_numbers": true
     },
     "480x800": {
       "width": 480,
-      "height": 800
+      "height": 800,
+      "emphasize_numbers": true
     }
   },
   "devices": {

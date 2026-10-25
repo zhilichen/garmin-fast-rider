@@ -31,7 +31,8 @@ def main():
             generated = Path(folder) / profile
             metrics = generated / "FontInk.mc"
             generator.generate(
-                ROOT / "third_party/fonts", generated, size["width"] / 246, metrics
+                ROOT / "third_party/fonts", generated, size["width"] / 246, metrics,
+                size.get("emphasize_numbers", False)
             )
             for actual in generated.iterdir():
                 expected = (
