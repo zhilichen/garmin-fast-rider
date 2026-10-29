@@ -1,0 +1,290 @@
+[
+  {
+    "profile": "480x800",
+    "value": "5",
+    "unit": "GEAR",
+    "ink_height": 85,
+    "previous_ink_height": 66,
+    "numeric_width": 29,
+    "available": 73
+  },
+  {
+    "profile": "480x800",
+    "value": "12",
+    "unit": "GEAR",
+    "ink_height": 85,
+    "previous_ink_height": 66,
+    "numeric_width": 52,
+    "available": 73
+  },
+  {
+    "profile": "480x800",
+    "value": "64",
+    "unit": "RPM",
+    "ink_height": 85,
+    "previous_ink_height": 66,
+    "numeric_width": 61,
+    "available": 97
+  },
+  {
+    "profile": "480x800",
+    "value": "120",
+    "unit": "RPM",
+    "ink_height": 85,
+    "previous_ink_height": 66,
+    "numeric_width": 83,
+    "available": 97
+  },
+  {
+    "profile": "480x800",
+    "value": "6",
+    "unit": "%",
+    "ink_height": 85,
+    "previous_ink_height": 66,
+    "numeric_width": 29,
+    "available": 60
+  },
+  {
+    "profile": "480x800",
+    "value": "-16",
+    "unit": "%",
+    "ink_height": 68,
+    "previous_ink_height": 66,
+    "numeric_width": 55,
+    "available": 60
+  },
+  {
+    "profile": "480x800",
+    "value": "22.4",
+    "unit": "MPH",
+    "ink_height": 77,
+    "previous_ink_height": 51,
+    "numeric_width": 97,
+    "available": 97
+  },
+  {
+    "profile": "480x800",
+    "value": "100.5",
+    "unit": "MPH",
+    "ink_height": 59,
+    "previous_ink_height": 43,
+    "numeric_width": 83,
+    "available": 97
+  },
+  {
+    "profile": "420x600",
+    "value": "5",
+    "unit": "GEAR",
+    "ink_height": 74,
+    "previous_ink_height": 58,
+    "numeric_width": 26,
+    "available": 64
+  },
+  {
+    "profile": "420x600",
+    "value": "12",
+    "unit": "GEAR",
+    "ink_height": 74,
+    "previous_ink_height": 58,
+    "numeric_width": 46,
+    "available": 64
+  },
+  {
+    "profile": "420x600",
+    "value": "64",
+    "unit": "RPM",
+    "ink_height": 74,
+    "previous_ink_height": 58,
+    "numeric_width": 55,
+    "available": 84
+  },
+  {
+    "profile": "420x600",
+    "value": "120",
+    "unit": "RPM",
+    "ink_height": 74,
+    "previous_ink_height": 58,
+    "numeric_width": 74,
+    "available": 84
+  },
+  {
+    "profile": "420x600",
+    "value": "6",
+    "unit": "%",
+    "ink_height": 74,
+    "previous_ink_height": 58,
+    "numeric_width": 26,
+    "available": 52
+  },
+  {
+    "profile": "420x600",
+    "value": "-16",
+    "unit": "%",
+    "ink_height": 59,
+    "previous_ink_height": 58,
+    "numeric_width": 50,
+    "available": 52
+  },
+  {
+    "profile": "420x600",
+    "value": "22.4",
+    "unit": "MPH",
+    "ink_height": 59,
+    "previous_ink_height": 45,
+    "numeric_width": 77,
+    "available": 84
+  },
+  {
+    "profile": "420x600",
+    "value": "100.5",
+    "unit": "MPH",
+    "ink_height": 53,
+    "previous_ink_height": 38,
+    "numeric_width": 74,
+    "available": 84
+  },
+  {
+    "profile": "246x322",
+    "value": "5",
+    "unit": "GEAR",
+    "ink_height": 43,
+    "previous_ink_height": 28,
+    "numeric_width": 15,
+    "available": 37
+  },
+  {
+    "profile": "246x322",
+    "value": "12",
+    "unit": "GEAR",
+    "ink_height": 43,
+    "previous_ink_height": 28,
+    "numeric_width": 26,
+    "available": 37
+  },
+  {
+    "profile": "246x322",
+    "value": "64",
+    "unit": "RPM",
+    "ink_height": 43,
+    "previous_ink_height": 28,
+    "numeric_width": 34,
+    "available": 49
+  },
+  {
+    "profile": "246x322",
+    "value": "120",
+    "unit": "RPM",
+    "ink_height": 43,
+    "previous_ink_height": 28,
+    "numeric_width": 42,
+    "available": 49
+  },
+  {
+    "profile": "246x322",
+    "value": "6",
+    "unit": "%",
+    "ink_height": 43,
+    "previous_ink_height": 28,
+    "numeric_width": 16,
+    "available": 31
+  },
+  {
+    "profile": "246x322",
+    "value": "-16",
+    "unit": "%",
+    "ink_height": 34,
+    "previous_ink_height": 28,
+    "numeric_width": 31,
+    "available": 31
+  },
+  {
+    "profile": "246x322",
+    "value": "22.4",
+    "unit": "MPH",
+    "ink_height": 34,
+    "previous_ink_height": 28,
+    "numeric_width": 48,
+    "available": 49
+  },
+  {
+    "profile": "246x322",
+    "value": "100.5",
+    "unit": "MPH",
+    "ink_height": 30,
+    "previous_ink_height": 21,
+    "numeric_width": 49,
+    "available": 49
+  },
+  {
+    "profile": "282x470",
+    "value": "5",
+    "unit": "GEAR",
+    "ink_height": 50,
+    "previous_ink_height": 39,
+    "numeric_width": 18,
+    "available": 43
+  },
+  {
+    "profile": "282x470",
+    "value": "12",
+    "unit": "GEAR",
+    "ink_height": 50,
+    "previous_ink_height": 39,
+    "numeric_width": 31,
+    "available": 43
+  },
+  {
+    "profile": "282x470",
+    "value": "64",
+    "unit": "RPM",
+    "ink_height": 50,
+    "previous_ink_height": 39,
+    "numeric_width": 37,
+    "available": 56
+  },
+  {
+    "profile": "282x470",
+    "value": "120",
+    "unit": "RPM",
+    "ink_height": 50,
+    "previous_ink_height": 39,
+    "numeric_width": 50,
+    "available": 56
+  },
+  {
+    "profile": "282x470",
+    "value": "6",
+    "unit": "%",
+    "ink_height": 50,
+    "previous_ink_height": 39,
+    "numeric_width": 18,
+    "available": 36
+  },
+  {
+    "profile": "282x470",
+    "value": "-16",
+    "unit": "%",
+    "ink_height": 41,
+    "previous_ink_height": 39,
+    "numeric_width": 35,
+    "available": 36
+  },
+  {
+    "profile": "282x470",
+    "value": "22.4",
+    "unit": "MPH",
+    "ink_height": 41,
+    "previous_ink_height": 29,
+    "numeric_width": 52,
+    "available": 56
+  },
+  {
+    "profile": "282x470",
+    "value": "100.5",
+    "unit": "MPH",
+    "ink_height": 34,
+    "previous_ink_height": 24,
+    "numeric_width": 50,
+    "available": 56
+  }
+]

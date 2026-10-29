@@ -1,0 +1,6 @@
+Bigger ride essentials!
+- Larger bold gear, cadence, grade and speed numbers in the riding view.
+- Tight vertical GEAR, RPM and MPH labels beside the values, with a larger percent sign.
+- Speed keeps one decimal; long readings fit without losing precision.
+- Clear day/night layouts across supported Edge models.
+- Power, heart-rate zones, lap statistics, graph and paused summary keep their existing layout.

@@ -15,4 +15,10 @@
   <font id="Remaining24" filename="Remaining24.fnt" antialias="true"/>
   <font id="Remaining22" filename="Remaining22.fnt" antialias="true"/>
   <font id="Remaining21" filename="Remaining21.fnt" antialias="true"/>
+  <font id="LiveSide60" filename="LiveSide60.fnt" antialias="true"/>
+  <font id="LiveSide54" filename="LiveSide54.fnt" antialias="true"/>
+  <font id="LiveSide48" filename="LiveSide48.fnt" antialias="true"/>
+  <font id="LiveSide42" filename="LiveSide42.fnt" antialias="true"/>
+  <font id="LiveSideLabel13" filename="LiveSideLabel13.fnt" antialias="true"/>
+  <font id="LiveSidePercent22" filename="LiveSidePercent22.fnt" antialias="true"/>
 </fonts>

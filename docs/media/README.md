@@ -17,3 +17,5 @@ The original rider and scenery were created with built-in imagegen; their [promp
 `ride-summary.png` uses unmodified native v0.4.3 stopped-view captures in both themes, with the same official Edge 840 exterior. Rebuild with `python3 scripts/render-summary-preview.py` using the same optional Node/sharp setup.
 
 `zone-gauges.png` shows native v0.4.4 number-only badges and tapered fill gauges in both themes, in the official Edge 840 exterior. Rebuild with `python3 scripts/render-zones-preview.py`.
+
+`live-cells.png` shows the native v0.4.5 large live numerals and vertical labels, inside the official Edge 840 exterior. Rebuild with `python3 scripts/render-live-cells-preview.py`.

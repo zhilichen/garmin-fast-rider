@@ -17,3 +17,5 @@ Do not replace the reference to hide an unintended regression. An intentional
 840 design change should explicitly update the reference and explain the change
 in review. Recorded-image checks do not substitute for exporting new native
 frames after a renderer change.
+
+In v0.4.5, six live-cell roles are appended to the font declarations. The original PNG/FNT files and their hashes stay intact. `fonts.xml` here preserves the original declarations and is checked against the original hash; current declarations must retain those entries unchanged and in order.

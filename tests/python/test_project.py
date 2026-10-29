@@ -1,4 +1,4 @@
-import importlib.util,json,re,unittest,hashlib
+import importlib.util,json,re,unittest,hashlib,xml.etree.ElementTree as ET
 from pathlib import Path
 from PIL import Image,ImageChops
 
@@ -23,7 +23,15 @@ class DeviceProjectTests(unittest.TestCase):
 
     def test_840_fonts_are_original_assets(self):
         for name,sha in json.loads((ROOT/'tests/fixtures/edge840-v0315/font-assets.json').read_text()).items():
-            self.assertEqual(hashlib.sha256((ROOT/'resources/fonts/246x322'/name).read_bytes()).hexdigest(),sha,name)
+            actual = ROOT/'resources/fonts/246x322'/name
+            if name == 'fonts.xml':
+                original = ROOT/'tests/fixtures/edge840-v0315/fonts.xml'
+                self.assertEqual(hashlib.sha256(original.read_bytes()).hexdigest(),sha)
+                baseline = list(ET.fromstring(original.read_bytes()))
+                current = list(ET.fromstring(actual.read_bytes()))
+                self.assertEqual([f.attrib for f in current[:len(baseline)]],[f.attrib for f in baseline])
+            else:
+                self.assertEqual(hashlib.sha256(actual.read_bytes()).hexdigest(),sha,name)
 
     def test_full_decimal_distance_fits_every_profile(self):
         chars='0123456789.-()mi'
@@ -52,7 +60,7 @@ class DeviceProjectTests(unittest.TestCase):
             def metric(key):return json.loads(re.search('const '+key+' = (.*);',ink)[1])
             def anchor(key):return int(re.search('const '+key+' = (.*);',layout)[1])
             top,bottom=metric('TOP'),metric('BOTTOM')
-            self.assertEqual(len(metric('SIZES')),20)
+            self.assertEqual(len(metric('SIZES')),26)
             self.assertGreater(metric('NUMERIC_RIGHT')[16][16],metric('NUMERIC_LEFT')[16][16])
             self.assertLess(anchor('STATS_TITLE_BASELINE')+bottom[3]+1,anchor('STATS_TIME_BASELINE')-top[16],name)
             self.assertLess(anchor('STATS_TIME_BASELINE')+bottom[16]+1,anchor('STATS_AVERAGE_BASELINE')-top[18],name)

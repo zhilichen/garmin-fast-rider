@@ -329,14 +329,7 @@ class FastRiderView extends WatchUi.DataField {
         else {
             drawPrimary(dc);
             color(dc, theme.rule); dc.fillRectangle(Layout.COLUMN_DIVIDER, Layout.MIDDLE_TOP, Layout.STROKE, Layout.STATS_BOTTOM-Layout.MIDDLE_TOP);
-            text(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_LABEL_TOP, 3, "gear", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
-            text(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_LABEL_TOP, 3, "rpm", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
-            drawLive(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_VALUE_TOP, intText(rearGear), Layout.LIVE_LEFT_WIDTH, theme.ink);
-            drawLive(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_VALUE_TOP, intText(cadence), Layout.LIVE_RIGHT_WIDTH, theme.cadenceColor(cadence));
-            text(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_LABEL_BOTTOM, 3, "%", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
-            text(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_LABEL_BOTTOM, 3, "mph", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
-            drawLive(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_VALUE_BOTTOM, intText(grade), Layout.LIVE_LEFT_WIDTH, theme.gradeColor(grade));
-            drawLive(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_VALUE_BOTTOM, RideMath.speedMphText(speed), Layout.LIVE_RIGHT_WIDTH, theme.ink);
+            LiveMetrics.draw(self,dc);
             drawStats(dc);
         }
         drawChartHeader(dc); drawPowerTrend(dc);

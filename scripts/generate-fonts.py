@@ -37,6 +37,17 @@ EMPHASIS_SPECS = [
     ('AverageEmphasis', 'RobotoCondensed-Bold.ttf', 68, '0123456789-'),
     ('RemainingEmphasis', 'RobotoCondensed-Bold.ttf', 25, '0123456789().-'),
 ]
+# Tall, narrow numeric roles are confined to the four live-data cells.
+# Existing font resources and role indices remain unchanged.
+SIDE_SPECS = [
+    ('LiveSide60', 'RobotoCondensed-Bold.ttf', 60, '0123456789.-'),
+    ('LiveSide54', 'RobotoCondensed-Bold.ttf', 54, '0123456789.-'),
+    ('LiveSide48', 'RobotoCondensed-Bold.ttf', 48, '0123456789.-'),
+    ('LiveSide42', 'RobotoCondensed-Bold.ttf', 42, '0123456789.-'),
+    ('LiveSideLabel13', 'RobotoCondensed-Bold.ttf', 13, 'GEARPMH'),
+    ('LiveSidePercent22', 'RobotoCondensed-Bold.ttf', 22, '%'),
+]
+
 BASE_ORDER = ['Primary58', 'Live38', 'Average54', 'Meta18', 'Chart26',
     'Stats32', 'Average36', 'Stats30', 'ZoneDigit44', 'SmallZ16',
     'SmallZ10', 'Climb18', 'Units18', 'Remaining24', 'Remaining22', 'Remaining21']
@@ -46,11 +57,13 @@ def generate(font_dir, out, scale, metrics_path, emphasize=False):
     resources = ['<fonts>']
     ink = {}
     numeric = {}
-    for name, filename, base_size, characters in FONT_SPECS + (EMPHASIS_SPECS if emphasize else []):
+    for name, filename, base_size, characters in FONT_SPECS + (EMPHASIS_SPECS if emphasize else []) + SIDE_SPECS:
         size = max(1, math.floor(base_size*scale) if name in ('Chart26', 'Remaining21') else round(base_size*scale))
         # These atlases contain individual Latin glyphs. Explicit BASIC layout
         # keeps their advances independent of optional host RAQM/HarfBuzz builds.
         font = ImageFont.truetype(str(font_dir / filename), size, layout_engine=ImageFont.Layout.BASIC)
+        narrow = name in ('LiveSide60', 'LiveSide54', 'LiveSide48', 'LiveSide42')
+        horizontal = .48 if name == 'LiveSide42' else (.54 if name == 'LiveSide48' else .56)
         glyphs=[]; x=y=1; row=0
         character_fonts = {}
         if name.startswith('Remaining'):
@@ -66,7 +79,7 @@ def generate(font_dir, out, scale, metrics_path, emphasize=False):
         for c in sorted(set(characters)):
             face, shift = character_fonts.get(c, (font, 0))
             raw = face.getbbox(c, anchor='ls')
-            box = (raw[0], raw[1]+shift, raw[2], raw[3]+shift)
+            box = (math.floor(raw[0]*horizontal), raw[1], math.ceil(raw[2]*horizontal), raw[3]) if narrow else (raw[0], raw[1]+shift, raw[2], raw[3]+shift)
             w=max(1,box[2]-box[0]); h=max(1,box[3]-box[1])
             if x+w+1>256: x=1; y+=row+1; row=0
             glyphs.append((c,x,y,w,h,box)); x+=w+1; row=max(row,h)
@@ -82,7 +95,19 @@ def generate(font_dir, out, scale, metrics_path, emphasize=False):
                f'page id=0 file="{name}.png"',f'chars count={len(glyphs)}']
         for c,x,y,w,h,box in glyphs:
             face, shift = character_fonts.get(c, (font, 0))
-            if name.startswith('SmallZ'):
+            if narrow:
+                # Rasterize from the vector source at 4x into the narrow target,
+                # retaining grayscale AA rather than stretching an existing atlas.
+                raw = face.getbbox(c, anchor='ls')
+                mask = Image.new('L', ((raw[2]-raw[0])*4, h*4), 0)
+                high = ImageFont.truetype(str(font_dir / filename), size*4, layout_engine=ImageFont.Layout.BASIC)
+                ImageDraw.Draw(mask).text((-raw[0]*4,-raw[1]*4),c,font=high,anchor='ls',fill=255)
+                mask = mask.resize((w,h),Image.Resampling.LANCZOS)
+                # Remove sub-3% resampling halos: invisible on MIP, but they
+                # otherwise inflate every digit's measured ink width.
+                mask = mask.point([0 if value < 8 else value for value in range(256)])
+                atlas.paste((255,255,255),(x,y,x+w,y+h),mask)
+            elif name.startswith('SmallZ'):
                 # Add a quarter-pixel stroke within the glyph bounds. Render at
                 # 4x so the small Z gains weight without a whole-pixel outline.
                 raster_scale = 4
@@ -94,7 +119,7 @@ def generate(font_dir, out, scale, metrics_path, emphasize=False):
                 atlas.paste((255,255,255), (x,y,x+w,y+h), mask)
             else:
                 draw.text((x-box[0],y-box[1]+shift),c,font=face,anchor='ls',fill=(255,255,255))
-            advance = round(face.getlength(c))
+            advance = max(w,round(face.getlength(c)*horizontal)) if narrow else round(face.getlength(c))
             # Keep full glyphs in CIQ. Optical spacing is applied at draw time,
             # rather than reducing advance widths and clipping imported glyphs.
             if name.startswith('Remaining') or name == 'Units18':
@@ -114,7 +139,7 @@ def generate(font_dir, out, scale, metrics_path, emphasize=False):
     (out/'fonts.xml').write_text('\n'.join(resources+['</fonts>'])+'\n')
     # Runtime drawText paints its logical line box when AA has a solid backdrop.
     # Clip to actual glyph bounds so adjacent rows cannot erase one another.
-    order = BASE_ORDER + ([spec[0] for spec in EMPHASIS_SPECS] if emphasize else [])
+    order = BASE_ORDER + ([spec[0] for spec in EMPHASIS_SPECS] if emphasize else []) + [spec[0] for spec in SIDE_SPECS]
     metrics = '// Generated by scripts/generate-fonts.py; actual glyph ink bounds.\nmodule FontInk {\n'
     for field, column in [('SIZES', 0), ('TOP', 1), ('BOTTOM', 2)]:
         metrics += f'    const {field} = '+str([ink[name][column] for name in order])+';\n'
@@ -132,6 +157,10 @@ def generate(font_dir, out, scale, metrics_path, emphasize=False):
     metrics += '    const STATS_FACES = '+str(([16,17] if emphasize else [])+[5,7,4])+';\n'
     metrics += '    const AVERAGE_FACES = '+str(([18] if emphasize else [])+[2,6])+';\n'
     metrics += '    const DISTANCE_PAIRS = '+str(([[17,19]] if emphasize else [])+[[5,13],[7,14],[4,15]])+';\n'
+    side = len(BASE_ORDER) + (len(EMPHASIS_SPECS) if emphasize else 0)
+    metrics += '    const LIVE_SIDE_FACES = '+str(list(range(side,side+4)))+';\n'
+    metrics += f'    const LIVE_SIDE_LABEL = {side+4};\n'
+    metrics += f'    const LIVE_SIDE_PERCENT = {side+5};\n'
     metrics += '    function load() {\n        return ['+', '.join('Toybox.WatchUi.loadResource(Rez.Fonts.'+name+')' for name in order)+'];\n    }\n'
     metrics += '}\n'
     metrics_path.parent.mkdir(parents=True, exist_ok=True)

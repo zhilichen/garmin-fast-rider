@@ -1,0 +1,16 @@
+info face="LiveSide60" size=102 bold=1 italic=0 unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1
+common lineHeight=108 base=102 scaleW=256 scaleH=256 pages=1 packed=0
+page id=0 file="LiveSide60.png"
+chars count=12
+char id=45 x=1 y=1 width=21 height=37 xoffset=0 yoffset=65 xadvance=21 page=0 chnl=15
+char id=46 x=23 y=1 width=17 height=16 xoffset=0 yoffset=87 xadvance=17 page=0 chnl=15
+char id=48 x=41 y=1 width=30 height=75 xoffset=0 yoffset=28 xadvance=30 page=0 chnl=15
+char id=49 x=72 y=1 width=30 height=73 xoffset=0 yoffset=29 xadvance=30 page=0 chnl=15
+char id=50 x=103 y=1 width=30 height=74 xoffset=0 yoffset=28 xadvance=30 page=0 chnl=15
+char id=51 x=134 y=1 width=30 height=75 xoffset=0 yoffset=28 xadvance=30 page=0 chnl=15
+char id=52 x=165 y=1 width=30 height=73 xoffset=0 yoffset=29 xadvance=30 page=0 chnl=15
+char id=53 x=196 y=1 width=30 height=74 xoffset=0 yoffset=29 xadvance=30 page=0 chnl=15
+char id=54 x=1 y=77 width=30 height=74 xoffset=0 yoffset=29 xadvance=30 page=0 chnl=15
+char id=55 x=32 y=77 width=30 height=73 xoffset=0 yoffset=29 xadvance=30 page=0 chnl=15
+char id=56 x=63 y=77 width=30 height=75 xoffset=0 yoffset=28 xadvance=30 page=0 chnl=15
+char id=57 x=94 y=77 width=30 height=75 xoffset=0 yoffset=28 xadvance=30 page=0 chnl=15

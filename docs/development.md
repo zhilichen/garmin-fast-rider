@@ -78,3 +78,7 @@ ZIP仅包含目标设备的真实live程序、说明、项目许可及字体许�
 `--publish`将已经核对构建指纹和SHA256的程序写入`releases/v<version>/`，生成各型号ZIP、完整ZIP、校验值，以及`README.md`和`README.zh-CN.md`中的下载表与画廊。设备列表直接来自同一配置目录，两个语言版本都由CI检查。将版本目录与两份README一起提交，其他用户便可直接从GitHub下载。此命令不推送Git，也不提交Connect IQ审核。
 
 已发布版本目录不能被不同内容覆盖；应用变化后应先更新`manifest.xml`版本并重新构建、验收。`check-downloads.py`无需SDK，CI会验证已提交的程序、ZIP内容、许可证、SHA256及README链接。
+
+### 同设备构建顺序
+
+同一设备的live、test、snapshot使用相同的bin/<device>/gen目录，按顺序构建这些模式。更新字体期间也应等生成资源完成后再编译。本轮SDK一次并行构建报内部错误，最终12设备全部顺序重建后通过。

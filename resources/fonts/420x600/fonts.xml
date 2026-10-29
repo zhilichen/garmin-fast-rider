@@ -19,4 +19,10 @@
   <font id="StatsEmphasis" filename="StatsEmphasis.fnt" antialias="true"/>
   <font id="AverageEmphasis" filename="AverageEmphasis.fnt" antialias="true"/>
   <font id="RemainingEmphasis" filename="RemainingEmphasis.fnt" antialias="true"/>
+  <font id="LiveSide60" filename="LiveSide60.fnt" antialias="true"/>
+  <font id="LiveSide54" filename="LiveSide54.fnt" antialias="true"/>
+  <font id="LiveSide48" filename="LiveSide48.fnt" antialias="true"/>
+  <font id="LiveSide42" filename="LiveSide42.fnt" antialias="true"/>
+  <font id="LiveSideLabel13" filename="LiveSideLabel13.fnt" antialias="true"/>
+  <font id="LiveSidePercent22" filename="LiveSidePercent22.fnt" antialias="true"/>
 </fonts>

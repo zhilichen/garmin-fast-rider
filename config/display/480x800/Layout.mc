@@ -13,10 +13,10 @@ module Layout {
     const LEFT_RIGHT = 215;
     const LEFT_WIDTH = 211;
     const RIGHT_WIDTH = 250;
-    const LIVE_LEFT_CENTER = 51;
-    const LIVE_RIGHT_CENTER = 158;
-    const LIVE_LEFT_WIDTH = 94;
-    const LIVE_RIGHT_WIDTH = 113;
+    const LIVE_LEFT_CENTER = 49;
+    const LIVE_RIGHT_CENTER = 156;
+    const LIVE_LEFT_WIDTH = 90;
+    const LIVE_RIGHT_WIDTH = 117;
     const STATS_VALUE_WIDTH = 246;
     const RADAR_LEFT = 425;
     const ZONE_BADGE_WIDTH = 47;
@@ -43,6 +43,8 @@ module Layout {
     const ZONE_BADGE_PADDING = 8;
     const ZONE_BADGE_RADIUS = 10;
     const ZONE_WEDGE_THIN = 8;
+    const LIVE_SIDE_GAP = 2;
+    const LIVE_LETTER_GAP = 0;
     const PRIMARY_BASELINE = 84;
     const ZONE_BASELINE = 123;
     const PRIMARY_BOTTOM = 176;
@@ -64,6 +66,8 @@ module Layout {
     const STATS_AVERAGE_LABEL_BASELINE = 364;
     const STATS_DISTANCE_BASELINE = 524;
     const STATS_BOTTOM = 530;
+    const LIVE_CENTER_TOP = 267;
+    const LIVE_CENTER_BOTTOM = 447;
     const BANNER_TOP = 547;
     const HEADER_BASELINE = 582;
     const HEADER_BOLT_TOP = 555;
