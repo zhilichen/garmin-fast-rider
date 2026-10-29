@@ -1,3 +1,5 @@
+当前默认画面已更新为v0.4.4的Zone数字框与梯形进度。[本轮原图与验收](validation/zones/v0.4.4/README.md)。以下历史边界图保留其原有版本。
+
 # 原生模拟器画面
 
 新增：[v0.4.2 日间／夜间对照与验收](validation/themes/v0.4.2/README.md)。以下保留 v0.4.1 日间基准。

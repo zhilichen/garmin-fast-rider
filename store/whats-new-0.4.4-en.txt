@@ -1,0 +1,5 @@
+Clearer zone displays while riding!
+- Number-only zone badges with matching-color rounded outlines.
+- Tapered heart-rate and power gauges: solid to your current position, hollow to the zone ceiling.
+- Clear day/night colors, antialiased graphics and shared layouts across supported Edge models.
+- Zone calculations, riding data and paused ride summary remain unchanged.

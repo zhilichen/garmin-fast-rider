@@ -1,0 +1,213 @@
+{
+  "comparisons": [
+    {
+      "capture": "edge840-day.png",
+      "reference": "../../summary/v0.4.3/edge840-riding-day.png",
+      "changed_pixels": 3484,
+      "changed_pixels_outside_zone_regions": 0
+    },
+    {
+      "capture": "edge840-night.png",
+      "reference": "../../summary/v0.4.3/edge840-riding-night.png",
+      "changed_pixels": 3487,
+      "changed_pixels_outside_zone_regions": 0
+    },
+    {
+      "capture": "edge840-stopped-day.png",
+      "reference": "../../summary/v0.4.3/edge840-day.png",
+      "changed_pixels": 0
+    },
+    {
+      "capture": "edge840-stopped-night.png",
+      "reference": "../../summary/v0.4.3/edge840-night.png",
+      "changed_pixels": 0
+    }
+  ],
+  "fill_checks": "normal solid/hollow, full and missing interiors verified in both themes",
+  "captures": [
+    {
+      "file": "edge1030-day.png",
+      "size": [
+        282,
+        470
+      ],
+      "sha256": "4ea0dd925da71a7f3f29a4560fffb6aaa6a02a84c6fd70a89bf36928ce47b932"
+    },
+    {
+      "file": "edge1030bontrager-day.png",
+      "size": [
+        282,
+        470
+      ],
+      "sha256": "e141998bf91c8eacedfe2f259c1fe45703797b7f2dc45f4e3310283d89641581"
+    },
+    {
+      "file": "edge1030plus-day.png",
+      "size": [
+        282,
+        470
+      ],
+      "sha256": "4ea0dd925da71a7f3f29a4560fffb6aaa6a02a84c6fd70a89bf36928ce47b932"
+    },
+    {
+      "file": "edge1040-day.png",
+      "size": [
+        282,
+        470
+      ],
+      "sha256": "4ea0dd925da71a7f3f29a4560fffb6aaa6a02a84c6fd70a89bf36928ce47b932"
+    },
+    {
+      "file": "edge1040-night.png",
+      "size": [
+        282,
+        470
+      ],
+      "sha256": "5d2ab814cbc1bba7478f99a02cfe600a258803a953c7c24bc22d1fea53baba0c"
+    },
+    {
+      "file": "edge1050-day.png",
+      "size": [
+        480,
+        800
+      ],
+      "sha256": "a7f3bd5ce81d73eb0d058f9140dc5d8a012892bfbbeb0d1d3203ffb1919689c2"
+    },
+    {
+      "file": "edge1050-night.png",
+      "size": [
+        480,
+        800
+      ],
+      "sha256": "53b939396e3d42d665138b47b2f8c7c5d782121ba8f43758a82e6310fc62feff"
+    },
+    {
+      "file": "edge1060-day.png",
+      "size": [
+        480,
+        800
+      ],
+      "sha256": "a7f3bd5ce81d73eb0d058f9140dc5d8a012892bfbbeb0d1d3203ffb1919689c2"
+    },
+    {
+      "file": "edge530-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "628d2d773276a24681340b1e3754b93df05a0701168273e02ebb8588d3c9cdba"
+    },
+    {
+      "file": "edge530-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "419164cb6867fbece360924951f5384a52ddec1c8435294a43fa0b233a84930a"
+    },
+    {
+      "file": "edge540-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "628d2d773276a24681340b1e3754b93df05a0701168273e02ebb8588d3c9cdba"
+    },
+    {
+      "file": "edge550-day.png",
+      "size": [
+        420,
+        600
+      ],
+      "sha256": "f25e76974920598a10bc80d7d9dad07bd37326613c129056b704e83ebe26800e"
+    },
+    {
+      "file": "edge830-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "628d2d773276a24681340b1e3754b93df05a0701168273e02ebb8588d3c9cdba"
+    },
+    {
+      "file": "edge840-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "628d2d773276a24681340b1e3754b93df05a0701168273e02ebb8588d3c9cdba"
+    },
+    {
+      "file": "edge840-missing-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "960802a9384160875d4a09db8d32e225d44d47b61186a6cb5471916f6886537d"
+    },
+    {
+      "file": "edge840-missing-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "1fbeb73dc1f8e97792b25dfb6c2db599987a2eef80b63bec89d1a0052d32858e"
+    },
+    {
+      "file": "edge840-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "419164cb6867fbece360924951f5384a52ddec1c8435294a43fa0b233a84930a"
+    },
+    {
+      "file": "edge840-stopped-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "7f24a04b7225162b62d69cc811a6f344159e1fd7f878535ec3f20611eab0e102"
+    },
+    {
+      "file": "edge840-stopped-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "3faf9cc8d7c7ec8b6c14e5a1f491d4406259392a4ca7f54685a8dae41b7dd250"
+    },
+    {
+      "file": "edge840-stress-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "63e52d5f39a524ee7a0c48e72a4198746c5b1b328e32fe345aacf4f11f06ac45"
+    },
+    {
+      "file": "edge840-stress-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "e1b8ba9fd486a4d1ca813267b4be3ba802f0e06b69f9eba7d94e760de4101d08"
+    },
+    {
+      "file": "edge850-day.png",
+      "size": [
+        420,
+        600
+      ],
+      "sha256": "f25e76974920598a10bc80d7d9dad07bd37326613c129056b704e83ebe26800e"
+    },
+    {
+      "file": "edge850-night.png",
+      "size": [
+        420,
+        600
+      ],
+      "sha256": "678ae046a4e8cd17fabd76e1ce8a80ab96cd9a2f2f1b5172df80053f0d2046e1"
+    }
+  ]
+}

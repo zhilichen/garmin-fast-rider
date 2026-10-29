@@ -312,11 +312,7 @@ function edge840ReferenceMetricsTest(logger) {
     Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[8]), 44);
     Test.assertEqual(v.zoneBadgeWidth(dc, 6, 0), Layout.ZONE_BADGE_WIDTH);
     Test.assertEqual(v.zoneBadgeWidth(dc, 7, 6), Layout.ZONE_SMALL_BADGE_WIDTH);
-    Test.assertEqual(dc.getTextWidthInPixels("Z", v.fonts[9]), 9);
-    Test.assertEqual(FontInk.TOP[9], 12);
-    Test.assertEqual(FontInk.TOP[8], 32);
-    // The larger small Z sits below the primary digits; the large zone digit
-    // has its own clear horizontal lane, including with 3-digit primary values.
+    // Number-only badges reserve a bounded outline lane below the radar area.
     Test.assertEqual(v.heartFont(dc, "199"), 0);
     Test.assertEqual(v.fontSizes[v.heartFont(dc, "199")], 58);
     Test.assertEqual(v.fontSizes[1], 38);
@@ -324,19 +320,19 @@ function edge840ReferenceMetricsTest(logger) {
     Test.assertEqual(v.zoneBadgeWidth(dc, 4, 0), Layout.ZONE_BADGE_WIDTH);
     Test.assertEqual(Layout.COLUMN_DIVIDER, 107+5);
     Test.assertEqual(Layout.RIGHT_WIDTH, 128);
-    Test.assert(Layout.ZONE_BASELINE-FontInk.TOP[9] > Layout.PRIMARY_BASELINE+FontInk.BOTTOM[0]+FontInk.NATIVE_BOTTOM_PAD);
+    Test.assert(Layout.ZONE_BADGE_BOTTOM < Layout.ZONE_WEDGE_TOP);
     Test.assert(Layout.PRIMARY_BASELINE-FontInk.TOP[0] >= 1);
     Test.assert(Layout.PRIMARY_BASELINE-FontInk.TOP[0] <= 2);
-    Test.assert(Layout.ZONE_BASELINE-FontInk.TOP[8] >= Layout.RADAR_BOTTOM);
-    Test.assert(Layout.ZONE_BASELINE+FontInk.BOTTOM[8]+FontInk.NATIVE_BOTTOM_PAD < Layout.ZONE_BAR_TOP-(Layout.ZONE_MARKER_HEIGHT-Layout.ZONE_BAR)/2);
+    Test.assert(Layout.ZONE_BADGE_BOTTOM-FontInk.TOP[5]-FontInk.BOTTOM[5]-FontInk.NATIVE_BOTTOM_PAD-2*Layout.ZONE_BADGE_PADDING >= Layout.RADAR_BOTTOM);
+    Test.assert(Layout.ZONE_BADGE_BOTTOM < Layout.ZONE_WEDGE_TOP);
     // AA backdrop clips use ink bounds: adjacent rows must remain disjoint.
     var timeFonts = [5, 7, 4];
     for (var i = 0; i < timeFonts.size(); i += 1) {
         Test.assert(132+FontInk.BOTTOM[timeFonts[i]]+FontInk.NATIVE_BOTTOM_PAD < 180-FontInk.TOP[2]);
     }
     Test.assert(170+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD < 212-FontInk.TOP[1]);
-    Test.assert(Layout.UNIT_BASELINE+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD < Layout.ZONE_BAR_TOP-(Layout.ZONE_MARKER_HEIGHT-Layout.ZONE_BAR)/2);
-    Test.assert(Layout.ZONE_BAR_TOP+(Layout.ZONE_MARKER_HEIGHT+Layout.ZONE_BAR)/2 <= Layout.MIDDLE_TOP);
+    Test.assert(Layout.UNIT_BASELINE+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD < Layout.ZONE_WEDGE_TOP);
+    Test.assert(Layout.ZONE_WEDGE_BOTTOM+Layout.STROKE/2 < Layout.MIDDLE_TOP);
     v.trend.endTime = 600000;
     Test.assertEqual(v.chartX(600000), Layout.PLOT_RIGHT);
     Test.assertEqual(v.chartX(300000), Layout.PLOT_LEFT);
@@ -473,8 +469,8 @@ function responsiveGeometryTest(logger) {
         var face = v.liveFont(values[i],Layout.LIVE_RIGHT_WIDTH);
         Test.assert(v.packedWidth(values[i],face) <= Layout.LIVE_RIGHT_WIDTH);
     }
-    Test.assert(Layout.ZONE_BASELINE-FontInk.TOP[8] >= Layout.RADAR_BOTTOM);
-    Test.assert(Layout.ZONE_BASELINE+FontInk.BOTTOM[8]+FontInk.NATIVE_BOTTOM_PAD < Layout.ZONE_BAR_TOP-(Layout.ZONE_MARKER_HEIGHT-Layout.ZONE_BAR)/2);
+    Test.assert(Layout.ZONE_BADGE_BOTTOM-FontInk.TOP[5]-FontInk.BOTTOM[5]-FontInk.NATIVE_BOTTOM_PAD-2*Layout.ZONE_BADGE_PADDING >= Layout.RADAR_BOTTOM);
+    Test.assert(Layout.ZONE_BADGE_BOTTOM < Layout.ZONE_WEDGE_TOP);
     Test.assert(Layout.LIVE_LABEL_BOTTOM+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD < Layout.LIVE_VALUE_BOTTOM-FontInk.TOP[1]);
     Test.assert(Layout.STATS_TIME_BASELINE+FontInk.BOTTOM[5]+FontInk.NATIVE_BOTTOM_PAD < Layout.STATS_AVERAGE_BASELINE-FontInk.TOP[2]);
     var range = v.rangeWidth(dc,"20m");

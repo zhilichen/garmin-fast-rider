@@ -371,35 +371,52 @@ class FastRiderView extends WatchUi.DataField {
         drawHeart(dc, hx, iy);
         drawBolt(dc, bx, iy);
         text(dc, bx+Layout.BOLT_WIDTH+Layout.INLINE_GAP, Layout.UNIT_BASELINE, 3, ui.powerSeconds+"s", theme.label, Graphics.TEXT_JUSTIFY_LEFT);
-        color(dc, hc); dc.fillRectangle(Layout.LEFT_EDGE, Layout.ZONE_BAR_TOP, Layout.LEFT_WIDTH, Layout.ZONE_BAR);
-        color(dc, pc); dc.fillRectangle(Layout.RIGHT_START, Layout.ZONE_BAR_TOP, Layout.RIGHT_WIDTH, Layout.ZONE_BAR);
-        drawZoneMarker(dc, Layout.LEFT_EDGE, Layout.LEFT_WIDTH, RideMath.zoneFraction(hr, hrLimits, hrMinimum, hrMaximum));
-        drawZoneMarker(dc, Layout.RIGHT_START, Layout.RIGHT_WIDTH, RideMath.zoneFraction(watts, powerLimits, 0, null));
+        drawZoneGauge(dc, Layout.LEFT_EDGE, Layout.LEFT_WIDTH, RideMath.zoneFraction(hr, hrLimits, hrMinimum, hrMaximum), hc);
+        drawZoneGauge(dc, Layout.RIGHT_START, Layout.RIGHT_WIDTH, RideMath.zoneFraction(watts, powerLimits, 0, null), pc);
     }
     function drawHeart(dc, x, y) {
         color(dc, theme.red);
         dc.fillPolygon([[x+Layout.u(8),y+Layout.u(2)],[x+Layout.u(6),y],[x+Layout.u(3),y],[x,y+Layout.u(3)],[x,y+Layout.u(6)],[x+Layout.u(2),y+Layout.u(9)],[x+Layout.u(8),y+Layout.u(14)],[x+Layout.u(14),y+Layout.u(9)],[x+Layout.u(16),y+Layout.u(6)],[x+Layout.u(16),y+Layout.u(3)],[x+Layout.u(13),y],[x+Layout.u(10),y]]);
     }
+    function zoneBadgeFont(mainFont) { return mainFont == 6 ? 4 : 5; }
     function zoneBadgeWidth(dc, zone, mainFont) {
-        var zf = mainFont == 6 ? 10 : 9; var nf = mainFont == 6 ? 4 : 8;
-        return textWidth(dc, "Z", zf)+textWidth(dc, zone.format("%d"), nf);
+        return mainFont == 6 ? Layout.ZONE_SMALL_BADGE_WIDTH : Layout.ZONE_BADGE_WIDTH;
     }
     function drawZoneBadge(dc, right, zone, mainFont, c) {
-        if (zone == 0) { text(dc, right, Layout.ZONE_BASELINE, 3, "--", c, Graphics.TEXT_JUSTIFY_RIGHT); return; }
-        var zf = mainFont == 6 ? 10 : 9; var nf = mainFont == 6 ? 4 : 8;
-        var number = zone.format("%d");
-        text(dc, right-textWidth(dc, number, nf), Layout.ZONE_BASELINE, zf, "Z", c, Graphics.TEXT_JUSTIFY_RIGHT);
-        text(dc, right, Layout.ZONE_BASELINE, nf, number, c, Graphics.TEXT_JUSTIFY_RIGHT);
-    }
-    function drawZoneMarker(dc, left, barWidth, fraction) {
-        if (fraction == null) { return; }
-        var x = left+DisplayRules.pixel(fraction*(barWidth-Layout.ZONE_MARKER_WIDTH));
-        var y = Layout.ZONE_BAR_TOP-(Layout.ZONE_MARKER_HEIGHT-Layout.ZONE_BAR)/2;
-        color(dc, theme.marker);
-        dc.fillRectangle(x, y, Layout.ZONE_MARKER_WIDTH, Layout.ZONE_MARKER_HEIGHT);
-        // Cut through the colored bar with the background; caps contrast with it.
+        var nf = zone == 0 ? 3 : zoneBadgeFont(mainFont);
+        var number = zone == 0 ? "--" : zone.format("%d");
+        var w = zoneBadgeWidth(dc, zone, mainFont);
+        var h = FontInk.TOP[nf]+FontInk.BOTTOM[nf]+FontInk.NATIVE_BOTTOM_PAD+2*Layout.ZONE_BADGE_PADDING;
+        var x = right-w; var y = Layout.ZONE_BADGE_BOTTOM-h;
+        // Filled outer/inner shapes keep the border inside its pixel bounds.
+        color(dc, c); dc.fillRoundedRectangle(x, y, w, h, Layout.ZONE_BADGE_RADIUS);
         color(dc, theme.background);
-        dc.fillRectangle(x, Layout.ZONE_BAR_TOP, Layout.ZONE_MARKER_WIDTH, Layout.ZONE_BAR);
+        dc.fillRoundedRectangle(x+Layout.STROKE, y+Layout.STROKE, w-2*Layout.STROKE,
+            h-2*Layout.STROKE, Layout.ZONE_BADGE_RADIUS-Layout.STROKE);
+        drawPacked(dc, x+DisplayRules.pixel((w-packedWidth(number,nf))/2.0),
+            Layout.ZONE_BADGE_BOTTOM-Layout.ZONE_BADGE_PADDING-FontInk.BOTTOM[nf]-FontInk.NATIVE_BOTTOM_PAD,
+            nf, number, c);
+    }
+    function drawZoneGauge(dc, left, barWidth, fraction, c) {
+        var top = Layout.ZONE_WEDGE_TOP; var bottom = Layout.ZONE_WEDGE_BOTTOM;
+        var inset = Layout.STROKE/2.0;
+        var right = left+barWidth-1;
+        var points = [[left+inset,bottom-Layout.ZONE_WEDGE_THIN+1],
+            [right-inset,top+inset],[right-inset,bottom-inset],[left+inset,bottom-inset]];
+        var filled = zoneGaugeWidth(barWidth,fraction);
+        color(dc, c);
+        // Fill up to the current position; the rest retains the real day/night backdrop.
+        if (filled > 0) {
+            dc.setClip(left,top,filled,bottom-top+1); dc.fillPolygon(points); dc.clearClip();
+        }
+        dc.setPenWidth(Layout.STROKE);
+        for (var i = 0; i < points.size(); i += 1) {
+            var next = (i+1)%points.size();
+            dc.drawLine(points[i][0],points[i][1],points[next][0],points[next][1]);
+        }
+    }
+    function zoneGaugeWidth(barWidth, fraction) {
+        return fraction == null ? 0 : DisplayRules.pixel(barWidth*RideMath.clamp(fraction,0.0,1.0));
     }
     function drawStats(dc) {
         var title = ui.allStats ? "All" : "LAP "+(lapNumber == null ? "?" : lapNumber.format("%d"));

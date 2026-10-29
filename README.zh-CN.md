@@ -13,7 +13,7 @@
 ## 给骑行者
 
 - **关键信息放在一起。** 大号心率和功率，配合后拨档位、踏频、坡度、速度、Lap/All 统计与累计爬升。
-- **用颜色判断强度。** 心率与功率显示 Zone 颜色和区间内位置；功率曲线与实时数字使用相同色系。
+- **用颜色判断强度。** 心率与功率显示同色 Zone 数字框和梯形区间进度；功率曲线与实时数字使用相同色系。
 - **快速查看一个训练段。** 功率图包含 Z2 上限、FTP 辅助线和原生 Lap 标记，可查看最近5分钟、20分钟或整次骑行。
 - **日夜清晰。** 跟随 Edge 自身的显示模式，夜间采用黑底亮字和更明亮的 Zone 配色。
 - **双击响铃。** 支持触控的机型可播放两秒三击电子铃声，无需设备自带原生车铃功能。
@@ -47,6 +47,12 @@ FastRider 跟随 Edge 数据字段的系统背景色。将码表的显示模式�
 [![Edge 840 日间与夜间模式：白底深色与黑底高对比配色](docs/media/day-night.png)](docs/validation/themes/v0.4.2/README.md)
 
 <a id="download"></a>
+### 一眼看清 Zone 和区间进度
+
+心率、功率各用同色圆角框显示分区数字。下方梯形从左到右逐渐变厚：当前位置左侧实心，右侧空心，表示距离当前区间上限还剩多少。缺失数据时显示横线和空心梯形。分区边界与配色规则保持不变。
+
+[![Edge 840 数字 Zone 圆角框与实心/空心梯形进度](docs/media/zone-gauges.png)](docs/validation/zones/v0.4.4/README.md)
+
 ### 暂停时，看整次骑行
 
 手动停止计时或触发自动暂停后，页面自动切换为全程统计。顶部用较小数字显示当前心率和全程平均心率；中间显示开始后的总时间、总距离（导航剩余距离可用时附带显示）、全程平均功率与本地计算的 NP。底部保留功率图，爬升和时钟数字放大加粗，单位保持原字号。恢复计时后回到原骑行页面，保留已选择的视图。无触屏设备也会自动切换。
@@ -58,24 +64,24 @@ NP 需先积累30秒功率，真实零功率参与计算，暂停时间不参与
 ## 下载与支持设备
 
 <!-- downloads:start -->
-当前版本 **v0.4.3**，下载后即可安装，无需 SDK 或 Java。PRG 可直接复制到设备；ZIP 包含同一程序、安装说明和许可证。
+当前版本 **v0.4.4**，下载后即可安装，无需 SDK 或 Java。PRG 可直接复制到设备；ZIP 包含同一程序、安装说明和许可证。
 
 | 设备 | 原生分辨率 | 操作 | PRG 直接下载 | ZIP 下载 |
 | --- | --- | --- | --- | --- |
-| Edge 530 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge530/FastRider-0.4.3-edge530.zip) |
-| Edge 540 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge540/FastRider-0.4.3-edge540.zip) |
-| Edge 550 | 420×600 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge550/FastRider-0.4.3-edge550.zip) |
-| Edge 830 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge830/FastRider-0.4.3-edge830.zip) |
-| Edge 840 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge840/FastRider-0.4.3-edge840.zip) |
-| Edge 850 | 420×600 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge850/FastRider-0.4.3-edge850.zip) |
-| Edge 1030 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030/FastRider-0.4.3-edge1030.zip) |
-| Edge 1030 Bontrager | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030bontrager/FastRider-0.4.3-edge1030bontrager.zip) |
-| Edge 1030 Plus | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030plus/FastRider-0.4.3-edge1030plus.zip) |
-| Edge 1040 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1040/FastRider-0.4.3-edge1040.zip) |
-| Edge 1050 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1050/FastRider-0.4.3-edge1050.zip) |
-| Edge 1060 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1060/FastRider-0.4.3-edge1060.zip) |
+| Edge 530 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge530/FastRider-0.4.4-edge530.zip) |
+| Edge 540 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge540/FastRider-0.4.4-edge540.zip) |
+| Edge 550 | 420×600 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge550/FastRider-0.4.4-edge550.zip) |
+| Edge 830 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge830/FastRider-0.4.4-edge830.zip) |
+| Edge 840 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge840/FastRider-0.4.4-edge840.zip) |
+| Edge 850 | 420×600 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge850/FastRider-0.4.4-edge850.zip) |
+| Edge 1030 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1030/FastRider-0.4.4-edge1030.zip) |
+| Edge 1030 Bontrager | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1030bontrager/FastRider-0.4.4-edge1030bontrager.zip) |
+| Edge 1030 Plus | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1030plus/FastRider-0.4.4-edge1030plus.zip) |
+| Edge 1040 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1040/FastRider-0.4.4-edge1040.zip) |
+| Edge 1050 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1050/FastRider-0.4.4-edge1050.zip) |
+| Edge 1060 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/edge1060/FastRider-0.4.4-edge1060.zip) |
 
-[全部型号 ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/FastRider-0.4.3.zip) · [SHA256 校验值](releases/v0.4.3/SHA256SUMS) · [版本清单](releases/v0.4.3/manifest.json)
+[全部型号 ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.4/FastRider-0.4.4.zip) · [SHA256 校验值](releases/v0.4.4/SHA256SUMS) · [版本清单](releases/v0.4.4/manifest.json)
 <!-- downloads:end -->
 
 请选择与**设备型号完全对应**的文件。Solar 版本随 Garmin 对应设备包支持。所有型号都使用**单字段全屏**数据页面。
@@ -211,6 +217,8 @@ python3 scripts/test-matrix.py
 ```
 
 UI改动使用 `./scripts/build.sh snapshot edge840` 构建固定快照，在模拟器运行后导出**原生屏幕截图**，同时检查长数值、传感器缺失和受影响的显示档。840基准包含12种视图组合；若有意修改设计，应明确更新基准。
+
+**v0.4.4**：Zone改为同色数字框及实心/空心梯形进度；12款机型465次原生测试执行通过；Zone区域外与停止页逐像素不变。[Zone验收](docs/validation/zones/v0.4.4/README.md)。
 
 **v0.4.3**：新增暂停/停止全程统计页；12款机型441次原生测试执行通过；840日夜骑行页逐像素不变。[停止页验收](docs/validation/summary/v0.4.3/README.md)。
 

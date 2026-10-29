@@ -51,3 +51,5 @@ The 0.4.1 pending status above records the earlier submission; current Store
 approval status has not been rechecked for this change.
 
 Suggested What's New: [English](whats-new-0.4.3-en.txt) · [中文](whats-new-0.4.3-zh-CN.txt).
+
+Version **0.4.4** adds number-only zone badges and tapered fill gauges. Prepared IQ: `../dist/connect-iq/v0.4.4/FastRider-0.4.4.iq`. This candidate has not been submitted in this change. [Acceptance](../docs/validation/zones/v0.4.4/README.md) · What's New: [English](whats-new-0.4.4-en.txt) / [中文](whats-new-0.4.4-zh-CN.txt).
