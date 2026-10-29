@@ -54,3 +54,11 @@ flowchart TD
 同一主题实例只在系统背景改变时更新属性，不重新创建数据模型、历史或输入状态。BMFont仍使用原始灰度覆盖资源，所有文字绘制使用当前背景作为抗锯齿底色。图表填充按90%不透明度混合到当前背景；FTP/Z2/Lap辅助线用同一背景描边，Zone位置标记在黑底下改用白色端点与黑色切口。
 
 夜间色彩锚点采用旧款MIP屏的64色RGB立方体，降低颜色量化导致色系混淆的风险。[原生截图与测试记录](validation/themes/v0.4.2/README.md)。
+
+## 计时状态与停止页
+
+`RideScreenState` 集中映射原生 TIMER_STATE：ON 使用原骑行布局，PAUSED（Auto Pause）和 STOPPED 使用 `SummaryRenderer`，OFF 保留原待骑行布局。原生计时回调立即切换，`compute()` 再用 Activity.Info 同步状态。恢复时不重置触控选择、Lap 或历史。停止页不响应隐藏的功率/圈统计触控，图表范围与车铃仍按设备能力工作。
+
+停止页独立锚点位于 `design/layout.json` 的 summary 字段，由同一生成器生成四份 `SummaryLayout.mc`。原有 Layout 与字库资源保持不变。平均心率读 `averageHeartRate`，平均功率优先读 `averagePower`，总时间用 `elapsedTime`。不实现 Moving。
+
+`NormalizedPower` 在活动计时时间轴上将观测功率采样保持到1秒，以完整30秒滑动平均的四次方均值开四次根。只保留30个值和累计和；缺失值不会当作零，暂停不会注入零。计时回退/重置清空；中途加载、丢样或无法连接的时间段标记 estimated。NP 不从 Garmin 原生统计读取，也不跨应用卸载恢复；不足30秒显示横线，记录不全显示 NP est. W。全程均心率与均功率仍优先用原生数据，避免中途加载丢失全程均值。

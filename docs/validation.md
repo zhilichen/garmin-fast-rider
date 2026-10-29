@@ -1,3 +1,5 @@
+最新停止页验收：[v0.4.3 原生截图与测试](validation/summary/v0.4.3/README.md)。
+
 最新日夜主题验收：[v0.4.2 原生截图与测试](validation/themes/v0.4.2/README.md)。以下保留 v0.4.1 历史记录。
 
 # v0.4.1 验收

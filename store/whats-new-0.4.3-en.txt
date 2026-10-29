@@ -1,0 +1,8 @@
+New paused and stopped ride summary!
+- Automatically switches when you stop the timer or Auto Pause activates; resumes your riding dashboard when you continue.
+- Current and average heart rate, total elapsed time, distance, ride-average power and locally calculated NP on one screen.
+- Larger bold ascent and clock numbers while paused; clear day and night themes.
+- Remaining navigation distance appears when available.
+- Riding layout and touch selections stay intact across transitions.
+
+NP needs 30 seconds of observed power. Partial recordings or missing samples are labeled "NP est. W" and may differ from Garmin post-ride NP.

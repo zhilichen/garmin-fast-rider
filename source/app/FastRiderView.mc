@@ -44,10 +44,14 @@ class FastRiderView extends WatchUi.DataField {
     var flashUntil = 0;
     var sensorMask = -1;
     var theme as DisplayTheme;
+    var screen as RideScreenState;
+    var normalized as NormalizedPower;
+    var averageHr = null;
 
     function initialize() {
         DataField.initialize();
         theme = new DisplayTheme();
+        screen = new RideScreenState(); normalized = new NormalizedPower();
         gradeEstimator = new GradeEstimator();
         lap = new LapStats(); ride = new LapStats();
         rolling = new PowerAverage(); ui = new InteractionState();
@@ -82,6 +86,7 @@ class FastRiderView extends WatchUi.DataField {
     function compute(info) {
         if (BuildMode.DEMO) { computeDemo(); return; }
         if (timerMillis != null && info.timerTime != null && info.timerTime < timerMillis) { onTimerReset(); }
+        screen.update(info.timerState);
         var running = info.timerState == Activity.TIMER_STATE_ON;
         power = info.currentPower;
         hr = info.currentHeartRate; if (hr != null && hr <= 0) { hr = null; }
@@ -98,6 +103,8 @@ class FastRiderView extends WatchUi.DataField {
         ride.update(timerMillis, power, running);
         // Prefer Garmin's complete-ride statistic, including after a mid-ride load.
         ridePower = RideMath.rideAverage(timerMillis, info.averagePower, ride.averagePower);
+        averageHr = timerMillis != null && timerMillis > 0 && info.averageHeartRate != null && info.averageHeartRate > 0 ? info.averageHeartRate : null;
+        normalized.update(timerMillis, power, running);
         rolling.update(timerMillis, power, running);
         grade = gradeEstimator.update(meters, info.altitude, System.getTimer());
         ascent = info.totalAscent;
@@ -127,16 +134,19 @@ class FastRiderView extends WatchUi.DataField {
             if (t >= 4978) { rolling.update(t*1000, watts, true); }
         }
         lapNumber = 3; demoSeeded = true;
+        for (var n = 0; n <= 120; n += 1) { normalized.update(n*1000, 220, true); }
     }
     function computeDemo() {
         if (!demoSeeded) { seedDemo(); }
         var t = (System.getTimer()-start)/1000.0;
-        millis = 4988000+(t*1000).toNumber(); timerMillis = millis;
+        if (screen.state == Activity.TIMER_STATE_OFF) { screen.update(Activity.TIMER_STATE_ON); }
+        millis = 4988000+(t*1000).toNumber();
+        if (!screen.summary() || timerMillis == null) { timerMillis = millis; }
         power = RideMath.demoPower(millis/1000.0);
         hr = 158; cadence = 64; rearGear = 5; speed = 10.0138;
         meters = demoMeters(millis/1000.0); ascent = 682.0+t/10.0; grade = 6.4;
         remainingDistance = 19955.8656; remainingAscent = 365.76;
-        ridePower = 212;
+        ridePower = 212; averageHr = 146;
         rolling.update(timerMillis, power, true);
         lap.update(timerMillis, power, true); lap.updateDistance(meters);
         trend.update(millis, power, true);
@@ -144,6 +154,7 @@ class FastRiderView extends WatchUi.DataField {
     function onTimerReset() {
         hardwareLog("timer reset -> defaults=3s/All/5m");
         trend.reset(); rolling.reset(); lap.reset(); ride.reset(); ui.reset();
+        normalized.reset(); screen.reset(); averageHr = null;
         gradeEstimator.reset(); grade = null; lapNumber = null;
         demoSeeded = false; demoDiagnostics = false; ascent = null; remainingDistance = null; remainingAscent = null;
         meters = null; millis = null; timerMillis = null; ridePower = null;
@@ -153,18 +164,19 @@ class FastRiderView extends WatchUi.DataField {
     }
     function onTimerStart() {
         hardwareLog("timer start");
+        screen.update(Activity.TIMER_STATE_ON); WatchUi.requestUpdate();
         if (BuildMode.DEMO) { return; }
         var info = Activity.getActivityInfo();
         if (info.timerTime != null && info.timerTime == 0) {
             lap.beginAt(0, info.currentPower, info.elapsedDistance);
             ride.beginAt(0, info.currentPower, info.elapsedDistance); lapNumber = 1;
         } else { lap.started(info.timerTime); ride.started(info.timerTime); }
-        trend.started(info.elapsedTime); rolling.reset();
+        trend.started(info.elapsedTime); rolling.reset(); normalized.started(info.timerTime);
     }
-    function breakSamples() { lap.breakSample(); ride.breakSample(); trend.breakSample(); rolling.reset(); }
-    function onTimerPause() { hardwareLog("timer pause"); breakSamples(); }
-    function onTimerResume() { hardwareLog("timer resume"); breakSamples(); }
-    function onTimerStop() { hardwareLog("timer stop"); breakSamples(); }
+    function breakSamples() { lap.breakSample(); ride.breakSample(); trend.breakSample(); rolling.reset(); normalized.breakSample(); }
+    function onTimerPause() { hardwareLog("timer pause"); screen.update(Activity.TIMER_STATE_PAUSED); breakSamples(); WatchUi.requestUpdate(); }
+    function onTimerResume() { hardwareLog("timer resume"); screen.update(Activity.TIMER_STATE_ON); breakSamples(); WatchUi.requestUpdate(); }
+    function onTimerStop() { hardwareLog("timer stop"); screen.update(Activity.TIMER_STATE_STOPPED); breakSamples(); WatchUi.requestUpdate(); }
     function onTimerLap() {
         if (BuildMode.DEMO) {
             if (!demoSeeded) { computeDemo(); }
@@ -181,6 +193,7 @@ class FastRiderView extends WatchUi.DataField {
     }
     function onTimerLap2(trigger) { onTimerLap(); return true; }
     function handleTap(x, y) {
+        if (screen.summary() && y < Layout.BANNER_TOP) { return false; }
         if (width != Layout.WIDTH || height != Layout.HEIGHT || !ui.tap(x, y)) { return false; }
         flashRegion = y < Layout.PRIMARY_BOTTOM ? 1 : (y < Layout.STATS_BOTTOM ? 2 : 3);
         flashUntil = System.getTimer()+180;
@@ -312,17 +325,21 @@ class FastRiderView extends WatchUi.DataField {
             text(dc, width/2, height/2, 3, "FastRider", theme.ink, Graphics.TEXT_JUSTIFY_CENTER);
             text(dc, width/2, height/2+Layout.u(24), 3, "1 field", theme.label, Graphics.TEXT_JUSTIFY_CENTER); return;
         }
-        drawPrimary(dc);
-        color(dc, theme.rule); dc.fillRectangle(Layout.COLUMN_DIVIDER, Layout.MIDDLE_TOP, Layout.STROKE, Layout.STATS_BOTTOM-Layout.MIDDLE_TOP);
-        text(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_LABEL_TOP, 3, "gear", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
-        text(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_LABEL_TOP, 3, "rpm", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
-        drawLive(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_VALUE_TOP, intText(rearGear), Layout.LIVE_LEFT_WIDTH, theme.ink);
-        drawLive(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_VALUE_TOP, intText(cadence), Layout.LIVE_RIGHT_WIDTH, theme.cadenceColor(cadence));
-        text(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_LABEL_BOTTOM, 3, "%", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
-        text(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_LABEL_BOTTOM, 3, "mph", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
-        drawLive(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_VALUE_BOTTOM, intText(grade), Layout.LIVE_LEFT_WIDTH, theme.gradeColor(grade));
-        drawLive(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_VALUE_BOTTOM, RideMath.speedMphText(speed), Layout.LIVE_RIGHT_WIDTH, theme.ink);
-        drawStats(dc); drawChartHeader(dc); drawPowerTrend(dc);
+        if (screen.summary()) { SummaryRenderer.draw(self, dc); }
+        else {
+            drawPrimary(dc);
+            color(dc, theme.rule); dc.fillRectangle(Layout.COLUMN_DIVIDER, Layout.MIDDLE_TOP, Layout.STROKE, Layout.STATS_BOTTOM-Layout.MIDDLE_TOP);
+            text(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_LABEL_TOP, 3, "gear", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
+            text(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_LABEL_TOP, 3, "rpm", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
+            drawLive(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_VALUE_TOP, intText(rearGear), Layout.LIVE_LEFT_WIDTH, theme.ink);
+            drawLive(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_VALUE_TOP, intText(cadence), Layout.LIVE_RIGHT_WIDTH, theme.cadenceColor(cadence));
+            text(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_LABEL_BOTTOM, 3, "%", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
+            text(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_LABEL_BOTTOM, 3, "mph", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
+            drawLive(dc, Layout.LIVE_LEFT_CENTER, Layout.LIVE_VALUE_BOTTOM, intText(grade), Layout.LIVE_LEFT_WIDTH, theme.gradeColor(grade));
+            drawLive(dc, Layout.LIVE_RIGHT_CENTER, Layout.LIVE_VALUE_BOTTOM, RideMath.speedMphText(speed), Layout.LIVE_RIGHT_WIDTH, theme.ink);
+            drawStats(dc);
+        }
+        drawChartHeader(dc); drawPowerTrend(dc);
         if ((BuildMode.DEMO || BuildMode.DIAGNOSTICS) && !demoDiagnostics) {
             var stats = System.getSystemStats();
             System.println((BuildMode.DEMO ? "FastRider demo memory: " : "FastRider device memory: ")+stats.usedMemory+" / "+stats.totalMemory+" bytes");
@@ -351,14 +368,17 @@ class FastRiderView extends WatchUi.DataField {
         drawZoneBadge(dc, Layout.LEFT_RIGHT, hz, hf, hc);
         drawZoneBadge(dc, Layout.RIGHT_EDGE, pz, pf, pc);
         var iy = Layout.UNIT_BASELINE-Layout.BOLT_WIDTH;
-        color(dc, theme.red);
-        dc.fillPolygon([[hx+Layout.u(8),iy+Layout.u(2)],[hx+Layout.u(6),iy],[hx+Layout.u(3),iy],[hx,iy+Layout.u(3)],[hx,iy+Layout.u(6)],[hx+Layout.u(2),iy+Layout.u(9)],[hx+Layout.u(8),iy+Layout.u(14)],[hx+Layout.u(14),iy+Layout.u(9)],[hx+Layout.u(16),iy+Layout.u(6)],[hx+Layout.u(16),iy+Layout.u(3)],[hx+Layout.u(13),iy],[hx+Layout.u(10),iy]]);
+        drawHeart(dc, hx, iy);
         drawBolt(dc, bx, iy);
         text(dc, bx+Layout.BOLT_WIDTH+Layout.INLINE_GAP, Layout.UNIT_BASELINE, 3, ui.powerSeconds+"s", theme.label, Graphics.TEXT_JUSTIFY_LEFT);
         color(dc, hc); dc.fillRectangle(Layout.LEFT_EDGE, Layout.ZONE_BAR_TOP, Layout.LEFT_WIDTH, Layout.ZONE_BAR);
         color(dc, pc); dc.fillRectangle(Layout.RIGHT_START, Layout.ZONE_BAR_TOP, Layout.RIGHT_WIDTH, Layout.ZONE_BAR);
         drawZoneMarker(dc, Layout.LEFT_EDGE, Layout.LEFT_WIDTH, RideMath.zoneFraction(hr, hrLimits, hrMinimum, hrMaximum));
         drawZoneMarker(dc, Layout.RIGHT_START, Layout.RIGHT_WIDTH, RideMath.zoneFraction(watts, powerLimits, 0, null));
+    }
+    function drawHeart(dc, x, y) {
+        color(dc, theme.red);
+        dc.fillPolygon([[x+Layout.u(8),y+Layout.u(2)],[x+Layout.u(6),y],[x+Layout.u(3),y],[x,y+Layout.u(3)],[x,y+Layout.u(6)],[x+Layout.u(2),y+Layout.u(9)],[x+Layout.u(8),y+Layout.u(14)],[x+Layout.u(14),y+Layout.u(9)],[x+Layout.u(16),y+Layout.u(6)],[x+Layout.u(16),y+Layout.u(3)],[x+Layout.u(13),y],[x+Layout.u(10),y]]);
     }
     function zoneBadgeWidth(dc, zone, mainFont) {
         var zf = mainFont == 6 ? 10 : 9; var nf = mainFont == 6 ? 4 : 8;
@@ -411,6 +431,9 @@ class FastRiderView extends WatchUi.DataField {
         return packedWidth(parts[0], parts[2])+Layout.PACKED_GAP+packedWidth("mi", 12)+(parts[1] == null ? 0 : Layout.PACKED_GAP+packedWidth(parts[1], parts[3]));
     }
     function distanceParts(dc, distance, remaining, all) as Lang.Array {
+        return distancePartsWithin(dc, distance, remaining, all, Layout.RIGHT_WIDTH, null);
+    }
+    function distancePartsWithin(dc, distance, remaining, all, available, maxTop) as Lang.Array {
         var shown = distance == null ? "--" : (distance/1609.344).format(all ? "%.1f" : "%.2f");
         var rest = all ? RideMath.remainingMilesText(remaining, 1) : null;
         var pairs = FontInk.DISTANCE_PAIRS;
@@ -418,7 +441,7 @@ class FastRiderView extends WatchUi.DataField {
         for (var pass = 0; pass < 3; pass += 1) {
             for (var i = 0; i < pairs.size(); i += 1) {
                 var pair = pairs[i]; var parts = [shown,rest,pair[0],pair[1]];
-                if (distanceRowWidth(parts) <= Layout.RIGHT_WIDTH) { return parts; }
+                if (distanceRowWidth(parts) <= available && (maxTop == null || FontInk.TOP[pair[0]] <= maxTop && FontInk.TOP[pair[1]] <= maxTop)) { return parts; }
             }
             if (pass == 0 && rest != null) { rest = RideMath.remainingMilesText(remaining, 0); }
             else if (distance != null) { shown = (distance/1609.344).format("%.0f"); }
@@ -428,27 +451,39 @@ class FastRiderView extends WatchUi.DataField {
     function drawChartHeader(dc) {
         color(dc, theme.rule); dc.fillRectangle(Layout.LEFT_EDGE, Layout.BANNER_TOP, Layout.RULE_WIDTH, Layout.STROKE);
         var climb = RideMath.ascentFeetValue(ascent);
-        text(dc, Layout.LEFT_EDGE, Layout.HEADER_BASELINE, 11, climb, theme.label, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, Layout.LEFT_EDGE+textWidth(dc, climb, 11)+Layout.STATS_GAP, Layout.HEADER_BASELINE, 12, "ft", theme.label, Graphics.TEXT_JUSTIFY_LEFT);
+        var face = screen.summary() ? 4 : 11;
+        var baseline = screen.summary() ? SummaryLayout.HEADER_BASELINE : Layout.HEADER_BASELINE;
+        text(dc, Layout.LEFT_EDGE, baseline, face, climb, theme.label, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, Layout.LEFT_EDGE+textWidth(dc, climb, face)+Layout.STATS_GAP, baseline, 12, "ft", theme.label, Graphics.TEXT_JUSTIFY_LEFT);
         drawRangeLabel(dc, ui.rangeLabel());
         var clock = System.getClockTime();
-        text(dc, Layout.RIGHT_EDGE, Layout.HEADER_BASELINE, 3, RideMath.clock12(clock.hour, clock.min), theme.label, Graphics.TEXT_JUSTIFY_RIGHT);
+        var time = RideMath.clock12(clock.hour, clock.min);
+        if (screen.summary()) {
+            var suffix = time.substring(time.length()-2, time.length());
+            var number = time.substring(0, time.length()-3);
+            text(dc, Layout.RIGHT_EDGE, baseline, 3, suffix, theme.label, Graphics.TEXT_JUSTIFY_RIGHT);
+            text(dc, Layout.RIGHT_EDGE-textWidth(dc, suffix, 3)-Layout.PACKED_GAP, baseline, 4, number, theme.label, Graphics.TEXT_JUSTIFY_RIGHT);
+        } else { text(dc, Layout.RIGHT_EDGE, baseline, 3, time, theme.label, Graphics.TEXT_JUSTIFY_RIGHT); }
     }
     function drawBolt(dc, x, y) {
         color(dc, theme.blue);
         dc.fillPolygon([[x+Layout.u(9),y],[x,y+Layout.u(8)],[x+Layout.u(5),y+Layout.u(8)],[x+Layout.u(2),y+Layout.u(14)],[x+Layout.u(14),y+Layout.u(5)],[x+Layout.u(8),y+Layout.u(5)],[x+Layout.u(12),y]]);
     }
-    function rangeWidth(dc, label) { return textWidth(dc, "< ", 3)+Layout.BOLT_WIDTH+textWidth(dc, " "+label+" >", 3); }
+    function rangeWidth(dc, label) { return textWidth(dc, screen.summary() ? "<" : "< ", 3)+Layout.BOLT_WIDTH+textWidth(dc, screen.summary() ? label+">" : " "+label+" >", 3); }
     function drawRangeLabel(dc, label) {
         var x = (Layout.WIDTH/2)-DisplayRules.pixel(rangeWidth(dc, label)/2.0);
-        var bx = x+textWidth(dc, "< ", 3);
-        text(dc, x, Layout.HEADER_BASELINE, 3, "< ", theme.label, Graphics.TEXT_JUSTIFY_LEFT);
-        text(dc, bx+Layout.BOLT_WIDTH, Layout.HEADER_BASELINE, 3, " "+label+" >", theme.label, Graphics.TEXT_JUSTIFY_LEFT);
-        drawBolt(dc, bx, Layout.HEADER_BOLT_TOP);
+        var lead = screen.summary() ? "<" : "< ";
+        var tail = screen.summary() ? label+">" : " "+label+" >";
+        var bx = x+textWidth(dc, lead, 3);
+        var baseline = screen.summary() ? SummaryLayout.HEADER_BASELINE : Layout.HEADER_BASELINE;
+        text(dc, x, baseline, 3, lead, theme.label, Graphics.TEXT_JUSTIFY_LEFT);
+        text(dc, bx+Layout.BOLT_WIDTH, baseline, 3, tail, theme.label, Graphics.TEXT_JUSTIFY_LEFT);
+        drawBolt(dc, bx, screen.summary() ? SummaryLayout.HEADER_BOLT_TOP : Layout.HEADER_BOLT_TOP);
     }
+    function plotTop() { return screen.summary() ? SummaryLayout.PLOT_TOP : Layout.PLOT_TOP; }
     function powerY(watts) {
         var lo = ftpWatts*0.55; var hi = ftpWatts*1.5;
-        return DisplayRules.pixel(RideMath.clamp(Layout.PLOT_BOTTOM-(watts-lo)*(Layout.PLOT_BOTTOM-Layout.PLOT_TOP)/(hi-lo), Layout.PLOT_TOP, Layout.PLOT_BOTTOM-Layout.u(1)));
+        return DisplayRules.pixel(RideMath.clamp(Layout.PLOT_BOTTOM-(watts-lo)*(Layout.PLOT_BOTTOM-plotTop())/(hi-lo), plotTop(), Layout.PLOT_BOTTOM-Layout.u(1)));
     }
     function chartX(t) { return DisplayRules.pixel(Layout.PLOT_RIGHT+(t-trend.endTime)*(Layout.PLOT_RIGHT-Layout.PLOT_LEFT)/trend.windowMillis(ui.range).toFloat()); }
     function drawPowerTrend(dc) {
@@ -478,9 +513,9 @@ class FastRiderView extends WatchUi.DataField {
         for (var i = 0; i < trend.boundaries.size(); i += 1) {
             var px = chartX(trend.boundaries[i]);
             if (px < Layout.PLOT_LEFT || px > Layout.PLOT_RIGHT) { continue; }
-            color(dc, theme.background); dc.fillRectangle(px-Layout.u(2), Layout.PLOT_TOP, Layout.u(4), Layout.PLOT_BOTTOM-Layout.PLOT_TOP+1);
-            color(dc, theme.ink); dc.fillRectangle(px-Layout.u(1), Layout.PLOT_TOP, Layout.STROKE, Layout.PLOT_BOTTOM-Layout.PLOT_TOP+1); dc.fillRectangle(px-Layout.u(3), Layout.PLOT_TOP, Layout.LAP_CAP_WIDTH, Layout.GUIDE_HALO_HEIGHT);
+            color(dc, theme.background); dc.fillRectangle(px-Layout.u(2), plotTop(), Layout.u(4), Layout.PLOT_BOTTOM-plotTop()+1);
+            color(dc, theme.ink); dc.fillRectangle(px-Layout.u(1), plotTop(), Layout.STROKE, Layout.PLOT_BOTTOM-plotTop()+1); dc.fillRectangle(px-Layout.u(3), plotTop(), Layout.LAP_CAP_WIDTH, Layout.GUIDE_HALO_HEIGHT);
         }
-        color(dc, theme.blue); dc.fillRectangle(Layout.PLOT_RIGHT, Layout.PLOT_TOP, Layout.STROKE, Layout.PLOT_BOTTOM-Layout.PLOT_TOP+1);
+        color(dc, theme.blue); dc.fillRectangle(Layout.PLOT_RIGHT, plotTop(), Layout.STROKE, Layout.PLOT_BOTTOM-plotTop()+1);
     }
 }

@@ -43,3 +43,11 @@ actual resulting app URL and submission status; a prepared IQ file or a saved
 draft does not mean that the app has been submitted or approved.
 
 Official entry: https://developer.garmin.com/connect-iq/submit-an-app/
+
+Version **0.4.3** adds an automatic paused/stopped ride summary and local NP.
+Prepared IQ: `../dist/connect-iq/v0.4.3/FastRider-0.4.3.iq`. This version has not
+been uploaded or submitted in this change. [Acceptance record](../docs/validation/summary/v0.4.3/README.md).
+The 0.4.1 pending status above records the earlier submission; current Store
+approval status has not been rechecked for this change.
+
+Suggested What's New: [English](whats-new-0.4.3-en.txt) · [中文](whats-new-0.4.3-zh-CN.txt).

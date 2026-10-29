@@ -13,3 +13,5 @@ This optional documentation export needs Node.js and `sharp`; use `NODE` / `NODE
 The original rider and scenery were created with built-in imagegen; their [prompts and hashes](../../store/campaign/v0.4.1/PROMPTS.json) are recorded. Actual device imagery in the campaign comes from the official SDK skin, with unmodified native UI captures and only an exterior silhouette clip. Garmin retains its device-design and trademark rights; the code license does not grant those rights.
 
 `day-night.png` compares two unmodified native Edge 840 captures inside the official simulator exterior. Rebuild it with `python3 scripts/render-theme-preview.py` after capturing both themes. This optional export also needs the installed Edge 840 SDK device package (`CIQ_DEVICE_HOME`, or the SDK Manager download location). All layout and text are SVG; the night image uses the app's actual renderer, not an inverted or recolored day screenshot.
+
+`ride-summary.png` uses unmodified native v0.4.3 stopped-view captures in both themes, with the same official Edge 840 exterior. Rebuild with `python3 scripts/render-summary-preview.py` using the same optional Node/sharp setup.

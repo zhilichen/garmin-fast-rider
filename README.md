@@ -46,32 +46,40 @@ FastRider follows the Edge data-field background. Set the device's display mode 
 
 [![FastRider on Edge 840: original day palette beside the high-contrast night palette](docs/media/day-night.png)](docs/validation/themes/v0.4.2/README.md)
 
+### Your ride, when you pause
+
+Stop the activity timer or trigger Auto Pause to see a dedicated ride summary. The smaller top row shows current and average heart rate. Total elapsed time, distance (plus remaining navigation distance when available), ride-average watts and locally calculated NP fill the center. The graph stays visible, with larger bold ascent and clock numbers. Resume the timer to return to the riding dashboard with your selected views intact. This automatic switch also works on button-only devices.
+
+NP needs 30 seconds of observed power. It includes valid zero watts and excludes paused time. A mid-ride load or missing samples shows **NP est. W**; unavailable values show dashes. It is calculated locally and can differ from Garmin's post-ride NP. Average heart rate and ride-average power use Garmin's native statistics when available. There is no Moving field.
+
+[![FastRider paused ride summary on Edge 840 in day and night modes](docs/media/ride-summary.png)](docs/validation/summary/v0.4.3/README.md)
+
 ## Download
 
 <!-- downloads:start -->
-Current version: **v0.4.2**. No SDK or Java needed to install. Choose a PRG to copy directly, or a ZIP with the same program, installation instructions and licenses.
+Current version: **v0.4.3**. No SDK or Java needed to install. Choose a PRG to copy directly, or a ZIP with the same program, installation instructions and licenses.
 
 | Device | Native resolution | Interaction | Direct PRG | ZIP |
 | --- | --- | --- | --- | --- |
-| Edge 530 | 246×322 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge530/FastRider-0.4.2-edge530.zip) |
-| Edge 540 | 246×322 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge540/FastRider-0.4.2-edge540.zip) |
-| Edge 550 | 420×600 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge550/FastRider-0.4.2-edge550.zip) |
-| Edge 830 | 246×322 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge830/FastRider-0.4.2-edge830.zip) |
-| Edge 840 | 246×322 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge840/FastRider-0.4.2-edge840.zip) |
-| Edge 850 | 420×600 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge850/FastRider-0.4.2-edge850.zip) |
-| Edge 1030 | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1030/FastRider-0.4.2-edge1030.zip) |
-| Edge 1030 Bontrager | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1030bontrager/FastRider-0.4.2-edge1030bontrager.zip) |
-| Edge 1030 Plus | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1030plus/FastRider-0.4.2-edge1030plus.zip) |
-| Edge 1040 | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1040/FastRider-0.4.2-edge1040.zip) |
-| Edge 1050 | 480×800 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1050/FastRider-0.4.2-edge1050.zip) |
-| Edge 1060 | 480×800 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/edge1060/FastRider-0.4.2-edge1060.zip) |
+| Edge 530 | 246×322 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge530/FastRider-0.4.3-edge530.zip) |
+| Edge 540 | 246×322 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge540/FastRider-0.4.3-edge540.zip) |
+| Edge 550 | 420×600 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge550/FastRider-0.4.3-edge550.zip) |
+| Edge 830 | 246×322 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge830/FastRider-0.4.3-edge830.zip) |
+| Edge 840 | 246×322 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge840/FastRider-0.4.3-edge840.zip) |
+| Edge 850 | 420×600 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge850/FastRider-0.4.3-edge850.zip) |
+| Edge 1030 | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030/FastRider-0.4.3-edge1030.zip) |
+| Edge 1030 Bontrager | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030bontrager/FastRider-0.4.3-edge1030bontrager.zip) |
+| Edge 1030 Plus | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1030plus/FastRider-0.4.3-edge1030plus.zip) |
+| Edge 1040 | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1040/FastRider-0.4.3-edge1040.zip) |
+| Edge 1050 | 480×800 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1050/FastRider-0.4.3-edge1050.zip) |
+| Edge 1060 | 480×800 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/edge1060/FastRider-0.4.3-edge1060.zip) |
 
-[All devices ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.2/FastRider-0.4.2.zip) · [SHA256 checksums](releases/v0.4.2/SHA256SUMS) · [Release manifest](releases/v0.4.2/manifest.json)
+[All devices ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.3/FastRider-0.4.3.zip) · [SHA256 checksums](releases/v0.4.3/SHA256SUMS) · [Release manifest](releases/v0.4.3/manifest.json)
 <!-- downloads:end -->
 
 Choose the file for your **exact device model**. Solar variants follow the matching Garmin device package. Every model uses a **one-field, full-screen** activity page.
 
-These direct downloads are ready to sideload. Store version **v0.4.1** is awaiting Garmin review; day/night support is included in the **v0.4.2** downloads here.
+These direct downloads are ready to sideload and include the latest changes. The [Connect IQ listing](https://apps.garmin.com/apps/ba487f91-82ad-4baa-94f0-9002f86d6a53) shows Garmin Store availability; sideload and Store versions may differ.
 
 ## Install
 
@@ -199,6 +207,8 @@ python3 scripts/test-matrix.py
 ```
 
 For UI changes, build a deterministic capture with `./scripts/build.sh snapshot edge840`, run it in the simulator and export the **native screen**. Also inspect long values, missing sensors and affected display profiles. The approved 840 baseline has 12 view combinations; intentional design changes should update it explicitly.
+
+**v0.4.3**: Dedicated paused/stopped summary, 441 native test executions across all 12 models, and unchanged Edge 840 day/night riding pixels. [Summary validation](docs/validation/summary/v0.4.3/README.md).
 
 **v0.4.2**: 381 native test executions passed across all 12 models. Day/night captures cover four display profiles and the button-only 530; all five day captures match v0.4.1 exactly, including the 840 after switching back from night. [Theme validation](docs/validation/themes/v0.4.2/README.md).
 

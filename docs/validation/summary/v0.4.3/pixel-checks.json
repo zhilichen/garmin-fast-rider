@@ -1,0 +1,182 @@
+{
+  "comparisons": [
+    {
+      "capture": "edge840-riding-day.png",
+      "reference": "../../themes/v0.4.2/edge840-day.png",
+      "different_pixels": 0,
+      "difference_bounds": null
+    },
+    {
+      "capture": "edge840-riding-night.png",
+      "reference": "../../themes/v0.4.2/edge840-night.png",
+      "different_pixels": 0,
+      "difference_bounds": null
+    },
+    {
+      "capture": "edge840-native-paused-night.png",
+      "reference": "edge840-night.png",
+      "different_pixels": 1,
+      "difference_bounds": [
+        241,
+        319,
+        242,
+        320
+      ],
+      "note": "Native pause/resume breaks sample continuity: one graph pixel and, after resume, the rolling-power position marker differ. Layout and statistics return unchanged."
+    },
+    {
+      "capture": "edge840-native-resumed-night.png",
+      "reference": "edge840-riding-night.png",
+      "different_pixels": 45,
+      "difference_bounds": [
+        185,
+        68,
+        242,
+        320
+      ],
+      "note": "Native pause/resume breaks sample continuity: one graph pixel and, after resume, the rolling-power position marker differ. Layout and statistics return unchanged."
+    },
+    {
+      "capture": "edge840-native-stopped-night.png",
+      "reference": "edge840-night.png",
+      "different_pixels": 1,
+      "difference_bounds": [
+        241,
+        319,
+        242,
+        320
+      ],
+      "note": "Native pause/resume breaks sample continuity: one graph pixel and, after resume, the rolling-power position marker differ. Layout and statistics return unchanged."
+    }
+  ],
+  "captures": [
+    {
+      "file": "edge1040-day.png",
+      "size": [
+        282,
+        470
+      ],
+      "sha256": "f0d400372ccd3ed906a74aff708c571297a86c5ce6a8a4305026d011f73e2c2e"
+    },
+    {
+      "file": "edge1040-night.png",
+      "size": [
+        282,
+        470
+      ],
+      "sha256": "6af3cc05104ceb515cb72d166b5d0f0c03b5f7ed972f02489fec9dca0ced824b"
+    },
+    {
+      "file": "edge1050-day.png",
+      "size": [
+        480,
+        800
+      ],
+      "sha256": "48cff9aa9b6446b078a04f4cfe590dbd8df81468d88afbf57ea25ea01da28cd8"
+    },
+    {
+      "file": "edge1050-night.png",
+      "size": [
+        480,
+        800
+      ],
+      "sha256": "09deede11d1bba5ebd058639b1f597fcbb32cc7bb3d3f1adf11b7ad039d0b4b3"
+    },
+    {
+      "file": "edge530-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "7f24a04b7225162b62d69cc811a6f344159e1fd7f878535ec3f20611eab0e102"
+    },
+    {
+      "file": "edge530-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "3faf9cc8d7c7ec8b6c14e5a1f491d4406259392a4ca7f54685a8dae41b7dd250"
+    },
+    {
+      "file": "edge840-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "7f24a04b7225162b62d69cc811a6f344159e1fd7f878535ec3f20611eab0e102"
+    },
+    {
+      "file": "edge840-native-paused-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "aa39cd08ba7252678ff69c16f02ecfe08951e54fe8b2b52c550d9c99e7c501b8"
+    },
+    {
+      "file": "edge840-native-resumed-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "1e08f798550c384656fcd140012b4a5c362427ab6531f065990b92f2c590eef1"
+    },
+    {
+      "file": "edge840-native-stopped-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "aa39cd08ba7252678ff69c16f02ecfe08951e54fe8b2b52c550d9c99e7c501b8"
+    },
+    {
+      "file": "edge840-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "3faf9cc8d7c7ec8b6c14e5a1f491d4406259392a4ca7f54685a8dae41b7dd250"
+    },
+    {
+      "file": "edge840-riding-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "e246dc87eb8c51108a365a60991585d7f0acb5b6f72eee6fa666a477205fc3b7"
+    },
+    {
+      "file": "edge840-riding-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "5b586f9c35c05e39e6bc1529f643629de5977184eaab0fe1a6da100e383b9408"
+    },
+    {
+      "file": "edge840-stress-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "ef9ccad7ef9b99cbcc2f77435dac81e6fd059d1ab5e7fd48ce892e6f526be78e"
+    },
+    {
+      "file": "edge850-day.png",
+      "size": [
+        420,
+        600
+      ],
+      "sha256": "eb1ffd14d20f0fc1c4be6418e69424113f8a9984c07d2d464de02649652d8ff9"
+    },
+    {
+      "file": "edge850-night.png",
+      "size": [
+        420,
+        600
+      ],
+      "sha256": "77daf9e7c44c45713c9cd32361780efe46aee883e6efd61b4bc8bda893661ae5"
+    }
+  ]
+}
