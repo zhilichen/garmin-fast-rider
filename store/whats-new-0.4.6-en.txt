@@ -1,0 +1,7 @@
+Your full ride, organized while you pause!
+- Total ride time and the current clock at the top.
+- Left column: current heart rate, average heart rate, average power and local NP.
+- Right column: distance, ascent, Garmin average cadence and average speed.
+- A compact power graph with its range selector centered above it.
+- Day/night themes and touch areas follow the new layout.
+- The riding dashboard retains its existing layout.

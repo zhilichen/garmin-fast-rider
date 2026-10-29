@@ -484,7 +484,7 @@ function responsiveGeometryTest(logger) {
 function numericEmphasisTest(logger) {
     var dc = TestPlatform.dc(16,16); var v = new FastRiderView(); v.loadFonts();
     Test.assertEqual(v.fonts.size(),FontInk.SIZES.size());
-    if (!FontInk.PACK_STATS) { Test.assertEqual(v.fonts.size(),22); return true; }
+    if (!FontInk.PACK_STATS) { Test.assertEqual(v.fonts.size(),23); return true; }
     // Enlarged faces must fit without sacrificing decimal precision or cropping.
     var values = ["64","120","22.4","100.5"];
     for (var i = 0; i < values.size(); i += 1) {

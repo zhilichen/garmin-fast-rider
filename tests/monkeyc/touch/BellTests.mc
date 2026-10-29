@@ -119,3 +119,19 @@ function bellRepeatAfterTwoSecondsTest(logger) {
     Test.assert(bell.tap(Layout.u(20), Layout.u(40), 2400));
     return true;
 }
+
+(:test)
+function summaryBellAndGraphRoutingTest(logger) {
+    var field = new FastRiderView();field.computeDemo();field.onTimerStop();
+    var input = new BellTestDelegate(field);
+    Test.assert(input.handleTapAt(Layout.u(20),SummaryLayout.ROW_VALUE_4,100));
+    Test.assert(input.handleTapAt(Layout.u(20),SummaryLayout.ROW_VALUE_4,200));
+    Test.assertEqual(input.rings,1);
+    Test.assertEqual(input.bell.bottom,SummaryLayout.BANNER_TOP);
+    Test.assert(input.handleTapAt(Layout.WIDTH/2,SummaryLayout.HEADER_BASELINE,300));
+    Test.assertEqual(field.ui.range,1);
+    field.onTimerResume();
+    Test.assert(!input.handleTapAt(Layout.u(20),Layout.STATS_BOTTOM+1,400));
+    Test.assertEqual(input.bell.bottom,Layout.STATS_BOTTOM);
+    return true;
+}

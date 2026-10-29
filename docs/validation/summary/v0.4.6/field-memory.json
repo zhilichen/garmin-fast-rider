@@ -1,0 +1,11 @@
+{
+  "note": "Actual native snapshot first-frame heap, synthetic seeded ride; not a long-ride peak or test-VM heap.",
+  "limit_bytes": 127424,
+  "devices": {
+    "edge840": 74448,
+    "edge530": 110624,
+    "edge1040": 77992,
+    "edge850": 78264,
+    "edge1050": 78184
+  }
+}

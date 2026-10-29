@@ -10,7 +10,7 @@ from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-CAPTURES = ROOT / 'docs/validation/summary/v0.4.3'
+CAPTURES = ROOT / 'docs/validation/summary/v0.4.6'
 
 
 def image(path, x, y, w, h):
@@ -33,8 +33,8 @@ def main():
         body += f'<svg x="{x+169}" y="159" width="382" height="518" viewBox="0 0 382 518"><defs><clipPath id="outline-{mode}"><path d="{outline}"/></clipPath></defs><g clip-path="url(#outline-{mode})">'
         body += image(CAPTURES / ('edge840-' + mode + '.png'), 69, 78, 246, 322)
         body += image(skin, 0, 0, 382, 518) + '</g></svg>'
-        sentence = 'Heart rate. Time. Distance. Avg W. NP.'
-        body += f'<text x="{x+360}" y="724" text-anchor="middle" fill="{color}" font-size="28">{sentence}</text>'
+        sentence = 'Heart rate. Power. Distance. Cadence. Speed.'
+        body += f'<text x="{x+360}" y="724" text-anchor="middle" fill="{color}" font-size="23">{sentence}</text>'
         body += f'<text x="{x+360}" y="772" text-anchor="middle" fill="{accent}" font-size="23">A dedicated view when the timer stops.</text>'
     body += '<text x="50" y="827" fill="#53636D" font-size="18">Edge 840 · actual native simulator captures · synthetic ride data</text></g>'
     svg = '<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="850">' + body + '</svg>'

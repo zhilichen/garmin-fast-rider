@@ -15,6 +15,11 @@ module RideMath {
         return nativePower != null && nativePower >= 0 ? nativePower : observedPower;
     }
 
+    // Ignore pre-start native leftovers; retain real zero averages once recording.
+    function recordedAverage(timer, value) {
+        return timer != null && timer > 0 && value != null && value >= 0 ? value : null;
+    }
+
     // Thresholds are upper bounds, inclusive; missing sensor != zero watts.
     function zone(value, limits as Lang.Array<Lang.Number or Lang.Float>) {
         if (value == null) { return 0; }

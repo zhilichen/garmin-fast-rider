@@ -7,11 +7,12 @@ class BellGesture {
     var pendingY = 0;
     var busyUntil = null;
     var lastClock = null;
+    var bottom = Layout.STATS_BOTTOM;
 
     function initialize() { reset(); }
     function reset() { cancelPending(); busyUntil = null; lastClock = null; }
     function cancelPending() { pendingTime = null; }
-    function contains(x, y) { return x >= 0 && x < Layout.COLUMN_DIVIDER && y >= 0 && y < Layout.STATS_BOTTOM; }
+    function contains(x, y) { return x >= 0 && x < Layout.COLUMN_DIVIDER && y >= 0 && y < bottom; }
 
     // True exactly once per accepted double tap. Other regions break the pair.
     function tap(x, y, now) {

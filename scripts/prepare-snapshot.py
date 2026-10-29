@@ -25,8 +25,9 @@ def prepare(device,case):
         anchor='        trend.update(millis, power, true);\n    }\n    function onTimerReset()'
         if s.count(anchor)!=1:raise ValueError('Summary snapshot anchor changed')
         extra='        screen.update(Activity.TIMER_STATE_STOPPED);\n'
-        if base_case=='missing':extra+='        averageHr = null; normalized.reset();\n'
+        if base_case=='missing':extra+='        averageHr = null; averageCadence = null; averageSpeed = null; normalized.reset();\n'
         if base_case=='stress':
+            s=s.replace('averageCadence = 86; averageSpeed = 8.9408;', 'averageCadence = 123; averageSpeed = 44.927;')
             s=s.replace('ascent = 682.0+t/10.0;', 'ascent = 30479.6952;').replace('RideMath.clock12(15, 47)','RideMath.clock12(0, 59)')
         s=s.replace(anchor,'        trend.update(millis, power, true);\n'+extra+'    }\n    function onTimerReset()')
     p.write_text(s)

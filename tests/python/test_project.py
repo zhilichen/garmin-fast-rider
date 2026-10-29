@@ -51,6 +51,21 @@ class DeviceProjectTests(unittest.TestCase):
             self.assertEqual(a.size,(246,322));self.assertEqual(b.size,a.size)
             self.assertIsNone(ImageChops.difference(a,b).getbbox(),p.name)
 
+    def test_summary_rows_have_clearance_and_compact_graph_header(self):
+        for folder in (ROOT/'config/display').iterdir():
+            ink=(folder/'FontInk.mc').read_text();summary=(folder/'SummaryLayout.mc').read_text();layout=(folder/'Layout.mc').read_text()
+            metric=lambda key:json.loads(re.search('const '+key+' = (.*);',ink)[1])
+            anchor=lambda key:int(re.search('const '+key+' = (.*);',summary)[1])
+            top,bottom=metric('TOP'),metric('BOTTOM');label=metric('SUMMARY_LABEL')
+            for row in range(1,5):
+                self.assertGreater(anchor('ROW_VALUE_'+str(row))-anchor('ROW_LABEL_'+str(row)),top[5]+bottom[label]+1)
+                if row<4:
+                    self.assertLess(anchor('ROW_VALUE_'+str(row))+bottom[label]+1,anchor('ROW_LABEL_'+str(row+1))-top[label])
+            self.assertLess(anchor('ROW_VALUE_4')+bottom[label]+1,anchor('BANNER_TOP'))
+            riding_banner=int(re.search('const BANNER_TOP = (.*);',layout)[1])
+            self.assertGreater(anchor('BANNER_TOP'),riding_banner)
+            self.assertLess(anchor('HEADER_BASELINE'),anchor('PLOT_TOP'))
+
     def test_emphasized_rows_have_real_ink_clearance(self):
         profiles=json.loads((ROOT/'config/devices.json').read_text())['profiles']
         for name,profile in profiles.items():
@@ -60,7 +75,7 @@ class DeviceProjectTests(unittest.TestCase):
             def metric(key):return json.loads(re.search('const '+key+' = (.*);',ink)[1])
             def anchor(key):return int(re.search('const '+key+' = (.*);',layout)[1])
             top,bottom=metric('TOP'),metric('BOTTOM')
-            self.assertEqual(len(metric('SIZES')),26)
+            self.assertEqual(len(metric('SIZES')),27)
             self.assertGreater(metric('NUMERIC_RIGHT')[16][16],metric('NUMERIC_LEFT')[16][16])
             self.assertLess(anchor('STATS_TITLE_BASELINE')+bottom[3]+1,anchor('STATS_TIME_BASELINE')-top[16],name)
             self.assertLess(anchor('STATS_TIME_BASELINE')+bottom[16]+1,anchor('STATS_AVERAGE_BASELINE')-top[18],name)

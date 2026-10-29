@@ -86,17 +86,22 @@
   "bottom_margin": 3,
   "summary": {
     "top": {
-      "HEART_BASELINE": 32,
-      "TOP_RULE": 44
+      "HEADER_LABEL": 14,
+      "HEADER_VALUE": 42,
+      "TOP_RULE": 48
     },
     "body": {
-      "ELAPSED_LABEL": 64,
-      "ELAPSED_VALUE": 95,
-      "DISTANCE_LABEL": 116,
-      "DISTANCE_VALUE": 146,
-      "POWER_VALUE": 213
+      "ROW_LABEL_1": 64,
+      "ROW_VALUE_1": 96,
+      "ROW_LABEL_2": 112,
+      "ROW_VALUE_2": 144,
+      "ROW_LABEL_3": 160,
+      "ROW_VALUE_3": 192,
+      "ROW_LABEL_4": 208,
+      "ROW_VALUE_4": 240
     },
-    "header_baseline": 26,
-    "plot_offset": 34
+    "banner_fraction": 0.7639751552795031,
+    "header_baseline": 18,
+    "plot_offset": 23
   }
 }

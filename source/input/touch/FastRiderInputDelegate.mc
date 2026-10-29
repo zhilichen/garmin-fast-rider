@@ -13,6 +13,8 @@ class FastRiderInputDelegate extends WatchUi.InputDelegate {
         if ((field has :width && field.width != Layout.WIDTH) || (field has :height && field.height != Layout.HEIGHT)) {
             bell.reset(); return false;
         }
+        var bottom = field has :bellBottom ? field.bellBottom() : Layout.STATS_BOTTOM;
+        if (bottom != bell.bottom) { bell.cancelPending(); bell.bottom = bottom; }
         var inBellRegion = bell.contains(x, y);
         var shouldRing = bell.tap(x, y, now);
         if (inBellRegion) {

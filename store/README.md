@@ -55,3 +55,5 @@ Suggested What's New: [English](whats-new-0.4.3-en.txt) · [中文](whats-new-0.
 Version **0.4.4** adds number-only zone badges and tapered fill gauges. Prepared IQ: `../dist/connect-iq/v0.4.4/FastRider-0.4.4.iq`. This candidate has not been submitted in this change. [Acceptance](../docs/validation/zones/v0.4.4/README.md) · What's New: [English](whats-new-0.4.4-en.txt) / [中文](whats-new-0.4.4-zh-CN.txt).
 
 Version **0.4.5** enlarges the four riding live metrics, with tight vertical side labels. Prepared IQ: `../dist/connect-iq/v0.4.5/FastRider-0.4.5.iq`. This candidate has not been submitted in this change. [Acceptance](../docs/validation/live-cells/v0.4.5/README.md) · What's New: [English](whats-new-0.4.5-en.txt) / [中文](whats-new-0.4.5-zh-CN.txt).
+
+Version **0.4.6** reorganizes the paused summary: time on top, eight metrics in two columns and a compact graph. Prepared IQ: `../dist/connect-iq/v0.4.6/FastRider-0.4.6.iq`. This candidate has not been submitted in this change. [Acceptance](../docs/validation/summary/v0.4.6/README.md) · What's New: [English](whats-new-0.4.6-en.txt) / [中文](whats-new-0.4.6-zh-CN.txt).

@@ -1,0 +1,206 @@
+{
+  "comparisons": [
+    {
+      "capture": "edge840-riding-day.png",
+      "reference": "../../live-cells/v0.4.5/edge840-day.png",
+      "changed_pixels": 0,
+      "difference_bounds": null
+    },
+    {
+      "capture": "edge840-riding-night.png",
+      "reference": "../../live-cells/v0.4.5/edge840-night.png",
+      "changed_pixels": 0,
+      "difference_bounds": null
+    },
+    {
+      "capture": "edge840-native-paused-night.png",
+      "reference": "edge840-night.png",
+      "changed_pixels": 1,
+      "difference_bounds": [
+        241,
+        319,
+        242,
+        320
+      ],
+      "note": "Native pause/resume breaks sample continuity; the graph and rolling-power progress gauge can differ."
+    },
+    {
+      "capture": "edge840-native-resumed-night.png",
+      "reference": "edge840-riding-night.png",
+      "changed_pixels": 10,
+      "difference_bounds": [
+        187,
+        78,
+        242,
+        320
+      ],
+      "note": "Native pause/resume breaks sample continuity; the graph and rolling-power progress gauge can differ."
+    },
+    {
+      "capture": "edge840-native-stopped-night.png",
+      "reference": "edge840-night.png",
+      "changed_pixels": 1,
+      "difference_bounds": [
+        241,
+        319,
+        242,
+        320
+      ],
+      "note": "Native pause/resume breaks sample continuity; the graph and rolling-power progress gauge can differ."
+    }
+  ],
+  "captures": [
+    {
+      "file": "edge1040-day.png",
+      "size": [
+        282,
+        470
+      ],
+      "sha256": "2b5aaf9f6bf0d117b0a5e0ec9533355cd93d37aceaaa329a931ce92aa3c2e7c1"
+    },
+    {
+      "file": "edge1040-night.png",
+      "size": [
+        282,
+        470
+      ],
+      "sha256": "46f5e7dd8a98b22797a1a87023c5f31b3f2f2d3548c8c2cb1db8393b74fe01b5"
+    },
+    {
+      "file": "edge1050-day.png",
+      "size": [
+        480,
+        800
+      ],
+      "sha256": "e07c624b6372288a87bf6984c9d43e64cdb9c66eb0a5ec1c47efcdae193f6782"
+    },
+    {
+      "file": "edge1050-night.png",
+      "size": [
+        480,
+        800
+      ],
+      "sha256": "4a63eaeab8c3641899152082a2f62c1971dc5b1b3a5b30775cf8522ebd1434c0"
+    },
+    {
+      "file": "edge530-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "bfdf558bd77f48183e9e0d45d9de368a3ca524b4d382719f95372cd48e0b1eb4"
+    },
+    {
+      "file": "edge530-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "bbce4d057c38e0d04eae63f1427b6e6f3f59f15fbb4b035fccded76410927c7a"
+    },
+    {
+      "file": "edge840-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "bfdf558bd77f48183e9e0d45d9de368a3ca524b4d382719f95372cd48e0b1eb4"
+    },
+    {
+      "file": "edge840-missing-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "e921b10865b8c872e6c4132730653cce0e8a56eb518d91d5765c14bce64605df"
+    },
+    {
+      "file": "edge840-missing-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "a81ffce16c53273dd118e369f618be3b2df9faee2c998294d9d65b7f3e66fb00"
+    },
+    {
+      "file": "edge840-native-paused-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "189c2713a34283ec178e99c6089459843623950474288e40af7342fcfdeea6e7"
+    },
+    {
+      "file": "edge840-native-resumed-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "8282aaa8c79f3f8f30665d4d6f03ec0b1683b3e1a6243a984c68a069b4d49e7c"
+    },
+    {
+      "file": "edge840-native-stopped-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "189c2713a34283ec178e99c6089459843623950474288e40af7342fcfdeea6e7"
+    },
+    {
+      "file": "edge840-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "bbce4d057c38e0d04eae63f1427b6e6f3f59f15fbb4b035fccded76410927c7a"
+    },
+    {
+      "file": "edge840-riding-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "84d8ab718754450d7294577245108b7507fada7fc4aaf372a8e92fae5633d796"
+    },
+    {
+      "file": "edge840-riding-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "e499dfd4fcd6bc369723a09099c098a762cfcbf3fc3f23cb6a41c977226ad3c5"
+    },
+    {
+      "file": "edge840-stress-day.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "b594688522caab417aebf8ae3f768079afdb400180203a9dd49cd0c6916da475"
+    },
+    {
+      "file": "edge840-stress-night.png",
+      "size": [
+        246,
+        322
+      ],
+      "sha256": "6da32590d390ebbcab58900ce90b1b8a449746d3a48fb8b7d07269a76fed8b1b"
+    },
+    {
+      "file": "edge850-day.png",
+      "size": [
+        420,
+        600
+      ],
+      "sha256": "14f68db08da572629605b73ce8ed461ad3a9688f69d7f90c2825ff3061e86439"
+    },
+    {
+      "file": "edge850-night.png",
+      "size": [
+        420,
+        600
+      ],
+      "sha256": "56a824aca3ebe6280fd6392a6753a03639eb4c2cbcb8a80dafb7bde5a26e37d5"
+    }
+  ]
+}

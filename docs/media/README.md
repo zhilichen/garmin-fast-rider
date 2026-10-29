@@ -14,7 +14,7 @@ The original rider and scenery were created with built-in imagegen; their [promp
 
 `day-night.png` compares two unmodified native Edge 840 captures inside the official simulator exterior. Rebuild it with `python3 scripts/render-theme-preview.py` after capturing both themes. This optional export also needs the installed Edge 840 SDK device package (`CIQ_DEVICE_HOME`, or the SDK Manager download location). All layout and text are SVG; the night image uses the app's actual renderer, not an inverted or recolored day screenshot.
 
-`ride-summary.png` uses unmodified native v0.4.3 stopped-view captures in both themes, with the same official Edge 840 exterior. Rebuild with `python3 scripts/render-summary-preview.py` using the same optional Node/sharp setup.
+`ride-summary.png` uses unmodified native v0.4.6 stopped-view captures in both themes, with the same official Edge 840 exterior. Rebuild with `python3 scripts/render-summary-preview.py` using the same optional Node/sharp setup.
 
 `zone-gauges.png` shows native v0.4.4 number-only badges and tapered fill gauges in both themes, in the official Edge 840 exterior. Rebuild with `python3 scripts/render-zones-preview.py`.
 

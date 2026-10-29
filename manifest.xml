@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
-  <iq:application id="c50b5e107a674e21b965df8228c5c840" type="datafield" name="@Strings.AppName" entry="FastRiderApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.2.0" version="0.4.5">
+  <iq:application id="c50b5e107a674e21b965df8228c5c840" type="datafield" name="@Strings.AppName" entry="FastRiderApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.2.0" version="0.4.6">
     <iq:products>
       <iq:product id="edge530"/>
       <iq:product id="edge540"/>

@@ -79,24 +79,55 @@ function summaryRenderBoundariesTest(logger) {
         SummaryRenderer.draw(v,dc); v.drawChartHeader(dc); v.drawPowerTrend(dc);
         v.millis = 360000000; v.meters = 300.5*1609.344; v.remainingDistance = 200.5*1609.344;
         v.ridePower = 1234; v.ascent = 30479.6952;
-        var p = v.distancePartsWithin(dc,v.meters,v.remainingDistance,true,Layout.RULE_WIDTH,
-            SummaryRenderer.room(SummaryLayout.DISTANCE_LABEL,SummaryLayout.DISTANCE_VALUE));
+        v.averageCadence = 123; v.averageSpeed = 44.927;
+        var p = v.distancePartsWithin(dc,v.meters,v.remainingDistance,true,Layout.RIGHT_WIDTH,
+            SummaryRenderer.room(SummaryLayout.ROW_LABEL_1,SummaryLayout.ROW_VALUE_1));
         Test.assertEqual(p[0],"300.5"); Test.assertEqual(p[1],"(-200.5)");
-        Test.assert(v.distanceRowWidth(p) <= Layout.RULE_WIDTH);
+        Test.assert(v.distanceRowWidth(p) <= Layout.RIGHT_WIDTH);
         SummaryRenderer.draw(v,dc); v.drawChartHeader(dc); v.drawPowerTrend(dc);
         v.hr = null; v.averageHr = null; v.meters = null; v.millis = null;
         v.remainingDistance = null; v.ridePower = null; v.normalized.reset();
+        v.averageCadence = null; v.averageSpeed = null;
         SummaryRenderer.draw(v,dc); v.drawChartHeader(dc); v.drawPowerTrend(dc);
     }
     for (var range = 0; range < 3; range += 1) {
         v.ui.range = range;
-        var half = DisplayRules.pixel(v.rangeWidth(dc,v.ui.rangeLabel())/2.0);
-        var left = Layout.LEFT_EDGE+v.textWidth(dc,"99999",4)+Layout.STATS_GAP+v.textWidth(dc,"ft",12);
-        var right = Layout.RIGHT_EDGE-v.textWidth(dc,"AM",3)-Layout.PACKED_GAP-v.textWidth(dc,"12:59",4);
-        Test.assert(left+Layout.u(2) <= Layout.WIDTH/2-half);
-        Test.assert(Layout.WIDTH/2-half+v.rangeWidth(dc,v.ui.rangeLabel())+Layout.u(2) <= right);
+        Test.assert(v.rangeWidth(dc,v.ui.rangeLabel()) < Layout.RULE_WIDTH);
     }
+    var clockRoom = Layout.RADAR_LEFT-Layout.u(2)-Layout.RIGHT_START-v.textWidth(dc,"AM",3)-Layout.STATS_GAP;
+    var cf = SummaryRenderer.face(v,dc,"12:59",FontInk.STATS_FACES,clockRoom,
+        SummaryRenderer.room(SummaryLayout.HEADER_LABEL,SummaryLayout.HEADER_VALUE));
+    Test.assert(v.packedWidth("12:59",cf) <= clockRoom);
+    var tf = SummaryRenderer.face(v,dc,"100:00:00",FontInk.STATS_FACES,Layout.LEFT_WIDTH,
+        SummaryRenderer.room(SummaryLayout.HEADER_LABEL,SummaryLayout.HEADER_VALUE));
+    Test.assert(v.packedWidth("100:00:00",tf) <= Layout.LEFT_WIDTH);
+    Test.assert(v.chartTop() > Layout.BANNER_TOP);
+    Test.assert(SummaryLayout.HEADER_BASELINE < v.plotTop());
+    Test.assert(SummaryLayout.ROW_VALUE_4+FontInk.BOTTOM[FontInk.SUMMARY_LABEL]+FontInk.NATIVE_BOTTOM_PAD < v.chartTop());
     Test.assert(v.plotTop() > Layout.PLOT_TOP && v.plotTop() < Layout.PLOT_BOTTOM);
     v.onTimerResume(); Test.assertEqual(v.plotTop(),Layout.PLOT_TOP);
+    return true;
+}
+
+(:test)
+function nativeSummaryAveragesTest(logger) {
+    Test.assert(RideMath.recordedAverage(null,80) == null);
+    Test.assert(RideMath.recordedAverage(0,80) == null);
+    Test.assert(RideMath.recordedAverage(1000,null) == null);
+    Test.assert(RideMath.recordedAverage(1000,-1) == null);
+    Test.assertEqual(RideMath.recordedAverage(1000,0),0);
+    Test.assertEqual(RideMath.recordedAverage(1000,86),86);
+    assertNear(RideMath.recordedAverage(1000,8.9408),8.9408);
+    var v = new FastRiderView();v.computeDemo();v.onTimerStop();
+    Test.assertEqual(v.averageCadence,86);
+    Test.assertEqual(RideMath.speedMphText(v.averageSpeed),"20.0");
+    var before = v.ui.range;
+    Test.assert(!v.handleTap(Layout.RIGHT_EDGE,SummaryLayout.ROW_VALUE_4));
+    Test.assertEqual(v.ui.range,before);
+    if (InputSupport.ENABLED) {
+        Test.assert(v.handleTap(Layout.WIDTH/2,SummaryLayout.HEADER_BASELINE));
+        Test.assertEqual(v.ui.range,(before+1)%3);
+    }
+    v.onTimerReset();Test.assert(v.averageCadence == null && v.averageSpeed == null);
     return true;
 }
