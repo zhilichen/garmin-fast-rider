@@ -244,6 +244,10 @@ class FastRiderView extends WatchUi.DataField {
     function intText(value) { return value == null ? "--" : Math.round(value).toNumber().format("%d"); }
     function primaryFont(dc, value) {
         var available = powerValueWidth();
+        if (value.length() > 3) {
+            if (packedWidth(value,2) <= available) { return 2; }
+            return compactPrimaryFont(value,available);
+        }
         if (numberWidth(dc,value,0,0) <= available) { return 0; }
         if (packedWidth(value,FontInk.PRIMARY_COMPACT) <= available) { return FontInk.PRIMARY_COMPACT; }
         return compactPrimaryFont(value,available);
@@ -251,6 +255,7 @@ class FastRiderView extends WatchUi.DataField {
     function compactPrimaryFont(value, available) {
         for (var i = 0; i < FontInk.LIVE_SIDE_FACES.size(); i += 1) {
             var f = FontInk.LIVE_SIDE_FACES[i];
+            if (FontInk.TOP[f] >= FontInk.TOP[0]) { continue; }
             if (packedWidth(value,f) <= available) { return f; }
         }
         return 4;
@@ -259,8 +264,8 @@ class FastRiderView extends WatchUi.DataField {
         var extra = FontInk.TOP[face]-FontInk.TOP[0];
         return Layout.PRIMARY_BASELINE+(extra > 0 ? extra : 0);
     }
-    function powerBadgeRight() { return Layout.RADAR_LEFT-Layout.u(2); }
-    function powerValueWidth() { return powerBadgeRight()-Layout.ZONE_BADGE_WIDTH-Layout.RIGHT_START-Layout.PRIMARY_ZONE_GAP; }
+    function powerBadgeRight() { return Layout.RIGHT_EDGE; }
+    function powerValueWidth() { return powerBadgeRight()-Layout.ZONE_BADGE_WIDTH-Layout.RIGHT_START-Layout.POWER_ZONE_GAP; }
     function digitIndex(ch) {
         if (ch.equals(".")) { return 10; } if (ch.equals("-")) { return 11; }
         if (ch.equals("(")) { return 12; } if (ch.equals(")")) { return 13; }
@@ -386,7 +391,7 @@ class FastRiderView extends WatchUi.DataField {
     }
     function drawPrimary(dc) {
         color(dc, theme.rule); dc.fillRectangle(Layout.COLUMN_DIVIDER, Layout.TOP_RULE_Y, Layout.STROKE, Layout.TOP_RULE_HEIGHT);
-        // Keep x=218..245 / y=0..33 clear for the native radar overlay.
+        // Use the full power panel; its Zone badge aligns with the right content edge.
         var watts = rolling.average(ui.powerSeconds);
         var hz = RideMath.zone(hr, hrLimits); var pz = RideMath.zone(watts, powerLimits);
         var hc = theme.zoneColor(hz); var pc = theme.powerColor(pz);

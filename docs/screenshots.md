@@ -1,3 +1,5 @@
+v0.4.9功率框右对齐，三/四位数字自适应。[最新原生图与验收](validation/power/v0.4.9/README.md)。
+
 v0.4.8停止页精简标签、放大数字与加宽右栏。[最新图与验收](validation/summary/v0.4.8/README.md)。
 
 v0.4.7骑行页更新Zone框、同排计时与更大距离。[最新原生图与验收](validation/riding/v0.4.7/README.md)。

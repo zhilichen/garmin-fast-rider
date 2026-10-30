@@ -13,6 +13,7 @@ def prepare(device,case,destination=None):
         if s.count(a)!=1:raise ValueError('Snapshot anchor changed: '+a)
         s=s.replace(a,b)
     base_case=case.removeprefix('stopped-') if case.startswith('stopped-') else case
+    if case == 'power-four-capacity':base_case='capacity'
     if base_case=='stress':
         s=s.replace('hr = 158; cadence = 64; rearGear = 5; speed = 10.0138;','hr = 199; cadence = 120; rearGear = 11; speed = 44.927;')
         s=s.replace('meters = demoMeters(millis/1000.0);','meters = 300.5*1609.344;').replace('remainingDistance = 19955.8656;','remainingDistance = 200.5*1609.344;').replace('ridePower = 212;','ridePower = 1234;')
@@ -21,6 +22,11 @@ def prepare(device,case,destination=None):
         s=s.replace('hr = 158; cadence = 64; rearGear = 5; speed = 10.0138;','hr = null; cadence = null; rearGear = null; speed = null;')
         s=s.replace('grade = 6.4;','grade = null;').replace('remainingDistance = 19955.8656;','remainingDistance = null;')
         s=s.replace('rolling.update(timerMillis, power, true);','rolling.reset(); power = null;')
+    if case in ('power-three','power-four','power-four-wide','power-four-capacity'):
+        watts={'power-three':888,'power-four':1234,'power-four-wide':4444,'power-four-capacity':4444}[case]
+        anchor='rolling.update(timerMillis, power, true);'
+        if s.count(anchor)!=1:raise ValueError('Power snapshot anchor changed')
+        s=s.replace(anchor,f'power = {watts}; rolling.reset(); rolling.update(timerMillis, power, true);')
     if case in ('lap', 'lap-hours', 'hours-stress', 'ten-second'):
         anchor='        trend.update(millis, power, true);\n    }\n    function onTimerReset()'
         extra=''
@@ -68,4 +74,4 @@ def prepare(device,case,destination=None):
     return target/'snapshot.jungle'
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('device');p.add_argument('--case',choices=['default','stress','missing','stopped','stopped-stress','stopped-missing','lap','lap-hours','hours-stress','ten-second','capacity','stopped-capacity'],default='default');a=p.parse_args();print(prepare(a.device,a.case))
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('device');p.add_argument('--case',choices=['default','stress','missing','stopped','stopped-stress','stopped-missing','lap','lap-hours','hours-stress','ten-second','capacity','stopped-capacity','power-three','power-four','power-four-wide','power-four-capacity'],default='default');a=p.parse_args();print(prepare(a.device,a.case))

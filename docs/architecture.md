@@ -84,3 +84,6 @@ v0.4.7骑行页使用共享RideStatistics绘制同排All/Lap与时间；只对H:
 
 
 v0.4.8停止页中列线与列宽独立于骑行Layout，设计来自summary.x。标签包含单位，数字行省略重复单位；SUMMARY_VALUE_FACES与SUMMARY_DISTANCE_PAIRS复用既有字库，新增候选列表而不新增位图。距离拟合通过showUnit选择是否计入mi宽度，文本精度与回退机制共用，骑行页显式保留行内单位。
+
+
+v0.4.9功率框使用RIGHT_EDGE。POWER_ZONE_GAP独立于心率的PRIMARY_ZONE_GAP；99px参考数字区容纳任意三位Primary58及任意四位Average54墨迹。四位和更长值先进入较小字形候选，更长回退跳过不比三位字形矮的候选。停止页不调用此功率字号逻辑。

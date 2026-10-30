@@ -50,7 +50,8 @@
     "ZONE_WEDGE_THIN": 4,
     "LIVE_SIDE_GAP": 1,
     "LIVE_LETTER_GAP": 0,
-    "PRIMARY_ZONE_GAP": 3
+    "PRIMARY_ZONE_GAP": 3,
+    "POWER_ZONE_GAP": 1
   },
   "top": {
     "PRIMARY_BASELINE": 43,

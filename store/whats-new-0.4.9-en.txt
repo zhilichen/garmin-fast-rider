@@ -1,0 +1,3 @@
+- Power Zone badge now aligns with the right edge.
+- Three-digit power keeps its large font.
+- Four-digit power uses a slightly smaller bold font, with complete digits and a clear gap before the Zone badge.

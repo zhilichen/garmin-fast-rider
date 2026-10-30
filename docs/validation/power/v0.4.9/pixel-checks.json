@@ -1,0 +1,70 @@
+[
+  {
+    "check": "stopped unchanged",
+    "theme": "day",
+    "different_pixels": 0,
+    "before": "docs/validation/summary/v0.4.8/edge840-day.png",
+    "after": "docs/validation/power/v0.4.9/edge840-stopped-day.png",
+    "crop": null
+  },
+  {
+    "check": "heart rate unchanged",
+    "theme": "day",
+    "different_pixels": 0,
+    "before": "docs/validation/summary/v0.4.8/edge840-riding-day.png",
+    "after": "docs/validation/power/v0.4.9/edge840-day.png",
+    "crop": [
+      0,
+      0,
+      114,
+      77
+    ]
+  },
+  {
+    "check": "middle and graph unchanged",
+    "theme": "day",
+    "different_pixels": 0,
+    "before": "docs/validation/summary/v0.4.8/edge840-riding-day.png",
+    "after": "docs/validation/power/v0.4.9/edge840-day.png",
+    "crop": [
+      0,
+      77,
+      246,
+      322
+    ]
+  },
+  {
+    "check": "stopped unchanged",
+    "theme": "night",
+    "different_pixels": 0,
+    "before": "docs/validation/summary/v0.4.8/edge840-night.png",
+    "after": "docs/validation/power/v0.4.9/edge840-stopped-night.png",
+    "crop": null
+  },
+  {
+    "check": "heart rate unchanged",
+    "theme": "night",
+    "different_pixels": 0,
+    "before": "docs/validation/summary/v0.4.8/edge840-riding-night.png",
+    "after": "docs/validation/power/v0.4.9/edge840-night.png",
+    "crop": [
+      0,
+      0,
+      114,
+      77
+    ]
+  },
+  {
+    "check": "middle and graph unchanged",
+    "theme": "night",
+    "different_pixels": 0,
+    "before": "docs/validation/summary/v0.4.8/edge840-riding-night.png",
+    "after": "docs/validation/power/v0.4.9/edge840-night.png",
+    "crop": [
+      0,
+      77,
+      246,
+      322
+    ]
+  }
+]

@@ -61,3 +61,5 @@ Version **0.4.6** reorganizes the paused summary: time on top, eight metrics in 
 Version **0.4.7** raises/enlarges Zone badges and gauges, puts All/Lap beside time with smaller hour-format seconds, and enlarges distance. Font and history caches are bounded for legacy runtimes. Prepared IQ: `../dist/connect-iq/v0.4.7/FastRider-0.4.7.iq`. Not submitted by this change. [Acceptance](../docs/validation/riding/v0.4.7/README.md) · What's New: [English](whats-new-0.4.7-en.txt) / [中文](whats-new-0.4.7-zh-CN.txt).
 
 Version **0.4.8** simplifies the paused summary, enlarges numeric values and widens its right column. Prepared IQ: `../dist/connect-iq/v0.4.8/FastRider-0.4.8.iq`. Not submitted in this change. [Acceptance](../docs/validation/summary/v0.4.8/README.md) · What's New: [English](whats-new-0.4.8-en.txt) / [中文](whats-new-0.4.8-zh-CN.txt).
+
+Version **0.4.9** right-aligns the power Zone badge and fits full-size three-digit / smaller four-digit power. Prepared IQ: `../dist/connect-iq/v0.4.9/FastRider-0.4.9.iq`. Not submitted in this change. [Acceptance](../docs/validation/power/v0.4.9/README.md).

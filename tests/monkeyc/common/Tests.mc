@@ -295,10 +295,11 @@ function edge840ReferenceMetricsTest(logger) {
     // A tiny Dc is sufficient to verify font metrics without a full-screen buffer.
     var dc = TestPlatform.dc(16,16);
     var v = new FastRiderView(); v.loadFonts();
-    // Ordinary 3-digit and fallback 4-digit power stay left of the radar overlay.
+    // Visible power ink fits in its own lane left of the right-aligned badge.
     Test.assertEqual(dc.getTextWidthInPixels("303", v.font(0)), 87);
-    Test.assert(Layout.RIGHT_START+dc.getTextWidthInPixels("999", v.font(v.primaryFont(dc, "999"))) <= Layout.RADAR_LEFT);
-    Test.assert(Layout.RIGHT_START+dc.getTextWidthInPixels("1234", v.font(v.primaryFont(dc, "1234"))) <= Layout.RADAR_LEFT);
+    Test.assertEqual(v.primaryFont(dc,"999"),0);
+    Test.assert(v.numberWidth(dc,"999",0,0) <= v.powerValueWidth());
+    Test.assert(v.packedWidth("1234",v.primaryFont(dc,"1234")) <= v.powerValueWidth());
     Test.assert(v.packedWidth("120", 1) <= Layout.LIVE_RIGHT_WIDTH);
     Test.assertEqual(v.liveFont("120", Layout.LIVE_RIGHT_WIDTH), 1);
     Test.assertEqual(v.liveFont("22.4", Layout.LIVE_RIGHT_WIDTH), 1);
@@ -312,7 +313,7 @@ function edge840ReferenceMetricsTest(logger) {
     Test.assertEqual(Toybox.Graphics.getFontAscent(v.font(8)), 44);
     Test.assertEqual(v.zoneBadgeWidth(dc, 6, 0), Layout.ZONE_BADGE_WIDTH);
     Test.assertEqual(v.zoneBadgeWidth(dc, 7, 6), Layout.ZONE_SMALL_BADGE_WIDTH);
-    // Raised number-only badges reserve a lane left of the radar area.
+    // The power badge uses the panel right edge.
     Test.assertEqual(v.heartFont(dc, "199"), 0);
     Test.assertEqual(v.fontSizes[v.heartFont(dc, "199")], 58);
     Test.assertEqual(v.fontSizes[1], 38);
@@ -323,7 +324,7 @@ function edge840ReferenceMetricsTest(logger) {
     Test.assert(Layout.ZONE_BADGE_BOTTOM < Layout.ZONE_WEDGE_TOP);
     Test.assert(Layout.PRIMARY_BASELINE-FontInk.TOP[0] >= 1);
     Test.assert(Layout.PRIMARY_BASELINE-FontInk.TOP[0] <= 2);
-    Test.assert(v.powerBadgeRight() <= Layout.RADAR_LEFT-Layout.u(2));
+    Test.assertEqual(v.powerBadgeRight(),Layout.RIGHT_EDGE);
     Test.assert(Layout.ZONE_BADGE_BOTTOM < Layout.ZONE_WEDGE_TOP);
     // AA backdrop clips use ink bounds: adjacent rows must remain disjoint.
     var timeFonts = [5, 7, 4];
@@ -467,14 +468,15 @@ function responsiveGeometryTest(logger) {
     var samples = ["999","1234"];
     for (var i = 0; i < samples.size(); i += 1) {
         var f = v.primaryFont(dc,samples[i]);
-        Test.assert(Layout.RIGHT_START+v.numberWidth(dc,samples[i],f,0) < Layout.RADAR_LEFT);
+        var w = f == 0 ? v.numberWidth(dc,samples[i],f,0) : v.packedWidth(samples[i],f);
+        Test.assert(Layout.RIGHT_START+w+Layout.POWER_ZONE_GAP <= v.powerBadgeRight()-Layout.ZONE_BADGE_WIDTH);
     }
     var values = ["120","22.4","100.5"];
     for (var i = 0; i < values.size(); i += 1) {
         var face = v.liveFont(values[i],Layout.LIVE_RIGHT_WIDTH);
         Test.assert(v.packedWidth(values[i],face) <= Layout.LIVE_RIGHT_WIDTH);
     }
-    Test.assert(v.powerBadgeRight() <= Layout.RADAR_LEFT-Layout.u(2));
+    Test.assertEqual(v.powerBadgeRight(),Layout.RIGHT_EDGE);
     Test.assert(Layout.ZONE_BADGE_BOTTOM < Layout.ZONE_WEDGE_TOP);
     Test.assert(Layout.LIVE_LABEL_BOTTOM+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD < Layout.LIVE_VALUE_BOTTOM-FontInk.TOP[1]);
     Test.assert(Layout.STATS_TIME_BASELINE+FontInk.BOTTOM[5]+FontInk.NATIVE_BOTTOM_PAD < Layout.STATS_AVERAGE_BASELINE-FontInk.TOP[2]);

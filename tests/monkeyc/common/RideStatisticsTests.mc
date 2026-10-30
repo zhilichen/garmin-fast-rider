@@ -27,11 +27,14 @@ function inlineRideTimeTest(logger) {
 (:test)
 function raisedZoneAndDistanceTest(logger) {
     var dc = TestPlatform.dc(16,16);var v = new FastRiderView();v.loadFonts();
-    var powers = ["77","303","999","1234","9999","65535"];
+    var powers = ["77","100","303","444","888","999","1000","1234","4444","8888","9999","65535"];
     for (var i = 0; i < powers.size(); i += 1) {
         var f = v.primaryFont(dc,powers[i]);
         var w = f == 0 ? v.numberWidth(dc,powers[i],f,0) : v.packedWidth(powers[i],f);
         Test.assert(w <= v.powerValueWidth());
+        Test.assert(Layout.RIGHT_START+w+Layout.POWER_ZONE_GAP <= v.powerBadgeRight()-Layout.ZONE_BADGE_WIDTH);
+        if (powers[i].length() == 3) { Test.assertEqual(f,0); }
+        if (powers[i].length() == 4) { Test.assert(FontInk.TOP[f] < FontInk.TOP[0]); }
         Test.assert(v.primaryBaseline(f)-FontInk.TOP[f] >= 0);
     }
     var hearts = ["158","188","199","240"];

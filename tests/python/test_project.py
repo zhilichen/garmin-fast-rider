@@ -61,6 +61,24 @@ class DeviceProjectTests(unittest.TestCase):
             for main,rest in [('300.5','(-200.5)'),('888.8','(-999.9)')]:
                 self.assertLessEqual(width(main,4)+gap+width('mi',12)+gap+width(rest,15),available,folder.name)
 
+    def test_power_digit_capacity_and_right_aligned_badge(self):
+        # Bound all four-digit combinations from real glyph ink, including 4444.
+        for folder in (ROOT/'config/display').iterdir():
+            ink=(folder/'FontInk.mc').read_text();layout=(folder/'Layout.mc').read_text()
+            metric=lambda n:json.loads(re.search('const '+n+' = (.*);',ink)[1])
+            anchor=lambda n:int(re.search('const '+n+' = (.*);',layout)[1])
+            available=anchor('RIGHT_EDGE')-anchor('ZONE_BADGE_WIDTH')-anchor('RIGHT_START')-anchor('POWER_ZONE_GAP')
+            lo,hi=metric('NUMERIC_LEFT')[2],metric('NUMERIC_RIGHT')[2]
+            widest=4*max(hi[i]-lo[i] for i in range(10))+3*anchor('PACKED_GAP')
+            self.assertLessEqual(widest,available,folder.name)
+            fnt=(ROOT/'resources/fonts'/folder.name/'Primary58.fnt').read_text()
+            advances=[int(v) for code,v in re.findall(r'char id=(\d+).*?xadvance=(-?\d+)',fnt) if 48 <= int(code) <= 57]
+            left0,right0=metric('NUMERIC_LEFT')[0],metric('NUMERIC_RIGHT')[0]
+            triple_bound=2*max(advances)+max(right0[:10])-min(left0[:10])
+            self.assertLessEqual(triple_bound,available,folder.name)
+            self.assertLess(metric('TOP')[2],metric('TOP')[0],folder.name)
+            self.assertGreaterEqual(anchor('POWER_ZONE_GAP'),1)
+
     def test_recorded_840_native_regression(self):
         before=ROOT/'tests/fixtures/edge840-v0315';after=ROOT/'docs/validation/edge840'
         captures=list(before.glob('*.png'));self.assertEqual(len(captures),12)
