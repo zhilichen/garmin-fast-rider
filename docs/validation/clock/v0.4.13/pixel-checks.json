@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "day",
+    "region": "elapsed header",
+    "different_pixels": 0
+  },
+  {
+    "theme": "day",
+    "region": "summary body and graph",
+    "different_pixels": 0
+  },
+  {
+    "theme": "day",
+    "region": "full riding view",
+    "different_pixels": 0
+  },
+  {
+    "theme": "night",
+    "region": "elapsed header",
+    "different_pixels": 0
+  },
+  {
+    "theme": "night",
+    "region": "summary body and graph",
+    "different_pixels": 0
+  },
+  {
+    "theme": "night",
+    "region": "full riding view",
+    "different_pixels": 0
+  }
+]

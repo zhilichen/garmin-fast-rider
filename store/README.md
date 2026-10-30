@@ -4,7 +4,7 @@ The Store listing is **Fast Rider**, a free, public cycling Data Field for the
 12 Edge models in `config/devices.json`. Source and support use the public
 GitHub repository. No paid account, subscription or payment integration is used.
 
-Latest complete upload kit: [campaign/v0.4.1](campaign/v0.4.1/README.md), with exact-size images, per-field copy and a local HTML preview.
+Latest complete upload kit: [campaign/v0.4.13](campaign/v0.4.13/README.md), with exact-size images, per-field copy and a local HTML preview.
 
 Prepared material:
 
@@ -69,3 +69,5 @@ Version **0.4.10** stacks mi above remaining miles beside the large riding dista
 Version **0.4.11** enlarges riding metrics and distance, removes paused header labels, and gives the paused statistics more room. Prepared IQ: `../dist/connect-iq/v0.4.11/FastRider-0.4.11.iq`. Not submitted. [Acceptance](../docs/validation/readability/v0.4.11/README.md).
 
 Version **0.4.12** uses short paused-screen metric names and small units beside each value. Prepared IQ: `../dist/connect-iq/v0.4.12/FastRider-0.4.12.iq`. Not submitted. [Acceptance](../docs/validation/summary/v0.4.12/README.md).
+
+Version **0.4.13** aligns the paused clock at the top-right edge and refreshes all campaign screenshots/copy, adding paused-summary and day/night feature cards. Prepared IQ: `../dist/connect-iq/v0.4.13/FastRider-0.4.13.iq`. Not submitted. [Acceptance](../docs/validation/clock/v0.4.13/README.md).

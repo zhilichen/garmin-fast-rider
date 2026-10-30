@@ -1,0 +1,32 @@
+[
+  {
+    "file": "edge840-controls.png",
+    "sha256": "f2d1615c8f280f496706876c30bf3c405a4d04d1f7ecae0fa37ec15fc8a777e0",
+    "kind": "native simulator capture with synthetic fixture data"
+  },
+  {
+    "file": "edge840-default.png",
+    "sha256": "323a3eb5be3653be953a4e6a1cf4b6dc572ee331929deb56421b785489cb75bd",
+    "kind": "native simulator capture with synthetic fixture data"
+  },
+  {
+    "file": "edge840-night.png",
+    "sha256": "04cdc51ecc6aeb2f2d4052f8f7f8b2968c160cb04183c08547f2ca822eea016f",
+    "kind": "native simulator capture with synthetic fixture data"
+  },
+  {
+    "file": "edge840-paused.png",
+    "sha256": "e051657bb4a3392fd9bb9d3fd3b87593512eed5e11ca75890fc7198868caf28d",
+    "kind": "native simulator capture with synthetic fixture data"
+  },
+  {
+    "file": "edge840-threshold.png",
+    "sha256": "33261904f9f7d631d12e6306b3fb6e07798c053a5260db66014cb0bd4c2a0d9a",
+    "kind": "native simulator capture with synthetic fixture data"
+  },
+  {
+    "file": "edge840-z2.png",
+    "sha256": "9a0de9f5bb7ce7f76c0f6a93bdb3e50e4b125416f47c7574b826085c4ff5e8bf",
+    "kind": "native simulator capture with synthetic fixture data"
+  }
+]

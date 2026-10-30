@@ -1,0 +1,100 @@
+[
+  {
+    "file": "01-hero-en.png",
+    "width": 1440,
+    "height": 720,
+    "bytes": 1095979,
+    "sha256": "ad72df4d62b13acb076cf3e2b1f503a3ad8435a50841cba34574d672422c6bd3",
+    "size_limit_bytes": 2048000
+  },
+  {
+    "file": "04-screen-01-one-screen.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 135862,
+    "sha256": "b8b42d2b63641ef459226ee059c3a4682d75423516744de15f3c2b394db296cb",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-02-touch-bell.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 140753,
+    "sha256": "674ebfa590448049924bc1b79fc35b183ea5f11e6a39842cb6b6833d00fa55cd",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-03-z2-training.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 136364,
+    "sha256": "0f0e52d48ef1da9bf35d2186fbf99a93806ff4e16da5296086f9bc1ae19d175c",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-04-threshold-intervals.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 141507,
+    "sha256": "a51db2c8a7e9b91aecc56432c67d01044b1b06daee9dae411556cc282a09e8c8",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-05-color-coded.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 138977,
+    "sha256": "faa98425f9a2d57df7636a07deb13fc2891009cd29249f4c2946553f3b69810f",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-06-tap-controls.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 135022,
+    "sha256": "24026e154f3682b65981da0967aa8bd19902b4d5872f170d146fb1ca9e9533c6",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-07-paused-summary.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 137549,
+    "sha256": "7f09d6b6633348025ba1cf7f98b88e1f36fcd326e332e5395d7984315e119ef9",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "04-screen-08-day-night.jpg",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 147072,
+    "sha256": "eee1f7bdbb99750425ecaf349abcfce08681dafcefe789c20675db698c7ee3ff",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "02-cover-500.png",
+    "width": 500,
+    "height": 500,
+    "bytes": 299584,
+    "sha256": "6408e2a50faf201d172a174c0111f9854cb9049dce78808032171c40ffc8d089",
+    "size_limit_bytes": 300000
+  },
+  {
+    "file": "03-device-icon-24-bit.png",
+    "width": 128,
+    "height": 128,
+    "bytes": 26793,
+    "colors": "24-bit sRGB",
+    "sha256": "e37aa95ff0eee0de8538fe10bc6aa527c7ad572a6541d0e9ef53886b4891ce18",
+    "size_limit_bytes": 150000
+  },
+  {
+    "file": "03-device-icon-64-color.png",
+    "width": 128,
+    "height": 128,
+    "bytes": 3098,
+    "colors": "Garmin RGB cube, at most 64",
+    "sha256": "36fe07ec74461bc096a481691bb87065a7adaf4b101324aa9908f5c1139b196c",
+    "size_limit_bytes": 150000
+  }
+]

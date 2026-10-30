@@ -10,7 +10,7 @@ from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-CAPTURES = ROOT / 'docs/validation/summary/v0.4.12'
+CAPTURES = ROOT / 'docs/validation/clock/v0.4.13'
 
 
 def image(path, x, y, w, h):
@@ -37,7 +37,7 @@ def main():
         body += image(skin, 0, 0, 382, 518) + '</g></svg>'
         body += f'<text x="{x+360}" y="741" text-anchor="middle" font-size="24">{line1}</text>'
         body += f'<text x="{x+360}" y="785" text-anchor="middle" fill="#004CFF" font-size="24">{line2}</text>'
-    body += '<text x="50" y="858" fill="#53636D" font-size="18">Edge 840 · native simulator captures · synthetic ride data · v0.4.12</text></g>'
+    body += '<text x="50" y="858" fill="#53636D" font-size="18">Edge 840 · native simulator captures · synthetic ride data · v0.4.13</text></g>'
     svg = '<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="890">' + body + '</svg>'
     temp = ROOT / '.local/readme/readability.svg'
     temp.parent.mkdir(parents=True, exist_ok=True)

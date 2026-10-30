@@ -1,0 +1,32 @@
+Power, heart rate, lap stats and your ride essentials — on one screen!
+
+Fast Rider turns your Garmin Edge into a clear, colorful cycling dashboard. Big numbers, useful power guides and a friendly touch bell keep the essentials close. Ride with live metrics; pause for a whole-ride summary.
+
+YOUR EFFORT, COLOR CODED
+Power and heart rate show numbered zone badges and tapered progress bars. The solid part shows your position inside the current zone. Power uses the same colors in the live reading and graph: blue for Z2, orange for Z4, purple for Z5, red for Z6/Z7, and gray for Z1/Z3. Heart-rate zones are independent. Cadence and gradient have their own color alerts.
+
+POWER GRAPH: Z2 + THRESHOLD
+Stay blue near the Z2 ceiling. For threshold efforts, including 3 × 20 minutes, hold orange through Z4. See the Z2 ceiling guide, FTP guide and native lap boundaries. Touch-enabled models can switch between the last 5 minutes, 20 minutes and the whole ride. The graph helps you see effort changes; it does not run or prescribe a workout.
+
+DOUBLE-TAP. DING!
+No built-in bike-bell feature? On touch models, double-tap the left side for a two-second, three-strike electronic bell effect. It uses supported Edge tones, without a companion app or separate bell feature. Sound depends on your device; this is not Garmin's native bike-bell function.
+
+RIDE + PAUSE VIEWS
+While riding: heart rate, 3s/10s power, rear gear, cadence, estimated gradient, speed, All/current-lap time, average power and distance, plus ascent, clock and power history.
+When paused or stopped: elapsed time and a top-right clock; current and average heart rate, average power, locally estimated NP, total distance, ascent, average cadence and average speed. Short labels and small units keep the summary easy to scan. Remaining distance appears when Garmin supplies valid navigation-to-destination data.
+
+DAY + NIGHT
+Follows your Edge data-field background, including Garmin's automatic day/night setting. Both ride and paused views use matching high-contrast themes; power and heart-rate zone meanings stay the same.
+
+TOUCH CONTROLS
+Tap power: 3s / 10s. Tap statistics: All / current lap. Tap the graph: 5m / 20m / All. Native lap boundaries select the latest lap. Button-only Edge 530, 540 and 550 use 3s / All / 5m and the automatic paused summary, without touch controls or the electronic bell.
+
+SETUP + DATA
+Choose Fast Rider in a one-field, full-screen cycling page. Units: mi, mph, ft, bpm, w and rpm. Compatible sensors are required for power, heart rate, cadence and electronic rear gear; missing readings show dashes. Cycling profile FTP and heart-rate zones are used when available, with app-setting fallbacks.
+
+Gradient uses altitude and distance. History and NP start when the field runs; earlier samples and future course elevation are unavailable. NP and lap average power are locally estimated and can differ from Garmin statistics. Screenshots show synthetic examples.
+
+Free and open source. No ads, external account or developer data collection. Independent project; not affiliated with Garmin.
+
+Source & support: https://github.com/zhilichen/garmin-fast-rider
+Privacy: https://github.com/zhilichen/garmin-fast-rider/blob/main/PRIVACY.md

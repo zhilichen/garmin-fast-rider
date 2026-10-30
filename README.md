@@ -2,7 +2,7 @@
 
 **English** · [简体中文](README.zh-CN.md)
 
-[![FastRider: a road cyclist in cycling sunglasses beside an Edge 840, showing power, heart rate, lap statistics and a power graph](store/campaign/v0.4.1/upload/01-hero-en.png)](#download)
+[![FastRider: a road cyclist in cycling sunglasses beside an Edge 840, showing power, heart rate, lap statistics and a power graph](store/campaign/v0.4.13/upload/01-hero-en.png)](#download)
 
 **Power, heart rate, lap stats and your ride essentials — on one screen.**
 
@@ -12,98 +12,80 @@ A free, open-source Connect IQ data field for **12 Garmin Edge models**. Built f
 
 ## For riders
 
-- **See the essentials together.** Large heart rate and power, rear gear, cadence, grade, speed, lap/ride statistics and total ascent.
-- **Recognize your effort.** Numbered zone badges and tapered progress gauges for heart rate and power; matching colors in the power graph.
-- **Review an interval at a glance.** Z2 and FTP guide lines, native lap markers, and 5-minute, 20-minute or whole-ride history.
-- **Ride through day and night.** Follows your Edge's display mode, with a bright-on-black night palette and matching zone colors.
-- **Tap for a bell.** A two-second, three-strike electronic bell effect on supported touch models, even without a native bike-bell feature.
+- **Your key numbers, together.** Big heart rate and power, rear gear, cadence, grade, speed and All/current-lap statistics.
+- **Your effort, color coded.** Numbered zone badges, tapered progress bars and matching power-graph colors.
+- **A touch bell.** Double-tap the left side for a two-second, three-strike electronic bell effect on supported touch models.
+- **Two views, automatically.** Live metrics while riding; a whole-ride summary when paused or stopped.
+- **Ready for day and night.** Follows the Edge data-field background, with bright colors on black at night.
 
 <table>
 <tr>
-<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-01-one-screen.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-01-one-screen.jpg" width="440" alt="Edge 840 dashboard: heart rate, power, gear, cadence, speed, grade and All/current-lap statistics"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-02-touch-bell.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-02-touch-bell.jpg" width="440" alt="Double-tap the left side for a two-second electronic bell effect on touch-enabled Edge models"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-01-one-screen.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-01-one-screen.jpg" width="440" alt="Latest Edge 840 live dashboard"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.jpg" width="440" alt="Two taps trigger the two-second electronic bell"></a></td>
 </tr>
 </table>
 
-### A graph built around your effort
+### Power graph: Z2 + threshold
 
-**Z2 stays blue; threshold stays orange.** In the power graph, Z2 spans above 55% through 75% of FTP, and Z4 spans above 90% through 105%. A change in color makes a change in effort easier to spot. The guide lines and native lap markers help you review steady endurance work or a session such as 3 × 20 minutes.
+**Z2 stays blue; threshold stays orange.** Z2 spans above 55% through 75% FTP, and Z4 spans above 90% through 105%. See the Z2 ceiling, FTP guide and native lap boundaries across 5m, 20m or All. The graph supports reviewing steady endurance work and sessions such as 3 × 20 minutes; it does not run or prescribe a workout.
 
 <table>
 <tr>
-<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-03-z2-training.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-03-z2-training.jpg" width="440" alt="Blue Z2 example at 180 W with FTP 250 W, including the Z2 ceiling guide"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-04-threshold-intervals.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-04-threshold-intervals.jpg" width="440" alt="Orange threshold example at 245 W with FTP 250 W, showing three work intervals and recovery periods"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-03-z2-training.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-03-z2-training.jpg" width="440" alt="180 W Z2 example at FTP 250 W"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-04-threshold-intervals.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-04-threshold-intervals.jpg" width="440" alt="245 W threshold example with three work intervals"></a></td>
 </tr>
 </table>
-
-Power colors: **gray Z1/Z3 · blue Z2 · orange Z4 · purple Z5 · red Z6/Z7**. Heart-rate zones are independent; cadence and grade use their own alerts. These are visual training guides, not a workout controller.
-
-*Illustrations show an Edge 840 with actual simulator-rendered UI and synthetic ride data. Open an image for the full-size version.*
-
-### Bigger live data, tighter labels
-
-Gear, cadence, grade and speed use taller bold numerals in the left-side 2×2 grid. GEAR, RPM and MPH stack beside their values; the percent sign is larger than those labels. Speed keeps one decimal, grade stays rounded, and long readings select a narrower face to stay in their own cell. The Zone gauges sit higher to give these readings more room.
-
-[![FastRider large live metrics with tight vertical labels, on an Edge 840 in day and night modes](docs/media/live-cells.png)](docs/validation/live-cells/v0.4.5/README.md)
-
-### More room for your ride statistics
-
-Larger Zone badges sit beside the live numbers, above raised progress gauges. **All / Lap and time share a row**, with seconds reduced to about two-thirds height once hours appear. The freed space goes to a larger distance readout; available navigation distance remains blue in parentheses. The paused summary keeps its own layout.
-
-[![FastRider riding layout with larger Zone badges, inline time and larger distance, on an Edge 840 in day and night modes](docs/media/riding-layout.png)](docs/validation/riding/v0.4.7/README.md)
-
-### Distance, with a clear second column
-
-Ride distance stays large on the left. **mi above blue remaining miles** forms a separate right-hand column with a shared left edge. Without navigation distance, only mi remains. All keeps one decimal; Lap keeps two.
-
-[![Larger ride numbers and a compact paused summary](docs/media/readability.png)](docs/validation/summary/v0.4.12/README.md)
-
-### Know your zone at a glance
-
-The power badge aligns with the right edge. Three-digit power keeps the large face; four digits use a slightly smaller bold face with a clear gap before the badge.
-
-[![FastRider: three- and four-digit power on an Edge 840](docs/media/power-layout.png)](docs/validation/power/v0.4.9/README.md)
-
-Heart rate and power each show a number inside a matching-color rounded badge. The gauge grows thicker from left to right: the solid section shows your progress through the current zone, and the hollow section shows what remains before its upper boundary. Missing readings show dashes and an unfilled gauge. Zone boundaries and colors are unchanged.
-
-[![FastRider number-only zone badges and solid/hollow tapered gauges on Edge 840](docs/media/zone-gauges.png)](docs/validation/zones/v0.4.4/README.md)
-
-### Day and night, automatically
-
-FastRider follows the Edge data-field background. Set the device's display mode to **Auto** to follow Garmin's own day/night schedule, or choose day/night manually on the device. The next redraw uses the selected theme; ride history and your selected views continue uninterrupted. Night colors are brighter, while power/heart-rate zone meanings stay the same. Font antialiasing, guide halos and zone markers use the current background too.
-
-[![FastRider on Edge 840: original day palette beside the high-contrast night palette](docs/media/day-night.png)](docs/validation/themes/v0.4.2/README.md)
 
 ### Your ride, when you pause
 
-Stop the activity timer or trigger Auto Pause to see a dedicated ride summary. Total ride time and the current clock sit at the top. The narrower left column shows current/average heart rate, average watts and local NP. Compact labels and units sit above larger values; the wider right column holds distance, ascent, average cadence and average speed. Remaining distance stays blue in parentheses. The compact power graph below keeps its centered range selector. Resume the timer to return to the riding dashboard with your selected views intact. This automatic switch also works on button-only devices.
+Stop the timer or trigger Auto Pause to see elapsed time, a **top-right clock**, current/average heart rate, average power, local NP, distance, ascent, average cadence and average speed. Short metric names sit above the values; small units follow the numbers. Valid navigation distance remains blue in parentheses. Resume to return to your selected ride views. Button-only models also switch automatically.
 
-NP needs 30 seconds of observed power. It includes valid zero watts and excludes paused time. A mid-ride load or missing samples shows **NP est. W**; unavailable values show dashes. It is calculated locally and can differ from Garmin's post-ride NP. Average heart rate and ride-average power use Garmin's native statistics when available. There is no Moving field.
+NP needs 30 seconds of observed power, includes valid zero watts and excludes pauses. Mid-ride loading or missing samples displays **NP est**, with a small w suffix. NP and lap-average power are locally estimated and may differ from Garmin statistics. There is no Moving field.
 
-[![FastRider paused ride summary on Edge 840 in day and night modes](docs/media/ride-summary.png)](docs/validation/summary/v0.4.8/README.md)
+<table>
+<tr>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-07-paused-summary.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-07-paused-summary.jpg" width="440" alt="Paused summary with short metric names and inline units"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-08-day-night.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-08-day-night.jpg" width="440" alt="Current interface in the high-contrast night theme"></a></td>
+</tr>
+</table>
+
+### Read your effort. Make it yours.
+
+Power colors: **gray Z1/Z3 · blue Z2 · orange Z4 · purple Z5 · red Z6/Z7**. Heart-rate zones are independent, while cadence and grade have their own alerts. The solid part of each tapered gauge shows your position inside the current zone.
+
+Touch models switch power between 3s/10s, statistics between All/current lap, and the graph between 5m/20m/All. Button-only 530/540/550 use the default 3s/All/5m view and automatic paused summary, without touch controls or the bell.
+
+<table>
+<tr>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg" width="440" alt="Power color groups and independent heart-rate/cadence/gradient alerts"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg" width="440" alt="Touch controls for averaging, statistics and graph range"></a></td>
+</tr>
+</table>
+
+*All device images use the official Edge 840 exterior and actual native UI captures with synthetic example data. Open any image to inspect it. [Store copy and full upload kit](store/campaign/v0.4.13/README.md) · [Current UI validation](docs/validation/clock/v0.4.13/README.md).*
 
 ## Download
 
 
 <!-- downloads:start -->
-Current version: **v0.4.12**. No SDK or Java needed to install. Choose a PRG to copy directly, or a ZIP with the same program, installation instructions and licenses.
+Current version: **v0.4.13**. No SDK or Java needed to install. Choose a PRG to copy directly, or a ZIP with the same program, installation instructions and licenses.
 
 | Device | Native resolution | Interaction | Direct PRG | ZIP |
 | --- | --- | --- | --- | --- |
-| Edge 530 | 246×322 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge530/FastRider-0.4.12-edge530.zip) |
-| Edge 540 | 246×322 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge540/FastRider-0.4.12-edge540.zip) |
-| Edge 550 | 420×600 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge550/FastRider-0.4.12-edge550.zip) |
-| Edge 830 | 246×322 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge830/FastRider-0.4.12-edge830.zip) |
-| Edge 840 | 246×322 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge840/FastRider-0.4.12-edge840.zip) |
-| Edge 850 | 420×600 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge850/FastRider-0.4.12-edge850.zip) |
-| Edge 1030 | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030/FastRider-0.4.12-edge1030.zip) |
-| Edge 1030 Bontrager | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030bontrager/FastRider-0.4.12-edge1030bontrager.zip) |
-| Edge 1030 Plus | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030plus/FastRider-0.4.12-edge1030plus.zip) |
-| Edge 1040 | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1040/FastRider-0.4.12-edge1040.zip) |
-| Edge 1050 | 480×800 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1050/FastRider-0.4.12-edge1050.zip) |
-| Edge 1060 | 480×800 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1060/FastRider-0.4.12-edge1060.zip) |
+| Edge 530 | 246×322 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge530/FastRider-0.4.13-edge530.zip) |
+| Edge 540 | 246×322 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge540/FastRider-0.4.13-edge540.zip) |
+| Edge 550 | 420×600 | Fixed default view | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge550/FastRider-0.4.13-edge550.zip) |
+| Edge 830 | 246×322 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge830/FastRider-0.4.13-edge830.zip) |
+| Edge 840 | 246×322 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge840/FastRider-0.4.13-edge840.zip) |
+| Edge 850 | 420×600 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge850/FastRider-0.4.13-edge850.zip) |
+| Edge 1030 | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030/FastRider-0.4.13-edge1030.zip) |
+| Edge 1030 Bontrager | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030bontrager/FastRider-0.4.13-edge1030bontrager.zip) |
+| Edge 1030 Plus | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030plus/FastRider-0.4.13-edge1030plus.zip) |
+| Edge 1040 | 282×470 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1040/FastRider-0.4.13-edge1040.zip) |
+| Edge 1050 | 480×800 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1050/FastRider-0.4.13-edge1050.zip) |
+| Edge 1060 | 480×800 | Touch controls + bell | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1060/FastRider-0.4.13-edge1060.zip) |
 
-[All devices ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/FastRider-0.4.12.zip) · [SHA256 checksums](releases/v0.4.12/SHA256SUMS) · [Release manifest](releases/v0.4.12/manifest.json)
+[All devices ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/FastRider-0.4.13.zip) · [SHA256 checksums](releases/v0.4.13/SHA256SUMS) · [Release manifest](releases/v0.4.13/manifest.json)
 <!-- downloads:end -->
 
 Choose the file for your **exact device model**. Solar variants follow the matching Garmin device package. Every model uses a **one-field, full-screen** activity page.
@@ -135,7 +117,7 @@ Touch models select the newest lap after a native manual or automatic lap bounda
 
 **Edge 530, 540 and 550 keep the fixed 3s / All / 5m view.** They have no touch controls or electronic bell; lap boundaries still appear in the graph. Bell sound and loudness depend on device tone support. The effect uses device tones, not Garmin's native bike-bell function.
 
-[View the touch-control card](store/campaign/v0.4.1/upload/04-screen-06-tap-controls.jpg) · [View the color guide](store/campaign/v0.4.1/upload/04-screen-05-color-coded.jpg)
+[View the touch-control card](store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg) · [View the color guide](store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg)
 
 ### What the numbers mean
 

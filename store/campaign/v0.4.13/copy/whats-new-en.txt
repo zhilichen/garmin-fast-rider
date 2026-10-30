@@ -1,0 +1,6 @@
+Updated for v0.4.13:
+- Current time aligns to the top-right edge of the paused summary.
+- Short paused-view labels, with small units beside every value.
+- Larger live metrics and riding distance, plus numbered zone badges and tapered zone-progress bars.
+- Automatic ride/paused summaries and day/night colors.
+- Refreshed screenshots for the current UI, Z2 training and threshold intervals.

@@ -2,7 +2,7 @@
 
 [English](README.md) · **简体中文**
 
-[![戴骑行太阳镜的公路车骑手与 Edge 840：同屏显示功率、心率、圈统计和功率趋势图](store/campaign/v0.4.1/upload/01-hero-en.png)](#download)
+[![戴骑行太阳镜的公路车骑手与 Edge 840：同屏显示功率、心率、圈统计和功率趋势图](store/campaign/v0.4.13/upload/01-hero-en.png)](#download)
 
 **功率、心率、Lap 统计和骑行关键信息，一屏看清。**
 
@@ -12,99 +12,81 @@
 
 ## 给骑行者
 
-- **关键信息放在一起。** 大号心率和功率，配合后拨档位、踏频、坡度、速度、Lap/All 统计与累计爬升。
-- **用颜色判断强度。** 心率与功率显示同色 Zone 数字框和梯形区间进度；功率曲线与实时数字使用相同色系。
-- **快速查看一个训练段。** 功率图包含 Z2 上限、FTP 辅助线和原生 Lap 标记，可查看最近5分钟、20分钟或整次骑行。
-- **日夜清晰。** 跟随 Edge 自身的显示模式，夜间采用黑底亮字和更明亮的 Zone 配色。
-- **双击响铃。** 支持触控的机型可播放两秒三击电子铃声，无需设备自带原生车铃功能。
+- **关键信息同屏。** 大字心率和功率、后档位、踏频、坡度、速度，以及All/当前圈统计。
+- **用颜色读懂强度。** 分区数字框、渐宽进度条，以及与实时功率对应的曲线配色。
+- **双击响铃。** 支持触控与提示音的机型可播放两秒三击电子铃声，无需原生车铃功能。
+- **骑行、停止自动切换。** 骑行时看实时指标，暂停或停止后看全程统计。
+- **日夜清晰。** 跟随Edge数据字段背景，夜间采用黑底亮字和更明亮的分区配色。
 
 <table>
 <tr>
-<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-01-one-screen.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-01-one-screen.jpg" width="440" alt="Edge 840 同屏显示心率、功率、档位、踏频、速度、坡度与整次骑行或当前圈统计"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-02-touch-bell.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-02-touch-bell.jpg" width="440" alt="在触屏 Edge 左侧区域双击，播放两秒电子铃声"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-01-one-screen.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-01-one-screen.jpg" width="440" alt="最新Edge840骑行仪表盘"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.jpg" width="440" alt="双击触发两秒电子铃声"></a></td>
 </tr>
 </table>
 
-### 围绕训练强度设计的功率图
+### 为Z2与阈值训练优化的功率图
 
-**Z2 保持蓝色，阈值保持橘色。** 功率图中，Z2 对应 FTP 的55%以上至75%，Z4 对应90%以上至105%。颜色变化便于发现强度偏移；辅助线与原生分圈标记帮助回看耐力训练，以及3 × 20分钟这样的阈值间歇。
+**Z2保持蓝色，阈值段保持橘色。** Z2为高于55%至75% FTP，Z4为高于90%至105% FTP。图中包含Z2上限、FTP辅助线与原生Lap边界，可查看5m、20m或All，适合观察稳定耐力骑行和3×20分钟等间歇。本图不执行或制定训练计划。
 
 <table>
 <tr>
-<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-03-z2-training.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-03-z2-training.jpg" width="440" alt="FTP 250 W 时的180 W蓝色Z2示例，包含Z2上限辅助线"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.1/upload/04-screen-04-threshold-intervals.jpg"><img src="store/campaign/v0.4.1/upload/04-screen-04-threshold-intervals.jpg" width="440" alt="FTP 250 W 时的245 W橘色阈值示例，显示三段训练及恢复区间"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-03-z2-training.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-03-z2-training.jpg" width="440" alt="FTP250W时180W的蓝色Z2示例"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-04-threshold-intervals.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-04-threshold-intervals.jpg" width="440" alt="245W橘色阈值示例及三段训练"></a></td>
 </tr>
 </table>
-
-功率配色：**Z1/Z3 灰 · Z2 蓝 · Z4 橘 · Z5 紫 · Z6/Z7 红**。心率独立分区，踏频和坡度使用各自的提示颜色。这些是训练观察辅助，不执行训练计划。
-
-*配图使用真实 Edge 840 外形、原生模拟器渲染界面和合成骑行数据。点击可查看完整尺寸。*
-
-### 自动跟随日夜模式
-
-FastRider 跟随 Edge 数据字段的系统背景色。将码表的显示模式设为**自动**，即可跟随 Garmin 自身的日夜切换；也可在码表上手动选择日间或夜间。下次重绘即应用配色，骑行历史和已选择的视图会继续保留。夜间颜色更明亮，功率与心率的 Zone 含义保持一致；字体抗锯齿、辅助线描边和 Zone 位置标记也会适应背景。
-
-[![Edge 840 日间与夜间模式：白底深色与黑底高对比配色](docs/media/day-night.png)](docs/validation/themes/v0.4.2/README.md)
-
-<a id="download"></a>
-### 大数字，紧凑标注
-
-左侧实时信息保留2×2排列：左上档位、右上踏频、左下坡度、右下速度。四格数字放大加粗，GEAR、RPM、MPH紧靠数字右侧竖排，%符号略大。速度保留一位小数，坡度仍取整数；长读数选择更窄字形，保持完整且不挤入邻格。
-
-[![Edge 840 放大数字及右侧竖排标注的日夜效果](docs/media/live-cells.png)](docs/validation/live-cells/v0.4.5/README.md)
-
-### 给骑行统计更多空间
-
-Zone 数字框放大并上移，区间进度条同步上移。**All / Lap 与时间同排**，出现小时后，秒数约为主数字的 2/3 高度。腾出的空间用于放大距离，导航剩余距离继续使用蓝色括号。停止页保留独立布局。
-
-[![Edge 840 日夜骑行页：更大 Zone 数字框、同行时间与放大距离](docs/media/riding-layout.png)](docs/validation/riding/v0.4.7/README.md)
-
-### 大里程，清晰的右侧信息列
-
-骑行里程保留左侧大字，右侧**上方mi、下方蓝色剩余里程**，两行左对齐。没有剩余里程时只显示mi；All保留一位小数，Lap保留两位。
-
-[![更大的骑行数字与紧凑停止统计](docs/media/readability.png)](docs/validation/summary/v0.4.12/README.md)
-
-### 一眼看清 Zone 和区间进度
-
-功率Zone框与右边缘对齐。三位功率保留大字，四位功率自动使用稍小粗体，与框保持间隔并完整显示。
-
-[![Edge840三位与四位功率显示](docs/media/power-layout.png)](docs/validation/power/v0.4.9/README.md)
-
-心率、功率各用同色圆角框显示分区数字。下方梯形从左到右逐渐变厚：当前位置左侧实心，右侧空心，表示距离当前区间上限还剩多少。缺失数据时显示横线和空心梯形。分区边界与配色规则保持不变。
-
-[![Edge 840 数字 Zone 圆角框与实心/空心梯形进度](docs/media/zone-gauges.png)](docs/validation/zones/v0.4.4/README.md)
 
 ### 暂停时，看整次骑行
 
-手动停止计时或触发自动暂停后，自动切换全程统计。顶部左侧为开始后的总时间，右侧为当前时钟；左侧窄栏显示实时/平均心率、平均功率、NP。标签与单位移到大数字上方，右侧加宽以容纳距离、爬升、平均踏频和平均速度；剩余距离仍以蓝色括号显示。下方紧凑功率图只保留居中的范围切换。恢复计时后回到原骑行页面，保留已选择视图；无触屏设备也自动切换。
+手动停止计时或触发自动暂停后，切换到全程统计：总时长、**顶右对齐的当前时钟**、实时/平均心率、平均功率、本地NP、距离、爬升、平均踏频与均速。简写标题放在上方，单位以小字紧跟数字；可用的导航剩余距离保留蓝色括号。恢复计时后回到已选择的骑行视图，无触屏设备也自动切换。
 
-NP 需先积累30秒功率，真实零功率参与计算，暂停时间不参与。中途加载或数据缺失时显示 **NP est. W**，无数据时显示横线；本地结果可能与 Garmin 骑行结束后的 NP 不同。平均心率、平均功率优先使用 Garmin 原生全程统计。不显示 Moving。
+NP需积累30秒功率，真实零功率参与计算，暂停时间不参与。中途加载或缺失样本时显示**NP est**，后跟小字w；本地NP与Lap均功率可能与Garmin统计不同。不显示Moving。
 
-[![Edge 840 日间和夜间停止页](docs/media/ride-summary.png)](docs/validation/summary/v0.4.8/README.md)
+<table>
+<tr>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-07-paused-summary.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-07-paused-summary.jpg" width="440" alt="使用简写标题和数字后单位的停止统计"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-08-day-night.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-08-day-night.jpg" width="440" alt="最新界面的高对比夜间主题"></a></td>
+</tr>
+</table>
 
+### 看懂强度，按需切换
+
+功率配色：**Z1/Z3灰 · Z2蓝 · Z4橘 · Z5紫 · Z6/Z7红**。心率采用独立分区；踏频和坡度也有自己的颜色提示。梯形进度条的实心部分表示当前在区间中的位置。
+
+触屏机型可切换3s/10s功率、All/当前Lap统计，以及5m/20m/All图表。无触屏的530/540/550使用3s/All/5m默认视图和自动停止统计，不包含触控或车铃。
+
+<table>
+<tr>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg" width="440" alt="功率分组配色及独立心率踏频坡度提示"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg" width="440" alt="功率均值统计和图表范围的点击切换"></a></td>
+</tr>
+</table>
+
+*设备展示采用官方Edge840外形和原生界面截图，数字为合成示例。点击图片可查看完整尺寸。[商店文案与上传素材](store/campaign/v0.4.13/README.md) · [最新界面验收](docs/validation/clock/v0.4.13/README.md)。*
+
+<a id="download"></a>
 ## 下载与支持设备
 
 
 <!-- downloads:start -->
-当前版本 **v0.4.12**，下载后即可安装，无需 SDK 或 Java。PRG 可直接复制到设备；ZIP 包含同一程序、安装说明和许可证。
+当前版本 **v0.4.13**，下载后即可安装，无需 SDK 或 Java。PRG 可直接复制到设备；ZIP 包含同一程序、安装说明和许可证。
 
 | 设备 | 原生分辨率 | 操作 | PRG 直接下载 | ZIP 下载 |
 | --- | --- | --- | --- | --- |
-| Edge 530 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge530/FastRider-0.4.12-edge530.zip) |
-| Edge 540 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge540/FastRider-0.4.12-edge540.zip) |
-| Edge 550 | 420×600 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge550/FastRider-0.4.12-edge550.zip) |
-| Edge 830 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge830/FastRider-0.4.12-edge830.zip) |
-| Edge 840 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge840/FastRider-0.4.12-edge840.zip) |
-| Edge 850 | 420×600 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge850/FastRider-0.4.12-edge850.zip) |
-| Edge 1030 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030/FastRider-0.4.12-edge1030.zip) |
-| Edge 1030 Bontrager | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030bontrager/FastRider-0.4.12-edge1030bontrager.zip) |
-| Edge 1030 Plus | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1030plus/FastRider-0.4.12-edge1030plus.zip) |
-| Edge 1040 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1040/FastRider-0.4.12-edge1040.zip) |
-| Edge 1050 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1050/FastRider-0.4.12-edge1050.zip) |
-| Edge 1060 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/edge1060/FastRider-0.4.12-edge1060.zip) |
+| Edge 530 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge530/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge530/FastRider-0.4.13-edge530.zip) |
+| Edge 540 | 246×322 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge540/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge540/FastRider-0.4.13-edge540.zip) |
+| Edge 550 | 420×600 | 默认视图 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge550/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge550/FastRider-0.4.13-edge550.zip) |
+| Edge 830 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge830/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge830/FastRider-0.4.13-edge830.zip) |
+| Edge 840 | 246×322 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge840/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge840/FastRider-0.4.13-edge840.zip) |
+| Edge 850 | 420×600 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge850/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge850/FastRider-0.4.13-edge850.zip) |
+| Edge 1030 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030/FastRider-0.4.13-edge1030.zip) |
+| Edge 1030 Bontrager | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030bontrager/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030bontrager/FastRider-0.4.13-edge1030bontrager.zip) |
+| Edge 1030 Plus | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030plus/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1030plus/FastRider-0.4.13-edge1030plus.zip) |
+| Edge 1040 | 282×470 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1040/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1040/FastRider-0.4.13-edge1040.zip) |
+| Edge 1050 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1050/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1050/FastRider-0.4.13-edge1050.zip) |
+| Edge 1060 | 480×800 | 触控切换与车铃 | [PRG](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1060/FastRider.prg) | [ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/edge1060/FastRider-0.4.13-edge1060.zip) |
 
-[全部型号 ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.12/FastRider-0.4.12.zip) · [SHA256 校验值](releases/v0.4.12/SHA256SUMS) · [版本清单](releases/v0.4.12/manifest.json)
+[全部型号 ZIP](https://github.com/zhilichen/garmin-fast-rider/raw/refs/heads/main/releases/v0.4.13/FastRider-0.4.13.zip) · [SHA256 校验值](releases/v0.4.13/SHA256SUMS) · [版本清单](releases/v0.4.13/manifest.json)
 <!-- downloads:end -->
 
 请选择与**设备型号完全对应**的文件。Solar 版本随 Garmin 对应设备包支持。所有型号都使用**单字段全屏**数据页面。
@@ -138,7 +120,7 @@ NP 需先积累30秒功率，真实零功率参与计算，暂停时间不参与
 
 **Edge 530、540、550 始终使用固定的 3s / All / 5m 视图。** 不提供触控或电子车铃，功率图仍记录 Lap 边界。铃声音色和响度取决于设备提示音支持；使用的是设备提示音组合，并非 Garmin 原生车铃功能。
 
-[点击切换图解](store/campaign/v0.4.1/upload/04-screen-06-tap-controls.jpg) · [配色图解](store/campaign/v0.4.1/upload/04-screen-05-color-coded.jpg)
+[点击切换图解](store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg) · [配色图解](store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg)
 
 ### 数据是怎样计算的
 

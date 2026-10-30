@@ -1,3 +1,5 @@
+最新顶右时钟与宣传材料：[v0.4.13](validation/clock/v0.4.13/README.md)。
+
 最新停止页标签与单位验收：[v0.4.12](validation/summary/v0.4.12/README.md)。
 
 最新字号与停止页验收：[v0.4.11](validation/readability/v0.4.11/README.md)。

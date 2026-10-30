@@ -1,0 +1,77 @@
+{
+  "version": "0.4.13",
+  "mode": "live",
+  "release": true,
+  "bytes": 1096057,
+  "sha256": "03851388690308eb71ab3cfa5f71e7cd14d3e930c13309ecedb9faae41c3d793",
+  "devices": [
+    {
+      "device": "edge530",
+      "inputs_sha256": "8cb86df85ab2bfbe82a95effe43e3b60e697a3535fc22b2a2d03ef78002e8492"
+    },
+    {
+      "device": "edge540",
+      "inputs_sha256": "8cb86df85ab2bfbe82a95effe43e3b60e697a3535fc22b2a2d03ef78002e8492"
+    },
+    {
+      "device": "edge550",
+      "inputs_sha256": "bf65916e1c7dc5a7fe8b276655fda322520ec7f5f939262b4909ece231df729a"
+    },
+    {
+      "device": "edge830",
+      "inputs_sha256": "5b20dc6035b133f4a864473285c905b0d954711df673c8a4a2a7cbd04124efe7"
+    },
+    {
+      "device": "edge840",
+      "inputs_sha256": "5b20dc6035b133f4a864473285c905b0d954711df673c8a4a2a7cbd04124efe7"
+    },
+    {
+      "device": "edge850",
+      "inputs_sha256": "fb0857c1e468a8619c5ab1265a1ca5a99180b398100be5792893d7b8e0c4fdf6"
+    },
+    {
+      "device": "edge1030",
+      "inputs_sha256": "b8b5e32fecb425a422e44eb666ce4c5959af7597649f8f9db69fcf1ddf9c4bae"
+    },
+    {
+      "device": "edge1030bontrager",
+      "inputs_sha256": "b8b5e32fecb425a422e44eb666ce4c5959af7597649f8f9db69fcf1ddf9c4bae"
+    },
+    {
+      "device": "edge1030plus",
+      "inputs_sha256": "b8b5e32fecb425a422e44eb666ce4c5959af7597649f8f9db69fcf1ddf9c4bae"
+    },
+    {
+      "device": "edge1040",
+      "inputs_sha256": "3fb8ff0420a113dc1afdc59cad963f816a3b33837c66b478a3e930d9dc27d57d"
+    },
+    {
+      "device": "edge1050",
+      "inputs_sha256": "77891f4fd3f878ab5f178fe0843a7e009e9b1801cea1b21b0b169c837631a9e8"
+    },
+    {
+      "device": "edge1060",
+      "inputs_sha256": "f483e374806ed1a07644735ceb788e75a3723b9a14f44c696e94665cb47ef6db"
+    }
+  ],
+  "regional_part_numbers": [
+    "006-B2713-00",
+    "006-B2924-00",
+    "006-B3095-00",
+    "006-B3121-00",
+    "006-B3122-00",
+    "006-B3349-00",
+    "006-B3350-00",
+    "006-B3570-00",
+    "006-B3812-00",
+    "006-B3843-00",
+    "006-B4061-00",
+    "006-B4062-00",
+    "006-B4305-00",
+    "006-B4440-00",
+    "006-B4633-00",
+    "006-B4634-00",
+    "006-B4962-00"
+  ],
+  "acceptance_record": "docs/validation.md"
+}

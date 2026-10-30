@@ -1,6 +1,6 @@
 # README visuals
 
-The project homepage reuses the road-cycling [Store campaign](../../store/campaign/v0.4.1/README.md): the same male rider, cycling sunglasses, paved-road scenery and original Edge 840 screen captures. Hero and feature cards are referenced directly, without duplicate exports.
+The project homepage reuses the road-cycling [Store campaign](../../store/campaign/v0.4.13/README.md): the same male rider, cycling sunglasses, paved-road scenery and original Edge 840 screen captures. Hero and feature cards are referenced directly, without duplicate exports.
 
 `developer-map.png` is a separate, editable architecture illustration in that visual style. Its device counts and resolutions come from `config/devices.json`:
 

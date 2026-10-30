@@ -53,8 +53,7 @@ module SummaryRenderer {
         var elapsed = v.millis == null ? "--:--" : RideMath.duration(v.millis);
         var f = face(v,dc,elapsed,FontInk.STATS_FACES,Layout.LEFT_WIDTH,SummaryLayout.HEADER_VALUE-Layout.u(2));
         v.drawPacked(dc,Layout.LEFT_EDGE,SummaryLayout.HEADER_VALUE,f,elapsed,v.theme.ink);
-        // The native radar overlay still owns the top-right corner.
-        var right = Layout.RADAR_LEFT-Layout.u(2);
+        var right = Layout.RIGHT_EDGE;
         var clock = v.clockText();
         var suffix = clock.substring(clock.length()-2,clock.length());
         var number = clock.substring(0,clock.length()-3);

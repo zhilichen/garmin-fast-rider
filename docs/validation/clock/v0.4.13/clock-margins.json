@@ -1,0 +1,58 @@
+[
+  {
+    "device": "edge840",
+    "theme": "day",
+    "top_ink_margin": 3,
+    "right_ink_margin": 2,
+    "layout_margin": 2
+  },
+  {
+    "device": "edge840",
+    "theme": "night",
+    "top_ink_margin": 3,
+    "right_ink_margin": 2,
+    "layout_margin": 2
+  },
+  {
+    "device": "edge1040",
+    "theme": "day",
+    "top_ink_margin": 3,
+    "right_ink_margin": 2,
+    "layout_margin": 2
+  },
+  {
+    "device": "edge1040",
+    "theme": "night",
+    "top_ink_margin": 3,
+    "right_ink_margin": 2,
+    "layout_margin": 2
+  },
+  {
+    "device": "edge850",
+    "theme": "day",
+    "top_ink_margin": 4,
+    "right_ink_margin": 4,
+    "layout_margin": 3
+  },
+  {
+    "device": "edge850",
+    "theme": "night",
+    "top_ink_margin": 4,
+    "right_ink_margin": 4,
+    "layout_margin": 3
+  },
+  {
+    "device": "edge1050",
+    "theme": "day",
+    "top_ink_margin": 5,
+    "right_ink_margin": 6,
+    "layout_margin": 4
+  },
+  {
+    "device": "edge1050",
+    "theme": "night",
+    "top_ink_margin": 5,
+    "right_ink_margin": 6,
+    "layout_margin": 4
+  }
+]
