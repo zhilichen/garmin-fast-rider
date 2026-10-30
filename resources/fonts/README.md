@@ -10,6 +10,8 @@ Profiles with `emphasize_numbers` append LiveEmphasis, StatsEmphasis, AverageEmp
 
 The original 16 246×322 glyph assets remain byte-for-byte identical to v0.3.15. Normal builds consume committed assets; Pillow is only needed for regeneration and visual checks. See `THIRD_PARTY_NOTICES.md` for source font licenses.
 
-The current runtime has29 roles at246×322 and35 on emphasized profiles. Side-value, summary-label, compact-primary, enlarged-remaining and reduced-seconds roles are appended; existing role indices stay fixed. `MetaDisplay18` is a resource-only39-character subset loaded at the Meta18 role; a pixel/metric test compares every retained glyph with the original complete atlas.
+The current runtime has30 roles at246×322 and36 on emphasized profiles. Side-value, summary-label, compact-primary, enlarged-remaining and reduced-seconds roles are appended; existing role indices stay fixed. `MetaDisplay18` is a resource-only39-character subset loaded at the Meta18 role; a pixel/metric test compares every retained glyph with the original complete atlas.
 
-Fonts load on demand. An LRU keeps16 resources on modern graphics runtimes and8 on older ones, selected through a guarded graphics capability check. Layout and ink metadata do not depend on whether a font is currently cached.
+Fonts load on demand. An LRU keeps16 resources on modern graphics runtimes and6 on older ones, selected through a guarded graphics capability check. Layout and ink metadata do not depend on whether a font is currently cached.
+
+`SummaryValue46` adds a full-width bold numeric role for the compact paused rows. Enlarged live metrics keep four tall/narrow roles (68/60/54/46 reference sizes); riding distance reuses those roles with the unit/remaining column kept separate.

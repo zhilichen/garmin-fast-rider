@@ -23,7 +23,9 @@ def contents():
         files[f'config/display/{key}/Layout.mc']=s
         summary=design['summary']
         summary_banner=math.floor(h*summary['banner_fraction']+0.5)
-        body=lambda n:math.floor(px(48)+(n-48)*(summary_banner-px(48))/198+0.5)
+        body_start=summary['top']['TOP_RULE']
+        body_end=math.floor(design['reference'][1]*summary['banner_fraction']+0.5)
+        body=lambda n:math.floor(px(body_start)+(n-body_start)*(summary_banner-px(body_start))/(body_end-body_start)+0.5)
         stop={k:px(n) for k,n in summary['top'].items()}
         stop.update({k:px(n) for k,n in summary.get('x',{}).items()})
         stop['LEFT_WIDTH']=stop['LEFT_RIGHT']-v['LEFT_EDGE']

@@ -1,0 +1,226 @@
+[
+  {
+    "profile": "480x800",
+    "value": "5",
+    "unit": "GEAR",
+    "visible_cap_height": 97,
+    "face": 20
+  },
+  {
+    "profile": "480x800",
+    "value": "12",
+    "unit": "GEAR",
+    "visible_cap_height": 97,
+    "face": 20
+  },
+  {
+    "profile": "480x800",
+    "value": "64",
+    "unit": "RPM",
+    "visible_cap_height": 97,
+    "face": 20
+  },
+  {
+    "profile": "480x800",
+    "value": "120",
+    "unit": "RPM",
+    "visible_cap_height": 97,
+    "face": 20
+  },
+  {
+    "profile": "480x800",
+    "value": "6",
+    "unit": "%",
+    "visible_cap_height": 97,
+    "face": 20
+  },
+  {
+    "profile": "480x800",
+    "value": "-16",
+    "unit": "%",
+    "visible_cap_height": 77,
+    "face": 22
+  },
+  {
+    "profile": "480x800",
+    "value": "22.4",
+    "unit": "MPH",
+    "visible_cap_height": 77,
+    "face": 22
+  },
+  {
+    "profile": "480x800",
+    "value": "100.5",
+    "unit": "MPH",
+    "visible_cap_height": 66,
+    "face": 23
+  },
+  {
+    "profile": "420x600",
+    "value": "5",
+    "unit": "GEAR",
+    "visible_cap_height": 85,
+    "face": 20
+  },
+  {
+    "profile": "420x600",
+    "value": "12",
+    "unit": "GEAR",
+    "visible_cap_height": 85,
+    "face": 20
+  },
+  {
+    "profile": "420x600",
+    "value": "64",
+    "unit": "RPM",
+    "visible_cap_height": 85,
+    "face": 20
+  },
+  {
+    "profile": "420x600",
+    "value": "120",
+    "unit": "RPM",
+    "visible_cap_height": 85,
+    "face": 20
+  },
+  {
+    "profile": "420x600",
+    "value": "6",
+    "unit": "%",
+    "visible_cap_height": 85,
+    "face": 20
+  },
+  {
+    "profile": "420x600",
+    "value": "-16",
+    "unit": "%",
+    "visible_cap_height": 67,
+    "face": 22
+  },
+  {
+    "profile": "420x600",
+    "value": "22.4",
+    "unit": "MPH",
+    "visible_cap_height": 67,
+    "face": 22
+  },
+  {
+    "profile": "420x600",
+    "value": "100.5",
+    "unit": "MPH",
+    "visible_cap_height": 58,
+    "face": 23
+  },
+  {
+    "profile": "246x322",
+    "value": "5",
+    "unit": "GEAR",
+    "visible_cap_height": 50,
+    "face": 16
+  },
+  {
+    "profile": "246x322",
+    "value": "12",
+    "unit": "GEAR",
+    "visible_cap_height": 50,
+    "face": 16
+  },
+  {
+    "profile": "246x322",
+    "value": "64",
+    "unit": "RPM",
+    "visible_cap_height": 50,
+    "face": 16
+  },
+  {
+    "profile": "246x322",
+    "value": "120",
+    "unit": "RPM",
+    "visible_cap_height": 50,
+    "face": 16
+  },
+  {
+    "profile": "246x322",
+    "value": "6",
+    "unit": "%",
+    "visible_cap_height": 50,
+    "face": 16
+  },
+  {
+    "profile": "246x322",
+    "value": "-16",
+    "unit": "%",
+    "visible_cap_height": 39,
+    "face": 18
+  },
+  {
+    "profile": "246x322",
+    "value": "22.4",
+    "unit": "MPH",
+    "visible_cap_height": 39,
+    "face": 18
+  },
+  {
+    "profile": "246x322",
+    "value": "100.5",
+    "unit": "MPH",
+    "visible_cap_height": 33,
+    "face": 19
+  },
+  {
+    "profile": "282x470",
+    "value": "5",
+    "unit": "GEAR",
+    "visible_cap_height": 56,
+    "face": 20
+  },
+  {
+    "profile": "282x470",
+    "value": "12",
+    "unit": "GEAR",
+    "visible_cap_height": 56,
+    "face": 20
+  },
+  {
+    "profile": "282x470",
+    "value": "64",
+    "unit": "RPM",
+    "visible_cap_height": 56,
+    "face": 20
+  },
+  {
+    "profile": "282x470",
+    "value": "120",
+    "unit": "RPM",
+    "visible_cap_height": 56,
+    "face": 20
+  },
+  {
+    "profile": "282x470",
+    "value": "6",
+    "unit": "%",
+    "visible_cap_height": 56,
+    "face": 20
+  },
+  {
+    "profile": "282x470",
+    "value": "-16",
+    "unit": "%",
+    "visible_cap_height": 45,
+    "face": 22
+  },
+  {
+    "profile": "282x470",
+    "value": "22.4",
+    "unit": "MPH",
+    "visible_cap_height": 45,
+    "face": 22
+  },
+  {
+    "profile": "282x470",
+    "value": "100.5",
+    "unit": "MPH",
+    "visible_cap_height": 39,
+    "face": 23
+  }
+]

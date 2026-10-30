@@ -1,7 +1,7 @@
 {
   "status": "pending_review",
   "app_name": "Fast Rider",
-  "candidate_version": "0.4.10",
+  "candidate_version": "0.4.11",
   "app_type": "datafield",
   "intended_visibility": "public",
   "price": "free",
@@ -23,6 +23,6 @@
   "screen_image_limit": 5,
   "listing_filled": true,
   "submitted_version": "0.4.1",
-  "prepared_upload": "../dist/connect-iq/v0.4.10/FastRider-0.4.10.iq",
+  "prepared_upload": "../dist/connect-iq/v0.4.11/FastRider-0.4.11.iq",
   "candidate_submitted_for_review": false
 }

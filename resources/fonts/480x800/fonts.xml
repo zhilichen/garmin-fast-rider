@@ -19,10 +19,10 @@
   <font id="StatsEmphasis" filename="StatsEmphasis.fnt" antialias="true"/>
   <font id="AverageEmphasis" filename="AverageEmphasis.fnt" antialias="true"/>
   <font id="RemainingEmphasis" filename="RemainingEmphasis.fnt" antialias="true"/>
+  <font id="LiveSide68" filename="LiveSide68.fnt" antialias="true"/>
   <font id="LiveSide60" filename="LiveSide60.fnt" antialias="true"/>
   <font id="LiveSide54" filename="LiveSide54.fnt" antialias="true"/>
-  <font id="LiveSide48" filename="LiveSide48.fnt" antialias="true"/>
-  <font id="LiveSide42" filename="LiveSide42.fnt" antialias="true"/>
+  <font id="LiveSide46" filename="LiveSide46.fnt" antialias="true"/>
   <font id="LiveSideLabel13" filename="LiveSideLabel13.fnt" antialias="true"/>
   <font id="LiveSidePercent22" filename="LiveSidePercent22.fnt" antialias="true"/>
   <font id="SummaryLabel14" filename="SummaryLabel14.fnt" antialias="true"/>
@@ -34,5 +34,6 @@
   <font id="RideSeconds30" filename="RideSeconds30.fnt" antialias="true"/>
   <font id="RideSeconds26" filename="RideSeconds26.fnt" antialias="true"/>
   <font id="RideSeconds18" filename="RideSeconds18.fnt" antialias="true"/>
+  <font id="SummaryValue46" filename="SummaryValue46.fnt" antialias="true"/>
   <font id="MetaDisplay18" filename="MetaDisplay18.fnt" antialias="true"/>
 </fonts>

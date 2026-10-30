@@ -65,3 +65,5 @@ Version **0.4.8** simplifies the paused summary, enlarges numeric values and wid
 Version **0.4.9** right-aligns the power Zone badge and fits full-size three-digit / smaller four-digit power. Prepared IQ: `../dist/connect-iq/v0.4.9/FastRider-0.4.9.iq`. Not submitted in this change. [Acceptance](../docs/validation/power/v0.4.9/README.md).
 
 Version **0.4.10** stacks mi above remaining miles beside the large riding distance. Prepared IQ: `../dist/connect-iq/v0.4.10/FastRider-0.4.10.iq`. Not submitted in this change. [Acceptance](../docs/validation/distance/v0.4.10/README.md).
+
+Version **0.4.11** enlarges riding metrics and distance, removes paused header labels, and gives the paused statistics more room. Prepared IQ: `../dist/connect-iq/v0.4.11/FastRider-0.4.11.iq`. Not submitted. [Acceptance](../docs/validation/readability/v0.4.11/README.md).

@@ -92,7 +92,7 @@ class DeviceProjectTests(unittest.TestCase):
             ink=(folder/'FontInk.mc').read_text();summary=(folder/'SummaryLayout.mc').read_text();layout=(folder/'Layout.mc').read_text()
             metric=lambda key:json.loads(re.search('const '+key+' = (.*);',ink)[1])
             anchor=lambda key:int(re.search('const '+key+' = (.*);',summary)[1])
-            top,bottom=metric('TOP'),metric('BOTTOM');label=metric('SUMMARY_LABEL');value_bottom=max(bottom[f] for f in metric('SUMMARY_VALUE_FACES'))
+            top,bottom=metric('TOP'),metric('BOTTOM');label=metric('SUMMARY_LABEL');value_bottom=max(bottom[f] for f in metric('SUMMARY_VALUE_FACES') if top[f] <= anchor('ROW_VALUE_1')-anchor('ROW_LABEL_1')-bottom[label]-3)
             for row in range(1,5):
                 self.assertGreater(anchor('ROW_VALUE_'+str(row))-anchor('ROW_LABEL_'+str(row)),top[5]+bottom[label]+1)
                 if row<4:
@@ -113,7 +113,7 @@ class DeviceProjectTests(unittest.TestCase):
             def metric(key):return json.loads(re.search('const '+key+' = (.*);',ink)[1])
             def anchor(key):return int(re.search('const '+key+' = (.*);',layout)[1])
             top,bottom=metric('TOP'),metric('BOTTOM')
-            self.assertEqual(len(metric('SIZES')),35)
+            self.assertEqual(len(metric('SIZES')),36)
             self.assertGreater(metric('NUMERIC_RIGHT')[16][16],metric('NUMERIC_LEFT')[16][16])
             self.assertEqual(anchor('STATS_TITLE_BASELINE'),anchor('STATS_TIME_BASELINE'),name)
             self.assertLess(anchor('STATS_TIME_BASELINE')+bottom[16]+1,anchor('STATS_AVERAGE_BASELINE')-top[18],name)

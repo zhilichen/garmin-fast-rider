@@ -35,20 +35,17 @@ module SummaryRenderer {
         v.drawPacked(dc,x,baseline,f,shown,c);
     }
     function header(v as FastRiderView, dc) {
-        var lf = FontInk.SUMMARY_LABEL;
-        caption(v,dc,Layout.LEFT_EDGE,SummaryLayout.HEADER_LABEL,"Ride");
         var elapsed = v.millis == null ? "--:--" : RideMath.duration(v.millis);
-        var f = face(v,dc,elapsed,FontInk.STATS_FACES,Layout.LEFT_WIDTH,room(SummaryLayout.HEADER_LABEL,SummaryLayout.HEADER_VALUE));
+        var f = face(v,dc,elapsed,FontInk.STATS_FACES,Layout.LEFT_WIDTH,SummaryLayout.HEADER_VALUE-Layout.u(2));
         v.drawPacked(dc,Layout.LEFT_EDGE,SummaryLayout.HEADER_VALUE,f,elapsed,v.theme.ink);
         // The native radar overlay still owns the top-right corner.
         var right = Layout.RADAR_LEFT-Layout.u(2);
-        v.text(dc,right,SummaryLayout.HEADER_LABEL,lf,"Time",v.theme.label,Graphics.TEXT_JUSTIFY_RIGHT);
         var clock = v.clockText();
         var suffix = clock.substring(clock.length()-2,clock.length());
         var number = clock.substring(0,clock.length()-3);
         var uw = v.textWidth(dc,suffix,3);
         f = face(v,dc,number,FontInk.STATS_FACES,right-Layout.RIGHT_START-uw-Layout.STATS_GAP,
-            room(SummaryLayout.HEADER_LABEL,SummaryLayout.HEADER_VALUE));
+            SummaryLayout.HEADER_VALUE-Layout.u(2));
         var x = right-uw-Layout.STATS_GAP-v.packedWidth(number,f);
         v.drawPacked(dc,x,SummaryLayout.HEADER_VALUE,f,number,v.theme.ink);
         v.text(dc,right,SummaryLayout.HEADER_VALUE,3,suffix,v.theme.label,Graphics.TEXT_JUSTIFY_RIGHT);

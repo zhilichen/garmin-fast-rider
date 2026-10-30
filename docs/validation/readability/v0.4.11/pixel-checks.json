@@ -1,0 +1,32 @@
+[
+  {
+    "theme": "day",
+    "region": "riding-primary",
+    "different_pixels": 0
+  },
+  {
+    "theme": "day",
+    "region": "riding-time-average",
+    "different_pixels": 0
+  },
+  {
+    "theme": "day",
+    "region": "riding-graph",
+    "different_pixels": 0
+  },
+  {
+    "theme": "night",
+    "region": "riding-primary",
+    "different_pixels": 0
+  },
+  {
+    "theme": "night",
+    "region": "riding-time-average",
+    "different_pixels": 0
+  },
+  {
+    "theme": "night",
+    "region": "riding-graph",
+    "different_pixels": 0
+  }
+]

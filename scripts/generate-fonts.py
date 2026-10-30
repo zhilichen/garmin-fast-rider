@@ -38,12 +38,12 @@ EMPHASIS_SPECS = [
     ('RemainingEmphasis', 'RobotoCondensed-Bold.ttf', 25, '0123456789().-'),
 ]
 # Tall, narrow numeric roles are shared by live cells and enlarged ride distance.
-# Existing font resources and role indices remain unchanged.
+# Keep the four live numeric role indices while enlarging their visible ink.
 SIDE_SPECS = [
+    ('LiveSide68', 'RobotoCondensed-Bold.ttf', 68, '0123456789.-'),
     ('LiveSide60', 'RobotoCondensed-Bold.ttf', 60, '0123456789.-'),
     ('LiveSide54', 'RobotoCondensed-Bold.ttf', 54, '0123456789.-'),
-    ('LiveSide48', 'RobotoCondensed-Bold.ttf', 48, '0123456789.-'),
-    ('LiveSide42', 'RobotoCondensed-Bold.ttf', 42, '0123456789.-'),
+    ('LiveSide46', 'RobotoCondensed-Bold.ttf', 46, '0123456789.-'),
     ('LiveSideLabel13', 'RobotoCondensed-Bold.ttf', 13, 'GEARPMH'),
     ('LiveSidePercent22', 'RobotoCondensed-Bold.ttf', 22, '%'),
 ]
@@ -62,6 +62,7 @@ SECOND_SPECS = [
     ('RideSeconds30', 'RobotoCondensed-Bold.ttf', 19, '0123456789:'),
     ('RideSeconds26', 'RobotoCondensed-Bold.ttf', 18, '0123456789:'),
     ('RideSeconds18', 'DejaVuSans_Cd_SemiBold_WGL4.ttf', 12, '0123456789:'),
+    ('SummaryValue46', 'RobotoCondensed-Bold.ttf', 46, '0123456789.-'),
 ]
 SECOND_LARGE_SPECS = [
     ('RideSeconds46', 'RobotoCondensed-Bold.ttf', 31, '0123456789:'),
@@ -100,8 +101,8 @@ def generate(font_dir, out, scale, metrics_path, emphasize=False):
         # These atlases contain individual Latin glyphs. Explicit BASIC layout
         # keeps their advances independent of optional host RAQM/HarfBuzz builds.
         font = ImageFont.truetype(str(font_dir / filename), size, layout_engine=ImageFont.Layout.BASIC)
-        narrow = name in ('LiveSide60', 'LiveSide54', 'LiveSide48', 'LiveSide42', 'PrimaryCompact58')
-        horizontal = .78 if name == 'PrimaryCompact58' else (.48 if name == 'LiveSide42' else (.54 if name == 'LiveSide48' else .56))
+        narrow = name in ('LiveSide68', 'LiveSide60', 'LiveSide54', 'LiveSide46', 'PrimaryCompact58')
+        horizontal = .78 if name == 'PrimaryCompact58' else ({'LiveSide68':.50,'LiveSide60':.56,'LiveSide54':.48,'LiveSide46':.42}.get(name,1.0))
         glyphs=[]; x=y=1; row=0
         character_fonts = {}
         if name.startswith('Remaining'):
@@ -201,15 +202,15 @@ def generate(font_dir, out, scale, metrics_path, emphasize=False):
     metrics += f'    const LIVE_SIDE_PERCENT = {side+5};\n'
     metrics += f'    const SUMMARY_LABEL = {side+6};\n'
     metrics += '    const SUMMARY_INT_FACES = '+str(([16,17] if emphasize else [])+[6,5,7,4])+';\n'
-    metrics += '    const SUMMARY_VALUE_FACES = '+str(([16,side+1,17] if emphasize else [])+[1,5,7,4])+';\n'
-    metrics += '    const SUMMARY_INT_VALUE_FACES = '+str(([2,16,side+1,17] if emphasize else [])+[1,5,7,4])+';\n'
-    metrics += '    const SUMMARY_DISTANCE_PAIRS = '+str(([[16,19],[side+1,order.index('RemainingRide30')],[17,19]] if emphasize else [])+[[1,13],[5,13],[7,14],[4,15]])+';\n'
+    metrics += '    const SUMMARY_VALUE_FACES = '+str(([16] if emphasize else [])+[order.index('SummaryValue46'),side+1,side+2,side+3,1,5,7,4])+';\n'
+    metrics += '    const SUMMARY_INT_VALUE_FACES = '+str([2,order.index('SummaryValue46'),side+1,side+2,side+3,1,5,7,4])+';\n'
+    metrics += '    const SUMMARY_DISTANCE_PAIRS = '+str(([[16,19]] if emphasize else [])+[[order.index('SummaryValue46'),13],[side+1,13],[side+2,13],[side+3,14],[1,13],[5,13],[7,14],[4,15]])+';\n'
     metrics += f'    const PRIMARY_COMPACT = {order.index("PrimaryCompact58")};\n'
     time_parents = (['LiveEmphasis','StatsEmphasis'] if emphasize else [])+['Stats32','Stats30','Chart26','Meta18']
     seconds_names = (['RideSeconds46','RideSeconds36'] if emphasize else [])+['RideSeconds32','RideSeconds30','RideSeconds26','RideSeconds18']
     metrics += '    const RIDE_TIME_PAIRS = '+str([[order.index(p),order.index(c)] for p,c in zip(time_parents,seconds_names)])+';\n'
     metrics += '    const RIDE_DISTANCE_PAIRS = '+str([[side+i,order.index('RemainingRide30')] for i in range(4)]+[[1,13],[5,13],[7,14],[4,15]])+';\n'
-    metrics += '    const RIDE_STACK_PAIRS = '+str([[side+2,13],[side+3,14],[1,15],[5,15],[7,15],[4,15]])+';\n'
+    metrics += '    const RIDE_STACK_PAIRS = '+str([[side,13],[side+1,13],[side+2,14],[side+3,14],[1,15],[5,15],[7,15],[4,15]])+';\n'
     metrics += '    function resources() {\n        return ['+', '.join('Rez.Fonts.'+('MetaDisplay18' if name == 'Meta18' else name) for name in order)+'];\n    }\n'
     metrics += '}\n'
     metrics_path.parent.mkdir(parents=True, exist_ok=True)

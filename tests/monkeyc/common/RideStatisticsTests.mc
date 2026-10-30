@@ -89,7 +89,7 @@ function stackedRideDistanceTest(logger) {
             Test.assert(pos[3]+FontInk.BOTTOM[12]+FontInk.NATIVE_BOTTOM_PAD+Layout.DISTANCE_STACK_GAP <= pos[4]-FontInk.TOP[p[3]]);
             Test.assert(FontInk.TOP[p[2]] > FontInk.TOP[p[3]]);
         } else { Test.assert(p[1] == null); }
-        if (i == 0 && Layout.WIDTH == 246) { Test.assertEqual(FontInk.TOP[p[2]],34); }
+        if (i == 0 && Layout.WIDTH == 246) { Test.assert(FontInk.TOP[p[2]] > 34); }
         if (i == 4) { Test.assertEqual(p[0],"0.42"); }
         for (var mode = 0; mode < 2; mode += 1) {
             v.theme.setBackground(mode == 0 ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK);

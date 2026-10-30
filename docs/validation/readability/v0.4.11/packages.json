@@ -1,0 +1,9 @@
+{
+  "version": "0.4.11",
+  "models": 12,
+  "prgs": 12,
+  "device_zips": 12,
+  "all_devices_zips": 1,
+  "validation": "scripts/check-downloads.py",
+  "store_submitted": false
+}

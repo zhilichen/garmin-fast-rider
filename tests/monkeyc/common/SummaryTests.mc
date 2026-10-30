@@ -104,10 +104,10 @@ function summaryRenderBoundariesTest(logger) {
     Test.assert(FontInk.NUMERIC_RIGHT[decimal][10] > FontInk.NUMERIC_LEFT[decimal][10]);
     var clockRoom = Layout.RADAR_LEFT-Layout.u(2)-Layout.RIGHT_START-v.textWidth(dc,"AM",3)-Layout.STATS_GAP;
     var cf = SummaryRenderer.face(v,dc,"12:59",FontInk.STATS_FACES,clockRoom,
-        SummaryRenderer.room(SummaryLayout.HEADER_LABEL,SummaryLayout.HEADER_VALUE));
+        SummaryLayout.HEADER_VALUE-Layout.u(2));
     Test.assert(v.packedWidth("12:59",cf) <= clockRoom);
     var tf = SummaryRenderer.face(v,dc,"100:00:00",FontInk.STATS_FACES,Layout.LEFT_WIDTH,
-        SummaryRenderer.room(SummaryLayout.HEADER_LABEL,SummaryLayout.HEADER_VALUE));
+        SummaryLayout.HEADER_VALUE-Layout.u(2));
     Test.assert(v.packedWidth("100:00:00",tf) <= Layout.LEFT_WIDTH);
     Test.assert(v.chartTop() > Layout.BANNER_TOP);
     Test.assert(SummaryLayout.HEADER_BASELINE < v.plotTop());

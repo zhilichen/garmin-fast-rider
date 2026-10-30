@@ -89,27 +89,26 @@
   "bottom_margin": 3,
   "summary": {
     "top": {
-      "HEADER_LABEL": 14,
-      "HEADER_VALUE": 42,
-      "TOP_RULE": 48
+      "HEADER_VALUE": 24,
+      "TOP_RULE": 29
     },
     "body": {
-      "ROW_LABEL_1": 64,
-      "ROW_VALUE_1": 99,
-      "ROW_LABEL_2": 112,
-      "ROW_VALUE_2": 147,
-      "ROW_LABEL_3": 160,
-      "ROW_VALUE_3": 195,
-      "ROW_LABEL_4": 208,
-      "ROW_VALUE_4": 243
+      "ROW_LABEL_1": 43,
+      "ROW_VALUE_1": 82,
+      "ROW_LABEL_2": 96,
+      "ROW_VALUE_2": 135,
+      "ROW_LABEL_3": 149,
+      "ROW_VALUE_3": 188,
+      "ROW_LABEL_4": 202,
+      "ROW_VALUE_4": 241
     },
     "banner_fraction": 0.7639751552795031,
     "header_baseline": 18,
     "plot_offset": 23,
     "x": {
-      "COLUMN_DIVIDER": 102,
-      "RIGHT_START": 106,
-      "LEFT_RIGHT": 100
+      "COLUMN_DIVIDER": 96,
+      "RIGHT_START": 100,
+      "LEFT_RIGHT": 94
     }
   }
 }

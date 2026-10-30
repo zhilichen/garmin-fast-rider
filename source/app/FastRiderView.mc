@@ -55,7 +55,8 @@ class FastRiderView extends WatchUi.DataField {
 
     function initialize() {
         DataField.initialize();
-        if (!(Graphics has :createBufferedBitmap)) { fontCacheLimit = 8; }
+        // Reserve allocation headroom for larger numeric atlases on legacy field heaps.
+        if (!(Graphics has :createBufferedBitmap)) { fontCacheLimit = 6; }
         theme = new DisplayTheme();
         screen = new RideScreenState(); normalized = new NormalizedPower();
         gradeEstimator = new GradeEstimator();

@@ -4,8 +4,8 @@ import Toybox.Lang;
 module RideDistance {
     function inkHeight(face) { return FontInk.TOP[face]+FontInk.BOTTOM[face]+FontInk.NATIVE_BOTTOM_PAD; }
     function maxHeight() {
-        var cap = inkHeight(FontInk.LIVE_SIDE_FACES[2]);
-        var room = Layout.STATS_DISTANCE_BASELINE-Layout.STATS_AVERAGE_BASELINE-FontInk.BOTTOM[3]-FontInk.NATIVE_BOTTOM_PAD-Layout.u(3);
+        var cap = inkHeight(FontInk.LIVE_SIDE_FACES[0]);
+        var room = Layout.STATS_DISTANCE_BASELINE-Layout.STATS_AVERAGE_BASELINE-FontInk.BOTTOM[3]-FontInk.NATIVE_BOTTOM_PAD-Layout.u(2);
         return cap < room ? cap : room;
     }
     function rowWidth(v as FastRiderView, shown, rest, mainFace, restFace) {

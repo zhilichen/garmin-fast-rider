@@ -1,0 +1,6 @@
+Larger numbers, clearer ride statistics.
+- Bigger gear, cadence, gradient and speed readings on the riding dashboard.
+- Larger riding distance beside stacked units and remaining miles.
+- A compact paused header without text labels, with more room for whole-ride statistics.
+- Wider paused right column and larger statistics, with adaptive fitting for long values.
+- Shared layouts across 12 Edge models, with day and night colors.
