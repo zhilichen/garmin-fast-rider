@@ -1,0 +1,110 @@
+[
+  {
+    "device": "edge530",
+    "version": "0.4.11",
+    "day_capture": "edge530-day.png",
+    "native_size": [
+      246,
+      322
+    ]
+  },
+  {
+    "device": "edge540",
+    "version": "0.4.11",
+    "day_capture": "edge540-day.png",
+    "native_size": [
+      246,
+      322
+    ]
+  },
+  {
+    "device": "edge550",
+    "version": "0.4.11",
+    "day_capture": "edge550-day.png",
+    "native_size": [
+      420,
+      600
+    ]
+  },
+  {
+    "device": "edge830",
+    "version": "0.4.11",
+    "day_capture": "edge830-day.png",
+    "native_size": [
+      246,
+      322
+    ]
+  },
+  {
+    "device": "edge840",
+    "version": "0.4.11",
+    "day_capture": "edge840-day.png",
+    "native_size": [
+      246,
+      322
+    ]
+  },
+  {
+    "device": "edge850",
+    "version": "0.4.11",
+    "day_capture": "edge850-day.png",
+    "native_size": [
+      420,
+      600
+    ]
+  },
+  {
+    "device": "edge1030",
+    "version": "0.4.11",
+    "day_capture": "edge1030-day.png",
+    "native_size": [
+      282,
+      470
+    ]
+  },
+  {
+    "device": "edge1030bontrager",
+    "version": "0.4.11",
+    "day_capture": "edge1030bontrager-day.png",
+    "native_size": [
+      282,
+      470
+    ]
+  },
+  {
+    "device": "edge1030plus",
+    "version": "0.4.11",
+    "day_capture": "edge1030plus-day.png",
+    "native_size": [
+      282,
+      470
+    ]
+  },
+  {
+    "device": "edge1040",
+    "version": "0.4.11",
+    "day_capture": "edge1040-day.png",
+    "native_size": [
+      282,
+      470
+    ]
+  },
+  {
+    "device": "edge1050",
+    "version": "0.4.11",
+    "day_capture": "edge1050-day.png",
+    "native_size": [
+      480,
+      800
+    ]
+  },
+  {
+    "device": "edge1060",
+    "version": "0.4.11",
+    "day_capture": "edge1060-day.png",
+    "native_size": [
+      480,
+      800
+    ]
+  }
+]

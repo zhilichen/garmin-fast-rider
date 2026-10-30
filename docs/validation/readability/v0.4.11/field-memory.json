@@ -1,5 +1,13 @@
 [
   {
+    "device": "edge1040",
+    "case": "edge1040",
+    "used_bytes": 85760,
+    "total_bytes": 127424,
+    "crash": false,
+    "note": "Actual native field first-frame heap; not a real-ride peak."
+  },
+  {
     "device": "edge840",
     "case": "edge840-stopped-missing",
     "used_bytes": 76320,
@@ -32,6 +40,14 @@
     "note": "Actual native field first-frame heap; not a real-ride peak."
   },
   {
+    "device": "edge1050",
+    "case": "edge1050",
+    "used_bytes": 85960,
+    "total_bytes": 127424,
+    "crash": false,
+    "note": "Actual native field first-frame heap; not a real-ride peak."
+  },
+  {
     "device": "edge540",
     "case": "edge540",
     "used_bytes": 77800,
@@ -48,9 +64,33 @@
     "note": "Actual native field first-frame heap; not a real-ride peak."
   },
   {
+    "device": "edge1050",
+    "case": "edge1050-stopped",
+    "used_bytes": 81368,
+    "total_bytes": 127424,
+    "crash": false,
+    "note": "Actual native field first-frame heap; not a real-ride peak."
+  },
+  {
+    "device": "edge1030",
+    "case": "edge1030",
+    "used_bytes": 114744,
+    "total_bytes": 127424,
+    "crash": false,
+    "note": "Actual native field first-frame heap; not a real-ride peak."
+  },
+  {
     "device": "edge550",
     "case": "edge550",
     "used_bytes": 83152,
+    "total_bytes": 127424,
+    "crash": false,
+    "note": "Actual native field first-frame heap; not a real-ride peak."
+  },
+  {
+    "device": "edge1040",
+    "case": "edge1040-stopped",
+    "used_bytes": 81168,
     "total_bytes": 127424,
     "crash": false,
     "note": "Actual native field first-frame heap; not a real-ride peak."
@@ -72,6 +112,14 @@
     "note": "Actual native field first-frame heap; not a real-ride peak."
   },
   {
+    "device": "edge1030plus",
+    "case": "edge1030plus",
+    "used_bytes": 114824,
+    "total_bytes": 127424,
+    "crash": false,
+    "note": "Actual native field first-frame heap; not a real-ride peak."
+  },
+  {
     "device": "edge840",
     "case": "edge840-missing",
     "used_bytes": 79240,
@@ -88,6 +136,22 @@
     "note": "Actual native field first-frame heap; not a real-ride peak."
   },
   {
+    "device": "edge1060",
+    "case": "edge1060",
+    "used_bytes": 85960,
+    "total_bytes": 127424,
+    "crash": false,
+    "note": "Actual native field first-frame heap; not a real-ride peak."
+  },
+  {
+    "device": "edge1030bontrager",
+    "case": "edge1030bontrager",
+    "used_bytes": 114896,
+    "total_bytes": 127424,
+    "crash": false,
+    "note": "Actual native field first-frame heap; not a real-ride peak."
+  },
+  {
     "device": "edge840",
     "case": "edge840-stopped",
     "used_bytes": 77248,
@@ -96,9 +160,25 @@
     "note": "Actual native field first-frame heap; not a real-ride peak."
   },
   {
+    "device": "edge850",
+    "case": "edge850",
+    "used_bytes": 85752,
+    "total_bytes": 127424,
+    "crash": false,
+    "note": "Actual native field first-frame heap; not a real-ride peak."
+  },
+  {
     "device": "edge840",
     "case": "edge840",
     "used_bytes": 80400,
+    "total_bytes": 127424,
+    "crash": false,
+    "note": "Actual native field first-frame heap; not a real-ride peak."
+  },
+  {
+    "device": "edge850",
+    "case": "edge850-stopped",
+    "used_bytes": 81160,
     "total_bytes": 127424,
     "crash": false,
     "note": "Actual native field first-frame heap; not a real-ride peak."

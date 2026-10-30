@@ -155,6 +155,8 @@ The layout uses four display profiles, with larger numeric fonts on larger scree
 <details>
 <summary><strong>Expand the 12-model native screenshot gallery</strong></summary>
 
+Gallery updated for **v0.4.11**: native captures for all 12 models, with day/night riding and paused views across all four screen resolutions in the validation notes.
+
 <!-- screenshots:start -->
 Native day-mode simulator captures, using synthetic data. Capture versions are listed in the validation notes below. Previews share a display width while keeping their aspect ratio; open an image to inspect native pixels.
 

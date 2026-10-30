@@ -19,7 +19,14 @@
 
 边界：[长读数](edge840-stress-day.png) · [停止长读数](edge840-stopped-stress-day.png) · [缺失数据](edge840-missing-day.png) · [停止缺失](edge840-stopped-missing-day.png) · [Lap](edge840-lap-day.png) · [四位功率](edge840-power-four-day.png)。
 
-本次已导出530、540、550与840的新截图。其余型号的最终交互画面导出尚未完成，主图库暂保留v0.4.10原图；12款设备、4种显示比例均已通过v0.4.11原生VM绘制与字号边界测试。
+12款机型的骑行日间截图已全部更新至v0.4.11。四种显示比例（840、1040、850、1050代表）均已导出骑行/停止、日间/夜间原生画面，检查数字完整性、单位对齐和分隔线边距。
+
+| 设备 | 骑行日间 | 骑行夜间 | 停止日间 | 停止夜间 |
+| --- | --- | --- | --- | --- |
+| Edge 1040 | [原图](edge1040-day.png) | [原图](edge1040-night.png) | [原图](edge1040-stopped-day.png) | [原图](edge1040-stopped-night.png) |
+| Edge 850 | [原图](edge850-day.png) | [原图](edge850-night.png) | [原图](edge850-stopped-day.png) | [原图](edge850-stopped-night.png) |
+| Edge 1050 | [原图](edge1050-day.png) | [原图](edge1050-night.png) | [原图](edge1050-stopped-day.png) | [原图](edge1050-stopped-night.png) |
+
 
 旧设备满容量：[骑行](edge1030-capacity-day.png) · [原生暂停](edge1030-capacity-paused-day.png) · [恢复](edge1030-capacity-resumed-day.png)。截图经File → Save Screen Capture原生导出，未重绘屏幕。
 
@@ -27,7 +34,7 @@
 
 最终12款机型共558次原生VM测试、11项Python检查通过；live/test/snapshot共36次最终构建无警告。840顶部、时间/平均功率与功率图的日夜像素比较共6项，均为0差异。
 
-[原生VM矩阵](vm-matrix.json) · [Python检查](python-tests.txt) · [字库检查](font-checks.txt) · [字形尺寸](ink-sizes.json) · [未修改区域像素检查](pixel-checks.json) · [字段内存](field-memory.json) · [分发校验](packages.json)。
+[原生VM矩阵](vm-matrix.json) · [Python检查](python-tests.txt) · [字库检查](font-checks.txt) · [字形尺寸](ink-sizes.json) · [未修改区域像素检查](pixel-checks.json) · [截图完整性](capture-checks.json) · [字段内存](field-memory.json) · [分发校验](packages.json)。
 
 测试覆盖长里程与剩余里程、小数速度、负坡度、3/4位功率、缺失数据、日夜绘制、Lap/All、原生暂停与恢复。首帧字段内存记录不代表真实长骑行峰值。
 
