@@ -209,6 +209,7 @@ def generate(font_dir, out, scale, metrics_path, emphasize=False):
     seconds_names = (['RideSeconds46','RideSeconds36'] if emphasize else [])+['RideSeconds32','RideSeconds30','RideSeconds26','RideSeconds18']
     metrics += '    const RIDE_TIME_PAIRS = '+str([[order.index(p),order.index(c)] for p,c in zip(time_parents,seconds_names)])+';\n'
     metrics += '    const RIDE_DISTANCE_PAIRS = '+str([[side+i,order.index('RemainingRide30')] for i in range(4)]+[[1,13],[5,13],[7,14],[4,15]])+';\n'
+    metrics += '    const RIDE_STACK_PAIRS = '+str([[side+2,13],[side+3,14],[1,15],[5,15],[7,15],[4,15]])+';\n'
     metrics += '    function resources() {\n        return ['+', '.join('Rez.Fonts.'+('MetaDisplay18' if name == 'Meta18' else name) for name in order)+'];\n    }\n'
     metrics += '}\n'
     metrics_path.parent.mkdir(parents=True, exist_ok=True)

@@ -87,3 +87,6 @@ v0.4.8停止页中列线与列宽独立于骑行Layout，设计来自summary.x�
 
 
 v0.4.9功率框使用RIGHT_EDGE。POWER_ZONE_GAP独立于心率的PRIMARY_ZONE_GAP；99px参考数字区容纳任意三位Primary58及任意四位Average54墨迹。四位和更长值先进入较小字形候选，更长回退跳过不比三位字形矮的候选。停止页不调用此功率字号逻辑。
+
+
+v0.4.10 RideDistance为骑行统计单独计算两列距离块。RIDE_STACK_PAIRS复用既有数字和剩余里程字库，mi与蓝色括号共用sideLeft。块宽为主值宽度加列间距和较宽侧行；块高为主值与侧列之较高者。主值垂直居中，mi置顶，剩余里程置底，最大高度仍由原统计区约束。distanceText统一All/Lap精度和回退文本，停止页的行内排版沿用原拟合器。

@@ -51,7 +51,8 @@
     "LIVE_SIDE_GAP": 1,
     "LIVE_LETTER_GAP": 0,
     "PRIMARY_ZONE_GAP": 3,
-    "POWER_ZONE_GAP": 1
+    "POWER_ZONE_GAP": 1,
+    "DISTANCE_STACK_GAP": 1
   },
   "top": {
     "PRIMARY_BASELINE": 43,

@@ -66,3 +66,36 @@ function lazyFontLoadingTest(logger) {
     v.drawPrimary(dc);Test.assert(v.fonts[0] != null && v.fonts[1] != null);
     return true;
 }
+
+(:test)
+function stackedRideDistanceTest(logger) {
+    var v = new FastRiderView();v.loadFonts();var dc = TestPlatform.dc(Layout.WIDTH,Layout.HEIGHT);
+    var cases = [[10.4,12.4,true],[300.5,200.5,true],[888.8,999.9,true],[10.4,null,true],[0.42,12.4,false],[null,null,true]];
+    for (var i = 0; i < cases.size(); i += 1) {
+        var c = cases[i] as Toybox.Lang.Array;
+        var meters = c[0] == null ? null : c[0]*1609.344;
+        var remaining = c[1] == null ? null : c[1]*1609.344;
+        var p = RideDistance.parts(v,meters,remaining,c[2]);var pos = RideDistance.positions(v,p);
+        Test.assert(p[4] <= Layout.RIGHT_WIDTH && p[5] <= RideDistance.maxHeight());
+        Test.assert(pos[0] >= Layout.RIGHT_START && pos[0]+p[4] <= Layout.RIGHT_EDGE);
+        Test.assertEqual(pos[2],pos[0]+v.packedWidth(p[0],p[2])+Layout.STATS_GAP);
+        Test.assertEqual(pos[3]-FontInk.TOP[12],pos[5]);
+        Test.assert(pos[1]-FontInk.TOP[p[2]] >= pos[5]);
+        Test.assert(pos[1]+FontInk.BOTTOM[p[2]]+FontInk.NATIVE_BOTTOM_PAD <= pos[6]);
+        Test.assert(pos[6] <= Layout.STATS_BOTTOM);
+        if (i < 3) {
+            Test.assertEqual(p[0],c[0].format("%.1f"));
+            Test.assertEqual(p[1],RideMath.remainingMilesText(remaining,1));
+            Test.assert(pos[3]+FontInk.BOTTOM[12]+FontInk.NATIVE_BOTTOM_PAD+Layout.DISTANCE_STACK_GAP <= pos[4]-FontInk.TOP[p[3]]);
+            Test.assert(FontInk.TOP[p[2]] > FontInk.TOP[p[3]]);
+        } else { Test.assert(p[1] == null); }
+        if (i == 0 && Layout.WIDTH == 246) { Test.assertEqual(FontInk.TOP[p[2]],34); }
+        if (i == 4) { Test.assertEqual(p[0],"0.42"); }
+        for (var mode = 0; mode < 2; mode += 1) {
+            v.theme.setBackground(mode == 0 ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK);
+            dc.setColor(v.theme.ink,v.theme.background);dc.clear();
+            RideDistance.draw(v,dc,meters,remaining,c[2]);
+        }
+    }
+    return true;
+}

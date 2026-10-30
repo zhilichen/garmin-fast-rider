@@ -47,6 +47,7 @@ module Layout {
     const LIVE_LETTER_GAP = 0;
     const PRIMARY_ZONE_GAP = 6;
     const POWER_ZONE_GAP = 2;
+    const DISTANCE_STACK_GAP = 2;
     const PRIMARY_BASELINE = 84;
     const ZONE_BASELINE = 96;
     const PRIMARY_BOTTOM = 148;

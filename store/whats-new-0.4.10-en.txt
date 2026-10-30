@@ -1,0 +1,4 @@
+- Ride distance keeps its large value on the left.
+- mi now sits above blue remaining miles in a separate, aligned right column.
+- Without remaining navigation distance, only mi is shown.
+- Lap/ride distance precision and the paused summary layout are preserved.

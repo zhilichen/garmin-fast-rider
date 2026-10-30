@@ -22,6 +22,7 @@ module FontInk {
     const PRIMARY_COMPACT = 27;
     const RIDE_TIME_PAIRS = [[16, 29], [17, 30], [5, 31], [7, 32], [4, 33], [3, 34]];
     const RIDE_DISTANCE_PAIRS = [[20, 28], [21, 28], [22, 28], [23, 28], [1, 13], [5, 13], [7, 14], [4, 15]];
+    const RIDE_STACK_PAIRS = [[22, 13], [23, 14], [1, 15], [5, 15], [7, 15], [4, 15]];
     function resources() {
         return [Rez.Fonts.Primary58, Rez.Fonts.Live38, Rez.Fonts.Average54, Rez.Fonts.MetaDisplay18, Rez.Fonts.Chart26, Rez.Fonts.Stats32, Rez.Fonts.Average36, Rez.Fonts.Stats30, Rez.Fonts.ZoneDigit44, Rez.Fonts.SmallZ16, Rez.Fonts.SmallZ10, Rez.Fonts.Climb18, Rez.Fonts.Units18, Rez.Fonts.Remaining24, Rez.Fonts.Remaining22, Rez.Fonts.Remaining21, Rez.Fonts.LiveEmphasis, Rez.Fonts.StatsEmphasis, Rez.Fonts.AverageEmphasis, Rez.Fonts.RemainingEmphasis, Rez.Fonts.LiveSide60, Rez.Fonts.LiveSide54, Rez.Fonts.LiveSide48, Rez.Fonts.LiveSide42, Rez.Fonts.LiveSideLabel13, Rez.Fonts.LiveSidePercent22, Rez.Fonts.SummaryLabel14, Rez.Fonts.PrimaryCompact58, Rez.Fonts.RemainingRide30, Rez.Fonts.RideSeconds46, Rez.Fonts.RideSeconds36, Rez.Fonts.RideSeconds32, Rez.Fonts.RideSeconds30, Rez.Fonts.RideSeconds26, Rez.Fonts.RideSeconds18];
     }

@@ -1,0 +1,96 @@
+[
+  {
+    "check": "power time and lap power unchanged",
+    "theme": "day",
+    "different_pixels": 0,
+    "before": "docs/validation/power/v0.4.9/edge840-day.png",
+    "after": "docs/validation/distance/v0.4.10/edge840-day.png",
+    "crop": [
+      0,
+      0,
+      246,
+      168
+    ]
+  },
+  {
+    "check": "left metrics unchanged",
+    "theme": "day",
+    "different_pixels": 0,
+    "before": "docs/validation/power/v0.4.9/edge840-day.png",
+    "after": "docs/validation/distance/v0.4.10/edge840-day.png",
+    "crop": [
+      0,
+      168,
+      116,
+      322
+    ]
+  },
+  {
+    "check": "graph and footer unchanged",
+    "theme": "day",
+    "different_pixels": 0,
+    "before": "docs/validation/power/v0.4.9/edge840-day.png",
+    "after": "docs/validation/distance/v0.4.10/edge840-day.png",
+    "crop": [
+      116,
+      214,
+      246,
+      322
+    ]
+  },
+  {
+    "check": "power time and lap power unchanged",
+    "theme": "night",
+    "different_pixels": 0,
+    "before": "docs/validation/power/v0.4.9/edge840-night.png",
+    "after": "docs/validation/distance/v0.4.10/edge840-night.png",
+    "crop": [
+      0,
+      0,
+      246,
+      168
+    ]
+  },
+  {
+    "check": "left metrics unchanged",
+    "theme": "night",
+    "different_pixels": 0,
+    "before": "docs/validation/power/v0.4.9/edge840-night.png",
+    "after": "docs/validation/distance/v0.4.10/edge840-night.png",
+    "crop": [
+      0,
+      168,
+      116,
+      322
+    ]
+  },
+  {
+    "check": "graph and footer unchanged",
+    "theme": "night",
+    "different_pixels": 0,
+    "before": "docs/validation/power/v0.4.9/edge840-night.png",
+    "after": "docs/validation/distance/v0.4.10/edge840-night.png",
+    "crop": [
+      116,
+      214,
+      246,
+      322
+    ]
+  },
+  {
+    "check": "stopped unchanged",
+    "theme": "day",
+    "different_pixels": 0,
+    "before": "docs/validation/power/v0.4.9/edge840-stopped-day.png",
+    "after": "docs/validation/distance/v0.4.10/edge840-stopped-day.png",
+    "crop": null
+  },
+  {
+    "check": "stopped unchanged",
+    "theme": "night",
+    "different_pixels": 0,
+    "before": "docs/validation/power/v0.4.9/edge840-stopped-night.png",
+    "after": "docs/validation/distance/v0.4.10/edge840-stopped-night.png",
+    "crop": null
+  }
+]

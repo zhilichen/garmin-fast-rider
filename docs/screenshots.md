@@ -1,3 +1,5 @@
+v0.4.10骑行里程改为主值+右侧上下信息列。[最新原生图与验收](validation/distance/v0.4.10/README.md)。
+
 v0.4.9功率框右对齐，三/四位数字自适应。[最新原生图与验收](validation/power/v0.4.9/README.md)。
 
 v0.4.8停止页精简标签、放大数字与加宽右栏。[最新图与验收](validation/summary/v0.4.8/README.md)。

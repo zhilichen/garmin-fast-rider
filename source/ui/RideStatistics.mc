@@ -49,12 +49,7 @@ module RideStatistics {
         var center = ax+aw+Layout.STATS_GAP+uw/2;
         v.text(dc,center,Layout.STATS_AVERAGE_LABEL_BASELINE,3,"AVG",v.theme.label,Graphics.TEXT_JUSTIFY_CENTER);
         v.text(dc,center,Layout.STATS_AVERAGE_BASELINE,3,"W",v.theme.label,Graphics.TEXT_JUSTIFY_CENTER);
-        var parts = v.distanceParts(dc,v.ui.allStats ? v.meters : v.lap.distance,v.ui.allStats ? v.remainingDistance : null,v.ui.allStats);
-        var x = Layout.RIGHT_START+DisplayRules.pixel((Layout.RIGHT_WIDTH-v.distanceRowWidth(parts))/2.0);
-        v.drawPacked(dc,x,Layout.STATS_DISTANCE_BASELINE,parts[2],parts[0],v.theme.ink);
-        x += v.packedWidth(parts[0],parts[2])+Layout.PACKED_GAP;
-        v.drawPacked(dc,x,Layout.STATS_DISTANCE_BASELINE,12,"mi",v.theme.label);
-        x += v.packedWidth("mi",12)+Layout.PACKED_GAP;
-        if (parts[1] != null) { v.drawPacked(dc,x,Layout.STATS_DISTANCE_BASELINE,parts[3],parts[1],v.theme.blue); }
+        RideDistance.draw(v,dc,v.ui.allStats ? v.meters : v.lap.distance,
+            v.ui.allStats ? v.remainingDistance : null,v.ui.allStats);
     }
 }

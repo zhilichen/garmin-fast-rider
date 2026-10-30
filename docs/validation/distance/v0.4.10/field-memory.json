@@ -1,0 +1,95 @@
+[
+  {
+    "device": "edge530",
+    "used_bytes": 102648,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge540",
+    "used_bytes": 76368,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge550",
+    "used_bytes": 82408,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge830",
+    "used_bytes": 106776,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge840",
+    "used_bytes": 78968,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge850",
+    "used_bytes": 85008,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge1030",
+    "used_bytes": 116264,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge1030bontrager",
+    "used_bytes": 116416,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge1030plus",
+    "used_bytes": 116344,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge1040",
+    "used_bytes": 84920,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge1050",
+    "used_bytes": 85464,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge1060",
+    "used_bytes": 85464,
+    "total_bytes": 127424,
+    "case": "default synthetic first frame",
+    "note": "Actual field heap; not a real-ride peak."
+  },
+  {
+    "device": "edge1030",
+    "used_bytes": 125024,
+    "total_bytes": 127424,
+    "case": "power-four-capacity",
+    "history_points_per_series": 128,
+    "lap_markers": 100,
+    "note": "Synthetic first-frame heap only."
+  }
+]

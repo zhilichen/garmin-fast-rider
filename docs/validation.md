@@ -1,3 +1,5 @@
+最新里程排版验收：[v0.4.10 主里程与mi/剩余里程上下叠排](validation/distance/v0.4.10/README.md)。
+
 最新功率显示验收：[v0.4.9 右对齐Zone与三/四位数字拟合](validation/power/v0.4.9/README.md)。
 
 最新停止页验收：[v0.4.8 精简标签、放大数字与加宽右栏](validation/summary/v0.4.8/README.md)。

@@ -472,19 +472,23 @@ class FastRiderView extends WatchUi.DataField {
     function distancePartsWithin(dc, distance, remaining, all, available, maxTop) as Lang.Array {
         return distancePartsUsing(dc,distance,remaining,all,available,maxTop,FontInk.DISTANCE_PAIRS,true);
     }
+    function distanceText(distance, remaining, all, pass) as Lang.Array {
+        var rest = all ? RideMath.remainingMilesText(remaining,pass == 0 ? 1 : 0) : null;
+        var whole = pass >= 2 || (pass >= 1 && rest == null);
+        var shown = distance == null ? "--" : (distance/1609.344).format(whole ? "%.0f" : (all ? "%.1f" : "%.2f"));
+        return [shown,rest];
+    }
     function distancePartsUsing(dc, distance, remaining, all, available, maxTop, pairs as Lang.Array, showUnit) as Lang.Array {
-        var shown = distance == null ? "--" : (distance/1609.344).format(all ? "%.1f" : "%.2f");
-        var rest = all ? RideMath.remainingMilesText(remaining, 1) : null;
-        // Fit complete decimal strings before considering extreme-value rounding.
+        // Preserve full decimal strings before rounding either part.
         for (var pass = 0; pass < 3; pass += 1) {
+            var text = distanceText(distance,remaining,all,pass);
             for (var i = 0; i < pairs.size(); i += 1) {
-                var pair = pairs[i] as Lang.Array; var parts = [shown,rest,pair[0],pair[1]];
+                var pair = pairs[i] as Lang.Array; var parts = [text[0],text[1],pair[0],pair[1]];
                 if (distanceRowWidthFor(parts,showUnit) <= available && (maxTop == null || FontInk.TOP[pair[0]] <= maxTop && FontInk.TOP[pair[1]] <= maxTop)) { return parts; }
             }
-            if (pass == 0 && rest != null) { rest = RideMath.remainingMilesText(remaining, 0); }
-            else if (distance != null) { shown = (distance/1609.344).format("%.0f"); }
         }
-        return [shown,null,4,15];
+        var text = distanceText(distance,remaining,all,2);
+        return [text[0],null,4,15];
     }
     function clockText() {
         var clock = System.getClockTime();
