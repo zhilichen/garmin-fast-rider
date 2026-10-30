@@ -4,7 +4,8 @@ import Toybox.Lang;
 class PowerHistory {
     const WINDOW_MS = 300000;
     const BUCKET_MS = 3000;
-    const MAX_POINTS = 160;
+    // Ordinary windows need ~101 buckets; reserve the remainder for gaps.
+    const MAX_POINTS = 128;
     const MAX_LAPS = 100;
     // [first timestamp, last timestamp, sum watts, sample count, segment]
     var points as Lang.Array<Lang.Array<Lang.Numeric>> = [];

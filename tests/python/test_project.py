@@ -33,6 +33,24 @@ class DeviceProjectTests(unittest.TestCase):
             else:
                 self.assertEqual(hashlib.sha256(actual.read_bytes()).hexdigest(),sha,name)
 
+    def test_display_label_subset_keeps_original_glyphs(self):
+        def read_font(path):
+            lines=path.read_text().splitlines();glyphs={}
+            for line in lines:
+                if line.startswith('char id='):
+                    row={k:int(v) for k,v in re.findall(r'(\w+)=(-?\d+)',line)};glyphs[row['id']]=row
+            return glyphs
+        for folder in (ROOT/'resources/fonts').iterdir():
+            if not folder.is_dir():continue
+            original=read_font(folder/'Meta18.fnt');subset=read_font(folder/'MetaDisplay18.fnt')
+            a=Image.open(folder/'Meta18.png');b=Image.open(folder/'MetaDisplay18.png')
+            for key,row in subset.items():
+                old=original[key]
+                for metric in ('width','height','xoffset','yoffset','xadvance'):
+                    self.assertEqual(old[metric],row[metric],(folder.name,key,metric))
+                crop=lambda im,r:im.crop((r['x'],r['y'],r['x']+r['width'],r['y']+r['height']))
+                self.assertIsNone(ImageChops.difference(crop(a,old),crop(b,row)).getbbox(),(folder.name,key))
+
     def test_full_decimal_distance_fits_every_profile(self):
         chars='0123456789.-()mi'
         for folder in (ROOT/'config/display').iterdir():
@@ -75,10 +93,11 @@ class DeviceProjectTests(unittest.TestCase):
             def metric(key):return json.loads(re.search('const '+key+' = (.*);',ink)[1])
             def anchor(key):return int(re.search('const '+key+' = (.*);',layout)[1])
             top,bottom=metric('TOP'),metric('BOTTOM')
-            self.assertEqual(len(metric('SIZES')),27)
+            self.assertEqual(len(metric('SIZES')),35)
             self.assertGreater(metric('NUMERIC_RIGHT')[16][16],metric('NUMERIC_LEFT')[16][16])
-            self.assertLess(anchor('STATS_TITLE_BASELINE')+bottom[3]+1,anchor('STATS_TIME_BASELINE')-top[16],name)
+            self.assertEqual(anchor('STATS_TITLE_BASELINE'),anchor('STATS_TIME_BASELINE'),name)
             self.assertLess(anchor('STATS_TIME_BASELINE')+bottom[16]+1,anchor('STATS_AVERAGE_BASELINE')-top[18],name)
-            self.assertLess(anchor('STATS_AVERAGE_BASELINE')+bottom[18]+1,anchor('STATS_DISTANCE_BASELINE')-top[17],name)
+            side=json.loads(re.search('const LIVE_SIDE_FACES = (.*);',ink)[1])[2]
+            self.assertLess(anchor('STATS_AVERAGE_BASELINE')+bottom[3]+1,anchor('STATS_DISTANCE_BASELINE')-top[side],name)
 
 if __name__=='__main__':unittest.main()

@@ -4,9 +4,9 @@ import argparse,json,shutil
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 
-def prepare(device,case):
+def prepare(device,case,destination=None):
     devices=json.loads((ROOT/'config/devices.json').read_text())['devices'];d=devices[device]
-    target=ROOT/'.local/snapshots'/device
+    target=Path(destination) if destination is not None else ROOT/'.local/snapshots'/device
     shutil.copytree(ROOT/'source',target/'source',dirs_exist_ok=True)
     p=target/'source/app/FastRiderView.mc';s=p.read_text()
     for a,b in [('var t = (System.getTimer()-start)/1000.0;','var t = 0.0;'),('var clock = System.getClockTime();',''),('RideMath.clock12(clock.hour, clock.min)','RideMath.clock12(15, 47)')]:
@@ -21,6 +21,34 @@ def prepare(device,case):
         s=s.replace('hr = 158; cadence = 64; rearGear = 5; speed = 10.0138;','hr = null; cadence = null; rearGear = null; speed = null;')
         s=s.replace('grade = 6.4;','grade = null;').replace('remainingDistance = 19955.8656;','remainingDistance = null;')
         s=s.replace('rolling.update(timerMillis, power, true);','rolling.reset(); power = null;')
+    if case in ('lap', 'lap-hours', 'hours-stress', 'ten-second'):
+        anchor='        trend.update(millis, power, true);\n    }\n    function onTimerReset()'
+        extra=''
+        if case in ('lap', 'lap-hours'):
+            extra+='        ui.allStats = false;\n'
+        if case == 'lap-hours':
+            extra+='        lapNumber = 12; lap.timeMs = 4992000; lap.distance = 12.34*1609.344;\n'
+        if case == 'hours-stress':
+            extra+='        timerMillis = 360000000;\n'
+        if case == 'ten-second':
+            extra+='        ui.powerSeconds = 10;\n'
+        if s.count(anchor)!=1:raise ValueError('Riding snapshot anchor changed')
+        s=s.replace(anchor,'        trend.update(millis, power, true);\n'+extra+'    }\n    function onTimerReset()')
+    if case == 'capacity':
+        anchor='        trend.update(millis, power, true);\n    }\n    function onTimerReset()'
+        extra='''        if (trend.boundaries.size() < 100) {
+            trend.points = []; trend.medium.points = []; trend.whole.points = []; trend.boundaries = [];
+            for (var i = 0; i < trend.MAX_POINTS; i += 1) {
+                var at = (4988-trend.MAX_POINTS+i)*1000;
+                trend.points.add([at,at,250,1,i]);
+                at = (4988-5*trend.medium.MAX_POINTS+i*5)*1000; trend.medium.points.add([at,at,250,1,i]);
+                at = 30000*i; trend.whole.points.add([at,at,250,1,i]);
+            }
+            for (var i = 0; i < 100; i += 1) { trend.boundaries.add(i*49000); }
+        }
+'''
+        if s.count(anchor)!=1:raise ValueError('Capacity snapshot anchor changed')
+        s=s.replace(anchor,'        trend.update(millis, power, true);\n'+extra+'    }\n    function onTimerReset()')
     if case.startswith('stopped'):
         anchor='        trend.update(millis, power, true);\n    }\n    function onTimerReset()'
         if s.count(anchor)!=1:raise ValueError('Summary snapshot anchor changed')
@@ -39,4 +67,4 @@ def prepare(device,case):
     return target/'snapshot.jungle'
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('device');p.add_argument('--case',choices=['default','stress','missing','stopped','stopped-stress','stopped-missing'],default='default');a=p.parse_args();print(prepare(a.device,a.case))
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('device');p.add_argument('--case',choices=['default','stress','missing','stopped','stopped-stress','stopped-missing','lap','lap-hours','hours-stress','ten-second','capacity'],default='default');a=p.parse_args();print(prepare(a.device,a.case))

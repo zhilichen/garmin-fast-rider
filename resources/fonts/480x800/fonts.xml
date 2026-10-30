@@ -26,4 +26,13 @@
   <font id="LiveSideLabel13" filename="LiveSideLabel13.fnt" antialias="true"/>
   <font id="LiveSidePercent22" filename="LiveSidePercent22.fnt" antialias="true"/>
   <font id="SummaryLabel14" filename="SummaryLabel14.fnt" antialias="true"/>
+  <font id="PrimaryCompact58" filename="PrimaryCompact58.fnt" antialias="true"/>
+  <font id="RemainingRide30" filename="RemainingRide30.fnt" antialias="true"/>
+  <font id="RideSeconds46" filename="RideSeconds46.fnt" antialias="true"/>
+  <font id="RideSeconds36" filename="RideSeconds36.fnt" antialias="true"/>
+  <font id="RideSeconds32" filename="RideSeconds32.fnt" antialias="true"/>
+  <font id="RideSeconds30" filename="RideSeconds30.fnt" antialias="true"/>
+  <font id="RideSeconds26" filename="RideSeconds26.fnt" antialias="true"/>
+  <font id="RideSeconds18" filename="RideSeconds18.fnt" antialias="true"/>
+  <font id="MetaDisplay18" filename="MetaDisplay18.fnt" antialias="true"/>
 </fonts>

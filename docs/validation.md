@@ -1,3 +1,5 @@
+最新骑行页验收：[v0.4.7 Zone/时间/距离原生截图与测试](validation/riding/v0.4.7/README.md)。
+
 最新停止页验收：[v0.4.6 原生截图与测试](validation/summary/v0.4.6/README.md)。
 
 最新实时信息布局验收：[v0.4.5 原生截图与测试](validation/live-cells/v0.4.5/README.md)。

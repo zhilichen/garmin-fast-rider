@@ -2,7 +2,8 @@
 // Adaptive all-ride buckets compact without discarding the start of the ride.
 import Toybox.Lang;
 class PowerSeries {
-    const MAX_POINTS = 160;
+    // Ordinary windows need ~101 buckets; reserve the remainder for gaps.
+    const MAX_POINTS = 128;
     var points as Lang.Array<Lang.Array<Lang.Numeric>> = [];
     var bucketMs;
     var initialBucket;

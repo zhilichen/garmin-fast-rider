@@ -1,0 +1,86 @@
+[
+  {
+    "device": "edge530",
+    "used_bytes": 100216,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge540",
+    "used_bytes": 74488,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge550",
+    "used_bytes": 78056,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge830",
+    "used_bytes": 104352,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge840",
+    "used_bytes": 77088,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge850",
+    "used_bytes": 80664,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge1030",
+    "used_bytes": 113368,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge1030bontrager",
+    "used_bytes": 113512,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge1030plus",
+    "used_bytes": 113448,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge1040",
+    "used_bytes": 80584,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge1050",
+    "used_bytes": 81120,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  },
+  {
+    "device": "edge1060",
+    "used_bytes": 81120,
+    "total_bytes": 127424,
+    "mode": "snapshot field heap",
+    "history": "deterministic 83-minute ride, first rendered frame"
+  }
+]

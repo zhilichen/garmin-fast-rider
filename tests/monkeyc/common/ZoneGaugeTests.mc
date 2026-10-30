@@ -22,8 +22,11 @@ function zoneGaugeGeometryTest(logger) {
             Test.assert(v.packedWidth(z.format("%d"),f)+2*Layout.ZONE_BADGE_PADDING <= v.zoneBadgeWidth(dc,z,faces[i]));
         }
         var top = Layout.ZONE_BADGE_BOTTOM-FontInk.TOP[f]-FontInk.BOTTOM[f]-FontInk.NATIVE_BOTTOM_PAD-2*Layout.ZONE_BADGE_PADDING;
-        Test.assert(top >= Layout.RADAR_BOTTOM);
+        Test.assert(top > Layout.PRIMARY_BASELINE-FontInk.TOP[0]);
+        Test.assert(v.powerBadgeRight() <= Layout.RADAR_LEFT-Layout.u(2));
     }
+    Test.assert(FontInk.TOP[v.zoneBadgeFont(0)] > FontInk.TOP[5]);
+    Test.assert(Layout.ZONE_BADGE_BOTTOM-Layout.ZONE_BADGE_PADDING-FontInk.NATIVE_BOTTOM_PAD > Layout.PRIMARY_BASELINE);
     Test.assert(Layout.ZONE_BADGE_BOTTOM < Layout.ZONE_WEDGE_TOP);
     Test.assert(Layout.ZONE_WEDGE_BOTTOM < Layout.MIDDLE_TOP);
     Test.assert(Layout.ZONE_WEDGE_THIN >= Layout.STROKE*2);

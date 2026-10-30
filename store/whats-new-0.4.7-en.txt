@@ -1,0 +1,8 @@
+Larger Zone badges and a clearer riding layout:
+- Heart-rate and power Zone numbers are larger and sit higher beside the live readings.
+- Raised Zone progress gauges give the middle data area more room.
+- All / Lap and time now share a row. Once hours appear, seconds use a smaller size.
+- Larger distance statistics, with blue remaining navigation distance when available.
+- Shared layouts across all 12 supported Edge models; the paused summary keeps its existing layout.
+- On-demand font loading with a bounded cache for lower-memory devices.
+- Bounded history memory for older Edge runtimes; ordinary 5m/20m sampling stays unchanged.

@@ -57,7 +57,7 @@ function powerWindowTest(logger) {
     for (var i = 0; i < 250; i += 1) {
         h.beginLap(i*1000); h.update(i*1000, 0, true);
     }
-    Test.assertEqual(h.points.size(), 160);
+    Test.assertEqual(h.points.size(), h.MAX_POINTS);
     Test.assertEqual(h.boundaries.size(), 100);
     h.reset();
     Test.assert(h.endTime == null && h.points.size() == 0 && h.lapStart == null);
@@ -234,7 +234,7 @@ function multiRangeHistoryTest(logger) {
     Test.assertEqual(h.boundaries.size(), 3);
     Test.assertEqual(h.windowMillis(0), 300000); Test.assertEqual(h.windowMillis(1), 1200000);
     Test.assertEqual(h.windowMillis(2), 3600000);
-    Test.assert(h.points.size() <= 160 && h.medium.points.size() <= 160 && h.whole.points.size() <= 160);
+    Test.assert(h.points.size() <= h.MAX_POINTS && h.medium.points.size() <= h.medium.MAX_POINTS && h.whole.points.size() <= h.whole.MAX_POINTS);
     h.update(0, 0, true);
     Test.assertEqual(h.whole.points.size(), 1); Test.assertEqual(h.medium.points.size(), 1);
     return true;
@@ -245,7 +245,7 @@ function allRideCompactionTest(logger) {
     var s = new PowerSeries(30000, null, true);
     // 24 hours, with a zero-watt interval and a break. No discarded beginning.
     for (var i = 0; i <= 5760; i += 1) { s.add(i*15000, i < 100 ? 0 : 240, i < 2000 ? 1 : 2); }
-    Test.assert(s.points.size() <= 160); Test.assert(s.bucketMs > 30000);
+    Test.assert(s.points.size() <= s.MAX_POINTS); Test.assert(s.bucketMs > 30000);
     Test.assertEqual(s.points[0][0], 0); Test.assertEqual(s.points[s.points.size()-1][1], 86400000);
     var count = 0; var sum = 0.0;
     for (var i = 0; i < s.points.size(); i += 1) { count += s.points[i][3]; sum += s.points[i][2]; }
@@ -296,23 +296,23 @@ function edge840ReferenceMetricsTest(logger) {
     var dc = TestPlatform.dc(16,16);
     var v = new FastRiderView(); v.loadFonts();
     // Ordinary 3-digit and fallback 4-digit power stay left of the radar overlay.
-    Test.assertEqual(dc.getTextWidthInPixels("303", v.fonts[0]), 87);
-    Test.assert(Layout.RIGHT_START+dc.getTextWidthInPixels("999", v.fonts[v.primaryFont(dc, "999")]) <= Layout.RADAR_LEFT);
-    Test.assert(Layout.RIGHT_START+dc.getTextWidthInPixels("1234", v.fonts[v.primaryFont(dc, "1234")]) <= Layout.RADAR_LEFT);
+    Test.assertEqual(dc.getTextWidthInPixels("303", v.font(0)), 87);
+    Test.assert(Layout.RIGHT_START+dc.getTextWidthInPixels("999", v.font(v.primaryFont(dc, "999"))) <= Layout.RADAR_LEFT);
+    Test.assert(Layout.RIGHT_START+dc.getTextWidthInPixels("1234", v.font(v.primaryFont(dc, "1234"))) <= Layout.RADAR_LEFT);
     Test.assert(v.packedWidth("120", 1) <= Layout.LIVE_RIGHT_WIDTH);
     Test.assertEqual(v.liveFont("120", Layout.LIVE_RIGHT_WIDTH), 1);
     Test.assertEqual(v.liveFont("22.4", Layout.LIVE_RIGHT_WIDTH), 1);
     Test.assertEqual(v.liveFont("100.5", Layout.LIVE_RIGHT_WIDTH), 7);
-    Test.assert(dc.getTextWidthInPixels("1:23:08", v.fonts[5]) <= 118);
-    Test.assert(dc.getTextWidthInPixels("12:23:08", v.fonts[7]) <= 118);
-    Test.assert(dc.getTextWidthInPixels("245", v.fonts[2])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 118);
-    Test.assert(dc.getTextWidthInPixels("1234", v.fonts[6])+3+dc.getTextWidthInPixels("AVG", v.fonts[3]) <= 118);
-    Test.assert(dc.getTextWidthInPixels("0.42", v.fonts[5])+3+dc.getTextWidthInPixels("mi", v.fonts[3]) <= 118);
-    Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[0]), 58);
-    Test.assertEqual(Toybox.Graphics.getFontAscent(v.fonts[8]), 44);
+    Test.assert(dc.getTextWidthInPixels("1:23:08", v.font(5)) <= 118);
+    Test.assert(dc.getTextWidthInPixels("12:23:08", v.font(7)) <= 118);
+    Test.assert(dc.getTextWidthInPixels("245", v.font(2))+3+dc.getTextWidthInPixels("AVG", v.font(3)) <= 118);
+    Test.assert(dc.getTextWidthInPixels("1234", v.font(6))+3+dc.getTextWidthInPixels("AVG", v.font(3)) <= 118);
+    Test.assert(dc.getTextWidthInPixels("0.42", v.font(5))+3+dc.getTextWidthInPixels("mi", v.font(3)) <= 118);
+    Test.assertEqual(Toybox.Graphics.getFontAscent(v.font(0)), 58);
+    Test.assertEqual(Toybox.Graphics.getFontAscent(v.font(8)), 44);
     Test.assertEqual(v.zoneBadgeWidth(dc, 6, 0), Layout.ZONE_BADGE_WIDTH);
     Test.assertEqual(v.zoneBadgeWidth(dc, 7, 6), Layout.ZONE_SMALL_BADGE_WIDTH);
-    // Number-only badges reserve a bounded outline lane below the radar area.
+    // Raised number-only badges reserve a lane left of the radar area.
     Test.assertEqual(v.heartFont(dc, "199"), 0);
     Test.assertEqual(v.fontSizes[v.heartFont(dc, "199")], 58);
     Test.assertEqual(v.fontSizes[1], 38);
@@ -323,7 +323,7 @@ function edge840ReferenceMetricsTest(logger) {
     Test.assert(Layout.ZONE_BADGE_BOTTOM < Layout.ZONE_WEDGE_TOP);
     Test.assert(Layout.PRIMARY_BASELINE-FontInk.TOP[0] >= 1);
     Test.assert(Layout.PRIMARY_BASELINE-FontInk.TOP[0] <= 2);
-    Test.assert(Layout.ZONE_BADGE_BOTTOM-FontInk.TOP[5]-FontInk.BOTTOM[5]-FontInk.NATIVE_BOTTOM_PAD-2*Layout.ZONE_BADGE_PADDING >= Layout.RADAR_BOTTOM);
+    Test.assert(v.powerBadgeRight() <= Layout.RADAR_LEFT-Layout.u(2));
     Test.assert(Layout.ZONE_BADGE_BOTTOM < Layout.ZONE_WEDGE_TOP);
     // AA backdrop clips use ink bounds: adjacent rows must remain disjoint.
     var timeFonts = [5, 7, 4];
@@ -331,7 +331,12 @@ function edge840ReferenceMetricsTest(logger) {
         Test.assert(132+FontInk.BOTTOM[timeFonts[i]]+FontInk.NATIVE_BOTTOM_PAD < 180-FontInk.TOP[2]);
     }
     Test.assert(170+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD < 212-FontInk.TOP[1]);
-    Test.assert(Layout.UNIT_BASELINE+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD < Layout.ZONE_WEDGE_TOP);
+    // The angled gauge may share vertical space with the caption, but its local edge must stay below it.
+    var unitRight = Layout.RIGHT_START+Layout.BOLT_WIDTH+Layout.INLINE_GAP+v.textWidth(dc,"10s",3);
+    var edge = Layout.ZONE_WEDGE_BOTTOM-Layout.ZONE_WEDGE_THIN+1;
+    var fraction = (unitRight-Layout.RIGHT_START-Layout.STROKE/2.0)/(Layout.RIGHT_WIDTH-1-Layout.STROKE);
+    var localTop = edge+(Layout.ZONE_WEDGE_TOP+Layout.STROKE/2.0-edge)*fraction-Layout.STROKE/2.0;
+    Test.assert(Layout.UNIT_BASELINE+FontInk.NATIVE_BOTTOM_PAD < localTop);
     Test.assert(Layout.ZONE_WEDGE_BOTTOM+Layout.STROKE/2 < Layout.MIDDLE_TOP);
     v.trend.endTime = 600000;
     Test.assertEqual(v.chartX(600000), Layout.PLOT_RIGHT);
@@ -347,15 +352,15 @@ function edge840ReferenceMetricsTest(logger) {
     Test.assert(v.rangeWidth(dc, "5m") > v.textWidth(dc, "< 5m >", 3));
     Test.assert(v.rangeWidth(dc, "All") <= rangeWidth);
     Test.assert(2+v.textWidth(dc, "99999", 11)+3+v.textWidth(dc, "ft", 12)+4 <= 123-rangeWidth/2);
-    Test.assert(123+rangeWidth/2+4 <= 244-dc.getTextWidthInPixels("12:59 PM", v.fonts[3]));
-    Test.assert(Layout.RIGHT_START+14+4+dc.getTextWidthInPixels("10s", v.fonts[3]) < 244-v.zoneBadgeWidth(dc, 7, 0));
+    Test.assert(123+rangeWidth/2+4 <= 244-dc.getTextWidthInPixels("12:59 PM", v.font(3)));
+    Test.assert(Layout.RIGHT_START+14+4+dc.getTextWidthInPixels("10s", v.font(3)) < 244-v.zoneBadgeWidth(dc, 7, 0));
     Test.assertEqual(RideMath.remainingMilesText(9.9*1609.344, 1), "(-9.9)");
     Test.assertEqual(RideMath.remainingMilesText(0, 1), "(0.0)");
     Test.assert(RideMath.remainingMilesText(null, 1) == null);
     Test.assert(RideMath.remainingMilesText(-1, 1) == null);
     var d = v.distanceParts(dc, 10.7*1609.344, 9.9*1609.344, true);
     Test.assertEqual(d[0], "10.7"); Test.assertEqual(d[1], "(-9.9)");
-    Test.assertEqual(d[2], 5); Test.assertEqual(d[3], 13);
+    Test.assert(FontInk.TOP[d[2]] > FontInk.TOP[5]); Test.assert(FontInk.TOP[d[3]] > FontInk.TOP[13]);
     Test.assert(FontInk.TOP[d[3]] > FontInk.TOP[12]);
     Test.assert(FontInk.TOP[d[3]] < FontInk.TOP[d[2]]);
     Test.assert(v.distanceParts(dc, 10.7*1609.344, null, true)[1] == null);
@@ -469,7 +474,7 @@ function responsiveGeometryTest(logger) {
         var face = v.liveFont(values[i],Layout.LIVE_RIGHT_WIDTH);
         Test.assert(v.packedWidth(values[i],face) <= Layout.LIVE_RIGHT_WIDTH);
     }
-    Test.assert(Layout.ZONE_BADGE_BOTTOM-FontInk.TOP[5]-FontInk.BOTTOM[5]-FontInk.NATIVE_BOTTOM_PAD-2*Layout.ZONE_BADGE_PADDING >= Layout.RADAR_BOTTOM);
+    Test.assert(v.powerBadgeRight() <= Layout.RADAR_LEFT-Layout.u(2));
     Test.assert(Layout.ZONE_BADGE_BOTTOM < Layout.ZONE_WEDGE_TOP);
     Test.assert(Layout.LIVE_LABEL_BOTTOM+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD < Layout.LIVE_VALUE_BOTTOM-FontInk.TOP[1]);
     Test.assert(Layout.STATS_TIME_BASELINE+FontInk.BOTTOM[5]+FontInk.NATIVE_BOTTOM_PAD < Layout.STATS_AVERAGE_BASELINE-FontInk.TOP[2]);
@@ -484,7 +489,7 @@ function responsiveGeometryTest(logger) {
 function numericEmphasisTest(logger) {
     var dc = TestPlatform.dc(16,16); var v = new FastRiderView(); v.loadFonts();
     Test.assertEqual(v.fonts.size(),FontInk.SIZES.size());
-    if (!FontInk.PACK_STATS) { Test.assertEqual(v.fonts.size(),23); return true; }
+    if (!FontInk.PACK_STATS) { Test.assertEqual(v.fonts.size(),29); return true; }
     // Enlarged faces must fit without sacrificing decimal precision or cropping.
     var values = ["64","120","22.4","100.5"];
     for (var i = 0; i < values.size(); i += 1) {
@@ -493,10 +498,11 @@ function numericEmphasisTest(logger) {
     }
     Test.assert(v.fontSizes[v.liveFont("64",Layout.LIVE_RIGHT_WIDTH)] > v.fontSizes[1]);
     Test.assert(v.fontSizes[v.liveFont("22.4",Layout.LIVE_RIGHT_WIDTH)] > v.fontSizes[5]);
-    var tf = v.statsFace(dc,"1:23:08",FontInk.STATS_FACES,Layout.STATS_VALUE_WIDTH);
+    var timeParts = RideStatistics.timeParts(v,dc,"All","1:23:08");
+    var tf = timeParts[2];
     Test.assert(v.fontSizes[tf] > v.fontSizes[5]);
-    Test.assert(v.statsWidth(dc,"1:23:08",tf) <= Layout.STATS_VALUE_WIDTH);
-    Test.assert(Layout.STATS_TITLE_BASELINE+FontInk.BOTTOM[3]+FontInk.NATIVE_BOTTOM_PAD+Layout.u(2) <= Layout.STATS_TIME_BASELINE-FontInk.TOP[tf]);
+    Test.assert(v.textWidth(dc,"All",timeParts[4])+Layout.STATS_GAP+timeParts[5] <= Layout.RIGHT_WIDTH);
+    Test.assertEqual(Layout.STATS_TITLE_BASELINE,Layout.STATS_TIME_BASELINE);
     var available = Layout.RIGHT_WIDTH-v.textWidth(dc,"AVG",3)-Layout.STATS_GAP;
     var af = v.statsFace(dc,"212",FontInk.AVERAGE_FACES,available);
     Test.assert(v.fontSizes[af] > v.fontSizes[2]);

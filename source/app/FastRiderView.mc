@@ -38,7 +38,10 @@ class FastRiderView extends WatchUi.DataField {
     var start;
     var width = Layout.WIDTH;
     var height = Layout.HEIGHT;
-    var fonts as Lang.Array<Graphics.FontType> or Null = null;
+    var fonts as Lang.Array<Graphics.FontType or Null> or Null = null;
+    var fontResources as Lang.Array = [];
+    var fontOrder as Lang.Array<Lang.Number> = [];
+    var fontCacheLimit = 16;
     var fontSizes as Lang.Array<Lang.Number> = FontInk.SIZES;
     var flashRegion = 0;
     var flashUntil = 0;
@@ -52,6 +55,7 @@ class FastRiderView extends WatchUi.DataField {
 
     function initialize() {
         DataField.initialize();
+        if (!(Graphics has :createBufferedBitmap)) { fontCacheLimit = 8; }
         theme = new DisplayTheme();
         screen = new RideScreenState(); normalized = new NormalizedPower();
         gradeEstimator = new GradeEstimator();
@@ -209,7 +213,20 @@ class FastRiderView extends WatchUi.DataField {
     }
     function loadFonts() {
         if (fonts != null) { return; }
-        fonts = FontInk.load();
+        fontResources = FontInk.resources();
+        fonts = [];
+        for (var i = 0; i < fontResources.size(); i += 1) { fonts.add(null); }
+    }
+    // Preserve role indices while loading only the glyph atlases actually used.
+    // Retired Zone/Z faces and unused size fallbacks consume no field heap.
+    function font(index) as Graphics.FontType {
+        if (fonts[index] == null) {
+            // Bound retained atlases across view and digit-width changes on 530/830.
+            if (fontOrder.size() >= fontCacheLimit) { fonts[fontOrder[0]] = null; fontOrder.remove(fontOrder[0]); }
+            fonts[index] = WatchUi.loadResource(fontResources[index]) as Graphics.FontType;
+        } else { fontOrder.remove(index); }
+        fontOrder.add(index);
+        return fonts[index] as Graphics.FontType;
     }
     function color(dc, c) { dc.setColor(c, Graphics.COLOR_TRANSPARENT); }
     function text(dc, x, baseline, index, value, c, align) {
@@ -220,12 +237,30 @@ class FastRiderView extends WatchUi.DataField {
         var bottom = RideMath.clamp(baseline+FontInk.BOTTOM[index]+FontInk.NATIVE_BOTTOM_PAD, 0, height);
         if (bottom <= top) { return; }
         dc.setClip(0, top, width, bottom-top);
-        dc.drawText(x, baseline-fontSizes[index], fonts[index], value, align);
+        dc.drawText(x, baseline-fontSizes[index], font(index), value, align);
         dc.clearClip();
     }
-    function textWidth(dc, value, index) { return dc.getTextWidthInPixels(value, fonts[index]); }
+    function textWidth(dc, value, index) { return dc.getTextWidthInPixels(value, font(index)); }
     function intText(value) { return value == null ? "--" : Math.round(value).toNumber().format("%d"); }
-    function primaryFont(dc, value) { return textWidth(dc, value, 0) <= Layout.RADAR_LEFT-Layout.RIGHT_START ? 0 : 6; }
+    function primaryFont(dc, value) {
+        var available = powerValueWidth();
+        if (numberWidth(dc,value,0,0) <= available) { return 0; }
+        if (packedWidth(value,FontInk.PRIMARY_COMPACT) <= available) { return FontInk.PRIMARY_COMPACT; }
+        return compactPrimaryFont(value,available);
+    }
+    function compactPrimaryFont(value, available) {
+        for (var i = 0; i < FontInk.LIVE_SIDE_FACES.size(); i += 1) {
+            var f = FontInk.LIVE_SIDE_FACES[i];
+            if (packedWidth(value,f) <= available) { return f; }
+        }
+        return 4;
+    }
+    function primaryBaseline(face) {
+        var extra = FontInk.TOP[face]-FontInk.TOP[0];
+        return Layout.PRIMARY_BASELINE+(extra > 0 ? extra : 0);
+    }
+    function powerBadgeRight() { return Layout.RADAR_LEFT-Layout.u(2); }
+    function powerValueWidth() { return powerBadgeRight()-Layout.ZONE_BADGE_WIDTH-Layout.RIGHT_START-Layout.PRIMARY_ZONE_GAP; }
     function digitIndex(ch) {
         if (ch.equals(".")) { return 10; } if (ch.equals("-")) { return 11; }
         if (ch.equals("(")) { return 12; } if (ch.equals(")")) { return 13; }
@@ -258,14 +293,14 @@ class FastRiderView extends WatchUi.DataField {
             // Use the unchanged original glyph with its full advance. Restrict
             // the theme AA backdrop so it cannot erase its closer neighbor.
             dc.setClip(lo, top, hi-lo, h); dc.setColor(c, theme.background);
-            dc.drawText(origin+pen, baseline-fontSizes[index], fonts[index], ch, Graphics.TEXT_JUSTIFY_LEFT);
+            dc.drawText(origin+pen, baseline-fontSizes[index], font(index), ch, Graphics.TEXT_JUSTIFY_LEFT);
             dc.clearClip(); pen += textWidth(dc, ch, index)-tracking;
         }
     }
     function heartFont(dc, value) {
         var tracking = value.length() > 2 ? Layout.HEART_TRACKING : 0;
         var bounds = numberBounds(dc, value, 0, tracking);
-        return bounds[1]+textWidth(dc, "7", 8)+Layout.PACKED_GAP <= Layout.LEFT_WIDTH ? 0 : 6;
+        return bounds[1]-bounds[0]+Layout.ZONE_BADGE_WIDTH+Layout.PRIMARY_ZONE_GAP <= Layout.LEFT_WIDTH ? 0 : 6;
     }
     function packedGap(value, position) {
         if (position >= value.length()-1) { return 0; }
@@ -288,7 +323,7 @@ class FastRiderView extends WatchUi.DataField {
             var left = FontInk.NUMERIC_LEFT[index][d];
             var w = FontInk.NUMERIC_RIGHT[index][d]-left;
             dc.setClip(cursor, top, w, h); dc.setColor(c, theme.background);
-            dc.drawText(cursor-left, baseline-fontSizes[index], fonts[index], ch, Graphics.TEXT_JUSTIFY_LEFT);
+            dc.drawText(cursor-left, baseline-fontSizes[index], font(index), ch, Graphics.TEXT_JUSTIFY_LEFT);
             dc.clearClip(); cursor += w+packedGap(value,i);
         }
     }
@@ -361,9 +396,10 @@ class FastRiderView extends WatchUi.DataField {
         var tracking = hf == 0 && h.length() > 2 ? Layout.HEART_TRACKING : 0;
         var hx = Layout.LEFT_EDGE; var bx = Layout.RIGHT_START;
         drawDigits(dc, hx-numberBounds(dc, h, hf, tracking)[0], Layout.PRIMARY_BASELINE, hf, h, hc, tracking, false);
-        drawDigits(dc, bx-numberBounds(dc, p, pf, 0)[0], Layout.PRIMARY_BASELINE, pf, p, pc, 0, false);
+        if (pf == 0) { drawDigits(dc,bx-numberBounds(dc,p,pf,0)[0],Layout.PRIMARY_BASELINE,pf,p,pc,0,false); }
+        else { drawPacked(dc,bx,primaryBaseline(pf),pf,p,pc); }
         drawZoneBadge(dc, Layout.LEFT_RIGHT, hz, hf, hc);
-        drawZoneBadge(dc, Layout.RIGHT_EDGE, pz, pf, pc);
+        drawZoneBadge(dc, powerBadgeRight(), pz, pf, pc);
         var iy = Layout.UNIT_BASELINE-Layout.BOLT_WIDTH;
         drawHeart(dc, hx, iy);
         drawBolt(dc, bx, iy);
@@ -375,12 +411,12 @@ class FastRiderView extends WatchUi.DataField {
         color(dc, theme.red);
         dc.fillPolygon([[x+Layout.u(8),y+Layout.u(2)],[x+Layout.u(6),y],[x+Layout.u(3),y],[x,y+Layout.u(3)],[x,y+Layout.u(6)],[x+Layout.u(2),y+Layout.u(9)],[x+Layout.u(8),y+Layout.u(14)],[x+Layout.u(14),y+Layout.u(9)],[x+Layout.u(16),y+Layout.u(6)],[x+Layout.u(16),y+Layout.u(3)],[x+Layout.u(13),y],[x+Layout.u(10),y]]);
     }
-    function zoneBadgeFont(mainFont) { return mainFont == 6 ? 4 : 5; }
+    function zoneBadgeFont(mainFont) { return 1; }
     function zoneBadgeWidth(dc, zone, mainFont) {
         return mainFont == 6 ? Layout.ZONE_SMALL_BADGE_WIDTH : Layout.ZONE_BADGE_WIDTH;
     }
     function drawZoneBadge(dc, right, zone, mainFont, c) {
-        var nf = zone == 0 ? 3 : zoneBadgeFont(mainFont);
+        var nf = zoneBadgeFont(mainFont);
         var number = zone == 0 ? "--" : zone.format("%d");
         var w = zoneBadgeWidth(dc, zone, mainFont);
         var h = FontInk.TOP[nf]+FontInk.BOTTOM[nf]+FontInk.NATIVE_BOTTOM_PAD+2*Layout.ZONE_BADGE_PADDING;
@@ -415,46 +451,26 @@ class FastRiderView extends WatchUi.DataField {
     function zoneGaugeWidth(barWidth, fraction) {
         return fraction == null ? 0 : DisplayRules.pixel(barWidth*RideMath.clamp(fraction,0.0,1.0));
     }
-    function drawStats(dc) {
-        var title = ui.allStats ? "All" : "LAP "+(lapNumber == null ? "?" : lapNumber.format("%d"));
-        var time = RideMath.lapDuration(ui.allStats ? timerMillis : lap.timeMs);
-        var average = intText(ui.allStats ? ridePower : lap.averagePower);
-        var distance = ui.allStats ? meters : lap.distance;
-        var parts = distanceParts(dc, distance, ui.allStats ? remainingDistance : null, ui.allStats);
-        text(dc, Layout.RIGHT_START, Layout.STATS_TITLE_BASELINE, 3, title, theme.label, Graphics.TEXT_JUSTIFY_LEFT);
-        var tf = statsFace(dc, time, FontInk.STATS_FACES, Layout.STATS_VALUE_WIDTH);
-        drawStatsNumber(dc, Layout.RIGHT_EDGE, Layout.STATS_TIME_BASELINE, tf, time, Graphics.TEXT_JUSTIFY_RIGHT);
-        var uw = textWidth(dc, "AVG", 3);
-        var available = FontInk.PACK_STATS ? Layout.RIGHT_WIDTH-uw-Layout.STATS_GAP : Layout.AVERAGE_VALUE_WIDTH;
-        var af = statsFace(dc, average, FontInk.AVERAGE_FACES, available);
-        var aw = statsWidth(dc, average, af);
-        var ax = Layout.RIGHT_START+DisplayRules.pixel((Layout.RIGHT_WIDTH-aw-Layout.STATS_GAP-uw)/2.0);
-        drawStatsNumber(dc, ax, Layout.STATS_AVERAGE_BASELINE, af, average, Graphics.TEXT_JUSTIFY_LEFT);
-        var center = ax+aw+Layout.STATS_GAP+uw/2;
-        text(dc, center, Layout.STATS_AVERAGE_LABEL_BASELINE, 3, "AVG", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
-        text(dc, center, Layout.STATS_AVERAGE_BASELINE, 3, "W", theme.label, Graphics.TEXT_JUSTIFY_CENTER);
-        var rowWidth = distanceRowWidth(parts);
-        var x = Layout.RIGHT_START+DisplayRules.pixel((Layout.RIGHT_WIDTH-rowWidth)/2.0);
-        drawPacked(dc, x, Layout.STATS_DISTANCE_BASELINE, parts[2], parts[0], theme.ink);
-        x += packedWidth(parts[0], parts[2])+Layout.PACKED_GAP;
-        drawPacked(dc, x, Layout.STATS_DISTANCE_BASELINE, 12, "mi", theme.label);
-        x += packedWidth("mi", 12)+Layout.PACKED_GAP;
-        if (parts[1] != null) { drawPacked(dc, x, Layout.STATS_DISTANCE_BASELINE, parts[3], parts[1], theme.blue); }
-    }
+    function drawStats(dc) { RideStatistics.draw(self,dc); }
     function distanceRowWidth(parts as Lang.Array) {
         return packedWidth(parts[0], parts[2])+Layout.PACKED_GAP+packedWidth("mi", 12)+(parts[1] == null ? 0 : Layout.PACKED_GAP+packedWidth(parts[1], parts[3]));
     }
     function distanceParts(dc, distance, remaining, all) as Lang.Array {
-        return distancePartsWithin(dc, distance, remaining, all, Layout.RIGHT_WIDTH, null);
+        var room = Layout.STATS_DISTANCE_BASELINE-Layout.STATS_AVERAGE_BASELINE-FontInk.BOTTOM[3]-FontInk.NATIVE_BOTTOM_PAD-Layout.u(3);
+        var maxTop = FontInk.TOP[FontInk.LIVE_SIDE_FACES[2]];
+        if (room < maxTop) { maxTop = room; }
+        return distancePartsUsing(dc,distance,remaining,all,Layout.RIGHT_WIDTH,maxTop,FontInk.RIDE_DISTANCE_PAIRS);
     }
     function distancePartsWithin(dc, distance, remaining, all, available, maxTop) as Lang.Array {
+        return distancePartsUsing(dc,distance,remaining,all,available,maxTop,FontInk.DISTANCE_PAIRS);
+    }
+    function distancePartsUsing(dc, distance, remaining, all, available, maxTop, pairs as Lang.Array) as Lang.Array {
         var shown = distance == null ? "--" : (distance/1609.344).format(all ? "%.1f" : "%.2f");
         var rest = all ? RideMath.remainingMilesText(remaining, 1) : null;
-        var pairs = FontInk.DISTANCE_PAIRS;
         // Fit complete decimal strings before considering extreme-value rounding.
         for (var pass = 0; pass < 3; pass += 1) {
             for (var i = 0; i < pairs.size(); i += 1) {
-                var pair = pairs[i]; var parts = [shown,rest,pair[0],pair[1]];
+                var pair = pairs[i] as Lang.Array; var parts = [shown,rest,pair[0],pair[1]];
                 if (distanceRowWidth(parts) <= available && (maxTop == null || FontInk.TOP[pair[0]] <= maxTop && FontInk.TOP[pair[1]] <= maxTop)) { return parts; }
             }
             if (pass == 0 && rest != null) { rest = RideMath.remainingMilesText(remaining, 0); }

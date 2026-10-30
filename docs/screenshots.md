@@ -1,3 +1,5 @@
+v0.4.7骑行页更新Zone框、同排计时与更大距离。[最新原生图与验收](validation/riding/v0.4.7/README.md)。
+
 v0.4.6更新停止页为八项全程统计，骑行页保持v0.4.5画面。[停止页新图与验收](validation/summary/v0.4.6/README.md)。
 
 当前默认图已更新为v0.4.5的大数字实时信息与右侧竖排标注。[本轮原图与验收](validation/live-cells/v0.4.5/README.md)。
