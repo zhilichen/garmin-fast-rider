@@ -1,0 +1,122 @@
+[
+  {
+    "profile": "480x800",
+    "shown": "10.4 mi(-12.4)",
+    "numeric_faces": [
+      16,
+      19
+    ],
+    "width": 259,
+    "available": 281
+  },
+  {
+    "profile": "480x800",
+    "shown": "300.5 mi(-200.5)",
+    "numeric_faces": [
+      22,
+      13
+    ],
+    "width": 269,
+    "available": 281
+  },
+  {
+    "profile": "480x800",
+    "shown": "888.8 mi(-999.9)",
+    "numeric_faces": [
+      22,
+      13
+    ],
+    "width": 268,
+    "available": 281
+  },
+  {
+    "profile": "420x600",
+    "shown": "10.4 mi(-12.4)",
+    "numeric_faces": [
+      16,
+      19
+    ],
+    "width": 233,
+    "available": 246
+  },
+  {
+    "profile": "420x600",
+    "shown": "300.5 mi(-200.5)",
+    "numeric_faces": [
+      23,
+      14
+    ],
+    "width": 214,
+    "available": 246
+  },
+  {
+    "profile": "420x600",
+    "shown": "888.8 mi(-999.9)",
+    "numeric_faces": [
+      23,
+      14
+    ],
+    "width": 212,
+    "available": 246
+  },
+  {
+    "profile": "246x322",
+    "shown": "10.4 mi(-12.4)",
+    "numeric_faces": [
+      29,
+      13
+    ],
+    "width": 133,
+    "available": 144
+  },
+  {
+    "profile": "246x322",
+    "shown": "300.5 mi(-200.5)",
+    "numeric_faces": [
+      19,
+      14
+    ],
+    "width": 131,
+    "available": 144
+  },
+  {
+    "profile": "246x322",
+    "shown": "888.8 mi(-999.9)",
+    "numeric_faces": [
+      19,
+      14
+    ],
+    "width": 131,
+    "available": 144
+  },
+  {
+    "profile": "282x470",
+    "shown": "10.4 mi(-12.4)",
+    "numeric_faces": [
+      16,
+      19
+    ],
+    "width": 153,
+    "available": 165
+  },
+  {
+    "profile": "282x470",
+    "shown": "300.5 mi(-200.5)",
+    "numeric_faces": [
+      22,
+      13
+    ],
+    "width": 160,
+    "available": 165
+  },
+  {
+    "profile": "282x470",
+    "shown": "888.8 mi(-999.9)",
+    "numeric_faces": [
+      22,
+      13
+    ],
+    "width": 159,
+    "available": 165
+  }
+]

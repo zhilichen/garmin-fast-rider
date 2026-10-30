@@ -1,0 +1,38 @@
+[
+  {
+    "theme": "day",
+    "view": "riding",
+    "region": "full",
+    "different_pixels": 0
+  },
+  {
+    "theme": "day",
+    "view": "stopped",
+    "region": "header",
+    "different_pixels": 0
+  },
+  {
+    "theme": "day",
+    "view": "stopped",
+    "region": "graph",
+    "different_pixels": 0
+  },
+  {
+    "theme": "night",
+    "view": "riding",
+    "region": "full",
+    "different_pixels": 0
+  },
+  {
+    "theme": "night",
+    "view": "stopped",
+    "region": "header",
+    "different_pixels": 0
+  },
+  {
+    "theme": "night",
+    "view": "stopped",
+    "region": "graph",
+    "different_pixels": 0
+  }
+]

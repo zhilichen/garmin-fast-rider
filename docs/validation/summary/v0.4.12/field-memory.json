@@ -1,0 +1,44 @@
+[
+  {
+    "case": "840 default paused",
+    "used_bytes": 77640,
+    "total_bytes": 127424,
+    "note": "Actual native field first frame; not a real-ride peak."
+  },
+  {
+    "case": "840 long values",
+    "used_bytes": 77936,
+    "total_bytes": 127424,
+    "note": "Actual native field first frame; not a real-ride peak."
+  },
+  {
+    "case": "840 missing",
+    "used_bytes": 76712,
+    "total_bytes": 127424,
+    "note": "Actual native field first frame; not a real-ride peak."
+  },
+  {
+    "case": "1030 full history, 100 laps, 4444W and pause/resume",
+    "used_bytes": 123976,
+    "total_bytes": 127424,
+    "note": "Actual native field first frame; not a real-ride peak."
+  },
+  {
+    "case": "1040 paused",
+    "used_bytes": 81576,
+    "total_bytes": 127424,
+    "note": "Actual native field first frame; not a real-ride peak."
+  },
+  {
+    "case": "850 paused",
+    "used_bytes": 81560,
+    "total_bytes": 127424,
+    "note": "Actual native field first frame; not a real-ride peak."
+  },
+  {
+    "case": "1050 paused",
+    "used_bytes": 81776,
+    "total_bytes": 127424,
+    "note": "Actual native field first frame; not a real-ride peak."
+  }
+]

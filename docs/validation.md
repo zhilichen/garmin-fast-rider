@@ -1,3 +1,5 @@
+最新停止页标签与单位验收：[v0.4.12](validation/summary/v0.4.12/README.md)。
+
 最新字号与停止页验收：[v0.4.11](validation/readability/v0.4.11/README.md)。
 
 最新里程排版验收：[v0.4.10 主里程与mi/剩余里程上下叠排](validation/distance/v0.4.10/README.md)。

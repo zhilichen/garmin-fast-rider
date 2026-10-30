@@ -82,7 +82,7 @@ function summaryRenderBoundariesTest(logger) {
         v.averageCadence = 123; v.averageSpeed = 44.927;
         var p = SummaryRenderer.distanceParts(v,dc);
         Test.assertEqual(p[0],"300.5"); Test.assertEqual(p[1],"(-200.5)");
-        Test.assert(v.distanceRowWidthFor(p,false) <= SummaryLayout.RIGHT_WIDTH);
+        Test.assert(v.distanceRowWidthFor(p,false)+SummaryRenderer.unitWidth(v,dc,"mi") <= SummaryLayout.RIGHT_WIDTH);
         SummaryRenderer.draw(v,dc); v.drawChartHeader(dc); v.drawPowerTrend(dc);
         v.hr = null; v.averageHr = null; v.meters = null; v.millis = null;
         v.remainingDistance = null; v.ridePower = null; v.normalized.reset();
@@ -95,6 +95,23 @@ function summaryRenderBoundariesTest(logger) {
     }
     Test.assert(SummaryLayout.COLUMN_DIVIDER < Layout.COLUMN_DIVIDER);
     Test.assert(SummaryLayout.RIGHT_WIDTH > Layout.RIGHT_WIDTH);
+    var samples = [["158","bpm",SummaryLayout.LEFT_WIDTH,1],
+        ["240","bpm",SummaryLayout.LEFT_WIDTH,2],["1234","w",SummaryLayout.LEFT_WIDTH,3],
+        ["65535","w",SummaryLayout.LEFT_WIDTH,4],["99999","ft",SummaryLayout.RIGHT_WIDTH,2],
+        ["123","rpm",SummaryLayout.RIGHT_WIDTH,3],["100.5","mph",SummaryLayout.RIGHT_WIDTH,4],
+        ["--","bpm",SummaryLayout.LEFT_WIDTH,1]];
+    for (var i = 0; i < samples.size(); i += 1) {
+        var sample = samples[i];
+        var p = SummaryRenderer.valueParts(v,dc,sample[0],sample[1],sample[2],sample[3]);
+        Test.assert(p[1] <= sample[2]);
+        Test.assert(FontInk.TOP[p[0]] <= SummaryRenderer.room(SummaryRenderer.rowLabel(sample[3]),SummaryRenderer.rowValue(sample[3])));
+        Test.assertEqual(p[2]+FontInk.BOTTOM[FontInk.SUMMARY_LABEL],
+            SummaryRenderer.rowValue(sample[3])+FontInk.BOTTOM[p[0]]);
+        if (sample[3] < 4) {
+            Test.assert(p[2]+FontInk.BOTTOM[FontInk.SUMMARY_LABEL]+FontInk.NATIVE_BOTTOM_PAD <
+                SummaryRenderer.rowLabel(sample[3]+1)-FontInk.TOP[FontInk.SUMMARY_LABEL]);
+        }
+    }
     var normal = SummaryRenderer.face(v,dc,"158",FontInk.SUMMARY_VALUE_FACES,SummaryLayout.LEFT_WIDTH,
         SummaryRenderer.room(SummaryLayout.ROW_LABEL_1,SummaryLayout.ROW_VALUE_1));
     if (Layout.WIDTH == 246) { Test.assert(FontInk.TOP[normal] > FontInk.TOP[6]); }

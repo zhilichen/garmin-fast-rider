@@ -1,0 +1,6 @@
+A clearer paused ride summary:
+- AVG HR replaces the average-heart-rate heart icon.
+- Short metric names: Avg PWR, NP, DIST, ASC, Avg CAD and Avg SPD.
+- Small bpm, w, mi, ft, rpm and mph units sit beside the values.
+- Adaptive fitting preserves long distance and remaining-distance readings.
+- Riding layout, zone colors, day/night modes and touch controls are unchanged.

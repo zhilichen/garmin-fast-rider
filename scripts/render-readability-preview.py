@@ -10,7 +10,7 @@ from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-CAPTURES = ROOT / 'docs/validation/readability/v0.4.11'
+CAPTURES = ROOT / 'docs/validation/summary/v0.4.12'
 
 
 def image(path, x, y, w, h):
@@ -27,7 +27,7 @@ def main():
     body = '<rect width="1440" height="890" fill="#FFF8EB"/><rect x="720" width="720" height="890" fill="#EAF4FF"/>'
     body += '<g font-family="Arial, sans-serif" fill="#152B3B">'
     panels = [('RIDE', 'Bigger numbers. Quick glances.', 'edge840-day.png', 'Gear · cadence · gradient · speed', 'More room for your miles.'),
-              ('PAUSE', 'Your whole ride, clearly.', 'edge840-stopped-day.png', 'A compact header. Larger statistics.', 'More space where it matters.')]
+              ('PAUSE', 'Your whole ride, clearly.', 'edge840-stopped-day.png', 'Short labels. Units beside numbers.', 'More space where it matters.')]
     for i, (tag, title, capture, line1, line2) in enumerate(panels):
         x = i * 720
         body += f'<text x="{x+50}" y="64" fill="#004CFF" font-size="24" font-weight="700">FASTRIDER · {tag}</text>'
@@ -37,7 +37,7 @@ def main():
         body += image(skin, 0, 0, 382, 518) + '</g></svg>'
         body += f'<text x="{x+360}" y="741" text-anchor="middle" font-size="24">{line1}</text>'
         body += f'<text x="{x+360}" y="785" text-anchor="middle" fill="#004CFF" font-size="24">{line2}</text>'
-    body += '<text x="50" y="858" fill="#53636D" font-size="18">Edge 840 · native simulator captures · synthetic ride data · v0.4.11</text></g>'
+    body += '<text x="50" y="858" fill="#53636D" font-size="18">Edge 840 · native simulator captures · synthetic ride data · v0.4.12</text></g>'
     svg = '<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="890">' + body + '</svg>'
     temp = ROOT / '.local/readme/readability.svg'
     temp.parent.mkdir(parents=True, exist_ok=True)

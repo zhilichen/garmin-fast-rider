@@ -1,0 +1,11 @@
+{
+  "version": "0.4.12",
+  "models": 12,
+  "prgs": 12,
+  "device_zips": 12,
+  "all_devices_zips": 1,
+  "iq_bytes": 1096212,
+  "iq_sha256": "3f220fb04621138089a687c7cfb4e080a721ae25d06b97f5e323dd455df981cd",
+  "regional_products": 17,
+  "store_submitted": false
+}
