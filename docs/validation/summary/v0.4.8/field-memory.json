@@ -1,0 +1,46 @@
+[
+  {
+    "device": "edge530",
+    "used_bytes": 98840,
+    "total_bytes": 127424,
+    "case": "stopped",
+    "note": "Actual field heap; synthetic first frame, not a long-ride peak."
+  },
+  {
+    "device": "edge840",
+    "used_bytes": 74608,
+    "total_bytes": 127424,
+    "case": "stopped",
+    "note": "Actual field heap; synthetic first frame, not a long-ride peak."
+  },
+  {
+    "device": "edge1040",
+    "used_bytes": 78776,
+    "total_bytes": 127424,
+    "case": "stopped",
+    "note": "Actual field heap; synthetic first frame, not a long-ride peak."
+  },
+  {
+    "device": "edge850",
+    "used_bytes": 78864,
+    "total_bytes": 127424,
+    "case": "stopped",
+    "note": "Actual field heap; synthetic first frame, not a long-ride peak."
+  },
+  {
+    "device": "edge1050",
+    "used_bytes": 78976,
+    "total_bytes": 127424,
+    "case": "stopped",
+    "note": "Actual field heap; synthetic first frame, not a long-ride peak."
+  },
+  {
+    "device": "edge1030",
+    "used_bytes": 122096,
+    "total_bytes": 127424,
+    "case": "stopped-capacity",
+    "history_points_per_series": 128,
+    "lap_markers": 100,
+    "note": "Actual field heap; fixed stopped capacity first frame."
+  }
+]

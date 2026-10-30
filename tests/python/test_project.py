@@ -74,14 +74,16 @@ class DeviceProjectTests(unittest.TestCase):
             ink=(folder/'FontInk.mc').read_text();summary=(folder/'SummaryLayout.mc').read_text();layout=(folder/'Layout.mc').read_text()
             metric=lambda key:json.loads(re.search('const '+key+' = (.*);',ink)[1])
             anchor=lambda key:int(re.search('const '+key+' = (.*);',summary)[1])
-            top,bottom=metric('TOP'),metric('BOTTOM');label=metric('SUMMARY_LABEL')
+            top,bottom=metric('TOP'),metric('BOTTOM');label=metric('SUMMARY_LABEL');value_bottom=max(bottom[f] for f in metric('SUMMARY_VALUE_FACES'))
             for row in range(1,5):
                 self.assertGreater(anchor('ROW_VALUE_'+str(row))-anchor('ROW_LABEL_'+str(row)),top[5]+bottom[label]+1)
                 if row<4:
-                    self.assertLess(anchor('ROW_VALUE_'+str(row))+bottom[label]+1,anchor('ROW_LABEL_'+str(row+1))-top[label])
-            self.assertLess(anchor('ROW_VALUE_4')+bottom[label]+1,anchor('BANNER_TOP'))
+                    self.assertLess(anchor('ROW_VALUE_'+str(row))+value_bottom+1,anchor('ROW_LABEL_'+str(row+1))-top[label])
+            self.assertLess(anchor('ROW_VALUE_4')+value_bottom+1,anchor('BANNER_TOP'))
             riding_banner=int(re.search('const BANNER_TOP = (.*);',layout)[1])
             self.assertGreater(anchor('BANNER_TOP'),riding_banner)
+            self.assertLess(anchor('COLUMN_DIVIDER'),int(re.search('const COLUMN_DIVIDER = (.*);',layout)[1]))
+            self.assertGreater(anchor('RIGHT_WIDTH'),int(re.search('const RIGHT_WIDTH = (.*);',layout)[1]))
             self.assertLess(anchor('HEADER_BASELINE'),anchor('PLOT_TOP'))
 
     def test_emphasized_rows_have_real_ink_clearance(self):

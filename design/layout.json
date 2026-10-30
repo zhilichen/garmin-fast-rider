@@ -93,16 +93,21 @@
     },
     "body": {
       "ROW_LABEL_1": 64,
-      "ROW_VALUE_1": 96,
+      "ROW_VALUE_1": 99,
       "ROW_LABEL_2": 112,
-      "ROW_VALUE_2": 144,
+      "ROW_VALUE_2": 147,
       "ROW_LABEL_3": 160,
-      "ROW_VALUE_3": 192,
+      "ROW_VALUE_3": 195,
       "ROW_LABEL_4": 208,
-      "ROW_VALUE_4": 240
+      "ROW_VALUE_4": 243
     },
     "banner_fraction": 0.7639751552795031,
     "header_baseline": 18,
-    "plot_offset": 23
+    "plot_offset": 23,
+    "x": {
+      "COLUMN_DIVIDER": 102,
+      "RIGHT_START": 106,
+      "LEFT_RIGHT": 100
+    }
   }
 }

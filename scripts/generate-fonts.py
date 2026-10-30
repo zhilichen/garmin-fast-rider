@@ -201,6 +201,9 @@ def generate(font_dir, out, scale, metrics_path, emphasize=False):
     metrics += f'    const LIVE_SIDE_PERCENT = {side+5};\n'
     metrics += f'    const SUMMARY_LABEL = {side+6};\n'
     metrics += '    const SUMMARY_INT_FACES = '+str(([16,17] if emphasize else [])+[6,5,7,4])+';\n'
+    metrics += '    const SUMMARY_VALUE_FACES = '+str(([16,side+1,17] if emphasize else [])+[1,5,7,4])+';\n'
+    metrics += '    const SUMMARY_INT_VALUE_FACES = '+str(([2,16,side+1,17] if emphasize else [])+[1,5,7,4])+';\n'
+    metrics += '    const SUMMARY_DISTANCE_PAIRS = '+str(([[16,19],[side+1,order.index('RemainingRide30')],[17,19]] if emphasize else [])+[[1,13],[5,13],[7,14],[4,15]])+';\n'
     metrics += f'    const PRIMARY_COMPACT = {order.index("PrimaryCompact58")};\n'
     time_parents = (['LiveEmphasis','StatsEmphasis'] if emphasize else [])+['Stats32','Stats30','Chart26','Meta18']
     seconds_names = (['RideSeconds46','RideSeconds36'] if emphasize else [])+['RideSeconds32','RideSeconds30','RideSeconds26','RideSeconds18']

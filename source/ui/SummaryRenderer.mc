@@ -24,19 +24,19 @@ module SummaryRenderer {
         return row == 1 ? SummaryLayout.ROW_VALUE_1 : (row == 2 ? SummaryLayout.ROW_VALUE_2 :
             (row == 3 ? SummaryLayout.ROW_VALUE_3 : SummaryLayout.ROW_VALUE_4));
     }
-    function value(v as FastRiderView, dc, shown, unit, faces as Lang.Array<Lang.Number>, left, width, row, c) {
-        var label = rowLabel(row); var baseline = rowValue(row);
-        var uf = unit.equals("ft") ? 12 : FontInk.SUMMARY_LABEL;
-        var uw = v.textWidth(dc,unit,uf);
-        var f = face(v,dc,shown,faces,width-uw-Layout.STATS_GAP,room(label,baseline));
-        var nw = v.packedWidth(shown,f);
-        var x = left+DisplayRules.pixel((width-nw-uw-Layout.STATS_GAP)/2.0);
+    function value(v as FastRiderView, dc, shown, left, width, row, c) {
+        var baseline = rowValue(row);
+        var faces = FontInk.SUMMARY_INT_VALUE_FACES;
+        for (var i = 0; i < shown.length(); i += 1) {
+            if (shown.substring(i,i+1).equals(".")) { faces = FontInk.SUMMARY_VALUE_FACES; break; }
+        }
+        var f = face(v,dc,shown,faces,width,room(rowLabel(row),baseline));
+        var x = left+DisplayRules.pixel((width-v.packedWidth(shown,f))/2.0);
         v.drawPacked(dc,x,baseline,f,shown,c);
-        v.text(dc,x+nw+Layout.STATS_GAP,baseline,uf,unit,v.theme.label,Graphics.TEXT_JUSTIFY_LEFT);
     }
     function header(v as FastRiderView, dc) {
         var lf = FontInk.SUMMARY_LABEL;
-        caption(v,dc,Layout.LEFT_EDGE,SummaryLayout.HEADER_LABEL,"Ride time");
+        caption(v,dc,Layout.LEFT_EDGE,SummaryLayout.HEADER_LABEL,"Ride");
         var elapsed = v.millis == null ? "--:--" : RideMath.duration(v.millis);
         var f = face(v,dc,elapsed,FontInk.STATS_FACES,Layout.LEFT_WIDTH,room(SummaryLayout.HEADER_LABEL,SummaryLayout.HEADER_VALUE));
         v.drawPacked(dc,Layout.LEFT_EDGE,SummaryLayout.HEADER_VALUE,f,elapsed,v.theme.ink);
@@ -54,44 +54,44 @@ module SummaryRenderer {
         v.text(dc,right,SummaryLayout.HEADER_VALUE,3,suffix,v.theme.label,Graphics.TEXT_JUSTIFY_RIGHT);
         v.color(dc,v.theme.rule);dc.fillRectangle(Layout.LEFT_EDGE,SummaryLayout.TOP_RULE,Layout.RULE_WIDTH,Layout.STROKE);
     }
+    function distanceParts(v as FastRiderView, dc) as Lang.Array {
+        return v.distancePartsUsing(dc,v.meters,v.remainingDistance,true,SummaryLayout.RIGHT_WIDTH,
+            room(SummaryLayout.ROW_LABEL_1,SummaryLayout.ROW_VALUE_1),FontInk.SUMMARY_DISTANCE_PAIRS,false);
+    }
     function distance(v as FastRiderView, dc) {
-        var parts = v.distancePartsWithin(dc,v.meters,v.remainingDistance,true,Layout.RIGHT_WIDTH,
-            room(SummaryLayout.ROW_LABEL_1,SummaryLayout.ROW_VALUE_1));
-        var x = Layout.RIGHT_START+DisplayRules.pixel((Layout.RIGHT_WIDTH-v.distanceRowWidth(parts))/2.0);
+        var parts = distanceParts(v,dc);
+        var x = SummaryLayout.RIGHT_START+DisplayRules.pixel((SummaryLayout.RIGHT_WIDTH-v.distanceRowWidthFor(parts,false))/2.0);
         v.drawPacked(dc,x,SummaryLayout.ROW_VALUE_1,parts[2],parts[0],v.theme.ink);
-        x += v.packedWidth(parts[0],parts[2])+Layout.PACKED_GAP;
-        v.drawPacked(dc,x,SummaryLayout.ROW_VALUE_1,12,"mi",v.theme.label);
-        x += v.packedWidth("mi",12)+Layout.PACKED_GAP;
-        if (parts[1] != null) { v.drawPacked(dc,x,SummaryLayout.ROW_VALUE_1,parts[3],parts[1],v.theme.blue); }
+        if (parts[1] != null) {
+            x += v.packedWidth(parts[0],parts[2])+Layout.PACKED_GAP;
+            v.drawPacked(dc,x,SummaryLayout.ROW_VALUE_1,parts[3],parts[1],v.theme.blue);
+        }
     }
     function draw(v as FastRiderView, dc) {
         header(v,dc);
-        v.color(dc,v.theme.rule);dc.fillRectangle(Layout.COLUMN_DIVIDER,SummaryLayout.TOP_RULE+Layout.STROKE,
+        v.color(dc,v.theme.rule);dc.fillRectangle(SummaryLayout.COLUMN_DIVIDER,SummaryLayout.TOP_RULE+Layout.STROKE,
             Layout.STROKE,SummaryLayout.BANNER_TOP-SummaryLayout.TOP_RULE-Layout.STROKE);
         v.drawHeart(dc,Layout.LEFT_EDGE,SummaryLayout.ROW_LABEL_1-Layout.u(12));
-        caption(v,dc,Layout.LEFT_EDGE+Layout.HEART_WIDTH+Layout.STATS_GAP,SummaryLayout.ROW_LABEL_1,"HR");
-        caption(v,dc,Layout.LEFT_EDGE,SummaryLayout.ROW_LABEL_2,"Avg HR");
-        caption(v,dc,Layout.LEFT_EDGE,SummaryLayout.ROW_LABEL_3,"Avg power");
+        caption(v,dc,Layout.LEFT_EDGE,SummaryLayout.ROW_LABEL_2,"AVG");
+        v.drawHeart(dc,Layout.LEFT_EDGE+v.textWidth(dc,"AVG",FontInk.SUMMARY_LABEL)+Layout.STATS_GAP,
+            SummaryLayout.ROW_LABEL_2-Layout.u(12));
+        caption(v,dc,Layout.LEFT_EDGE,SummaryLayout.ROW_LABEL_3,"AVG W");
         var np = v.normalized.value();
-        caption(v,dc,Layout.LEFT_EDGE,SummaryLayout.ROW_LABEL_4,np != null && v.normalized.estimated ? "NP est." : "NP");
-        value(v,dc,v.intText(v.hr),"bpm",FontInk.SUMMARY_INT_FACES,Layout.LEFT_EDGE,Layout.LEFT_WIDTH,
+        caption(v,dc,Layout.LEFT_EDGE,SummaryLayout.ROW_LABEL_4,np != null && v.normalized.estimated ? "NP est W" : "NP W");
+        value(v,dc,v.intText(v.hr),Layout.LEFT_EDGE,SummaryLayout.LEFT_WIDTH,
             1,v.theme.zoneColor(RideMath.zone(v.hr,v.hrLimits)));
-        value(v,dc,v.intText(v.averageHr),"bpm",FontInk.SUMMARY_INT_FACES,Layout.LEFT_EDGE,Layout.LEFT_WIDTH,
+        value(v,dc,v.intText(v.averageHr),Layout.LEFT_EDGE,SummaryLayout.LEFT_WIDTH,
             2,v.theme.zoneColor(RideMath.zone(v.averageHr,v.hrLimits)));
-        value(v,dc,v.intText(v.ridePower),"W",FontInk.SUMMARY_INT_FACES,Layout.LEFT_EDGE,Layout.LEFT_WIDTH,
-            3,v.theme.ink);
-        value(v,dc,v.intText(np),"W",FontInk.SUMMARY_INT_FACES,Layout.LEFT_EDGE,Layout.LEFT_WIDTH,
-            4,v.theme.ink);
-        caption(v,dc,Layout.RIGHT_START,SummaryLayout.ROW_LABEL_1,"Distance");
-        caption(v,dc,Layout.RIGHT_START,SummaryLayout.ROW_LABEL_2,"Ascent");
-        caption(v,dc,Layout.RIGHT_START,SummaryLayout.ROW_LABEL_3,"Avg cadence");
-        caption(v,dc,Layout.RIGHT_START,SummaryLayout.ROW_LABEL_4,"Avg speed");
+        value(v,dc,v.intText(v.ridePower),Layout.LEFT_EDGE,SummaryLayout.LEFT_WIDTH,3,v.theme.ink);
+        value(v,dc,v.intText(np),Layout.LEFT_EDGE,SummaryLayout.LEFT_WIDTH,4,v.theme.ink);
+        caption(v,dc,SummaryLayout.RIGHT_START,SummaryLayout.ROW_LABEL_1,"mi");
+        caption(v,dc,SummaryLayout.RIGHT_START,SummaryLayout.ROW_LABEL_2,"ft");
+        caption(v,dc,SummaryLayout.RIGHT_START,SummaryLayout.ROW_LABEL_3,"AVG rpm");
+        caption(v,dc,SummaryLayout.RIGHT_START,SummaryLayout.ROW_LABEL_4,"AVG mph");
         distance(v,dc);
-        value(v,dc,RideMath.ascentFeetValue(v.ascent),"ft",FontInk.SUMMARY_INT_FACES,Layout.RIGHT_START,Layout.RIGHT_WIDTH,
-            2,v.theme.ink);
-        value(v,dc,v.intText(v.averageCadence),"rpm",FontInk.SUMMARY_INT_FACES,Layout.RIGHT_START,Layout.RIGHT_WIDTH,
+        value(v,dc,RideMath.ascentFeetValue(v.ascent),SummaryLayout.RIGHT_START,SummaryLayout.RIGHT_WIDTH,2,v.theme.ink);
+        value(v,dc,v.intText(v.averageCadence),SummaryLayout.RIGHT_START,SummaryLayout.RIGHT_WIDTH,
             3,v.theme.cadenceColor(v.averageCadence));
-        value(v,dc,RideMath.speedMphText(v.averageSpeed),"mph",FontInk.STATS_FACES,Layout.RIGHT_START,Layout.RIGHT_WIDTH,
-            4,v.theme.ink);
+        value(v,dc,RideMath.speedMphText(v.averageSpeed),SummaryLayout.RIGHT_START,SummaryLayout.RIGHT_WIDTH,4,v.theme.ink);
     }
 }

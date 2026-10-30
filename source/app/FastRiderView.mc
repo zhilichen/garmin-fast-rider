@@ -453,25 +453,28 @@ class FastRiderView extends WatchUi.DataField {
     }
     function drawStats(dc) { RideStatistics.draw(self,dc); }
     function distanceRowWidth(parts as Lang.Array) {
-        return packedWidth(parts[0], parts[2])+Layout.PACKED_GAP+packedWidth("mi", 12)+(parts[1] == null ? 0 : Layout.PACKED_GAP+packedWidth(parts[1], parts[3]));
+        return distanceRowWidthFor(parts,true);
+    }
+    function distanceRowWidthFor(parts as Lang.Array, showUnit) {
+        return packedWidth(parts[0],parts[2])+(showUnit ? Layout.PACKED_GAP+packedWidth("mi",12) : 0)+(parts[1] == null ? 0 : Layout.PACKED_GAP+packedWidth(parts[1],parts[3]));
     }
     function distanceParts(dc, distance, remaining, all) as Lang.Array {
         var room = Layout.STATS_DISTANCE_BASELINE-Layout.STATS_AVERAGE_BASELINE-FontInk.BOTTOM[3]-FontInk.NATIVE_BOTTOM_PAD-Layout.u(3);
         var maxTop = FontInk.TOP[FontInk.LIVE_SIDE_FACES[2]];
         if (room < maxTop) { maxTop = room; }
-        return distancePartsUsing(dc,distance,remaining,all,Layout.RIGHT_WIDTH,maxTop,FontInk.RIDE_DISTANCE_PAIRS);
+        return distancePartsUsing(dc,distance,remaining,all,Layout.RIGHT_WIDTH,maxTop,FontInk.RIDE_DISTANCE_PAIRS,true);
     }
     function distancePartsWithin(dc, distance, remaining, all, available, maxTop) as Lang.Array {
-        return distancePartsUsing(dc,distance,remaining,all,available,maxTop,FontInk.DISTANCE_PAIRS);
+        return distancePartsUsing(dc,distance,remaining,all,available,maxTop,FontInk.DISTANCE_PAIRS,true);
     }
-    function distancePartsUsing(dc, distance, remaining, all, available, maxTop, pairs as Lang.Array) as Lang.Array {
+    function distancePartsUsing(dc, distance, remaining, all, available, maxTop, pairs as Lang.Array, showUnit) as Lang.Array {
         var shown = distance == null ? "--" : (distance/1609.344).format(all ? "%.1f" : "%.2f");
         var rest = all ? RideMath.remainingMilesText(remaining, 1) : null;
         // Fit complete decimal strings before considering extreme-value rounding.
         for (var pass = 0; pass < 3; pass += 1) {
             for (var i = 0; i < pairs.size(); i += 1) {
                 var pair = pairs[i] as Lang.Array; var parts = [shown,rest,pair[0],pair[1]];
-                if (distanceRowWidth(parts) <= available && (maxTop == null || FontInk.TOP[pair[0]] <= maxTop && FontInk.TOP[pair[1]] <= maxTop)) { return parts; }
+                if (distanceRowWidthFor(parts,showUnit) <= available && (maxTop == null || FontInk.TOP[pair[0]] <= maxTop && FontInk.TOP[pair[1]] <= maxTop)) { return parts; }
             }
             if (pass == 0 && rest != null) { rest = RideMath.remainingMilesText(remaining, 0); }
             else if (distance != null) { shown = (distance/1609.344).format("%.0f"); }

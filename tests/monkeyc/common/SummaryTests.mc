@@ -80,10 +80,9 @@ function summaryRenderBoundariesTest(logger) {
         v.millis = 360000000; v.meters = 300.5*1609.344; v.remainingDistance = 200.5*1609.344;
         v.ridePower = 1234; v.ascent = 30479.6952;
         v.averageCadence = 123; v.averageSpeed = 44.927;
-        var p = v.distancePartsWithin(dc,v.meters,v.remainingDistance,true,Layout.RIGHT_WIDTH,
-            SummaryRenderer.room(SummaryLayout.ROW_LABEL_1,SummaryLayout.ROW_VALUE_1));
+        var p = SummaryRenderer.distanceParts(v,dc);
         Test.assertEqual(p[0],"300.5"); Test.assertEqual(p[1],"(-200.5)");
-        Test.assert(v.distanceRowWidth(p) <= Layout.RIGHT_WIDTH);
+        Test.assert(v.distanceRowWidthFor(p,false) <= SummaryLayout.RIGHT_WIDTH);
         SummaryRenderer.draw(v,dc); v.drawChartHeader(dc); v.drawPowerTrend(dc);
         v.hr = null; v.averageHr = null; v.meters = null; v.millis = null;
         v.remainingDistance = null; v.ridePower = null; v.normalized.reset();
@@ -94,6 +93,15 @@ function summaryRenderBoundariesTest(logger) {
         v.ui.range = range;
         Test.assert(v.rangeWidth(dc,v.ui.rangeLabel()) < Layout.RULE_WIDTH);
     }
+    Test.assert(SummaryLayout.COLUMN_DIVIDER < Layout.COLUMN_DIVIDER);
+    Test.assert(SummaryLayout.RIGHT_WIDTH > Layout.RIGHT_WIDTH);
+    var normal = SummaryRenderer.face(v,dc,"158",FontInk.SUMMARY_VALUE_FACES,SummaryLayout.LEFT_WIDTH,
+        SummaryRenderer.room(SummaryLayout.ROW_LABEL_1,SummaryLayout.ROW_VALUE_1));
+    if (Layout.WIDTH == 246) { Test.assert(FontInk.TOP[normal] > FontInk.TOP[6]); }
+    var decimal = SummaryRenderer.face(v,dc,"100.5",FontInk.SUMMARY_VALUE_FACES,SummaryLayout.RIGHT_WIDTH,
+        SummaryRenderer.room(SummaryLayout.ROW_LABEL_4,SummaryLayout.ROW_VALUE_4));
+    Test.assert(v.packedWidth("100.5",decimal) <= SummaryLayout.RIGHT_WIDTH);
+    Test.assert(FontInk.NUMERIC_RIGHT[decimal][10] > FontInk.NUMERIC_LEFT[decimal][10]);
     var clockRoom = Layout.RADAR_LEFT-Layout.u(2)-Layout.RIGHT_START-v.textWidth(dc,"AM",3)-Layout.STATS_GAP;
     var cf = SummaryRenderer.face(v,dc,"12:59",FontInk.STATS_FACES,clockRoom,
         SummaryRenderer.room(SummaryLayout.HEADER_LABEL,SummaryLayout.HEADER_VALUE));
@@ -103,7 +111,7 @@ function summaryRenderBoundariesTest(logger) {
     Test.assert(v.packedWidth("100:00:00",tf) <= Layout.LEFT_WIDTH);
     Test.assert(v.chartTop() > Layout.BANNER_TOP);
     Test.assert(SummaryLayout.HEADER_BASELINE < v.plotTop());
-    Test.assert(SummaryLayout.ROW_VALUE_4+FontInk.BOTTOM[FontInk.SUMMARY_LABEL]+FontInk.NATIVE_BOTTOM_PAD < v.chartTop());
+    Test.assert(SummaryLayout.ROW_VALUE_4+FontInk.BOTTOM[1]+FontInk.NATIVE_BOTTOM_PAD < v.chartTop());
     Test.assert(v.plotTop() > Layout.PLOT_TOP && v.plotTop() < Layout.PLOT_BOTTOM);
     v.onTimerResume(); Test.assertEqual(v.plotTop(),Layout.PLOT_TOP);
     return true;

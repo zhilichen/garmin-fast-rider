@@ -10,7 +10,7 @@ from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-CAPTURES = ROOT / 'docs/validation/summary/v0.4.6'
+CAPTURES = ROOT / 'docs/validation/summary/v0.4.8'
 
 
 def image(path, x, y, w, h):
@@ -28,14 +28,14 @@ def main():
     body += '<g font-family="Arial, sans-serif">'
     for mode, x, color, accent in [('day', 0, '#152B3B', '#004CFF'), ('night', 720, '#FFFFFF', '#55AAFF')]:
         body += f'<text x="{x+50}" y="65" fill="{accent}" font-size="24" font-weight="700">FASTRIDER · {mode.upper()}</text>'
-        title = 'Pause. See your ride.' if mode == 'day' else 'Your ride, after dark.'
-        body += f'<text x="{x+50}" y="123" fill="{color}" font-size="43" font-weight="700">{title}</text>'
+        title = 'Pause. See more.' if mode == 'day' else 'Bigger numbers. Less text.'
+        body += f'<text x="{x+50}" y="123" fill="{color}" font-size="37" font-weight="700">{title}</text>'
         body += f'<svg x="{x+169}" y="159" width="382" height="518" viewBox="0 0 382 518"><defs><clipPath id="outline-{mode}"><path d="{outline}"/></clipPath></defs><g clip-path="url(#outline-{mode})">'
         body += image(CAPTURES / ('edge840-' + mode + '.png'), 69, 78, 246, 322)
         body += image(skin, 0, 0, 382, 518) + '</g></svg>'
-        sentence = 'Heart rate. Power. Distance. Cadence. Speed.'
+        sentence = 'Clear labels. Larger ride statistics.'
         body += f'<text x="{x+360}" y="724" text-anchor="middle" fill="{color}" font-size="23">{sentence}</text>'
-        body += f'<text x="{x+360}" y="772" text-anchor="middle" fill="{accent}" font-size="23">A dedicated view when the timer stops.</text>'
+        body += f'<text x="{x+360}" y="772" text-anchor="middle" fill="{accent}" font-size="23">More room for distance, ascent and speed.</text>'
     body += '<text x="50" y="827" fill="#53636D" font-size="18">Edge 840 · actual native simulator captures · synthetic ride data</text></g>'
     svg = '<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="850">' + body + '</svg>'
     temp = ROOT / '.local/readme/summary.svg'; temp.parent.mkdir(parents=True, exist_ok=True); temp.write_text(svg)

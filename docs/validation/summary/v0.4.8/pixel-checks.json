@@ -1,0 +1,44 @@
+[
+  {
+    "check": "riding unchanged",
+    "theme": "day",
+    "different_pixels": 0,
+    "before": "docs/validation/riding/v0.4.7/edge840-day.png",
+    "after": "docs/validation/summary/v0.4.8/edge840-riding-day.png",
+    "crop": null
+  },
+  {
+    "check": "summary graph unchanged",
+    "theme": "day",
+    "different_pixels": 0,
+    "before": "docs/validation/riding/v0.4.7/edge840-stopped-day.png",
+    "after": "docs/validation/summary/v0.4.8/edge840-day.png",
+    "crop": [
+      0,
+      246,
+      246,
+      322
+    ]
+  },
+  {
+    "check": "riding unchanged",
+    "theme": "night",
+    "different_pixels": 0,
+    "before": "docs/validation/riding/v0.4.7/edge840-night.png",
+    "after": "docs/validation/summary/v0.4.8/edge840-riding-night.png",
+    "crop": null
+  },
+  {
+    "check": "summary graph unchanged",
+    "theme": "night",
+    "different_pixels": 0,
+    "before": "docs/validation/riding/v0.4.7/edge840-stopped-night.png",
+    "after": "docs/validation/summary/v0.4.8/edge840-night.png",
+    "crop": [
+      0,
+      246,
+      246,
+      322
+    ]
+  }
+]

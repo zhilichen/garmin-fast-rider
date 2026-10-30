@@ -1,3 +1,5 @@
+最新停止页验收：[v0.4.8 精简标签、放大数字与加宽右栏](validation/summary/v0.4.8/README.md)。
+
 最新骑行页验收：[v0.4.7 Zone/时间/距离原生截图与测试](validation/riding/v0.4.7/README.md)。
 
 最新停止页验收：[v0.4.6 原生截图与测试](validation/summary/v0.4.6/README.md)。

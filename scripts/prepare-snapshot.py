@@ -34,7 +34,7 @@ def prepare(device,case,destination=None):
             extra+='        ui.powerSeconds = 10;\n'
         if s.count(anchor)!=1:raise ValueError('Riding snapshot anchor changed')
         s=s.replace(anchor,'        trend.update(millis, power, true);\n'+extra+'    }\n    function onTimerReset()')
-    if case == 'capacity':
+    if base_case == 'capacity':
         anchor='        trend.update(millis, power, true);\n    }\n    function onTimerReset()'
         extra='''        if (trend.boundaries.size() < 100) {
             trend.points = []; trend.medium.points = []; trend.whole.points = []; trend.boundaries = [];
@@ -50,14 +50,15 @@ def prepare(device,case,destination=None):
         if s.count(anchor)!=1:raise ValueError('Capacity snapshot anchor changed')
         s=s.replace(anchor,'        trend.update(millis, power, true);\n'+extra+'    }\n    function onTimerReset()')
     if case.startswith('stopped'):
-        anchor='        trend.update(millis, power, true);\n    }\n    function onTimerReset()'
+        anchor='    }\n    function onTimerReset()'
         if s.count(anchor)!=1:raise ValueError('Summary snapshot anchor changed')
         extra='        screen.update(Activity.TIMER_STATE_STOPPED);\n'
         if base_case=='missing':extra+='        averageHr = null; averageCadence = null; averageSpeed = null; normalized.reset();\n'
         if base_case=='stress':
             s=s.replace('averageCadence = 86; averageSpeed = 8.9408;', 'averageCadence = 123; averageSpeed = 44.927;')
             s=s.replace('ascent = 682.0+t/10.0;', 'ascent = 30479.6952;').replace('RideMath.clock12(15, 47)','RideMath.clock12(0, 59)')
-        s=s.replace(anchor,'        trend.update(millis, power, true);\n'+extra+'    }\n    function onTimerReset()')
+            extra+='        millis = 360000000;\n'
+        s=s.replace(anchor,extra+anchor)
     p.write_text(s)
     paths=[target/'source/app',target/'source/model',target/'source/ui',target/'source/input'/('touch' if d['touch'] else 'buttons'),ROOT/'config/demo',ROOT/'config/display'/d['profile']]
     resources=[ROOT/'resources/common',ROOT/'resources/fonts'/d['profile'],ROOT/'resources/icons'/str(d['icon_size'])]
@@ -67,4 +68,4 @@ def prepare(device,case,destination=None):
     return target/'snapshot.jungle'
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('device');p.add_argument('--case',choices=['default','stress','missing','stopped','stopped-stress','stopped-missing','lap','lap-hours','hours-stress','ten-second','capacity'],default='default');a=p.parse_args();print(prepare(a.device,a.case))
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('device');p.add_argument('--case',choices=['default','stress','missing','stopped','stopped-stress','stopped-missing','lap','lap-hours','hours-stress','ten-second','capacity','stopped-capacity'],default='default');a=p.parse_args();print(prepare(a.device,a.case))

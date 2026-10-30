@@ -1,3 +1,5 @@
+v0.4.8停止页精简标签、放大数字与加宽右栏。[最新图与验收](validation/summary/v0.4.8/README.md)。
+
 v0.4.7骑行页更新Zone框、同排计时与更大距离。[最新原生图与验收](validation/riding/v0.4.7/README.md)。
 
 v0.4.6更新停止页为八项全程统计，骑行页保持v0.4.5画面。[停止页新图与验收](validation/summary/v0.4.6/README.md)。

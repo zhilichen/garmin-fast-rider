@@ -25,6 +25,9 @@ def contents():
         summary_banner=math.floor(h*summary['banner_fraction']+0.5)
         body=lambda n:math.floor(px(48)+(n-48)*(summary_banner-px(48))/198+0.5)
         stop={k:px(n) for k,n in summary['top'].items()}
+        stop.update({k:px(n) for k,n in summary.get('x',{}).items()})
+        stop['LEFT_WIDTH']=stop['LEFT_RIGHT']-v['LEFT_EDGE']
+        stop['RIGHT_WIDTH']=v['RIGHT_EDGE']-stop['RIGHT_START']
         stop.update({k:body(n) for k,n in summary['body'].items()})
         stop['BANNER_TOP']=summary_banner
         stop['HEADER_BASELINE']=summary_banner+px(summary['header_baseline'])

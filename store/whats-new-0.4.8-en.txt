@@ -1,0 +1,5 @@
+A clearer paused ride summary:
+- Shorter labels with units above the values.
+- Larger heart rate, power, distance, ascent, cadence and speed numbers where space allows.
+- A wider right column for long distance and remaining-distance readings.
+- The riding dashboard and power graph keep their existing layout.

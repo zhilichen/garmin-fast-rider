@@ -16,6 +16,9 @@ module FontInk {
     const LIVE_SIDE_PERCENT = 25;
     const SUMMARY_LABEL = 26;
     const SUMMARY_INT_FACES = [16, 17, 6, 5, 7, 4];
+    const SUMMARY_VALUE_FACES = [16, 21, 17, 1, 5, 7, 4];
+    const SUMMARY_INT_VALUE_FACES = [2, 16, 21, 17, 1, 5, 7, 4];
+    const SUMMARY_DISTANCE_PAIRS = [[16, 19], [21, 28], [17, 19], [1, 13], [5, 13], [7, 14], [4, 15]];
     const PRIMARY_COMPACT = 27;
     const RIDE_TIME_PAIRS = [[16, 29], [17, 30], [5, 31], [7, 32], [4, 33], [3, 34]];
     const RIDE_DISTANCE_PAIRS = [[20, 28], [21, 28], [22, 28], [23, 28], [1, 13], [5, 13], [7, 14], [4, 15]];
