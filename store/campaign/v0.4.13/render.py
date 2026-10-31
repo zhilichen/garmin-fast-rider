@@ -50,15 +50,31 @@ def card_body(n,a,b,name='default'):
 def note(heading,body,x,y,w=394,tint='white',accent=BLUE):
  return rect(x,y,w,133,tint,24)+text(heading,x+24,y+39,23,accent,True)+lines(body,x+24,y+77,23,32)
 
+def hero_callout(zh,en,x,y,color,points):
+ # Two short bilingual headings sit above the leader, without explanatory copy.
+ body=text(zh,x,y,29,NAVY,True,family='Arial, Heiti SC, PingFang SC, sans-serif')
+ body+=text(en,x,y+29,21,color,True)
+ body+=f'<polyline points="{points}" fill="none" stroke="{color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+ px,py=points.split()[-1].split(',')
+ return body+f'<circle cx="{px}" cy="{py}" r="5" fill="{color}" stroke="white" stroke-width="2"/>'
+
+def dashboard_hero():
+ # Keep the Store's 1440x720 hero format; fade the existing paved-road artwork.
+ body='<rect width="1440" height="720" fill="#FFF8EB" fill-opacity="0.68"/>'
+ body+=bolt(43,38,1.2)+text('Fast Rider',101,88,65,BLUE,True)
+ body+=text('Your ride. One screen.',45,132,26,NAVY,True)
+ body+='<ellipse cx="720" cy="701" rx="180" ry="12" fill="#152B3B" fill-opacity="0.08"/>'
+ body+=device(505,128,430,'default')
+ body+=hero_callout('心率与心率区间','Heart rate + zone',48,229,'#C9003C','48,271 457,271 548,271 613,294')
+ body+=hero_callout('功率与功率区间','Power + zone',1000,229,BLUE,'1392,271 979,271 910,271 839,294')
+ body+=hero_callout('骑行实时数据','Live cycling data',48,398,'#00836D','48,440 457,440 548,440 626,413')
+ body+=hero_callout('全程 / 单圈统计','All / Lap stats',1000,398,'#006D87','1392,440 979,440 911,440 838,422')
+ body+=hero_callout('功率趋势图','Power graph',48,567,'#AC4A00','48,609 457,609 548,609 640,542')
+ return body
+
 def main():
  jobs=[]
- hero=bolt(64,54,1.15)+text('FastRider',119,93,48,BLUE,True)
- hero+=text('Your ride.',64,200,80,NAVY,True)+text('One screen.',64,286,80,BLUE,True)
- hero+=lines(['Power. Heart rate. Lap stats.','The essentials, together.'],68,338,27,36)
- hero+=chip('COLOR-CODED EFFORT',66,437,300)+chip('TOUCH BELL',66,494,226,TEAL)+chip('Power Graph',66,551,240,ORANGE)
- hero+=rider(355,296,630)
- hero+=device(989,55,390,'threshold' if ui_file('threshold').exists() else 'default')+rect(1063,619,240,38,CREAM,19)+text('Edge 840 • sample data',1183,644,19,'#53636D',False,'middle')
- jobs.append(save('01-hero-en',hero,1440,720))
+ jobs.append(save('01-hero-en',dashboard_hero(),1440,720))
  b=card_body(1,'Your key numbers.','One screen!')
  b+=note('POWER + HEART RATE',['Big numbers. Bold zones.'],550,243)
  b+=note('GEAR · RPM · MPH · GRADE',['Keep the essentials together.'],550,401)

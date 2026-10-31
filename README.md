@@ -2,7 +2,7 @@
 
 **English** · [简体中文](README.zh-CN.md)
 
-[![FastRider: a road cyclist in cycling sunglasses beside an Edge 840, showing power, heart rate, lap statistics and a power graph](store/campaign/v0.4.13/upload/01-hero-en.png)](#download)
+[![Fast Rider: bilingual feature callouts around the Edge 840 day riding dashboard, on a pale road background](store/campaign/v0.4.13/upload/01-hero-en.png)](#download)
 
 **Power, heart rate, lap stats and your ride essentials — on one screen.**
 

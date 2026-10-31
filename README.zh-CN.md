@@ -2,7 +2,7 @@
 
 [English](README.md) · **简体中文**
 
-[![戴骑行太阳镜的公路车骑手与 Edge 840：同屏显示功率、心率、圈统计和功率趋势图](store/campaign/v0.4.13/upload/01-hero-en.png)](#download)
+[![Fast Rider中英双语功能引线：居中的Edge840日间骑行界面与淡色公路背景](store/campaign/v0.4.13/upload/01-hero-en.png)](#download)
 
 **功率、心率、Lap 统计和骑行关键信息，一屏看清。**
 

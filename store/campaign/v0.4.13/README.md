@@ -1,6 +1,6 @@
 # Fast Rider 商店宣传材料 · v0.4.13
 
-沿用戴骑行太阳镜的男性公路骑手、蓝色闪电与铺装道路场景。Hero和八张功能图全部换成当前原生界面，新增暂停统计与日夜模式；设备外侧白底仍采用矢量轮廓裁切。
+Hero采用中间居中的真实Edge840日间骑行界面，五组引线以中英双语标出心率与区间、功率与区间、骑行实时数据、全程/单圈统计和功率趋势图。放大Fast Rider名称，淡色公路背景保持标题清晰，无额外简述。八张功能图沿用戴骑行太阳镜的男性公路骑手；设备外侧白底仍采用矢量轮廓裁切。
 
 ## 可填写内容
 
@@ -26,7 +26,7 @@
 
 | 文件 | 尺寸 | bytes |
 | --- | --- | --- |
-| [01-hero-en.png](upload/01-hero-en.png) | 1440×720 | 1,095,979 |
+| [01-hero-en.png](upload/01-hero-en.png) | 1440×720 | 658,097 |
 | [04-screen-01-one-screen.jpg](upload/04-screen-01-one-screen.jpg) | 1000×1000 | 135,862 |
 | [04-screen-02-touch-bell.jpg](upload/04-screen-02-touch-bell.jpg) | 1000×1000 | 140,753 |
 | [04-screen-03-z2-training.jpg](upload/04-screen-03-z2-training.jpg) | 1000×1000 | 136,364 |
