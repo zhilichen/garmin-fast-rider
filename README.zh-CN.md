@@ -2,7 +2,7 @@
 
 [English](README.md) · **简体中文**
 
-[![Fast Rider中英双语功能引线：居中的Edge840日间骑行界面与淡色公路背景](store/campaign/v0.4.13/upload/01-hero-en.png)](#download)
+[![Fast Rider中英双语功能引线：居中的Edge840日间骑行界面与淡色公路背景](store/campaign/v0.4.13/upload/01-hero-bilingual.png)](#download)
 
 **功率、心率、Lap 统计和骑行关键信息，一屏看清。**
 

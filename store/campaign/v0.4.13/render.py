@@ -39,26 +39,30 @@ def svg(body,w=1000,h=1000):
  return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">'+rect(0,0,w,h,CREAM,0)+scene+fade+rect(0,0,w,h,'url(#scene-fade)',0)+body+'</svg>'
 def save(name,body,w=1000,h=1000):
  p=OUT/(name+'.svg');p.write_text(svg(body,w,h));return {'name':name,'svg':str(p),'width':w,'height':h}
-def hero_callout(zh,en,x,y,color,points):
- # Two short bilingual headings sit above the leader, without explanatory copy.
- body=text(zh,x,y,29,NAVY,True,family='Arial, Heiti SC, PingFang SC, sans-serif')
- body+=text(en,x,y+29,21,color,True)
+def hero_callout(zh,en,x,y,color,points,english_only=False):
+ # Both variants share the device, leaders and background. Only headings differ.
+ if english_only:
+  body=text(en,x,y+15,30,NAVY,True)
+ else:
+  body=text(zh,x,y,29,NAVY,True,family='Arial, Heiti SC, PingFang SC, sans-serif')
+  body+=text(en,x,y+29,21,color,True)
  body+=f'<polyline points="{points}" fill="none" stroke="{color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
  px,py=points.split()[-1].split(',')
  return body+f'<circle cx="{px}" cy="{py}" r="5" fill="{color}" stroke="white" stroke-width="2"/>'
 
-def dashboard_hero():
+def dashboard_hero(english_only=False):
  # Keep the Store's 1440x720 hero format; fade the existing paved-road artwork.
+ callout=lambda *args:hero_callout(*args,english_only=english_only)
  body='<rect width="1440" height="720" fill="#FFF8EB" fill-opacity="0.68"/>'
  body+=bolt(43,38,1.2)+text('Fast Rider',101,88,65,BLUE,True)
  body+=text('Your ride. One screen.',45,132,26,NAVY,True)
  body+='<ellipse cx="720" cy="701" rx="180" ry="12" fill="#152B3B" fill-opacity="0.08"/>'
  body+=device(505,128,430,'default')
- body+=hero_callout('心率与心率区间','Heart rate + zone',48,229,'#C9003C','48,271 457,271 548,271 613,294')
- body+=hero_callout('功率与功率区间','Power + zone',1000,229,BLUE,'1392,271 979,271 910,271 839,294')
- body+=hero_callout('骑行实时数据','Live cycling data',48,398,'#00836D','48,440 457,440 548,440 626,413')
- body+=hero_callout('全程 / 单圈统计','All / Lap stats',1000,398,'#006D87','1392,440 979,440 911,440 838,422')
- body+=hero_callout('功率趋势图','Power graph',48,567,'#AC4A00','48,609 457,609 548,609 640,542')
+ body+=callout('心率与心率区间','Heart rate + zone',48,229,'#C9003C','48,271 457,271 548,271 613,294')
+ body+=callout('功率与功率区间','Power + zone',1000,229,BLUE,'1392,271 979,271 910,271 839,294')
+ body+=callout('骑行实时数据','Live cycling data',48,398,'#00836D','48,440 457,440 548,440 626,413')
+ body+=callout('全程 / 单圈统计','All / Lap stats',1000,398,'#006D87','1392,440 979,440 911,440 838,422')
+ body+=callout('功率趋势图','Power graph',48,567,'#AC4A00','48,609 457,609 548,609 640,542')
  return body
 
 def screen_frame(number, heading, subtitle, night=False):
@@ -103,7 +107,8 @@ def screen_cards():
  return jobs
 
 def main():
- jobs=[save('01-hero-en',dashboard_hero(),1440,720)]+screen_cards()
+ jobs=[save('01-hero-en',dashboard_hero(english_only=True),1440,720),
+       save('01-hero-bilingual',dashboard_hero(),1440,720)]+screen_cards()
  (OUT/'jobs.json').write_text(json.dumps(jobs,indent=2)+'\n')
  env=dict(os.environ)
  subprocess.run([env.get('NODE','node'),str(BASE/'render.cjs'),str(OUT/'jobs.json')],check=True,env=env)

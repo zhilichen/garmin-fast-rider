@@ -2,7 +2,7 @@
 
 **English** · [简体中文](README.zh-CN.md)
 
-[![Fast Rider: bilingual feature callouts around the Edge 840 day riding dashboard, on a pale road background](store/campaign/v0.4.13/upload/01-hero-en.png)](#download)
+[![Fast Rider: English feature callouts around the Edge 840 day riding dashboard, on a pale road background](store/campaign/v0.4.13/upload/01-hero-en.png)](#download)
 
 **Power, heart rate, lap stats and your ride essentials — on one screen.**
 

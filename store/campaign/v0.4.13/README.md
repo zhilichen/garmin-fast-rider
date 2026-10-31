@@ -1,6 +1,6 @@
 # Fast Rider 商店宣传材料 · v0.4.13
 
-Hero采用中间居中的真实Edge840日间骑行界面，五组引线以中英双语标出心率与区间、功率与区间、骑行实时数据、全程/单圈统计和功率趋势图。放大Fast Rider名称，淡色公路背景保持标题清晰，无额外简述。四张PNG功能图改为设备与真实屏幕为主体，配小号Fast Rider标识及简短英文说明；设备外侧白底仍采用矢量轮廓裁切。
+Hero采用中间居中的真实Edge840日间骑行界面，提供纯英文与中英双语两个版本，五组引线标出心率与区间、功率与区间、骑行实时数据、全程/单圈统计和功率趋势图。放大Fast Rider名称，淡色公路背景保持标题清晰，无额外简述。四张PNG功能图改为设备与真实屏幕为主体，配小号Fast Rider标识及简短英文说明；设备外侧白底仍采用矢量轮廓裁切。
 
 ## 可填写内容
 
@@ -22,7 +22,7 @@ Hero采用中间居中的真实Edge840日间骑行界面，五组引线以中英
 
 ## 图片
 
-Hero 保持1440×720且小于2048KB。四张Screen Images均为1000×1000 PNG，每张严格小于150,000 bytes；以屏幕与Edge840外形为主体，使用小号Fast Rider标识和简短英文说明。封面500×500小于300KB；设备图标128×128，其中一个限制为Garmin64色立方体。
+两版Hero均保持1440×720且小于2048KB：纯英文版为`01-hero-en.png`，原中英双语版保存在`01-hero-bilingual.png`，上传时任选一版。四张Screen Images均为1000×1000 PNG，每张严格小于150,000 bytes；以屏幕与Edge840外形为主体，使用小号Fast Rider标识和简短英文说明。封面500×500小于300KB；设备图标128×128，其中一个限制为Garmin64色立方体。
 
 按01–04顺序上传这四张功能图：
 
@@ -33,7 +33,8 @@ Hero 保持1440×720且小于2048KB。四张Screen Images均为1000×1000 PNG，
 
 | 文件 | 尺寸 | bytes |
 | --- | --- | --- |
-| [01-hero-en.png](upload/01-hero-en.png) | 1440×720 | 658,097 |
+| [01-hero-en.png](upload/01-hero-en.png) | 1440×720 | 645,227 |
+| [01-hero-bilingual.png](upload/01-hero-bilingual.png) | 1440×720 | 658,097 |
 | [04-screen-01-ride-day.png](upload/04-screen-01-ride-day.png) | 1000×1000 | 76,362 |
 | [04-screen-02-touch-bell.png](upload/04-screen-02-touch-bell.png) | 1000×1000 | 76,118 |
 | [04-screen-03-auto-summary.png](upload/04-screen-03-auto-summary.png) | 1000×1000 | 75,876 |

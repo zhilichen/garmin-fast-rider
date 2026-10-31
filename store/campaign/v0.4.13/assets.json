@@ -3,6 +3,14 @@
     "file": "01-hero-en.png",
     "width": 1440,
     "height": 720,
+    "bytes": 645227,
+    "sha256": "ea5f0dbdd34207f9e3a573f00fd9020f4f42e9646869f0cf8b1441add47f5370",
+    "size_limit_bytes": 2048000
+  },
+  {
+    "file": "01-hero-bilingual.png",
+    "width": 1440,
+    "height": 720,
     "bytes": 658097,
     "sha256": "9b8a9fdc27fddd7626062153c3c9e2a7519bd5eaa0ae4449444e2bb540dcd36c",
     "size_limit_bytes": 2048000
