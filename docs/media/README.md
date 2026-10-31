@@ -1,6 +1,6 @@
 # README visuals
 
-The project homepage reuses the road-cycling [Store campaign](../../store/campaign/v0.4.13/README.md): a centered Edge 840 day/riding dashboard with five bilingual feature callouts and a pale paved-road background in the Hero; male road cyclists, cycling sunglasses and native captures remain in the feature cards. Hero and feature cards are referenced directly, without duplicate exports.
+The project homepage reuses the road-cycling [Store campaign](../../store/campaign/v0.4.13/README.md): a centered Edge 840 day/riding dashboard with five bilingual feature callouts and a pale paved-road background in the Hero; four PNG screen images focus on native screens inside the Edge 840 exterior, with short English captions for riding, the touch bell, automatic paused statistics, and day/night themes. Each screen image is strictly below 150,000 bytes. Hero and feature cards are referenced directly, without duplicate exports.
 
 `developer-map.png` is a separate, editable architecture illustration in that visual style. Its device counts and resolutions come from `config/devices.json`:
 

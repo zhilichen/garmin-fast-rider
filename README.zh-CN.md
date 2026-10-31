@@ -20,21 +20,14 @@
 
 <table>
 <tr>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-01-one-screen.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-01-one-screen.jpg" width="440" alt="最新Edge840骑行仪表盘"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.jpg" width="440" alt="双击触发两秒电子铃声"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-01-ride-day.png"><img src="store/campaign/v0.4.13/upload/04-screen-01-ride-day.png" width="440" alt="最新Edge840骑行仪表盘"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.png"><img src="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.png" width="440" alt="双击触发两秒电子铃声"></a></td>
 </tr>
 </table>
 
 ### 为Z2与阈值训练优化的功率图
 
 **Z2保持蓝色，阈值段保持橘色。** Z2为高于55%至75% FTP，Z4为高于90%至105% FTP。图中包含Z2上限、FTP辅助线与原生Lap边界，可查看5m、20m或All，适合观察稳定耐力骑行和3×20分钟等间歇。本图不执行或制定训练计划。
-
-<table>
-<tr>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-03-z2-training.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-03-z2-training.jpg" width="440" alt="FTP250W时180W的蓝色Z2示例"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-04-threshold-intervals.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-04-threshold-intervals.jpg" width="440" alt="245W橘色阈值示例及三段训练"></a></td>
-</tr>
-</table>
 
 ### 暂停时，看整次骑行
 
@@ -44,8 +37,8 @@ NP需积累30秒功率，真实零功率参与计算，暂停时间不参与。�
 
 <table>
 <tr>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-07-paused-summary.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-07-paused-summary.jpg" width="440" alt="使用简写标题和数字后单位的停止统计"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-08-day-night.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-08-day-night.jpg" width="440" alt="最新界面的高对比夜间主题"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-03-auto-summary.png"><img src="store/campaign/v0.4.13/upload/04-screen-03-auto-summary.png" width="440" alt="使用简写标题和数字后单位的停止统计"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-04-day-night.png"><img src="store/campaign/v0.4.13/upload/04-screen-04-day-night.png" width="440" alt="最新界面的高对比夜间主题"></a></td>
 </tr>
 </table>
 
@@ -54,13 +47,6 @@ NP需积累30秒功率，真实零功率参与计算，暂停时间不参与。�
 功率配色：**Z1/Z3灰 · Z2蓝 · Z4橘 · Z5紫 · Z6/Z7红**。心率采用独立分区；踏频和坡度也有自己的颜色提示。梯形进度条的实心部分表示当前在区间中的位置。
 
 触屏机型可切换3s/10s功率、All/当前Lap统计，以及5m/20m/All图表。无触屏的530/540/550使用3s/All/5m默认视图和自动停止统计，不包含触控或车铃。
-
-<table>
-<tr>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg" width="440" alt="功率分组配色及独立心率踏频坡度提示"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg" width="440" alt="功率均值统计和图表范围的点击切换"></a></td>
-</tr>
-</table>
 
 *设备展示采用官方Edge840外形和原生界面截图，数字为合成示例。点击图片可查看完整尺寸。[商店文案与上传素材](store/campaign/v0.4.13/README.md) · [最新界面验收](docs/validation/clock/v0.4.13/README.md)。*
 
@@ -120,7 +106,7 @@ NP需积累30秒功率，真实零功率参与计算，暂停时间不参与。�
 
 **Edge 530、540、550 始终使用固定的 3s / All / 5m 视图。** 不提供触控或电子车铃，功率图仍记录 Lap 边界。铃声音色和响度取决于设备提示音支持；使用的是设备提示音组合，并非 Garmin 原生车铃功能。
 
-[点击切换图解](store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg) · [配色图解](store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg)
+[双击响铃图解](store/campaign/v0.4.13/upload/04-screen-02-touch-bell.png) · [骑行仪表盘](store/campaign/v0.4.13/upload/04-screen-01-ride-day.png)
 
 ### 数据是怎样计算的
 

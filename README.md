@@ -20,21 +20,14 @@ A free, open-source Connect IQ data field for **12 Garmin Edge models**. Built f
 
 <table>
 <tr>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-01-one-screen.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-01-one-screen.jpg" width="440" alt="Latest Edge 840 live dashboard"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.jpg" width="440" alt="Two taps trigger the two-second electronic bell"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-01-ride-day.png"><img src="store/campaign/v0.4.13/upload/04-screen-01-ride-day.png" width="440" alt="Latest Edge 840 live dashboard"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.png"><img src="store/campaign/v0.4.13/upload/04-screen-02-touch-bell.png" width="440" alt="Two taps trigger the two-second electronic bell"></a></td>
 </tr>
 </table>
 
 ### Power graph: Z2 + threshold
 
 **Z2 stays blue; threshold stays orange.** Z2 spans above 55% through 75% FTP, and Z4 spans above 90% through 105%. See the Z2 ceiling, FTP guide and native lap boundaries across 5m, 20m or All. The graph supports reviewing steady endurance work and sessions such as 3 × 20 minutes; it does not run or prescribe a workout.
-
-<table>
-<tr>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-03-z2-training.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-03-z2-training.jpg" width="440" alt="180 W Z2 example at FTP 250 W"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-04-threshold-intervals.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-04-threshold-intervals.jpg" width="440" alt="245 W threshold example with three work intervals"></a></td>
-</tr>
-</table>
 
 ### Your ride, when you pause
 
@@ -44,8 +37,8 @@ NP needs 30 seconds of observed power, includes valid zero watts and excludes pa
 
 <table>
 <tr>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-07-paused-summary.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-07-paused-summary.jpg" width="440" alt="Paused summary with short metric names and inline units"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-08-day-night.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-08-day-night.jpg" width="440" alt="Current interface in the high-contrast night theme"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-03-auto-summary.png"><img src="store/campaign/v0.4.13/upload/04-screen-03-auto-summary.png" width="440" alt="Paused summary with short metric names and inline units"></a></td>
+<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-04-day-night.png"><img src="store/campaign/v0.4.13/upload/04-screen-04-day-night.png" width="440" alt="Current interface in the high-contrast night theme"></a></td>
 </tr>
 </table>
 
@@ -54,13 +47,6 @@ NP needs 30 seconds of observed power, includes valid zero watts and excludes pa
 Power colors: **gray Z1/Z3 · blue Z2 · orange Z4 · purple Z5 · red Z6/Z7**. Heart-rate zones are independent, while cadence and grade have their own alerts. The solid part of each tapered gauge shows your position inside the current zone.
 
 Touch models switch power between 3s/10s, statistics between All/current lap, and the graph between 5m/20m/All. Button-only 530/540/550 use the default 3s/All/5m view and automatic paused summary, without touch controls or the bell.
-
-<table>
-<tr>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg" width="440" alt="Power color groups and independent heart-rate/cadence/gradient alerts"></a></td>
-<td width="50%"><a href="store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg"><img src="store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg" width="440" alt="Touch controls for averaging, statistics and graph range"></a></td>
-</tr>
-</table>
 
 *All device images use the official Edge 840 exterior and actual native UI captures with synthetic example data. Open any image to inspect it. [Store copy and full upload kit](store/campaign/v0.4.13/README.md) · [Current UI validation](docs/validation/clock/v0.4.13/README.md).*
 
@@ -117,7 +103,7 @@ Touch models select the newest lap after a native manual or automatic lap bounda
 
 **Edge 530, 540 and 550 keep the fixed 3s / All / 5m view.** They have no touch controls or electronic bell; lap boundaries still appear in the graph. Bell sound and loudness depend on device tone support. The effect uses device tones, not Garmin's native bike-bell function.
 
-[View the touch-control card](store/campaign/v0.4.13/upload/04-screen-06-tap-controls.jpg) · [View the color guide](store/campaign/v0.4.13/upload/04-screen-05-color-coded.jpg)
+[View the bell](store/campaign/v0.4.13/upload/04-screen-02-touch-bell.png) · [View the riding dashboard](store/campaign/v0.4.13/upload/04-screen-01-ride-day.png)
 
 ### What the numbers mean
 

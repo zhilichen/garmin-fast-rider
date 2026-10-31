@@ -8,67 +8,35 @@
     "size_limit_bytes": 2048000
   },
   {
-    "file": "04-screen-01-one-screen.jpg",
+    "file": "04-screen-01-ride-day.png",
     "width": 1000,
     "height": 1000,
-    "bytes": 135862,
-    "sha256": "b8b42d2b63641ef459226ee059c3a4682d75423516744de15f3c2b394db296cb",
+    "bytes": 76362,
+    "sha256": "a99dc48d6c52f05c74f3ec16bfd1a78a0da2aaf2c77bcfe8e6f0e18ed2b6dc0e",
     "size_limit_bytes": 150000
   },
   {
-    "file": "04-screen-02-touch-bell.jpg",
+    "file": "04-screen-02-touch-bell.png",
     "width": 1000,
     "height": 1000,
-    "bytes": 140753,
-    "sha256": "674ebfa590448049924bc1b79fc35b183ea5f11e6a39842cb6b6833d00fa55cd",
+    "bytes": 76118,
+    "sha256": "22ed7e342f216c1f99f8fa83f1bf3b716a67967a7cd59abd7e0e491897ab7b98",
     "size_limit_bytes": 150000
   },
   {
-    "file": "04-screen-03-z2-training.jpg",
+    "file": "04-screen-03-auto-summary.png",
     "width": 1000,
     "height": 1000,
-    "bytes": 136364,
-    "sha256": "0f0e52d48ef1da9bf35d2186fbf99a93806ff4e16da5296086f9bc1ae19d175c",
+    "bytes": 75876,
+    "sha256": "f5edb7777e234091f3ffd4ccf907585e1c494c12b5e432ca3a78f6416a2bdd14",
     "size_limit_bytes": 150000
   },
   {
-    "file": "04-screen-04-threshold-intervals.jpg",
+    "file": "04-screen-04-day-night.png",
     "width": 1000,
     "height": 1000,
-    "bytes": 141507,
-    "sha256": "a51db2c8a7e9b91aecc56432c67d01044b1b06daee9dae411556cc282a09e8c8",
-    "size_limit_bytes": 150000
-  },
-  {
-    "file": "04-screen-05-color-coded.jpg",
-    "width": 1000,
-    "height": 1000,
-    "bytes": 138977,
-    "sha256": "faa98425f9a2d57df7636a07deb13fc2891009cd29249f4c2946553f3b69810f",
-    "size_limit_bytes": 150000
-  },
-  {
-    "file": "04-screen-06-tap-controls.jpg",
-    "width": 1000,
-    "height": 1000,
-    "bytes": 135022,
-    "sha256": "24026e154f3682b65981da0967aa8bd19902b4d5872f170d146fb1ca9e9533c6",
-    "size_limit_bytes": 150000
-  },
-  {
-    "file": "04-screen-07-paused-summary.jpg",
-    "width": 1000,
-    "height": 1000,
-    "bytes": 137549,
-    "sha256": "7f09d6b6633348025ba1cf7f98b88e1f36fcd326e332e5395d7984315e119ef9",
-    "size_limit_bytes": 150000
-  },
-  {
-    "file": "04-screen-08-day-night.jpg",
-    "width": 1000,
-    "height": 1000,
-    "bytes": 147072,
-    "sha256": "eee1f7bdbb99750425ecaf349abcfce08681dafcefe789c20675db698c7ee3ff",
+    "bytes": 86813,
+    "sha256": "d0af7f04027e878ad78d83a9b026745e58b6ef8458376f8d5c523966a862b5c9",
     "size_limit_bytes": 150000
   },
   {
